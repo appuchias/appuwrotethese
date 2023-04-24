@@ -1,0 +1,314 @@
+[
+    {
+        "IDPovincia": "02",
+        "IDCCAA": "07",
+        "Provincia": "ALBACETE",
+        "CCAA": "Castilla la Mancha"
+    },
+    {
+        "IDPovincia": "03",
+        "IDCCAA": "10",
+        "Provincia": "ALICANTE",
+        "CCAA": "Comunidad Valenciana"
+    },
+    {
+        "IDPovincia": "04",
+        "IDCCAA": "01",
+        "Provincia": "ALMER\u00cdA",
+        "CCAA": "Andalucia"
+    },
+    {
+        "IDPovincia": "01",
+        "IDCCAA": "16",
+        "Provincia": "ARABA/\u00c1LAVA",
+        "CCAA": "Pa\u00eds Vasco"
+    },
+    {
+        "IDPovincia": "33",
+        "IDCCAA": "03",
+        "Provincia": "ASTURIAS",
+        "CCAA": "Asturias"
+    },
+    {
+        "IDPovincia": "05",
+        "IDCCAA": "08",
+        "Provincia": "\u00c1VILA",
+        "CCAA": "Castilla y Le\u00f3n"
+    },
+    {
+        "IDPovincia": "06",
+        "IDCCAA": "11",
+        "Provincia": "BADAJOZ",
+        "CCAA": "Extremadura"
+    },
+    {
+        "IDPovincia": "07",
+        "IDCCAA": "04",
+        "Provincia": "BALEARS (ILLES)",
+        "CCAA": "Baleares"
+    },
+    {
+        "IDPovincia": "08",
+        "IDCCAA": "09",
+        "Provincia": "BARCELONA",
+        "CCAA": "Catalu\u00f1a"
+    },
+    {
+        "IDPovincia": "48",
+        "IDCCAA": "16",
+        "Provincia": "BIZKAIA",
+        "CCAA": "Pa\u00eds Vasco"
+    },
+    {
+        "IDPovincia": "09",
+        "IDCCAA": "08",
+        "Provincia": "BURGOS",
+        "CCAA": "Castilla y Le\u00f3n"
+    },
+    {
+        "IDPovincia": "10",
+        "IDCCAA": "11",
+        "Provincia": "C\u00c1CERES",
+        "CCAA": "Extremadura"
+    },
+    {
+        "IDPovincia": "11",
+        "IDCCAA": "01",
+        "Provincia": "C\u00c1DIZ",
+        "CCAA": "Andalucia"
+    },
+    {
+        "IDPovincia": "39",
+        "IDCCAA": "06",
+        "Provincia": "CANTABRIA",
+        "CCAA": "Cantabria"
+    },
+    {
+        "IDPovincia": "12",
+        "IDCCAA": "10",
+        "Provincia": "CASTELL\u00d3N / CASTELL\u00d3",
+        "CCAA": "Comunidad Valenciana"
+    },
+    {
+        "IDPovincia": "51",
+        "IDCCAA": "18",
+        "Provincia": "CEUTA",
+        "CCAA": "Ceuta"
+    },
+    {
+        "IDPovincia": "13",
+        "IDCCAA": "07",
+        "Provincia": "CIUDAD REAL",
+        "CCAA": "Castilla la Mancha"
+    },
+    {
+        "IDPovincia": "14",
+        "IDCCAA": "01",
+        "Provincia": "C\u00d3RDOBA",
+        "CCAA": "Andalucia"
+    },
+    {
+        "IDPovincia": "15",
+        "IDCCAA": "12",
+        "Provincia": "CORU\u00d1A (A)",
+        "CCAA": "Galicia"
+    },
+    {
+        "IDPovincia": "16",
+        "IDCCAA": "07",
+        "Provincia": "CUENCA",
+        "CCAA": "Castilla la Mancha"
+    },
+    {
+        "IDPovincia": "20",
+        "IDCCAA": "16",
+        "Provincia": "GIPUZKOA",
+        "CCAA": "Pa\u00eds Vasco"
+    },
+    {
+        "IDPovincia": "17",
+        "IDCCAA": "09",
+        "Provincia": "GIRONA",
+        "CCAA": "Catalu\u00f1a"
+    },
+    {
+        "IDPovincia": "18",
+        "IDCCAA": "01",
+        "Provincia": "GRANADA",
+        "CCAA": "Andalucia"
+    },
+    {
+        "IDPovincia": "19",
+        "IDCCAA": "07",
+        "Provincia": "GUADALAJARA",
+        "CCAA": "Castilla la Mancha"
+    },
+    {
+        "IDPovincia": "21",
+        "IDCCAA": "01",
+        "Provincia": "HUELVA",
+        "CCAA": "Andalucia"
+    },
+    {
+        "IDPovincia": "22",
+        "IDCCAA": "02",
+        "Provincia": "HUESCA",
+        "CCAA": "Arag\u00f3n"
+    },
+    {
+        "IDPovincia": "23",
+        "IDCCAA": "01",
+        "Provincia": "JA\u00c9N",
+        "CCAA": "Andalucia"
+    },
+    {
+        "IDPovincia": "24",
+        "IDCCAA": "08",
+        "Provincia": "LE\u00d3N",
+        "CCAA": "Castilla y Le\u00f3n"
+    },
+    {
+        "IDPovincia": "25",
+        "IDCCAA": "09",
+        "Provincia": "LLEIDA",
+        "CCAA": "Catalu\u00f1a"
+    },
+    {
+        "IDPovincia": "27",
+        "IDCCAA": "12",
+        "Provincia": "LUGO",
+        "CCAA": "Galicia"
+    },
+    {
+        "IDPovincia": "28",
+        "IDCCAA": "13",
+        "Provincia": "MADRID",
+        "CCAA": "Madrid"
+    },
+    {
+        "IDPovincia": "29",
+        "IDCCAA": "01",
+        "Provincia": "M\u00c1LAGA",
+        "CCAA": "Andalucia"
+    },
+    {
+        "IDPovincia": "52",
+        "IDCCAA": "19",
+        "Provincia": "MELILLA",
+        "CCAA": "Melilla"
+    },
+    {
+        "IDPovincia": "30",
+        "IDCCAA": "14",
+        "Provincia": "MURCIA",
+        "CCAA": "Murcia"
+    },
+    {
+        "IDPovincia": "31",
+        "IDCCAA": "15",
+        "Provincia": "NAVARRA",
+        "CCAA": "Navarra"
+    },
+    {
+        "IDPovincia": "32",
+        "IDCCAA": "12",
+        "Provincia": "OURENSE",
+        "CCAA": "Galicia"
+    },
+    {
+        "IDPovincia": "34",
+        "IDCCAA": "08",
+        "Provincia": "PALENCIA",
+        "CCAA": "Castilla y Le\u00f3n"
+    },
+    {
+        "IDPovincia": "35",
+        "IDCCAA": "05",
+        "Provincia": "PALMAS (LAS)",
+        "CCAA": "Canarias"
+    },
+    {
+        "IDPovincia": "36",
+        "IDCCAA": "12",
+        "Provincia": "PONTEVEDRA",
+        "CCAA": "Galicia"
+    },
+    {
+        "IDPovincia": "26",
+        "IDCCAA": "17",
+        "Provincia": "RIOJA (LA)",
+        "CCAA": "Rioja (La)"
+    },
+    {
+        "IDPovincia": "37",
+        "IDCCAA": "08",
+        "Provincia": "SALAMANCA",
+        "CCAA": "Castilla y Le\u00f3n"
+    },
+    {
+        "IDPovincia": "38",
+        "IDCCAA": "05",
+        "Provincia": "SANTA CRUZ DE TENERIFE",
+        "CCAA": "Canarias"
+    },
+    {
+        "IDPovincia": "40",
+        "IDCCAA": "08",
+        "Provincia": "SEGOVIA",
+        "CCAA": "Castilla y Le\u00f3n"
+    },
+    {
+        "IDPovincia": "41",
+        "IDCCAA": "01",
+        "Provincia": "SEVILLA",
+        "CCAA": "Andalucia"
+    },
+    {
+        "IDPovincia": "42",
+        "IDCCAA": "08",
+        "Provincia": "SORIA",
+        "CCAA": "Castilla y Le\u00f3n"
+    },
+    {
+        "IDPovincia": "43",
+        "IDCCAA": "09",
+        "Provincia": "TARRAGONA",
+        "CCAA": "Catalu\u00f1a"
+    },
+    {
+        "IDPovincia": "44",
+        "IDCCAA": "02",
+        "Provincia": "TERUEL",
+        "CCAA": "Arag\u00f3n"
+    },
+    {
+        "IDPovincia": "45",
+        "IDCCAA": "07",
+        "Provincia": "TOLEDO",
+        "CCAA": "Castilla la Mancha"
+    },
+    {
+        "IDPovincia": "46",
+        "IDCCAA": "10",
+        "Provincia": "VALENCIA / VAL\u00c8NCIA",
+        "CCAA": "Comunidad Valenciana"
+    },
+    {
+        "IDPovincia": "47",
+        "IDCCAA": "08",
+        "Provincia": "VALLADOLID",
+        "CCAA": "Castilla y Le\u00f3n"
+    },
+    {
+        "IDPovincia": "49",
+        "IDCCAA": "08",
+        "Provincia": "ZAMORA",
+        "CCAA": "Castilla y Le\u00f3n"
+    },
+    {
+        "IDPovincia": "50",
+        "IDCCAA": "02",
+        "Provincia": "ZARAGOZA",
+        "CCAA": "Arag\u00f3n"
+    }
+]

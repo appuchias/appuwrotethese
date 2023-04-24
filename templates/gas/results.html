@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load user_agents i18n %}
+
+{% block title %}Resultados{% endblock %}
+
+{% load replace %}
+
+{% block content %}
+<div id="search-result">
+    <div class="text-center">
+        <!-- Title -->
+        <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Stations' %}</div>
+        <!-- Info -->
+        <p class="text-themed">
+            {% trans 'The icon at the bottom of every card opens the route to the station in your maps app (Google maps for the web)' %}.
+        </p>
+        <p class="last-update text-themed">{% trans 'Prices time' %}: {{ last_update }}</p>
+        <!-- <div class="spacer"></div> -->
+        <!-- Grid with gas stations -->
+        <div class="container-xl row justify-content-center">
+            {% for i in results %}
+            <figure class="col-sm-6 col-md-5 col-lg-4 col-xl-3">
+                <div class="figure-img img-fluid rounded tall">
+                    <h3 title="{{ i.company|title }}">
+                        <center class="truncate">{{ i.company|title }}</center>
+                    </h3>
+                    <h6 class="direccion truncate" title="{{ i.address }}">{{ i.address }}</h6>
+                    <h6 class="direccion truncate" title="{{ i.locality }}">{{ i.locality }}</h6>
+                    <h6 class="horario">{{ i.schedule }}</h6>
+                    <!-- <div class="repo-text"></div> -->
+                    <div class="prices">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Combustible</th>
+                                    <td scope="col"><strong>Precio (€)</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if i.PrecioProducto %}
+                                <tr>
+                                    <th scope="row">{{ product }}</th>
+                                    <td>{{ i.PrecioProducto|default:"-" }}</td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <th scope="row">Gasóleo A</th>
+                                    <td>{{ i.gasoleo_a|default:"-" }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Gasolina 95</th>
+                                    <td>{{ i.gasolina_95|default:"-" }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Gasolina 98</th>
+                                    <td>{{ i.gasolina_98|default:"-" }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">GLP</th>
+                                    <td>{{ i.glp|default:"-" }}</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <a class="directions text-decoration-none tooltip-slide" target="_blank"
+                            aria-label="Open map directions" data-balloon-pos="up"
+                            onclick="openmaps({{ i.latitude|replace:',|.' }}, {{ i.longitude|replace:',|.' }})">
+                            <i class="fas fa-directions"></i>
+                        </a>
+                        {% comment %} {% if user.is_authenticated %}<a class="eess-id" href="/gas/save/{{ i.id_eess }}"
+                            aria-label="Save station" data-balloon-pos="up"> <i
+                                class="fa-solid fa-star"></i>{{ i.id_eess }}</a>{% endif %} {% endcomment %}
+                    </div>
+                </div>
+            </figure>
+            {% endfor %}
+            <script>
+                function openmaps(lat, long) {
+                    // If it's an iPhone..
+                    if ((navigator.platform.indexOf("iPhone") != -1) ||
+                        (navigator.platform.indexOf("iPod") != -1) ||
+                        (navigator.platform.indexOf("iPad") != -1))
+                        window.open("maps://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=" + lat + "," + long);
+                    else
+                        window.open("https://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=" + lat + "," + long);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}

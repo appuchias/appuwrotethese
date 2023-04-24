@@ -1,0 +1,107 @@
+[
+    {
+        "IDProducto": "1",
+        "NombreProducto": "Gasolina 95 E5",
+        "NombreProductoAbreviatura": "G95E5"
+    },
+    {
+        "IDProducto": "23",
+        "NombreProducto": "Gasolina 95 E10",
+        "NombreProductoAbreviatura": "G95E10"
+    },
+    {
+        "IDProducto": "20",
+        "NombreProducto": "Gasolina 95 E5 Premium",
+        "NombreProductoAbreviatura": "G95E5+"
+    },
+    {
+        "IDProducto": "3",
+        "NombreProducto": "Gasolina 98 E5",
+        "NombreProductoAbreviatura": "G98E5"
+    },
+    {
+        "IDProducto": "21",
+        "NombreProducto": "Gasolina 98 E10",
+        "NombreProductoAbreviatura": "G98E10"
+    },
+    {
+        "IDProducto": "4",
+        "NombreProducto": "Gas\u00f3leo A habitual",
+        "NombreProductoAbreviatura": "GOA"
+    },
+    {
+        "IDProducto": "5",
+        "NombreProducto": "Gas\u00f3leo Premium",
+        "NombreProductoAbreviatura": "GOA+"
+    },
+    {
+        "IDProducto": "6",
+        "NombreProducto": "Gas\u00f3leo B",
+        "NombreProductoAbreviatura": "GOB"
+    },
+    {
+        "IDProducto": "7",
+        "NombreProducto": "Gas\u00f3leo C",
+        "NombreProductoAbreviatura": "GOC"
+    },
+    {
+        "IDProducto": "16",
+        "NombreProducto": "Bioetanol",
+        "NombreProductoAbreviatura": "BIE"
+    },
+    {
+        "IDProducto": "8",
+        "NombreProducto": "Biodi\u00e9sel",
+        "NombreProductoAbreviatura": "BIO"
+    },
+    {
+        "IDProducto": "17",
+        "NombreProducto": "Gases licuados del petr\u00f3leo",
+        "NombreProductoAbreviatura": "GLP"
+    },
+    {
+        "IDProducto": "18",
+        "NombreProducto": "Gas natural comprimido",
+        "NombreProductoAbreviatura": "GNC"
+    },
+    {
+        "IDProducto": "19",
+        "NombreProducto": "Gas natural licuado",
+        "NombreProductoAbreviatura": "GNL"
+    },
+    {
+        "IDProducto": "22",
+        "NombreProducto": "Hidr\u00f3geno",
+        "NombreProductoAbreviatura": "H2"
+    },
+    {
+        "IDProducto": "9",
+        "NombreProducto": "Fuel\u00f3leo bajo \u00edndice azufre",
+        "NombreProductoAbreviatura": "FOB"
+    },
+    {
+        "IDProducto": "10",
+        "NombreProducto": "Fuel\u00f3leo especial",
+        "NombreProductoAbreviatura": "FOE"
+    },
+    {
+        "IDProducto": "11",
+        "NombreProducto": "Gas\u00f3leo para uso mar\u00edtimo",
+        "NombreProductoAbreviatura": "MGO"
+    },
+    {
+        "IDProducto": "12",
+        "NombreProducto": "Gasolina de aviaci\u00f3n",
+        "NombreProductoAbreviatura": "GNAV"
+    },
+    {
+        "IDProducto": "13",
+        "NombreProducto": "Queroseno de aviaci\u00f3n JET_A1",
+        "NombreProductoAbreviatura": "JETA1"
+    },
+    {
+        "IDProducto": "14",
+        "NombreProducto": "Queroseno de aviaci\u00f3n JET_A2",
+        "NombreProductoAbreviatura": "JETA2"
+    }
+]

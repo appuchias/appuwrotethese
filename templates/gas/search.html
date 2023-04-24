@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load user_agents i18n %}
+
+{% block title %}{% trans 'Search stations' %}{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div id="search">
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Search' %}</div>
+    <div class="subtitle">
+        <center>
+            <div class="text-themed dark mb-2">{% trans 'Here you will find the cheapest gas stations for each area sorted by fuel type' %}.</div>
+            <div class="text-themed dark">({% trans 'Only works for Spain' %})</div>
+        </center>
+    </div>
+    <div class="crwrapper">
+        <form action="/gas/resultados/" method="post">
+            {% csrf_token %}
+            {% crispy form %}
+        </form>
+    </div>
+</div>
+{% endblock %}

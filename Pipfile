@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+crispy-bootstrap5 = "*"
+django = "*"
+django-crispy-forms = "*"
+django-user-agents = "*"
+gunicorn = "*"
+python-dotenv = "*"
+pytz = "*"
+whitenoise = "*"
+tzdata = "*"
+
+[dev-packages]
+black = "*"
+mypy = "*"

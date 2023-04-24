@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load i18n user_agents crispy_forms_tags %}
+
+{% block title %}{% trans 'Account' %}{% endblock %}
+
+{% block content %}
+<div id="login">
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'AWT Account' %}</div>
+        <div class="crwrapper{% if request|is_mobile %} mobile{% endif %}">
+            <div class="user-login-register">
+                <div class="row">
+                    <div class="title mx-2 my-2">{% trans "Login" %}</div>
+                    <form action="/account/login/" method="post">
+                        {% csrf_token %}
+                        {% crispy loginform %}
+                        <div class="links">
+                            <a href="/account/register" class="col-md-6">{% trans "Don't have an account" %}? {% trans "Create one here" %}</a>
+                            <a href='/account/respwd/'  class="col-md-6"><i class='fa-solid fa-lock'></i> {% trans "Forgot your password" %}?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

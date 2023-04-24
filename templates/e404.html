@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{# Translators: 404 Page title #}
+{% block title %}{% trans "404 Not Found" %}{% endblock title %}
+
+{% block content %}
+<div id="error404">
+    <h1 class="error title">
+        <center>{% trans "Error 404. Web not found." %}</center>
+    </h1>
+</div>
+{% endblock content %}

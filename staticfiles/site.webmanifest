@@ -1,0 +1,14 @@
+{
+    "name": "ApWrTh",
+    "short_name": "ApWrTh",
+    "icons": [
+        {
+            "src": "/static/android-chrome-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#eeeeee",
+    "background_color": "#eeeeee",
+    "display": "standalone"
+}

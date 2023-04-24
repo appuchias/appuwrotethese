@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static user_agents i18n %}
+
+{# Translators: Home page title #}
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block content %}
+<div id="home">
+    <div class="text-themed title{% if request|is_mobile %} mobile{% endif %}">Appu Wrote These</div>
+    <div class="projects">
+        <a href="/projects/" class="btn btn-outline-light"><i class="fas fa-project-diagram"></i> {% trans "View projects" %}</a>
+    </div>
+</div>
+{% endblock %}

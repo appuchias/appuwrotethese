@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load i18n user_agents crispy_forms_tags %}
+
+{% block title %}{% trans 'Account' %}{% endblock %}
+
+{% block content %}
+<div id="register">
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'AWT Account' %}</div>
+        <div class="crwrapper{% if request|is_mobile %} mobile{% endif %}">
+            <div class="user-login-register">
+                <div class="title ml-2 mt-2">{% trans "Register" %}</div>
+                <form action="/account/register/" method="post">
+                    {% csrf_token %}
+                    {% crispy registrationform %}
+                    <div class="links">
+                        <a href="/account/login">{% trans "Have an account" %}? {% trans "Log in" %}</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load i18n user_agents crispy_forms_tags %}
+
+{% block title %}{% trans "Password reset" %}{% endblock title %}
+
+{% block content %}
+<div id="chpwd">
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Password reset' %}</div>
+    <div class="crwrapper">
+        {% if not user.is_authenticated %}
+        <form action="/account/respwd/" method="post">
+            {% csrf_token %}
+            {% crispy respwdform %}
+        </form>
+        {% else %}
+        {% trans "Please log out before coming here" %} <a href="/account" class="btn btn-outline-dark">{% trans "Go back" %}</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

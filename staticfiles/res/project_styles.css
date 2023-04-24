@@ -1,0 +1,328 @@
+#content #search .title {
+    margin: 30px auto 10px auto;
+    font-size: 5rem;
+    color: var(--text-color);
+    text-align: center;
+    text-shadow: 10px 10px 20px var(--darker-text);
+}
+
+#content #search .title.mobile {
+    font-size: 3rem;
+}
+
+#content #search .subtitle {
+    font-size: 1rem;
+    max-width: 95%;
+    margin: 0 auto 40px auto;
+    text-align: center;
+}
+
+#content #search .subtitle.mobile {
+    font-size: 0.9rem;
+}
+
+#content #search .form-text {
+    color: var(--darker-text) !important;
+}
+
+#content #search .btn {
+    height: min-content;
+    margin: auto 0;
+}
+
+#content #search-result .text-center {
+    margin: 0 10%;
+}
+
+#content #search-result .title {
+    margin: 30px 0;
+    font-size: 5rem;
+    color: var(--text-color);
+    text-align: center;
+    text-shadow: 10px 10px 20px var(--darker-text);
+    overflow: hidden;
+}
+
+#content #search-result .title.mobile {
+    font-size: 3rem;
+}
+
+#content #search-result .row {
+    margin: 0 auto;
+}
+
+#content #search-result .row h6.direccion {
+    height: 19px !important;
+    align-self: center !important;
+}
+
+#content #search-result .row h6.horario {
+    height: 38px !important;
+    align-self: center !important;
+}
+
+#content #search-result .row .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#content #search-result .row .last-update {
+    margin: 5px 0 25px 0;
+    color: darkgray;
+}
+
+#content #search-result .row .figure-img.img-fluid.rounded.tall {
+    max-width: 400px;
+    margin: auto;
+    margin-bottom: 5% !important;
+    padding: 10px 5px 5px 5px;
+    background-color: #ddd;
+}
+
+#content #search-result .row .card-content {
+    min-height: fit-content;
+}
+
+#content #search-result .row .prices .table {
+    border: darkgray;
+}
+
+#content #search-result .row .table th {
+    text-align: left;
+}
+
+#content #search-result .row .table td {
+    text-align: right;
+}
+
+#content #search-result .row .card-footer {
+    height: 2.5em;
+    background-color: inherit;
+    border: none;
+    padding: 0 0 0 10px;
+}
+
+#content #search-result .row .card-footer a.eess-id {
+    font-size: 1em;
+    margin: auto 0;
+    color: var(--text-dark);
+    text-decoration: none;
+}
+
+#content #search-result .row .card-footer a.directions {
+    font-size: 2em;
+    margin: auto 0;
+    color: var(--text-dark);
+}
+
+#content #search-result .row .prices {
+    padding: 0 10px;
+}
+
+#content #account .title {
+    margin: 30px auto 10px auto;
+    font-size: 5rem;
+    color: var(--text-color);
+    text-align: center;
+    text-shadow: 10px 10px 20px var(--darker-text);
+}
+
+#content #account .title.mobile {
+    font-size: 3rem;
+}
+
+#content #account .crwrapper {
+    max-width: 95%;
+}
+
+#content #account .crwrapper .title {
+    font-size: 4rem;
+    margin: 0 auto 50px auto;
+    color: var(--darker-text);
+}
+
+#content #account .crwrapper .title.mobile {
+    font-size: 2rem;
+}
+
+#content #account .crwrapper .user-info {
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+#content #account .crwrapper .buttons .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+#content #account .crwrapper .buttons .row .btn {
+    margin: 2px;
+    width: max-content;
+}
+
+#content #account .crwrapper .user-login-register .title {
+    font-size: 2rem;
+    text-shadow: none;
+    margin: 5px auto;
+    color: var(--darker-text);
+}
+
+#content #account .crwrapper .user-login-register div.col-md-6 {
+    margin-bottom: 20px;
+}
+
+#content #login .title,
+#content #register .title {
+    margin: 30px auto 10px auto;
+    font-size: 5rem;
+    color: var(--text-color);
+    text-align: center;
+    text-shadow: 10px 10px 20px var(--darker-text);
+}
+
+#content #login .title.mobile,
+#content #register .title.mobile {
+    font-size: 3rem;
+}
+
+#content #login .crwrapper,
+#content #register .crwrapper {
+    max-width: max(40%, 700px);
+}
+
+#content #login .crwrapper.mobile,
+#content #register .crwrapper.mobile {
+    max-width: 95%;
+}
+
+#content #login .crwrapper .title,
+#content #register .crwrapper .title {
+    font-size: 4rem;
+    margin: 0 auto 50px auto;
+    color: var(--darker-text);
+}
+
+#content #login .crwrapper .title.mobile,
+#content #register .crwrapper .title.mobile {
+    font-size: 2rem;
+}
+
+#content #login .crwrapper .user-info,
+#content #register .crwrapper .user-info {
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+#content #login .crwrapper .buttons .row,
+#content #register .crwrapper .buttons .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+#content #login .crwrapper .buttons .row .btn,
+#content #register .crwrapper .buttons .row .btn {
+    margin: 2px;
+    width: max-content;
+}
+
+#content #login .crwrapper .user-login-register .title,
+#content #register .crwrapper .user-login-register .title {
+    font-size: 2rem;
+    text-shadow: none;
+    margin: 5px auto;
+    color: var(--darker-text);
+}
+
+#content #login .crwrapper div.links,
+#content #register .crwrapper div.links {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#content #login .crwrapper a,
+#content #register .crwrapper a {
+    height: min-content;
+    width: fit-content;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+#content #chpwd .title {
+    margin: 30px auto 10px auto;
+    font-size: 5rem;
+    color: var(--text-color);
+    text-align: center;
+    text-shadow: 10px 10px 20px var(--darker-text);
+}
+
+#content #chpwd .title.mobile {
+    font-size: 3rem;
+}
+
+#content #chpwd .crwrapper {
+    margin: 0 auto;
+    height: 50%;
+    max-width: 95%;
+}
+
+#content #chpwd .crwrapper .title {
+    font-size: 3rem;
+    margin: 0 auto 50px auto;
+    color: var(--darker-text);
+}
+
+#content #chpwd .crwrapper .title.mobile {
+    font-size: 2rem;
+}
+
+#content #upgrade .title {
+    margin: 30px auto 10px auto;
+    font-size: 5rem;
+    color: var(--text-color);
+    text-align: center;
+    text-shadow: 10px 10px 20px var(--darker-text);
+}
+
+#content #upgrade .title.mobile {
+    font-size: 3rem;
+}
+
+#content #upgrade .subtitle {
+    font-size: 1rem;
+    max-width: 95%;
+    margin: 0 auto 40px auto;
+    text-align: center;
+}
+
+#content #upgrade .subtitle.mobile {
+    font-size: 0.9rem;
+}
+
+#content #import {
+    max-width: calc(80%);
+}
+
+#content #import .title {
+    margin: 30px 0;
+    font-size: 5rem;
+    color: var(--text-color);
+    text-align: center;
+    text-shadow: 10px 10px 20px var(--darker-text);
+    overflow: hidden;
+}
+
+#content #import .title.mobile {
+    font-size: 3rem;
+}
+
+#content #import a {
+    color: var(--darker-text);
+}
+
+#content #import .form-text {
+    color: var(--darker-text) !important;
+}

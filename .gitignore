@@ -1,0 +1,12 @@
+.env
+.vscode
+*.code-workspace
+.mypy_cache
+.pytest_cache
+__pycache__
+
+db.sqlite3
+*.log
+ssl/*
+gas/data/data.json
+log/queries.csv

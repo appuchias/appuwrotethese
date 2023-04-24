@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load i18n user_agents crispy_forms_tags %}
+
+{% block title %}{% trans 'Account' %}{% endblock %}
+
+{% block content %}
+<div id="account">
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'AWT Account' %}</div>
+        <div class="crwrapper">
+            <div class="user-info">
+                <div class="username">{% trans "You're logged in as" %} '{{ user.get_username }}'. {% trans "Your account status is" %}: {% if not awtuser.is_upgraded %}{% trans "not " %}{% endif %}{% trans "upgraded" %}.</div>
+            </div>
+            <div class="buttons">
+                <div class="row">
+                {% comment %} {% if not awtuser.is_upgraded %}<a href="/account/upgrade/" class="btn btn-outline-dark"><i class="fa-solid fa-check"></i> {% trans "Upgrade account" %}</a>{% endif %} {% endcomment %}
+                <a href="/account/chpwd/" class="btn btn-outline-dark"><i class="fa-solid fa-lock"></i> {% trans "Change password" %}</a>
+                <a href="/account/logout/" class="btn btn-outline-dark"><i class="fa-solid fa-right-from-bracket"></i> {% trans "Logout" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

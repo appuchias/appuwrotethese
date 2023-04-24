@@ -1,0 +1,362 @@
+// Theming for apps
+#content {
+
+    /* Gas results */
+    #search {
+        .title {
+            margin: 30px auto 10px auto;
+
+            font-size: 5rem;
+            color: var(--text-color);
+            text-align: center;
+            text-shadow: 10px 10px 20px var(--darker-text);
+
+            &.mobile {
+                font-size: 3rem;
+            }
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            max-width: 95%;
+            margin: 0 auto 40px auto;
+            text-align: center;
+
+            &.mobile {
+                font-size: 0.9rem;
+            }
+        }
+
+        .form-text {
+            color: var(--darker-text) !important;
+        }
+
+        .btn {
+            height: min-content;
+            margin: auto 0;
+        }
+    }
+
+    #search-result {
+        .text-center {
+            margin: 0 10%;
+        }
+
+        .title {
+            margin: 30px 0;
+            font-size: 5rem;
+            color: var(--text-color);
+            text-align: center;
+            text-shadow: 10px 10px 20px var(--darker-text);
+            overflow: hidden;
+
+            &.mobile {
+                font-size: 3rem;
+            }
+        }
+
+        .row {
+            margin: 0 auto;
+
+            h6.direccion {
+                height: 19px !important;
+                align-self: center !important;
+            }
+
+            h6.horario {
+                height: 38px !important;
+                align-self: center !important;
+            }
+
+
+            .truncate {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .last-update {
+                margin: 5px 0 25px 0;
+
+                color: darkgray;
+            }
+
+            .figure-img.img-fluid.rounded.tall {
+                // min-width: 240px;
+                max-width: 400px;
+
+                margin: auto;
+                margin-bottom: 5% !important;
+                padding: 10px 5px 5px 5px;
+
+                background-color: #ddd;
+            }
+
+            .card-content {
+                min-height: fit-content;
+            }
+
+            .prices .table {
+                border: darkgray;
+            }
+
+            .table {
+                th {
+                    text-align: left;
+                }
+
+                td {
+                    text-align: right;
+                }
+            }
+
+            .card-footer {
+                height: 2.5em;
+
+                background-color: inherit;
+                border: none;
+
+                padding: 0 0 0 10px;
+
+                a.eess-id {
+                    font-size: 1em;
+                    margin: auto 0;
+                    color: var(--text-dark);
+                    text-decoration: none;
+                }
+
+                a.directions {
+                    font-size: 2em;
+                    margin: auto 0;
+
+                    color: var(--text-dark);
+                }
+            }
+
+            .prices {
+                // height : 240px;
+                padding: 0 10px;
+            }
+        }
+    }
+
+    #account {
+        .title {
+            margin: 30px auto 10px auto;
+
+            font-size: 5rem;
+            color: var(--text-color);
+            text-align: center;
+            text-shadow: 10px 10px 20px var(--darker-text);
+
+            &.mobile {
+                font-size: 3rem;
+            }
+        }
+
+        .crwrapper {
+            max-width: 95%;
+
+            .title {
+                font-size: 4rem;
+                margin: 0 auto 50px auto;
+                color: var(--darker-text);
+
+                &.mobile {
+                    font-size: 2rem;
+                }
+            }
+
+            .user-info {
+                margin: 0 auto;
+                padding: 0 10px;
+            }
+
+            .buttons {
+                .row {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: end;
+
+                    .btn {
+                        margin: 2px;
+                        width: max-content;
+                    }
+
+                }
+            }
+
+            .user-login-register {
+                .title {
+                    font-size: 2rem;
+                    text-shadow: none;
+                    margin: 5px auto;
+                    color: var(--darker-text);
+                }
+
+                div.col-md-6 {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+
+    #login,
+    #register {
+        .title {
+            margin: 30px auto 10px auto;
+
+            font-size: 5rem;
+            color: var(--text-color);
+            text-align: center;
+            text-shadow: 10px 10px 20px var(--darker-text);
+
+            &.mobile {
+                font-size: 3rem;
+            }
+        }
+
+        .crwrapper {
+            max-width: max(40%, 700px);
+
+            &.mobile {
+                max-width: 95%;
+            }
+
+            .title {
+                font-size: 4rem;
+                margin: 0 auto 50px auto;
+                color: var(--darker-text);
+
+                &.mobile {
+                    font-size: 2rem;
+                }
+            }
+
+            .user-info {
+                margin: 0 auto;
+                padding: 0 10px;
+            }
+
+            .buttons {
+                .row {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: end;
+
+                    .btn {
+                        margin: 2px;
+                        width: max-content;
+                    }
+
+                }
+            }
+
+            .user-login-register {
+                .title {
+                    font-size: 2rem;
+                    text-shadow: none;
+                    margin: 5px auto;
+                    color: var(--darker-text);
+                }
+            }
+
+            div.links {
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            a {
+                height: min-content;
+                width: fit-content;
+
+                color: var(--text-dark);
+                text-align: center;
+            }
+        }
+    }
+
+
+    #chpwd {
+        .title {
+            margin: 30px auto 10px auto;
+
+            font-size: 5rem;
+            color: var(--text-color);
+            text-align: center;
+            text-shadow: 10px 10px 20px var(--darker-text);
+
+            &.mobile {
+                font-size: 3rem;
+            }
+        }
+
+        .crwrapper {
+            margin: 0 auto;
+            height: 50%;
+            max-width: 95%;
+
+            .title {
+                font-size: 3rem;
+                margin: 0 auto 50px auto;
+                color: var(--darker-text);
+
+                &.mobile {
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+
+    #upgrade {
+        .title {
+            margin: 30px auto 10px auto;
+
+            font-size: 5rem;
+            color: var(--text-color);
+            text-align: center;
+            text-shadow: 10px 10px 20px var(--darker-text);
+
+            &.mobile {
+                font-size: 3rem;
+            }
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            max-width: 95%;
+            margin: 0 auto 40px auto;
+            text-align: center;
+
+            &.mobile {
+                font-size: 0.9rem;
+            }
+        }
+    }
+
+    #import {
+        max-width: calc(100% - 20px);
+
+        .title {
+            margin: 30px 0;
+            font-size: 5rem;
+            color: var(--text-color);
+            text-align: center;
+            text-shadow: 10px 10px 20px var(--darker-text);
+            overflow: hidden;
+
+            &.mobile {
+                font-size: 3rem;
+            }
+        }
+
+        a {
+            color: var(--darker-text);
+        }
+
+        .form-text {
+            color: var(--darker-text) !important;
+        }
+    }
+}

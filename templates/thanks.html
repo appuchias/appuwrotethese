@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load user_agents i18n %}
+
+{# Translators: Thanks home page #}
+{% block title %}{% trans "Thanks" %}{% endblock title %}
+
+{% block content %}
+<div id="thanks">
+    {# Translators: Thanks page title #}
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Thanks" %}</div>
+    <table class="table caption-top text-themed">
+        {# Translators: First table title #}
+        <caption class="text-themed">{% trans "Honorable mentions" %}:</caption>
+        <thead>
+            <tr>
+                {# Translators: First table headers #}
+                <th scope="col">{% trans "Who" %}</th>
+                <th scope="col">{% trans "Why" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">{% trans "My mother" %}</th>
+                {# Translators: Table content #}
+                <td>{% trans "A CSS master who got me through the painful design problems" %}.</td>
+            </tr>
+            <tr>
+                <th scope="row"><a href="https://www.instagram.com/paauu_31/" class="text-reset text-decoration-none text-themed" target="_blank">@paauu_31</a></th>
+                {# Translators: Table content  #}
+                <td>{% trans "Bug hunting and moral support throughout all page development" %}.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table caption-top text-themed">
+        {# Translators: Second table title #}
+        <caption class="text-themed">{% trans "Services" %}:</caption>
+        <thead>
+            <tr>
+                {# Translators: Second table headers #}
+                <th scope="col">{% trans "Webpage" %}</th>
+                <th scope="col">{% trans "Service provided" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">FontAwesome</th>
+                {# Translators: Table content #}
+                <td>{% trans "Icons used in the web. The most visible one is the home button (The meteor)" %}.</td>
+            </tr>
+            <tr>
+                <th scope="row">Bootstrap</th>
+                {# Translators: Table content #}
+                <td>{% trans "Main layout of the page" %}.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

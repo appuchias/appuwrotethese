@@ -1,0 +1,591 @@
+# AppuWroteThese ES translation.
+# Copyright (C) 2021 Appuchia
+# This file is distributed under the same license as the AppuWroteThese package.
+# Appuchia <contact@appu.ltd>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-24 22:42+0200\n"
+"PO-Revision-Date: 2021-10-06 21:47-0015\n"
+"Last-Translator: Appu  <fernandez.fer.pabloff@gmail.com>\n"
+"Language-Team: AppuWroteThese-Appuchia <contact@appu.ltd>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: accounts/forms.py:16 accounts/forms.py:132
+msgid "Email"
+msgstr "Email"
+
+#: accounts/forms.py:19
+msgid ""
+"Required. Your email will be used for password resetting and account "
+"activation."
+msgstr ""
+"Requerido. Tu correo electrónico se utilizará para restablecer la contraseña "
+"y la activación de la cuenta."
+
+#: accounts/forms.py:56 templates/accounts/register.html:12
+msgid "Register"
+msgstr "Registrarse"
+
+#: accounts/forms.py:91 templates/accounts/login.html:13
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: accounts/forms.py:122 templates/accounts/account.html:18
+msgid "Change password"
+msgstr "Cambiar contraseña"
+
+#: accounts/forms.py:135
+msgid "Required. You will receive an email with your temporary password."
+msgstr "Requerido. Recibirás un correo electrónico con su contraseña temporal."
+
+#: accounts/forms.py:151
+msgid "Reset password"
+msgstr "Restablecer contraseña"
+
+#: accounts/forms.py:162 accounts/models.py:38
+msgid "Upgrade UUID"
+msgstr "UUID de mejora"
+
+#: accounts/forms.py:164
+msgid ""
+"You will receive an email regarding your purchase from sellix with your "
+"upgrade UUID."
+msgstr ""
+"Recibirás un correo electrónico sobre tu compra de sellix con tu UUID de "
+"mejora."
+
+#: accounts/forms.py:185 templates/accounts/upgrade.html:5
+#: templates/accounts/upgrade.html:9
+msgid "Upgrade"
+msgstr "Mejorar"
+
+#: accounts/models.py:27
+msgid "Preferred query"
+msgstr "Petición favorita"
+
+#: accounts/models.py:33
+msgid "Upgraded"
+msgstr "Mejorada"
+
+#: accounts/models.py:49
+msgid "AWT User"
+msgstr "Usuario de AWT"
+
+#: accounts/models.py:50
+msgid "AWT Users"
+msgstr "Usuarios de AWT"
+
+#: accounts/views.py:52
+msgid "You are now logged in"
+msgstr "Has iniciado sesión"
+
+#: accounts/views.py:54
+msgid "Wrong username or password"
+msgstr "Nombre de usuario o contraseña incorrectos"
+
+#: accounts/views.py:76
+msgid "You are now registered"
+msgstr "Te has registrado"
+
+#: accounts/views.py:102
+msgid "Your password was successfully updated!"
+msgstr "Tu contraseña se actualizó correctamente."
+
+#: accounts/views.py:104
+msgid "Old password is not correct"
+msgstr "La contraseña anterior no es correcta"
+
+#: accounts/views.py:147
+msgid "[appu.ltd] Password reset email"
+msgstr "[appu.ltd] Restablecer contraseña"
+
+#: accounts/views.py:156
+msgid ""
+"Your password was successfully reset.                        Please check "
+"your email with your new temporary password."
+msgstr ""
+"Tu contraseña se restableció correctamente.                        Por "
+"favor, comprueba tu correo electrónico con tu nueva contraseña temporal."
+
+#: accounts/views.py:161
+msgid "Email is not registered"
+msgstr "El correo electrónico no está registrado"
+
+#: appuwrotethese/settings.py:233
+msgid "Spanish"
+msgstr "Castellano"
+
+#: appuwrotethese/settings.py:234
+msgid "English"
+msgstr "Inglés"
+
+#: appuwrotethese/views.py:18
+msgid "Fuel prices"
+msgstr "Gasolineras"
+
+#: appuwrotethese/views.py:20
+msgid ""
+"A project where you can check the different prices of all gas stations in "
+"Spain to sort them from lowest to highest"
+msgstr ""
+"Un proyecto en el que puedes ver los distintos precios de las gasolineras de "
+"España y ordenarlos de menor a mayor"
+
+#: appuwrotethese/views.py:27
+msgid "Future"
+msgstr "Futuro"
+
+#: appuwrotethese/views.py:28
+msgid "Future projects"
+msgstr "Futuros proyectos"
+
+#: appuwrotethese/views.py:50
+msgid "Project placeholder #"
+msgstr "Proyecto de ejemplo #"
+
+#: appuwrotethese/views.py:53
+msgid "Placeholder project description"
+msgstr "Descripción del proyecto de ejemplo"
+
+#: gas/forms.py:13
+msgid "Search query"
+msgstr "Búsqueda"
+
+#: gas/forms.py:16
+msgid "Specific element to look for (e.g. Coruña, 15001, etc.)"
+msgstr "Elemento concreto a buscar (p.ej. Coruña, 15001, etc.)"
+
+#: gas/forms.py:21
+msgid "Search by"
+msgstr "Buscar por"
+
+#: gas/forms.py:23 gas/models.py:20 gas/models.py:25
+msgid "Locality"
+msgstr "Municipio"
+
+#: gas/forms.py:24 gas/models.py:47 gas/models.py:52
+msgid "Province"
+msgstr "Provincia"
+
+#: gas/forms.py:25
+msgid "Postal code (Inaccurate)"
+msgstr "Código postal (Inexacto)"
+
+#: gas/forms.py:28
+msgid "What the search query is"
+msgstr "Cuál es la búsqueda"
+
+#: gas/forms.py:32
+msgid "Fuel"
+msgstr "Combustible"
+
+#: gas/forms.py:41
+msgid "Fuel you're interested in (Results will be filtered by this)"
+msgstr ""
+"Combustible en el que estás interesado (Se usará para filtrar los resultados)"
+
+#: gas/forms.py:54
+msgid "Show all"
+msgstr "Ver todos"
+
+#: gas/forms.py:57
+msgid "(Show all fuel types, not only the one you're looking for)"
+msgstr "(Mostrar todos los combustibles, no solo el que estás buscando)"
+
+#: gas/forms.py:81 templates/gas/search.html:10
+msgid "Search"
+msgstr "Buscar"
+
+#: gas/helper_query.py:127
+msgid "Locality not found"
+msgstr "Localidad no encontrada"
+
+#: gas/helper_query.py:135
+msgid "Province not found"
+msgstr "Provincia no encontrada"
+
+#: gas/helper_query.py:143
+#, fuzzy
+#| msgid "Postal code not found"
+msgid "Postal code invalid or not found"
+msgstr "Código postal"
+
+#: gas/helper_query.py:147
+msgid "Internal syntax error"
+msgstr "Error de sintaxis interno"
+
+#: gas/models.py:13
+msgid "Municipality ID"
+msgstr "ID de municipio"
+
+#: gas/models.py:14
+msgid "ID of the municipality"
+msgstr "ID del municipio"
+
+#: gas/models.py:26
+msgid "Localities"
+msgstr "Municipios"
+
+#: gas/models.py:40
+msgid "Province ID"
+msgstr "ID de provincia"
+
+#: gas/models.py:41
+msgid "ID of the province"
+msgstr "ID de la provincia"
+
+#: gas/models.py:53
+msgid "Provinces"
+msgstr "Provincias"
+
+#: gas/models.py:69
+msgid "Company"
+msgstr "Compañía"
+
+#: gas/models.py:70
+msgid "Address"
+msgstr "Dirección"
+
+#: gas/models.py:71
+msgid "Schedule"
+msgstr "Horario"
+
+#: gas/models.py:75
+msgid "Postal code"
+msgstr "Código postal"
+
+#: gas/models.py:81
+msgid "Latitude"
+msgstr "Latitud"
+
+#: gas/models.py:87
+msgid "Longitude"
+msgstr "Longitud"
+
+#: gas/models.py:119
+msgid "Gas station"
+msgstr "Gasolinera"
+
+#: gas/models.py:120
+msgid "Gas stations"
+msgstr "Gasolineras"
+
+#: gas/views.py:45
+msgid "No results found"
+msgstr "No se encontraron resultados"
+
+#: gas/views.py:62
+msgid "Invalid form data. Please try again."
+msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
+
+#: gas/views.py:71
+msgid "Operation not allowed"
+msgstr "Operación no permitida"
+
+#: gas/views.py:73
+msgid "You cannot access this site this way. Only POST requests are allowed."
+msgstr ""
+"No puedes acceder a este sitio de esta forma. Sólo se permiten peticiones "
+"POST."
+
+#: middleware/permanent_messages_middleware.py:6
+msgid "Province searching might be broken"
+msgstr "La búsqueda por provincias puede no funcionar"
+
+#: templates/accounts/account.html:5 templates/accounts/login.html:5
+#: templates/accounts/register.html:5
+msgid "Account"
+msgstr "Cuenta"
+
+#: templates/accounts/account.html:9 templates/accounts/login.html:9
+#: templates/accounts/register.html:9
+msgid "AWT Account"
+msgstr "Cuenta AWT"
+
+#: templates/accounts/account.html:12
+msgid "You're logged in as"
+msgstr "Estás conectado como"
+
+#: templates/accounts/account.html:12
+msgid "Your account status is"
+msgstr "El estado de tu cuenta es"
+
+#: templates/accounts/account.html:12
+msgid "not "
+msgstr "no "
+
+#: templates/accounts/account.html:12
+msgid "upgraded"
+msgstr "mejorada"
+
+#: templates/accounts/account.html:19
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+#: templates/accounts/chpwd.html:5 templates/accounts/chpwd.html:9
+msgid "Password change"
+msgstr "Cambiar contraseña"
+
+#: templates/accounts/chpwd.html:17
+msgid "You're not logged in"
+msgstr "No has iniciado sesión"
+
+#. Translators: Button to go to last page visited
+#: templates/accounts/chpwd.html:17 templates/accounts/respwd.html:17
+#: templates/build.html:14 templates/gas/noresults.html:15
+msgid "Go back"
+msgstr "Volver atrás"
+
+#: templates/accounts/login.html:18
+msgid "Don't have an account"
+msgstr "No tienes una cuenta"
+
+#: templates/accounts/login.html:18
+msgid "Create one here"
+msgstr "Crea una aquí"
+
+#: templates/accounts/login.html:19
+msgid "Forgot your password"
+msgstr "Olvidaste tu contrsaña"
+
+#: templates/accounts/register.html:17
+msgid "Have an account"
+msgstr "Tienes una cuenta"
+
+#: templates/accounts/register.html:17
+msgid "Log in"
+msgstr "Inicia sesión"
+
+#: templates/accounts/respwd.html:5 templates/accounts/respwd.html:9
+msgid "Password reset"
+msgstr "Reiniciar contraseña"
+
+#: templates/accounts/respwd.html:17
+msgid "Please log out before coming here"
+msgstr "Por favor, cierra sesión antes de venir aquí"
+
+#: templates/accounts/upgrade.html:11
+msgid ""
+"Upgrading is a paid feature. Once your account is upgraded, you will have "
+"lifetime access to all web features"
+msgstr ""
+"Mejorar la cuenta es una característica de pago. Una vez que tu cuenta esté "
+"mejorada, tendrás acceso de por vida a todas las características de la web"
+
+#: templates/accounts/upgrade.html:12
+msgid "To upgrade, visit"
+msgstr "Para mejorar, visita"
+
+#: templates/accounts/upgrade.html:12
+msgid "this link"
+msgstr "este enlace"
+
+#. Translators: Projects page tab title
+#. Translators: Projects page title
+#: templates/base.html:85 templates/projects.html:5 templates/projects.html:11
+msgid "Projects"
+msgstr "Proyectos"
+
+#: templates/base.html:88
+msgid "Change language"
+msgstr "Cambiar idioma"
+
+#: templates/base.html:116
+msgid "Coded with 🖤 by Appu"
+msgstr "Hecho con 🖤 por Appu"
+
+#. Translators: Build page title
+#: templates/build.html:5
+msgid "Appu is working on it"
+msgstr "Appu está trabajando en ello"
+
+#. Translators: Page in construction warning
+#: templates/build.html:10
+msgid "Page under construction. Maybe check back later."
+msgstr "Página en construcción. Vuelve más tarde."
+
+#. Translators: Button to go to the home page
+#: templates/build.html:16
+msgid "Go home"
+msgstr "Volver al inicio"
+
+#. Translators: 404 Page title
+#: templates/e404.html:5
+msgid "404 Not Found"
+msgstr "Error 404 no encontrado"
+
+#: templates/e404.html:10
+msgid "Error 404. Web not found."
+msgstr "Error 404: Web no encontrada."
+
+#. Translators: 500 Page title
+#: templates/e500.html:5
+msgid "500: Internal Server Error"
+msgstr "500: Error interno del servidor"
+
+#: templates/e500.html:10
+msgid ""
+"There was an internal error while loading the page. Please contact me to be "
+"able to solve it."
+msgstr ""
+"Hubo un error interno al cargar la página. Por favor, contacta conmigo para "
+"que pueda solucionarlo."
+
+#: templates/exif_trimmer/import.html:9
+msgid "EXIF remover"
+msgstr "Eliminador de EXIF"
+
+#: templates/exif_trimmer/import.html:12
+msgid ""
+"EXIF data contains information about the image such as the exact location "
+"where it was taken"
+msgstr ""
+"Los datos EXIF contienen información sobre la imagen, como la ubicación "
+"exacta donde fue tomada"
+
+#: templates/exif_trimmer/import.html:13
+msgid "Note that when doing this process, your image may lose some quality"
+msgstr ""
+"Ten en cuenta que cuando haces este proceso, tu imagen puede perder cierta "
+"calidad"
+
+#: templates/exif_trimmer/import.html:14
+msgid "The error thrown by the program was"
+msgstr "El error del programa fue"
+
+#: templates/gas/noresults.html:1
+msgid "No results"
+msgstr "Sin resultados"
+
+#: templates/gas/noresults.html:4
+msgid "Results were not found with that search"
+msgstr "No se encontraron resultados con esa búsqueda"
+
+#: templates/gas/noresults.html:8
+msgid "The error raised by the application for your request was"
+msgstr "El error originado por la aplicación para tu petición fue"
+
+#: templates/gas/noresults.html:13
+msgid "Note: Stations that don't offer that fuel type will not be shown"
+msgstr ""
+"Nota: Las gasolineras que no ofrezcan el combustible solicitado no serán "
+"mostradas"
+
+#: templates/gas/results.html:12
+msgid "Stations"
+msgstr "Gasolineras"
+
+#: templates/gas/results.html:15
+msgid ""
+"The icon at the bottom of every card opens the route to the station in your "
+"maps app (Google maps for the web)"
+msgstr ""
+"El icono en la parte inferior abre la dirección de la gasolinera en tu "
+"aplicación de mapas (Google maps para web)"
+
+#: templates/gas/results.html:17
+msgid "Prices time"
+msgstr "Hora de los precios"
+
+#: templates/gas/search.html:4
+msgid "Search stations"
+msgstr "Buscar gasolineras"
+
+#: templates/gas/search.html:13
+msgid ""
+"Here you will find the cheapest gas stations for each area sorted by fuel "
+"type"
+msgstr ""
+"Aquí podrás encontrar las gasolineras más baratas de cada zona para el tipo "
+"de combustible que utilices"
+
+#: templates/gas/search.html:14
+msgid "Only works for Spain"
+msgstr "Funciona solo en España"
+
+#. Translators: Home page title
+#: templates/home.html:5
+msgid "Home"
+msgstr "Inicio"
+
+#: templates/home.html:11
+msgid "View projects"
+msgstr "Ver proyectos"
+
+#. Translators: Thanks home page
+#. Translators: Thanks page title
+#: templates/thanks.html:5 templates/thanks.html:10
+msgid "Thanks"
+msgstr "Agradecimientos"
+
+#. Translators: First table title
+#: templates/thanks.html:13
+msgid "Honorable mentions"
+msgstr "Menciones honoríficas"
+
+#. Translators: First table headers
+#: templates/thanks.html:17
+msgid "Who"
+msgstr "Quién"
+
+#: templates/thanks.html:18
+msgid "Why"
+msgstr "Por qué"
+
+#: templates/thanks.html:23
+msgid "My mother"
+msgstr "Mi madre"
+
+#. Translators: Table content
+#: templates/thanks.html:25
+msgid "A CSS master who got me through the painful design problems"
+msgstr "Una maestra de CSS que me ayudó con los dolorosos problemas del diseño"
+
+#. Translators: Table content
+#: templates/thanks.html:30
+msgid "Bug hunting and moral support throughout all page development"
+msgstr "Caza de bugs y apoyo moral durante toda la creación de la web"
+
+#. Translators: Second table title
+#: templates/thanks.html:37
+msgid "Services"
+msgstr "Servicios"
+
+#. Translators: Second table headers
+#: templates/thanks.html:41
+msgid "Webpage"
+msgstr "Página web"
+
+#: templates/thanks.html:42
+msgid "Service provided"
+msgstr "Servicio ofrecido"
+
+#. Translators: Table content
+#: templates/thanks.html:49
+msgid ""
+"Icons used in the web. The most visible one is the home button (The meteor)"
+msgstr ""
+"Iconos usados en la web. El más visible es el botón 'home' (El meteorito)"
+
+#. Translators: Table content
+#: templates/thanks.html:54
+msgid "Main layout of the page"
+msgstr "Diseño principal de la web"
+
+#~ msgid "Query saved"
+#~ msgstr "Búsqueda guardada"
+
+#~ msgid "Your account must be upgraded to save a query"
+#~ msgstr "Tu cuenta debe estar mejorada para guardar una búsqueda"
+
+#~ msgid "Código postal no válido"
+#~ msgstr "Código postal no válido"
+
+#~ msgid "The web is under development. It HAS bugs"
+#~ msgstr "El sitio web está en desarrollo. TENDRÁ errores"

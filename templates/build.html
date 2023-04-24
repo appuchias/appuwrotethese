@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{# Translators: Build page title #}
+{% block title %}{% trans "Appu is working on it" %}{% endblock title %}
+
+{% block content %}
+<div id="build">
+    {# Translators: Page in construction warning #}
+    <center class="text-themed">{% trans "Page under construction. Maybe check back later." %}</center>
+    <div>
+        <center>
+            {# Translators: Button to go to last page visited #}
+            <a class="text-themed" href="javascript:history.back()">{% trans "Go back" %}</a>
+            {# Translators: Button to go to the home page #}
+            <a class="text-themed dark" href="/">{% trans "Go home" %}</a>
+        </center>
+    </div>
+</div>
+{% endblock content %}
