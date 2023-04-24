@@ -1,5 +1,5 @@
 # Appu Wrote These
-# Copyright (C) 2022  Appu <appuchia@appu.ltd>
+# Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
