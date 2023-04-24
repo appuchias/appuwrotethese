@@ -7,6 +7,6 @@ __pycache__
 
 db.sqlite3
 *.log
-ssl/*
-gas/data/data.json
-log/queries.csv
+src/ssl/*
+src/gas/data/data.json
+src/log/queries.csv

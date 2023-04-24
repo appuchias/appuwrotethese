@@ -1,7 +1,7 @@
-#!/usr/bin/fish
+#! /usr/bin/fish
 
-if [ "(pwd)" != /home/appu/appuwrotethese/ ]
-    cd /home/appu/appuwrotethese
+if [ "(pwd)" != /home/appu/appuwrotethese/src/ ]
+    cd /home/appu/appuwrotethese/src
 end
 
 pipenv run make update
