@@ -1,25 +1,21 @@
 run:
-	python3 src/manage.py runserver 0.0.0.0:8000
+	python3 manage.py runserver 0.0.0.0:8000
 
 makemsgs:
-	cd src
-	django-admin makemessages -a
-	cd ..
-
+		django-admin makemessages -a
+	
 compilemsgs:
-	cd src
-	django-admin compilemessages --use-fuzzy --locale es
-	cd ..
-
+		django-admin compilemessages --use-fuzzy --locale es
+	
 migrate:
-	python3 src/manage.py makemigrations
-	python3 src/manage.py migrate
+	python3 manage.py makemigrations
+	python3 manage.py migrate
 
 collectstatic:
-	python3 src/manage.py collectstatic --noinput
+	python3 manage.py collectstatic --noinput
 
 updatedb:
-	python3 src/manage.py update_db
+	python3 manage.py update_db
 
 update:
 	git fetch
