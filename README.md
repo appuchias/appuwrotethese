@@ -1,8 +1,7 @@
 # Appu Wrote These
 
-[![AGPL 3.0 License](https://img.shields.io/github/license/appuchias/appuwrotethese?style=flat-square)](https://github.com/appuchias/appuwrotethese/blob/master/LICENSE)
-[![Author](https://img.shields.io/badge/Project%20by-Appu-9cf?style=flat-square)](https://github.com/appuchias)
-![Size](https://img.shields.io/github/repo-size/appuchias/appuwrotethese?color=orange&style=flat-square)
+[![AGPL 3.0 License](https://img.shields.io/gitlab/license/appuchia/appuwrotethese?style=flat-square)](https://gitlab.com/appuchia/appuwrotethese/-/blob/master/LICENSE)
+[![Author](https://img.shields.io/badge/Project%20by-Appu-9cf?style=flat-square)](https://gitlab.com/appuchia)
 
 ## What is this?
 
@@ -19,7 +18,7 @@ In case some of that happens, you can contact me through any of the social netwo
 
 ## License
 
-This project is licensed under the [AGPL 3.0 License](https://github.com/appuchias/appuwrotethese/blob/master/LICENSE).
+This project is licensed under the [AGPL 3.0 License](https://gitlab.com/appuchia/appuwrotethese/-/blob/master/LICENSE).
 All other used licenses can be found [here](project-attribution-git$cc871f4a202a40e3274526bdd4decda4d1abc9ce.md)
 
 Built with 🖤 by Appu
