@@ -19,6 +19,6 @@ In case some of that happens, you can contact me through any of the social netwo
 ## License
 
 This project is licensed under the [AGPL 3.0 License](https://gitlab.com/appuchia/appuwrotethese/-/blob/master/LICENSE).
-All other used licenses can be found [here](project-attribution-git$cc871f4a202a40e3274526bdd4decda4d1abc9ce.md)
+All other used licenses can be found [here](https://app.fossa.com/attribution/a2b2b9c2-e587-42d8-a9ad-121fc1033b43)
 
 Built with 🖤 by Appu
