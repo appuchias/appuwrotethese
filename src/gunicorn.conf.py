@@ -1,5 +1,4 @@
-import socket
-from appuwrotethese import extras
+from appuwrotethese import extras, settings
 
 wsgi_app = "appuwrotethese.wsgi:application"
 
@@ -15,8 +14,7 @@ pidfile = "/tmp/gunicorn.pid"
 # bind = "unix:/tmp/gunicorn.sock"
 
 # Logging
-access_log_format = '%(t)s %({cf-connecting-ip}i)s[%({cf-ipcountry}i)s]  \
-"%(f)s" -> "%(r)s" %(s)s %(b)s "%(a)s"'
+access_log_format = '%(t)s %({cf-connecting-ip}i)s[%({cf-ipcountry}i)s]  "%(f)s" "%(r)s" -> %(s)s %(b)s "%(a)s"'
 accesslog = "./log/access.log"
 errorlog = "./log/gunicorn.log"
 loglevel = "info"
@@ -26,7 +24,7 @@ backlog = 256
 worker_connections = 200
 
 # Local development overrides
-if socket.gethostname() in ["LY530-Arch"]:
+if settings.DEBUG:
     reload = True
     workers = 1
     bind = "0.0.0.0:8000"
