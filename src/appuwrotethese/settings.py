@@ -237,7 +237,7 @@ LANGUAGE_COOKIE_NAME = "lang"
 LOCALE_PATHS = (BASE_DIR / "locale",)
 
 # Staticfiles
-STATIC_URL = "/"
+STATIC_URL = "/s/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
