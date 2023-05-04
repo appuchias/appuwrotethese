@@ -1,9 +1,9 @@
-from django.http.request import HttpRequest
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from datetime import datetime
-import json, threading
+import json
 
 from appuwrotethese import extras
 from gas import forms, helper_query
@@ -22,56 +22,51 @@ def search(request: HttpRequest):
 def result(request: HttpRequest):
     form = forms.SearchStations(request.POST)
 
-    if request.method == "POST":
-        if form.is_valid():
-            form_data = form.cleaned_data
+    if request.method != "POST":
+        # Using the HttpResponseNotAllowed would be better, but this is user
+        # frieldier for a webpage without an API
+        # return HttpResponseNotAllowed(["POST"], "Method not allowed")
 
-            # helper_query.process_star(request, form_data)
+        messages.error(request, _("Only POST is allowed in /gas/result/"))
+        return redirect("/gas/")
 
-            results = helper_query.process_search(request, form_data)
-            product_name = {
-                "GOA": "Gasóleo A",
-                "G95E5": "Gasolina 95",
-                "G98E5": "Gasolina 98",
-                "GLP": "GLP",
-            }.get(form_data.get("fuel", "GOA"), "Gasóleo A")
-            last_update = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-            if form_data.get("show_all", True):
-                with open("gas/data/data.json", "r") as f:
-                    last_update = json.load(f).get("Fecha", last_update)
+    if form.is_valid():
+        form_data = form.cleaned_data
 
-            # Show notification in case no results are returned
-            if not results:
-                messages.error(request, _("No results found"))
-                return redirect("/gas/")
+        # helper_query.process_star(request, form_data)
 
-            return render(
-                request,
-                "gas/results.html",
-                {
-                    "product": product_name,
-                    "results": results,
-                    "last_update": last_update,
-                },
-            )
-        else:  # Form is not valid
-            return render(
-                request,
-                "gas/noresults.html",
-                {
-                    "error": _("Invalid form data. Please try again."),
-                },
-            )
-    else:  # GET request
-        # Add message and redirect
+        results = helper_query.process_search(request, form_data)
+        product_name = {
+            "GOA": "Gasóleo A",
+            "G95E5": "Gasolina 95",
+            "G98E5": "Gasolina 98",
+            "GLP": "GLP",
+        }.get(form_data.get("fuel", "GOA"), "Gasóleo A")
+        last_update = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        if form_data.get("show_all", True):
+            with open("gas/data/data.json", "r") as f:
+                last_update = json.load(f).get("Fecha", last_update)
+
+        # Show notification in case no results are returned
+        if not results:
+            messages.error(request, _("No results found"))
+            return redirect("/gas/")
+
         return render(
             request,
-            "text.html",
+            "gas/results.html",
             {
-                "title": _("Operation not allowed"),
-                "text": _(
-                    "You cannot access this site this way. Only POST requests are allowed."
-                ),
+                "product": product_name,
+                "results": results,
+                "last_update": last_update,
+            },
+        )
+    else:  # Form is not valid
+        return render(
+            request,
+            "gas/noresults.html",
+            {
+                "error": _("Invalid form data. Please try again."),
             },
         )
 
