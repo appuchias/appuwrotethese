@@ -13,6 +13,7 @@ python-dotenv = "*"
 pytz = "*"
 whitenoise = "*"
 tzdata = "*"
+requests = "*"
 
 [dev-packages]
 black = "*"
