@@ -1,6 +1,7 @@
 import requests
 from django.http import HttpRequest
 from django.contrib import messages
+from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 from typing import Iterable
 
@@ -120,16 +121,26 @@ def process_search(request: HttpRequest, form: dict) -> Iterable:
 
     # Get the relevant IDs
     if q_type == "locality":
-        locality = models.Locality.objects.filter(name__icontains=query).first()
-        if locality:
+        locality = models.Locality.objects.filter(name__icontains=query)
+        if locality.exists():
+            # Select locality with more stations
+            locality = locality.annotate(num_stations=Count("station")).order_by(
+                "-num_stations"
+            )[0]
+
             id_locality = locality.id_mun
         else:
             messages.add_message(request, messages.ERROR, _("Locality not found"))
             return []
 
     elif q_type == "province":
-        province = models.Province.objects.filter(name__icontains=query).first()
-        if province:
+        province = models.Province.objects.filter(name__icontains=query)
+        if province.exists():
+            # Select province with more stations
+            province = province.annotate(num_stations=Count("station")).order_by(
+                "-num_stations"
+            )[0]
+
             id_province = province.id_prov
         else:
             messages.add_message(request, messages.ERROR, _("Province not found"))
