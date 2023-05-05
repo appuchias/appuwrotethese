@@ -3,7 +3,6 @@ from datetime import datetime
 
 from appuwrotethese.extras import (
     get_json_data,
-    store_json_data,
     DATA_OLD_MINUTES,
     FILEPATH_ROOT,
     PATH_PRODUCTS,
@@ -18,71 +17,10 @@ from appuwrotethese.extras import (
 # ######################### #
 
 
-def fetch_products() -> list:
-    """
-    Get the products from the database.
-    """
-
-    url = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/ProductosPetroliferos/"
-    products = requests.get(url).json()
-
-    # [{
-    # "IDProducto":"Contenido de la cadena",
-    # "NombreProducto":"Contenido de la cadena",
-    # "NombreProductoAbreviatura":"Contenido de la cadena"
-    # }]
-
-    store_json_data(products, PATH_PRODUCTS)
-
-    return products
-
-
-def fetch_localities() -> list:
-    """
-    Get the localities from the database.
-    """
-
-    url = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/Municipios/"
-    localities = requests.get(url).json()
-
-    # [{
-    # "IDMunicipio":"Contenido de la cadena",
-    # "IDProvincia":"Contenido de la cadena",
-    # "IDCCAA":"Contenido de la cadena",
-    # "Municipio":"Contenido de la cadena",
-    # "Provincia":"Contenido de la cadena",
-    # "CCAA":"Contenido de la cadena"
-    # }]
-
-    store_json_data(localities, PATH_LOCALITIES)
-
-    return localities
-
-
-def fetch_provinces() -> list:
-    """
-    Get the provinces from the database.
-    """
-
-    url = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/Provincias/"
-    provinces = requests.get(url).json()
-
-    # [{
-    # "IDPovincia":"Contenido de la cadena", # Mispelled in the API
-    # "IDCCAA":"Contenido de la cadena",
-    # "Provincia":"Contenido de la cadena",
-    # "CCAA":"Contenido de la cadena"
-    # }]
-
-    store_json_data(provinces, PATH_PROVINCES)
-
-    return provinces
-
-
 def fetch_data() -> dict:
-    """
-    Get the data from the most recent source (file or remote).
-    If file is older than 30 minutes, refresh it.
+    """Get the data from the most recent source (file or remote).
+
+    If the file is older than 30 minutes, redownload it.
     """
 
     # Get the data from the file or fake its existence
@@ -120,35 +58,13 @@ def fetch_data() -> dict:
     return data
 
 
-# ############### #
-#   Get from fp   #
-# ############### #
-
-
-def get_products() -> dict:
-    """Get the products from the file."""
-    return get_json_data(PATH_PRODUCTS)
-
-
-def get_localities() -> dict:
-    """Get the localities from the file."""
-    return get_json_data(PATH_LOCALITIES)
-
-
-def get_provinces() -> dict:
-    """Get the provinces from the file."""
-    return get_json_data(PATH_PROVINCES)
-
-
-# ####################### #
-#    Startup functions    #
-# ####################### #
+# ########################### #
+#    Create aux. API files    #
+# ########################### #
 
 
 def create_files() -> None:
-    """
-    Create the files needed for the program.
-    """
+    """Create the files needed for the program."""
 
     # Create folders
     for folder in (FILEPATH_ROOT, FILEPATH_ROOT / "data"):

@@ -1,5 +1,21 @@
+from appuwrotethese.extras import get_json_data
 from gas.models import Locality, Province, Station
-from gas.helper_data import get_localities, get_provinces, fetch_data
+from gas.helper_data import fetch_data, PATH_LOCALITIES, PATH_PROVINCES
+
+
+# ############### #
+#   Get from fp   #
+# ############### #
+
+
+def get_localities() -> dict:
+    """Get the localities from the file."""
+    return get_json_data(PATH_LOCALITIES)
+
+
+def get_provinces() -> dict:
+    """Get the provinces from the file."""
+    return get_json_data(PATH_PROVINCES)
 
 
 # ###############################

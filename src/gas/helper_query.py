@@ -103,8 +103,7 @@ def search_db(
 
 
 def process_search(request: HttpRequest, form: dict) -> Iterable:
-    """
-    Process a query and return the results.
+    """Process a query and return the results.
 
     This function gets the request and the clean form data
     and returns the list of results.
