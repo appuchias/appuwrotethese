@@ -134,13 +134,8 @@ def process_search(request: HttpRequest, form: dict) -> Iterable:
             return []
 
     elif q_type == "province":
-        province = models.Province.objects.filter(name__icontains=query)
-        if province.exists():
-            # Select province with more stations
-            province = province.annotate(num_stations=Count("station")).order_by(
-                "-num_stations"
-            )[0]
-
+        province = models.Province.objects.filter(name__icontains=query).first()
+        if province:
             id_province = province.id_prov
         else:
             messages.add_message(request, messages.ERROR, _("Province not found"))
