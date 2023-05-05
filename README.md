@@ -7,8 +7,8 @@
 
 This is my personal website where I will be uploading the projects I think might be useful for some other people and the ones I need to have access to in a convenient way.
 
-I am learning so many things shown here will have some bugs and there is the possibility that something is broken.
-In case some of that happens, you can contact me through any of the social networks in the webpage's footer and I will try to fix the issue.
+I am learning, so many things shown here will have bugs and there may be something broken.
+In case something happens, you can contact me through any social network found in the web footer.
 
 ## Projects featured here
 
