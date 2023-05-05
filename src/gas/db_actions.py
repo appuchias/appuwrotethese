@@ -1,6 +1,14 @@
-from appuwrotethese.extras import get_json_data
+from datetime import datetime
+import json, requests
+
+from appuwrotethese.extras import (
+    get_json_data,
+    DATA_OLD_MINUTES,
+    PATH_DATA,
+    PATH_LOCALITIES,
+    PATH_PROVINCES,
+)
 from gas.models import Locality, Province, Station
-from gas.helper_data import fetch_data, PATH_LOCALITIES, PATH_PROVINCES
 
 
 # ############### #
@@ -16,6 +24,52 @@ def get_localities() -> dict:
 def get_provinces() -> dict:
     """Get the provinces from the file."""
     return get_json_data(PATH_PROVINCES)
+
+
+# ######################### #
+#  Data fetching functions  #
+# ######################### #
+
+
+def fetch_data() -> dict:
+    """Get the data from the most recent source (file or remote).
+
+    If the file is older than 30 minutes, redownload it.
+    """
+
+    # Get the data from the file or fake its existence
+    try:
+        with open(PATH_DATA, "r") as r:
+            data = json.load(r)
+    except FileNotFoundError:
+        # Fake the data exists and is obviously old
+        data = {
+            "Fecha": f"{str(datetime.fromtimestamp(0).strftime(r'%d/%m/%Y %H:%M:%S'))}"
+        }
+
+    # Determine if the data is old
+    try:
+        date = data["Fecha"]
+    except KeyError:
+        data_is_old = True
+    else:
+        data_time = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
+        data_old_s = DATA_OLD_MINUTES * 60
+        # True if data is older than DATA_OLD_MINUTES minutes
+        data_is_old = (datetime.now() - data_time).total_seconds() > data_old_s
+
+    # Refresh the data
+    if data_is_old:
+        print("[!] Data was old, refreshing...")
+        data = requests.get(
+            "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/"
+        ).json()
+
+        # Store the newly obtained data to a file
+        with open(PATH_DATA, "w") as w:
+            json.dump(data, w, indent=4, ensure_ascii=True)
+
+    return data
 
 
 # ###############################
@@ -104,6 +158,7 @@ def update_db() -> None:
         "gasolina_98",
         "glp",
     ]
+
     stations_to_create: list[Station] = []
     stations_to_update: list[Station] = []
 

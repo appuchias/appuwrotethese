@@ -62,7 +62,7 @@ def firstof(
 
 
 # Take a dict and store it in a file
-def store_json_data(data: dict, filepath: Path) -> None:
+def store_json_data(data: dict | list, filepath: Path) -> None:
     """Store the JSON data in a file."""
 
     with open(filepath, "w") as w:
