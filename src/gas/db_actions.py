@@ -147,3 +147,18 @@ def update_db() -> None:
         print("[✓] Updated stations.")
 
     print("---\n[✓] All stations refreshed.")
+
+
+# #################### #
+#    Purge stations    #
+# #################### #
+
+
+def purge_stations() -> None:
+    """
+    Remove all the stations from the database.
+    """
+
+    print("[·] Purging stations...", end="\r")
+    Station.objects.all().delete()
+    print("[✓] Purged stations.   ")
