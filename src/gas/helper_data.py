@@ -51,9 +51,9 @@ def fetch_data() -> dict:
             "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/"
         ).json()
 
-    # Store the obtained data to a file
-    with open(PATH_DATA, "w") as w:
-        json.dump(data, w, indent=4, ensure_ascii=True)
+        # Store the newly obtained data to a file
+        with open(PATH_DATA, "w") as w:
+            json.dump(data, w, indent=4, ensure_ascii=True)
 
     return data
 
