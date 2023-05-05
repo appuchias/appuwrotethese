@@ -1,4 +1,5 @@
-from appuwrotethese import extras, settings
+from appuwrotethese.extras import BashColors
+from appuwrotethese.settings import DEBUG
 
 wsgi_app = "appuwrotethese.wsgi:application"
 
@@ -24,7 +25,7 @@ backlog = 256
 worker_connections = 200
 
 # Local development overrides
-if settings.DEBUG:
+if DEBUG:
     reload = True
     workers = 1
     bind = "0.0.0.0:8000"
@@ -36,4 +37,4 @@ if settings.DEBUG:
 
 # Startup
 def when_ready(_):
-    print(extras.Colors.FG_GREEN + "\nReady!\n" + extras.Colors.RESET)
+    print(BashColors.FG_GREEN + "\nReady!\n" + BashColors.RESET)

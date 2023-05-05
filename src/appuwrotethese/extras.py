@@ -23,7 +23,7 @@ DATA_OLD_MINUTES = 30
 
 
 # BASH Colors
-class Colors:
+class BashColors:
     FG_LIGHTGRAY = "\033[37m"
     FG_DARKGRAY = "\033[37m"
     FAIL = "\033[91m"
@@ -48,8 +48,7 @@ class Colors:
 def firstof(
     iterable: Iterable, func: Callable[[Any], bool] | None = None, **kwargs
 ) -> Any:
-    """
-    Returns the first ocurrence of the iterable that meets the function,
+    """Returns the first ocurrence of the iterable that meets the function,
     returning the default if none elements match.
 
     Sample usage: first([3, 6, 7], lambda x: x > 7, default=0) returns the first number
@@ -64,17 +63,14 @@ def firstof(
 
 # Take a dict and store it in a file
 def store_json_data(data: dict, filepath: Path) -> None:
-    """
-    Store the JSON data in a file.
-    """
+    """Store the JSON data in a file."""
+
     with open(filepath, "w") as w:
         json.dump(data, w, indent=4, ensure_ascii=True)
 
 
 def get_json_data(filepath: Path) -> dict:
-    """
-    Get the JSON data from a file.
-    """
+    """Get the JSON data from a file."""
 
     with open(filepath, "r") as r:
         data = json.load(r)

@@ -5,7 +5,7 @@ from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 from typing import Iterable
 
-from appuwrotethese.extras import get_user, get_json_data, PATH_PRODUCTS
+from appuwrotethese.extras import get_json_data, PATH_PRODUCTS
 from gas import models
 
 

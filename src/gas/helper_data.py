@@ -1,4 +1,5 @@
-import datetime, json, requests
+import json, requests
+from datetime import datetime
 
 from appuwrotethese.extras import (
     get_json_data,
@@ -91,7 +92,7 @@ def fetch_data() -> dict:
     except FileNotFoundError:
         # Fake the data exists and is obviously old
         data = {
-            "Fecha": f'{str(datetime.datetime(1970, 1, 1, 0, 0, 0).strftime(r"%d/%m/%Y %H:%M:%S"))}'
+            "Fecha": f"{str(datetime.fromtimestamp(0).strftime(r'%d/%m/%Y %H:%M:%S'))}"
         }
 
     # Determine if the data is old
@@ -100,11 +101,10 @@ def fetch_data() -> dict:
     except KeyError:
         data_is_old = True
     else:
-        data_time = datetime.datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
-        # True if data is older than x minutes
-        data_is_old = (
-            datetime.datetime.now() - data_time
-        ).total_seconds() > DATA_OLD_MINUTES * 60
+        data_time = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
+        data_old_s = DATA_OLD_MINUTES * 60
+        # True if data is older than DATA_OLD_MINUTES minutes
+        data_is_old = (datetime.now() - data_time).total_seconds() > data_old_s
 
     # Refresh the data
     if data_is_old:
