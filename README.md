@@ -14,7 +14,8 @@ In case some of that happens, you can contact me through any of the social netwo
 
 1. Gas prices
 
-    This project allows the users to look up the cheapest gas station in different areas of Spain, wither though the name of the locality or the postal(zip) code.
+    This project allows the users to look up the cheapest gas station in different areas of Spain,
+    either though the name of the locality, the province or its postal/zip code.
 
 ## License
 
