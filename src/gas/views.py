@@ -6,7 +6,7 @@ from datetime import datetime
 import json
 
 from appuwrotethese import extras
-from gas import forms, helper_query
+from gas import forms, query_handler
 
 
 def search(request: HttpRequest):
@@ -35,7 +35,7 @@ def result(request: HttpRequest):
 
         # helper_query.process_star(request, form_data)
 
-        results = helper_query.process_search(request, form_data)
+        results = query_handler.process_search(request, form_data)
         product_name = {
             "GOA": "Gasóleo A",
             "G95E5": "Gasolina 95",
