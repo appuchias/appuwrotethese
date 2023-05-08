@@ -1,13 +1,13 @@
-import requests
-from django.http import HttpRequest
+import json, requests
+from datetime import datetime
 from django.contrib import messages
 from django.db.models import Count
+from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 from typing import Iterable
 
-from appuwrotethese.extras import get_json_data, PATH_PRODUCTS
+from appuwrotethese.extras import PATH_PRODUCTS, get_json_data
 from gas import models
-
 
 # ############################## #
 #    Product id/name lookups     #
@@ -102,21 +102,29 @@ def search_db(
     return stations.order_by(prod_name)
 
 
-def process_search(request: HttpRequest, form: dict) -> Iterable:
+def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
     """Process a query and return the results.
 
     This function gets the request and the clean form data
-    and returns the list of results.
+    and returns the list of results and the product name (if needed).
     """
 
     query = str(form.get("query"))
     q_type = str(form.get("type"))
     prod_abbr = str(form.get("fuel"))
     show_all = bool(form.get("show_all", True))
+    product_name = {
+        "GOA": "Gasóleo A",
+        "G95E5": "Gasolina 95",
+        "G98E5": "Gasolina 98",
+        "GLP": "GLP",
+    }.get(prod_abbr, "Gasóleo A")
 
     id_locality = 0
     id_province = 0
     postal_code = 0
+
+    no_response = ([], "")
 
     # Get the relevant IDs
     if q_type == "locality":
@@ -130,7 +138,7 @@ def process_search(request: HttpRequest, form: dict) -> Iterable:
             id_locality = locality.id_mun
         else:
             messages.add_message(request, messages.ERROR, _("Locality not found"))
-            return []
+            return no_response
 
     elif q_type == "province":
         province = models.Province.objects.filter(name__icontains=query).first()
@@ -138,7 +146,7 @@ def process_search(request: HttpRequest, form: dict) -> Iterable:
             id_province = province.id_prov
         else:
             messages.add_message(request, messages.ERROR, _("Province not found"))
-            return []
+            return no_response
 
     elif q_type == "postal_code":
         if query.isdigit() and len(query) == 5:
@@ -147,17 +155,26 @@ def process_search(request: HttpRequest, form: dict) -> Iterable:
             messages.add_message(
                 request, messages.ERROR, _("Postal code invalid or not found")
             )
-            return []
+            return no_response
     else:
         messages.add_message(request, messages.ERROR, _("Internal syntax error"))
-        return []
+        return no_response
 
     if show_all:
         stations = search_db(id_locality, id_province, postal_code, prod_abbr)
     else:
         stations = search_api(id_locality, id_province, postal_code, prod_abbr)
 
-    return stations
+    return stations, product_name
+
+
+def get_last_update(form_data) -> str:
+    last_update = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    if form_data.get("show_all", True):
+        with open("gas/data/data.json", "r") as f:
+            last_update = json.load(f).get("Fecha", last_update)
+
+    return last_update
 
 
 # def process_star(request, form_data) -> None:

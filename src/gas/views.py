@@ -1,9 +1,7 @@
-from django.http import HttpRequest
-from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import HttpRequest, HttpResponseNotAllowed
+from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
-from datetime import datetime
-import json
 
 from appuwrotethese import extras
 from gas import forms, query_handler
@@ -20,55 +18,38 @@ def search(request: HttpRequest):
 
 
 def result(request: HttpRequest):
-    form = forms.SearchStations(request.POST)
+    if request.method not in ["GET", "POST"]:
+        return HttpResponseNotAllowed(["GET", "POST"], "Method not allowed")
 
-    if request.method != "POST":
-        # Using the HttpResponseNotAllowed would be better, but this is user
-        # frieldier for a webpage without an API
-        # return HttpResponseNotAllowed(["POST"], "Method not allowed")
+    form = forms.SearchStations(
+        request.GET if request.method == "GET" else request.POST
+    )
 
-        messages.error(request, _("Only POST is allowed in /gas/result/"))
-        return redirect("/gas/")
-
-    if form.is_valid():
-        form_data = form.cleaned_data
-
-        # helper_query.process_star(request, form_data)
-
-        results = query_handler.process_search(request, form_data)
-        product_name = {
-            "GOA": "Gasóleo A",
-            "G95E5": "Gasolina 95",
-            "G98E5": "Gasolina 98",
-            "GLP": "GLP",
-        }.get(form_data.get("fuel", "GOA"), "Gasóleo A")
-        last_update = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        if form_data.get("show_all", True):
-            with open("gas/data/data.json", "r") as f:
-                last_update = json.load(f).get("Fecha", last_update)
-
-        # Show notification in case no results are returned
-        if not results:
-            messages.error(request, _("No results found"))
-            return redirect("/gas/")
-
-        return render(
-            request,
-            "gas/results.html",
-            {
-                "product": product_name,
-                "results": results,
-                "last_update": last_update,
-            },
-        )
-    else:  # Form is not valid
+    if not form.is_valid():
         return render(
             request,
             "gas/noresults.html",
-            {
-                "error": _("Invalid form data. Please try again."),
-            },
+            {"error": _("Invalid form data. Please try again."), "results": []},
         )
+
+    form_data = form.cleaned_data
+    results, product_name = query_handler.process_search(request, form_data)
+    last_update = query_handler.get_last_update(form_data)
+
+    # Show notification in case no results are returned
+    if not results:
+        messages.error(request, _("No results found"))
+        return redirect("/gas/")
+
+    return render(
+        request,
+        "gas/results.html",
+        {
+            "product": product_name,
+            "results": results,
+            "last_update": last_update,
+        },
+    )
 
 
 def account(request: HttpRequest):
