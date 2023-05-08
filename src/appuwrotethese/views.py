@@ -1,6 +1,9 @@
 from django.utils.translation import gettext as _
 from django.http import HttpRequest, JsonResponse
 from django.shortcuts import render, redirect
+import os
+
+from .settings import STATIC_ROOT
 
 
 def home(request: HttpRequest):
@@ -8,7 +11,6 @@ def home(request: HttpRequest):
 
 
 def projects(request: HttpRequest):
-
     return redirect("/gas/")
 
     project_id = request.GET.get("id", "")
@@ -77,6 +79,13 @@ def text(request: HttpRequest):
 
 def build(request: HttpRequest):
     return render(request, "build.html")
+
+
+def redirect_static(request: HttpRequest, dest: str):
+    if os.path.isfile(STATIC_ROOT / dest):
+        return redirect(f"/s/{dest}")
+
+    return redirect("/")
 
 
 def health(request: HttpRequest):

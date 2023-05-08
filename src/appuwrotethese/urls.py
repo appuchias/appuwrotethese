@@ -10,6 +10,7 @@ urlpatterns = [
     path("gas/", include("gas.urls")),
     # path("account/", include("accounts.urls")),
     path("i18n/", include("django.conf.urls.i18n"), name="i18n"),
+    path("<str:dest>", views.redirect_static, name="static"),
 ]
 
 urlpatterns += [
