@@ -1,10 +1,12 @@
-import json, requests
+import json
 from datetime import datetime
+from typing import Iterable
+
+import requests
 from django.contrib import messages
 from django.db.models import Count
-from django.http import HttpRequest
+from django.http import HttpRequest, Http404
 from django.utils.translation import gettext_lazy as _
-from typing import Iterable
 
 from appuwrotethese.extras import PATH_PRODUCTS, get_json_data
 from gas import models
@@ -138,7 +140,7 @@ def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
             id_locality = locality.id_mun
         else:
             messages.add_message(request, messages.ERROR, _("Locality not found"))
-            return no_response
+            raise Http404
 
     elif q_type == "province":
         province = models.Province.objects.filter(name__icontains=query).first()
@@ -146,7 +148,7 @@ def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
             id_province = province.id_prov
         else:
             messages.add_message(request, messages.ERROR, _("Province not found"))
-            return no_response
+            raise Http404
 
     elif q_type == "postal_code":
         if query.isdigit() and len(query) == 5:
@@ -155,10 +157,10 @@ def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
             messages.add_message(
                 request, messages.ERROR, _("Postal code invalid or not found")
             )
-            return no_response
+            raise Http404
     else:
         messages.add_message(request, messages.ERROR, _("Internal syntax error"))
-        return no_response
+        raise Http404
 
     if show_all:
         stations = search_db(id_locality, id_province, postal_code, prod_abbr)

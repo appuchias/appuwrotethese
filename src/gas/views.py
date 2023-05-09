@@ -1,6 +1,6 @@
 from django.contrib import messages
-from django.http import HttpRequest, HttpResponseNotAllowed
-from django.shortcuts import redirect, render
+from django.http import Http404, HttpRequest, HttpResponseNotAllowed
+from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
 from appuwrotethese import extras
@@ -33,13 +33,13 @@ def result(request: HttpRequest):
         )
 
     form_data = form.cleaned_data
-    results, product_name = query_handler.process_search(request, form_data)
     last_update = query_handler.get_last_update(form_data)
+    results, product_name = query_handler.process_search(request, form_data)
 
     # Show notification in case no results are returned
     if not results:
-        messages.error(request, _("No results found"))
-        return redirect("/gas/")
+        messages.warning(request, _("No results found. Please try again."))
+        raise Http404()
 
     return render(
         request,
