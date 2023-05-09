@@ -11,11 +11,14 @@ from django.utils.translation import gettext_lazy as _
 from appuwrotethese.extras import PATH_PRODUCTS, get_json_data
 from gas import models
 
+LOCALITY_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroMunicipioProducto/"
+PROVINCE_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroProvinciaProducto/"
+ALL_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroProducto/"
+
+
 # ############################## #
 #    Product id/name lookups     #
 # ############################## #
-
-
 def get_product_id(product_abbr: str) -> int:
     products = get_json_data(PATH_PRODUCTS)
     for product in products:
@@ -23,18 +26,6 @@ def get_product_id(product_abbr: str) -> int:
             return int(product["IDProducto"])
 
     return 0
-
-
-def get_db_product_name(prod_abbr: str) -> str:
-    """Takes the short form of the product name and returns the full DB name"""
-    products = {
-        "GOA": "gasoleo_a",
-        "G95E5": "gasolina_95",
-        "G98E5": "gasolina_98",
-        "GLP": "glp",
-    }
-
-    return products.get(prod_abbr, "")
 
 
 # ###################### #
@@ -48,11 +39,11 @@ def search_api(
     id_prod = get_product_id(prod_abbr)
 
     if id_locality:
-        url = f"https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroMunicipioProducto/{id_locality}/{id_prod}"
+        url = LOCALITY_URL + f"{id_locality}/{id_prod}"
     elif id_province:
-        url = f"https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroProvinciaProducto/{id_province}/{id_prod}"
+        url = PROVINCE_URL + f"{id_province}/{id_prod}"
     elif postal_code:
-        url = f"https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroProducto/{id_prod}"
+        url = ALL_URL + f"{id_prod}"
     else:
         return []
 
@@ -89,7 +80,13 @@ def search_db(
 ) -> Iterable:
     """Gets the stations matching the query from the database"""
 
-    prod_name = get_db_product_name(prod_abbr)
+    prod_name = {
+        "GOA": "gasoleo_a",
+        "G95E5": "gasolina_95",
+        "G98E5": "gasolina_98",
+        "GLP": "glp",
+    }.get(prod_abbr)
+
     if id_locality:
         stations = models.Station.objects.filter(locality_id=id_locality)
     elif id_province:
