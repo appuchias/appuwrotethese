@@ -418,11 +418,11 @@ msgstr "Volver al inicio"
 #. Translators: 404 Page title
 #: templates/e404.html:5
 msgid "404 Not Found"
-msgstr "Error 404 no encontrado"
+msgstr "404 No encontrado"
 
 #: templates/e404.html:10
-msgid "Error 404. Web not found."
-msgstr "Error 404: Web no encontrada."
+msgid "Error 404. Resource not found."
+msgstr "Error 404: Recurso no encontrado."
 
 #. Translators: 500 Page title
 #: templates/e500.html:5
