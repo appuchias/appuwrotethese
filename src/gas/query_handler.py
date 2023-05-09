@@ -28,9 +28,30 @@ def get_product_id(product_abbr: str) -> int:
     return 0
 
 
-# ###################### #
-#    Make API queries    #
-# ###################### #
+def get_db_product_name(prod_abbr: str) -> str:
+    """Takes the short form of the product name and returns the full DB name"""
+    products = {
+        "GOA": "gasoleo_a",
+        "G95E5": "gasolina_95",
+        "G98E5": "gasolina_98",
+        "GLP": "glp",
+    }
+
+    return products.get(prod_abbr, "")
+
+
+def get_product_name(product_abbr: str) -> str:
+    return {
+        "GOA": "Gasóleo A",
+        "G95E5": "Gasolina 95",
+        "G98E5": "Gasolina 98",
+        "GLP": "GLP",
+    }.get(product_abbr, "Gasóleo A")
+
+
+# ################## #
+#    Make queries    #
+# ################## #
 def search_api(
     id_locality: int, id_province: int, postal_code: int, prod_abbr: str
 ) -> Iterable:
@@ -72,20 +93,12 @@ def search_api(
     return sorted(stations, key=lambda x: x["PrecioProducto"])
 
 
-# ##################### #
-#    Make DB queries    #
-# ##################### #
 def search_db(
     id_locality: int, id_province: int, postal_code: int, prod_abbr: str
 ) -> Iterable:
     """Gets the stations matching the query from the database"""
 
-    prod_name = {
-        "GOA": "gasoleo_a",
-        "G95E5": "gasolina_95",
-        "G98E5": "gasolina_98",
-        "GLP": "glp",
-    }.get(prod_abbr)
+    prod_name = get_db_product_name(prod_abbr)
 
     if id_locality:
         stations = models.Station.objects.filter(locality_id=id_locality)
@@ -101,6 +114,9 @@ def search_db(
     return stations.order_by(prod_name)
 
 
+# ############################ #
+#    Process the query form    #
+# ############################ #
 def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
     """Process a query and return the results.
 
@@ -112,18 +128,10 @@ def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
     q_type = str(form.get("type"))
     prod_abbr = str(form.get("fuel"))
     show_all = bool(form.get("show_all", True))
-    product_name = {
-        "GOA": "Gasóleo A",
-        "G95E5": "Gasolina 95",
-        "G98E5": "Gasolina 98",
-        "GLP": "GLP",
-    }.get(prod_abbr, "Gasóleo A")
 
     id_locality = 0
     id_province = 0
     postal_code = 0
-
-    no_response = ([], "")
 
     # Get the relevant IDs
     if q_type == "locality":
@@ -159,10 +167,22 @@ def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
         messages.add_message(request, messages.ERROR, _("Internal syntax error"))
         raise Http404
 
+    return get_stations_prod_name(
+        id_locality, id_province, postal_code, prod_abbr, show_all
+    )
+
+
+def get_stations_prod_name(
+    id_locality: int, id_province: int, postal_code: int, prod_abbr: str, show_all: bool
+) -> tuple[Iterable, str]:
+    """Get the stations from the database or the API, provided all details."""
+
     if show_all:
         stations = search_db(id_locality, id_province, postal_code, prod_abbr)
     else:
         stations = search_api(id_locality, id_province, postal_code, prod_abbr)
+
+    product_name = get_product_name(prod_abbr)
 
     return stations, product_name
 
