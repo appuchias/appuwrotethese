@@ -175,22 +175,3 @@ def get_last_update(form_data) -> str:
             last_update = json.load(f).get("Fecha", last_update)
 
     return last_update
-
-
-# def process_star(request, form_data) -> None:
-#     from accounts.models import AWTUser
-
-#     user = get_user(request)
-
-#     if form_data["star"]:
-#         if isinstance(user, AWTUser) and user.is_upgraded:
-#             AWTUser.objects.filter(id=user.id).update(
-#                 saved_query={
-#                     "query": form_data["query"],
-#                     "type": form_data["type"],
-#                     "fuel": form_data["fuel"],
-#                 }
-#             )
-#             messages.success(request, _("Query saved"))
-#         else:
-#             messages.error(request, _("Your account must be upgraded to save a query"))

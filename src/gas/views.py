@@ -50,27 +50,3 @@ def result(request: HttpRequest):
             "last_update": last_update,
         },
     )
-
-
-def account(request: HttpRequest):
-    user = extras.get_user(request)
-    return render(
-        request,
-        "gas/account.html",
-        {"awtuser": user},
-    )
-
-
-# def save(request: HttpRequest, id: int):
-#     user = extras.get_user(request)
-#     if user.is_authenticated and user.is_upgraded:
-#         station = models.Station.objects.get(id_eess=id)
-#         if not station:
-#             messages.error(request, _("Station not found"))
-#             return redirect("/account")
-#         AWTUser.objects.filter(id=user.id).update(saved_station=station)
-#         messages.success(request, _("Station saved"))
-#     else:
-#         messages.error(request, _("Your account must be upgraded to save a station"))
-#         return redirect("/account")
-#     return redirect("/gas")
