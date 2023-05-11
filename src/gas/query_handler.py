@@ -8,7 +8,7 @@ from django.db.models import Count
 from django.http import HttpRequest, Http404
 from django.utils.translation import gettext_lazy as _
 
-from appuwrotethese.extras import PATH_PRODUCTS, get_json_data
+from appuwrotethese.extras import PATH_DATA, PATH_PRODUCTS, get_json_data
 from gas import models
 
 LOCALITY_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroMunicipioProducto/"
@@ -193,7 +193,7 @@ def get_stations_prod_name(
 def get_last_update(form_data) -> str:
     last_update = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     if form_data.get("show_all", True):
-        with open("gas/data/data.json", "r") as f:
+        with open(PATH_DATA, "r") as f:
             last_update = json.load(f).get("Fecha", last_update)
 
     return last_update
