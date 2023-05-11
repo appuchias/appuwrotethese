@@ -81,8 +81,10 @@ def build(request: HttpRequest):
     return render(request, "build.html")
 
 
-def redirect_static(request: HttpRequest, dest: str):
-    if os.path.isfile(STATIC_ROOT / dest):
+def redirect_static(request: HttpRequest, **kwargs):
+    dest = kwargs.get("resource", "")
+
+    if dest and os.path.isfile(STATIC_ROOT / dest):
         return redirect(f"/s/{dest}")
 
     return redirect("/")
