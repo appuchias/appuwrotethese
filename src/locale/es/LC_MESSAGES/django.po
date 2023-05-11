@@ -1,16 +1,16 @@
 # AppuWroteThese ES translation.
-# Copyright (C) 2021 Appuchia
+# Copyright (C) 2021-2023 Appuchia
 # This file is distributed under the same license as the AppuWroteThese package.
-# Appuchia <contact@appu.ltd>, 2021.
+# Appuchia <appuchia@appu.ltd>, 2021-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 22:42+0200\n"
+"POT-Creation-Date: 2023-05-11 11:54+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
-"Last-Translator: Appu  <fernandez.fer.pabloff@gmail.com>\n"
-"Language-Team: AppuWroteThese-Appuchia <contact@appu.ltd>\n"
+"Last-Translator: Appuchia <appuchia@appu.ltd>\n"
+"Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -125,11 +125,11 @@ msgstr "Castellano"
 msgid "English"
 msgstr "Inglés"
 
-#: appuwrotethese/views.py:18
+#: appuwrotethese/views.py:20
 msgid "Fuel prices"
 msgstr "Gasolineras"
 
-#: appuwrotethese/views.py:20
+#: appuwrotethese/views.py:22
 msgid ""
 "A project where you can check the different prices of all gas stations in "
 "Spain to sort them from lowest to highest"
@@ -137,19 +137,19 @@ msgstr ""
 "Un proyecto en el que puedes ver los distintos precios de las gasolineras de "
 "España y ordenarlos de menor a mayor"
 
-#: appuwrotethese/views.py:27
+#: appuwrotethese/views.py:29
 msgid "Future"
 msgstr "Futuro"
 
-#: appuwrotethese/views.py:28
+#: appuwrotethese/views.py:30
 msgid "Future projects"
 msgstr "Futuros proyectos"
 
-#: appuwrotethese/views.py:50
+#: appuwrotethese/views.py:52
 msgid "Project placeholder #"
 msgstr "Proyecto de ejemplo #"
 
-#: appuwrotethese/views.py:53
+#: appuwrotethese/views.py:55
 msgid "Placeholder project description"
 msgstr "Descripción del proyecto de ejemplo"
 
@@ -198,27 +198,9 @@ msgstr "Ver todos"
 msgid "(Show all fuel types, not only the one you're looking for)"
 msgstr "(Mostrar todos los combustibles, no solo el que estás buscando)"
 
-#: gas/forms.py:81 templates/gas/search.html:10
+#: gas/forms.py:81 templates/gas/search.html:8
 msgid "Search"
 msgstr "Buscar"
-
-#: gas/helper_query.py:127
-msgid "Locality not found"
-msgstr "Localidad no encontrada"
-
-#: gas/helper_query.py:135
-msgid "Province not found"
-msgstr "Provincia no encontrada"
-
-#: gas/helper_query.py:143
-#, fuzzy
-#| msgid "Postal code not found"
-msgid "Postal code invalid or not found"
-msgstr "Código postal"
-
-#: gas/helper_query.py:147
-msgid "Internal syntax error"
-msgstr "Error de sintaxis interno"
 
 #: gas/models.py:13
 msgid "Municipality ID"
@@ -276,23 +258,29 @@ msgstr "Gasolinera"
 msgid "Gas stations"
 msgstr "Gasolineras"
 
-#: gas/views.py:45
-msgid "No results found"
-msgstr "No se encontraron resultados"
+#: gas/query_handler.py:150
+msgid "Locality not found"
+msgstr "Localidad no encontrada"
 
-#: gas/views.py:62
-msgid "Invalid form data. Please try again."
+#: gas/query_handler.py:158
+msgid "Province not found"
+msgstr "Provincia no encontrada"
+
+#: gas/query_handler.py:166
+msgid "Postal code invalid or not found"
+msgstr "Código postal inválido o no encontrado"
+
+#: gas/query_handler.py:170
+msgid "Internal syntax error"
+msgstr "Error de sintaxis interno"
+
+#: gas/views.py:28
+msgid "Invalid form. Please try again."
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
-#: gas/views.py:71
-msgid "Operation not allowed"
-msgstr "Operación no permitida"
-
-#: gas/views.py:73
-msgid "You cannot access this site this way. Only POST requests are allowed."
-msgstr ""
-"No puedes acceder a este sitio de esta forma. Sólo se permiten peticiones "
-"POST."
+#: gas/views.py:41
+msgid "No results found. Please try again."
+msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
 #: middleware/permanent_messages_middleware.py:6
 msgid "Province searching might be broken"
@@ -338,7 +326,7 @@ msgstr "No has iniciado sesión"
 
 #. Translators: Button to go to last page visited
 #: templates/accounts/chpwd.html:17 templates/accounts/respwd.html:17
-#: templates/build.html:14 templates/gas/noresults.html:15
+#: templates/build.html:14 templates/gas/noresults.html:13
 msgid "Go back"
 msgstr "Volver atrás"
 
@@ -388,15 +376,15 @@ msgstr "este enlace"
 
 #. Translators: Projects page tab title
 #. Translators: Projects page title
-#: templates/base.html:85 templates/projects.html:5 templates/projects.html:11
+#: templates/base.html:115 templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
 
-#: templates/base.html:88
+#: templates/base.html:118
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:116
+#: templates/base.html:139
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -420,7 +408,7 @@ msgstr "Volver al inicio"
 msgid "404 Not Found"
 msgstr "404 No encontrado"
 
-#: templates/e404.html:10
+#: templates/e404.html:12
 msgid "Error 404. Resource not found."
 msgstr "Error 404: Recurso no encontrado."
 
@@ -429,7 +417,7 @@ msgstr "Error 404: Recurso no encontrado."
 msgid "500: Internal Server Error"
 msgstr "500: Error interno del servidor"
 
-#: templates/e500.html:10
+#: templates/e500.html:12
 msgid ""
 "There was an internal error while loading the page. Please contact me to be "
 "able to solve it."
@@ -464,15 +452,11 @@ msgid "No results"
 msgstr "Sin resultados"
 
 #: templates/gas/noresults.html:4
-msgid "Results were not found with that search"
-msgstr "No se encontraron resultados con esa búsqueda"
+msgid "Results were not found"
+msgstr "No se encontraron resultados"
 
-#: templates/gas/noresults.html:8
-msgid "The error raised by the application for your request was"
-msgstr "El error originado por la aplicación para tu petición fue"
-
-#: templates/gas/noresults.html:13
-msgid "Note: Stations that don't offer that fuel type will not be shown"
+#: templates/gas/noresults.html:11
+msgid "Note: Stations that don't offer the wanted fuel type will not be shown"
 msgstr ""
 "Nota: Las gasolineras que no ofrezcan el combustible solicitado no serán "
 "mostradas"
@@ -497,7 +481,7 @@ msgstr "Hora de los precios"
 msgid "Search stations"
 msgstr "Buscar gasolineras"
 
-#: templates/gas/search.html:13
+#: templates/gas/search.html:11
 msgid ""
 "Here you will find the cheapest gas stations for each area sorted by fuel "
 "type"
@@ -505,7 +489,7 @@ msgstr ""
 "Aquí podrás encontrar las gasolineras más baratas de cada zona para el tipo "
 "de combustible que utilices"
 
-#: templates/gas/search.html:14
+#: templates/gas/search.html:12
 msgid "Only works for Spain"
 msgstr "Funciona solo en España"
 
@@ -577,6 +561,21 @@ msgstr ""
 #: templates/thanks.html:54
 msgid "Main layout of the page"
 msgstr "Diseño principal de la web"
+
+#~ msgid "No results found"
+#~ msgstr "No se encontraron resultados"
+
+#~ msgid "Operation not allowed"
+#~ msgstr "Operación no permitida"
+
+#~ msgid ""
+#~ "You cannot access this site this way. Only POST requests are allowed."
+#~ msgstr ""
+#~ "No puedes acceder a este sitio de esta forma. Sólo se permiten peticiones "
+#~ "POST."
+
+#~ msgid "The error raised by the application for your request was"
+#~ msgstr "El error originado por la aplicación para tu petición fue"
 
 #~ msgid "Query saved"
 #~ msgstr "Búsqueda guardada"

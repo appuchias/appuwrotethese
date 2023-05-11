@@ -25,11 +25,8 @@ def result(request: HttpRequest):
     )
 
     if not form.is_valid():
-        return render(
-            request,
-            "gas/noresults.html",
-            {"error": _("Invalid form data. Please try again."), "results": []},
-        )
+        messages.error(request, _("Invalid form. Please try again."))
+        return render(request, "gas/noresults.html", {"results": []})
 
     form_data = form.cleaned_data
     last_update = query_handler.get_last_update(form_data)

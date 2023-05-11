@@ -1,16 +1,13 @@
 {% extends 'base.html' %} {% load i18n %} {% block title %}{% trans 'No results' %}{% endblock %} {% block content %}
 <center class="mt-5">
     <div class="text-themed">
-        {% trans 'Results were not found with that search' %}
+        {% trans 'Results were not found' %}
     </div>
-    {% if error %}
-    <div class="text-themed my-3">
-        {% trans "The error raised by the application for your request was" %}:
-    </div>
+    {% comment %} {% if error %}
     <p class="text-themed my-3">{{ error }}</p>
-    {% endif %}
+    {% endif %} {% endcomment %}
     <div class="text-themed">
-        {% trans "Note: Stations that don't offer that fuel type will not be shown" %}.
+        {% trans "Note: Stations that don't offer the wanted fuel type will not be shown" %}.
     </div>
     <a class="text-themed dark" href="javascript:history.back()">{% trans 'Go back' %}</a>
 </center>
