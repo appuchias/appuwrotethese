@@ -20,6 +20,8 @@ ALL_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/Prec
 #    Product id/name lookups     #
 # ############################## #
 def get_product_id(product_abbr: str) -> int:
+    """Takes the short form of the product name and returns the API id"""
+
     products = get_json_data(PATH_PRODUCTS)
     for product in products:
         if product["NombreProductoAbreviatura"] == product_abbr:
@@ -30,17 +32,18 @@ def get_product_id(product_abbr: str) -> int:
 
 def get_db_product_name(prod_abbr: str) -> str:
     """Takes the short form of the product name and returns the full DB name"""
-    products = {
+
+    return {
         "GOA": "gasoleo_a",
         "G95E5": "gasolina_95",
         "G98E5": "gasolina_98",
         "GLP": "glp",
-    }
-
-    return products.get(prod_abbr, "")
+    }.get(prod_abbr, "")
 
 
 def get_product_name(product_abbr: str) -> str:
+    """Takes the short form of the product name and returns the full name"""
+
     return {
         "GOA": "Gasóleo A",
         "G95E5": "Gasolina 95",

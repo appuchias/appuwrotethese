@@ -3,7 +3,6 @@ from django.http import Http404, HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
-from appuwrotethese import extras
 from gas import forms, query_handler
 
 
