@@ -9,7 +9,7 @@ migrate:
 	./manage.py migrate
 
 test:
-	pathon -Wa manage.py test --keepdb
+	python -Wa manage.py test --keepdb
 
 updatedb:
 	./manage.py update_db
