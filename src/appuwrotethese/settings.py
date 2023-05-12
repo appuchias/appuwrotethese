@@ -213,18 +213,18 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {
+            "min_length": 10,
+        },
+    },
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-
 # Language and i18n
 LANGUAGE_CODE = "en-us"
-
-USE_TZ = True
-TIME_ZONE = "Europe/Madrid"
-
 USE_I18N = True
 LANGUAGES = [
     ("es", _("Spanish")),
@@ -233,6 +233,9 @@ LANGUAGES = [
 LANGUAGE_COOKIE_NAME = "lang"
 LOCALE_PATHS = (BASE_DIR / "locale",)
 FIRST_DAY_OF_WEEK = 1
+
+USE_TZ = True
+TIME_ZONE = "Europe/Madrid"
 
 # Staticfiles
 STATIC_URL = "/s/"
