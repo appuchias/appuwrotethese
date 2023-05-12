@@ -143,6 +143,7 @@ LOGGING = {
             "maxBytes": LOGFILE_SIZE,
             "backupCount": LOGFILE_COUNT,
             "formatter": "standard",
+            "delay": True,
         },
         "logfile_debug": {
             "level": "DEBUG",
@@ -173,6 +174,12 @@ LOGGING = {
             "level": "DEBUG",
             "propagate": True,
         },
+    },
+}
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
