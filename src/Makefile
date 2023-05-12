@@ -1,18 +1,18 @@
 run:
-	python3 manage.py runserver 0.0.0.0:8000
+	./manage.py runserver 0.0.0.0:8000
 
 collectstatic:
-	python3 manage.py collectstatic --noinput
+	./manage.py collectstatic --noinput
 
 migrate:
-	python3 manage.py makemigrations
-	python3 manage.py migrate
+	./manage.py makemigrations
+	./manage.py migrate
 
 test:
-	python3 manage.py test
+	pathon -Wa manage.py test --keepdb
 
 updatedb:
-	python3 manage.py update_db
+	./manage.py update_db
 
 makemsgs:
 		django-admin makemessages -a
