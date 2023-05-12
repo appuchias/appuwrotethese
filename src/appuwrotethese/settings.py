@@ -31,7 +31,7 @@ SECRET_KEY = getenv("SECRETKEY")
 
 if SECRET_KEY is None:
     SECRET_KEY = token_urlsafe(64)
-    logging.warning("SECRETKEY was not set in .env file. New SECRETKEY was generated.")
+    logging.warning("settings: SECRETKEY was not set in .env file. New one generated.")
     try:
         with open(BASE_DIR / ".env", "a") as f:
             f.write(f"SECRETKEY={SECRET_KEY}\n")
@@ -211,45 +211,35 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
     },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 
 # Language and i18n
 LANGUAGE_CODE = "en-us"
 
+USE_TZ = True
 TIME_ZONE = "Europe/Madrid"
 
 USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
 LANGUAGES = [
     ("es", _("Spanish")),
     ("en", _("English")),
 ]
 LANGUAGE_COOKIE_NAME = "lang"
 LOCALE_PATHS = (BASE_DIR / "locale",)
+FIRST_DAY_OF_WEEK = 1
 
 # Staticfiles
 STATIC_URL = "/s/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Media
-MEDIA_URL = "/usermedia/"
+MEDIA_URL = "/m/"
 
 # User agents
 USER_AGENTS_CACHE = "default"
@@ -257,7 +247,6 @@ USER_AGENTS_CACHE = "default"
 # Django crispy forms template
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
-
 
 # Email setup
 EMAIL_HOST = "in-v3.mailjet.com"
@@ -267,7 +256,6 @@ EMAIL_HOST_PASSWORD = getenv("SMTP_PASS", "")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 SERVER_EMAIL = "noreply@appu.ltd"
-
 
 # Messages setup
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
