@@ -3,6 +3,8 @@
 [![AGPL 3.0+ License](https://img.shields.io/github/license/appuchias/appuwrotethese?label=License&style=flat-square)](https://github.com/appuchias/appuwrotethese/blob/master/LICENSE)
 [![Author](https://img.shields.io/badge/Project%20by-Appu-9cf?style=flat-square)](https://github.com/appuchias)
 
+> [Leer en castellano](README_es.md)
+
 ## What is this?
 
 This is my personal website where I will be uploading the projects I think might be useful for some other people and the ones I need to have access to in a convenient way.
@@ -10,7 +12,7 @@ This is my personal website where I will be uploading the projects I think might
 I am learning, so many things shown here will have bugs and there may be something broken.
 In case something happens, you can contact me through any social network found in the web footer.
 
-## Projects featured here
+## Projects currently available
 
 1. Gas prices
 
