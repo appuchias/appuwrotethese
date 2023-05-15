@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-15 22:25+0200\n"
+"POT-Creation-Date: 2023-05-15 22:29+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -526,15 +526,19 @@ msgstr "Servicio ofrecido"
 
 #. Translators: Table content
 #: templates/thanks.html:49
-msgid ""
-"Icons used in the web. The most visible one is the home button (The meteor)"
-msgstr ""
-"Iconos usados en la web. El más visible es el botón 'home' (El meteorito)"
+msgid "Icons used in the web"
+msgstr "Iconos usados en la web"
 
 #. Translators: Table content
 #: templates/thanks.html:54
-msgid "Main layout of the page"
+msgid "Layout of the page"
 msgstr "Diseño principal de la web"
+
+#~ msgid ""
+#~ "Icons used in the web. The most visible one is the home button (The "
+#~ "meteor)"
+#~ msgstr ""
+#~ "Iconos usados en la web. El más visible es el botón 'home' (El meteorito)"
 
 #~ msgid "Data gathered from"
 #~ msgstr "Datos obtenidos de"
