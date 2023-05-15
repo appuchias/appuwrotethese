@@ -149,6 +149,7 @@ LOGGING = {
             "level": "DEBUG",
             "class": "logging.handlers.RotatingFileHandler",
             "filename": LOGFILE_NAME + "_debug.log",
+            "filters": ["require_debug_true"],
             "maxBytes": LOGFILE_SIZE,
             "backupCount": LOGFILE_COUNT,
             "formatter": "standard",
@@ -165,12 +166,12 @@ LOGGING = {
             "propagate": True,
         },
         "django.request": {
-            "handlers": ["mail_admins", "logfile"],
+            "handlers": ["mail_admins"],
             "level": "ERROR",
             "propagate": True,
         },
         "django.request": {
-            "handlers": ["logfile_debug"],
+            "handlers": ["logfile", "logfile_debug"],
             "level": "DEBUG",
             "propagate": True,
         },
