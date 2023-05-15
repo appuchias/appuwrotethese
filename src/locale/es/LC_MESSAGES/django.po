@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-11 11:54+0200\n"
+"POT-Creation-Date: 2023-05-15 22:25+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -117,11 +117,11 @@ msgstr ""
 msgid "Email is not registered"
 msgstr "El correo electrónico no está registrado"
 
-#: appuwrotethese/settings.py:233
+#: appuwrotethese/settings.py:231
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:234
+#: appuwrotethese/settings.py:232
 msgid "English"
 msgstr "Inglés"
 
@@ -254,7 +254,7 @@ msgstr "Longitud"
 msgid "Gas station"
 msgstr "Gasolinera"
 
-#: gas/models.py:120
+#: gas/models.py:120 templates/gas/search.html:4
 msgid "Gas stations"
 msgstr "Gasolineras"
 
@@ -278,7 +278,7 @@ msgstr "Error de sintaxis interno"
 msgid "Invalid form. Please try again."
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
-#: gas/views.py:41
+#: gas/views.py:37
 msgid "No results found. Please try again."
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
@@ -425,28 +425,6 @@ msgstr ""
 "Hubo un error interno al cargar la página. Por favor, contacta conmigo para "
 "que pueda solucionarlo."
 
-#: templates/exif_trimmer/import.html:9
-msgid "EXIF remover"
-msgstr "Eliminador de EXIF"
-
-#: templates/exif_trimmer/import.html:12
-msgid ""
-"EXIF data contains information about the image such as the exact location "
-"where it was taken"
-msgstr ""
-"Los datos EXIF contienen información sobre la imagen, como la ubicación "
-"exacta donde fue tomada"
-
-#: templates/exif_trimmer/import.html:13
-msgid "Note that when doing this process, your image may lose some quality"
-msgstr ""
-"Ten en cuenta que cuando haces este proceso, tu imagen puede perder cierta "
-"calidad"
-
-#: templates/exif_trimmer/import.html:14
-msgid "The error thrown by the program was"
-msgstr "El error del programa fue"
-
 #: templates/gas/noresults.html:1
 msgid "No results"
 msgstr "Sin resultados"
@@ -476,10 +454,6 @@ msgstr ""
 #: templates/gas/results.html:17
 msgid "Prices time"
 msgstr "Hora de los precios"
-
-#: templates/gas/search.html:4
-msgid "Search stations"
-msgstr "Buscar gasolineras"
 
 #: templates/gas/search.html:11
 msgid ""
@@ -561,6 +535,33 @@ msgstr ""
 #: templates/thanks.html:54
 msgid "Main layout of the page"
 msgstr "Diseño principal de la web"
+
+#~ msgid "Data gathered from"
+#~ msgstr "Datos obtenidos de"
+
+#~ msgid "here"
+#~ msgstr "aquí"
+
+#~ msgid "EXIF remover"
+#~ msgstr "Eliminador de EXIF"
+
+#~ msgid ""
+#~ "EXIF data contains information about the image such as the exact location "
+#~ "where it was taken"
+#~ msgstr ""
+#~ "Los datos EXIF contienen información sobre la imagen, como la ubicación "
+#~ "exacta donde fue tomada"
+
+#~ msgid "Note that when doing this process, your image may lose some quality"
+#~ msgstr ""
+#~ "Ten en cuenta que cuando haces este proceso, tu imagen puede perder "
+#~ "cierta calidad"
+
+#~ msgid "The error thrown by the program was"
+#~ msgstr "El error del programa fue"
+
+#~ msgid "Search stations"
+#~ msgstr "Buscar gasolineras"
 
 #~ msgid "No results found"
 #~ msgstr "No se encontraron resultados"
