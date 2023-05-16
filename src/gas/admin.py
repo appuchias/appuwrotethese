@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from gas.models import Locality, Province, Station
+from gas.models import Locality, Province, Station, StationPrice
 
 
 # Register your models here.
@@ -10,10 +10,6 @@ class StationAdmin(admin.ModelAdmin):
         ("latitude", "longitude"),
         "schedule",
         ("province", "locality", "postal_code"),
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
     ]
     readonly_fields = [
         "id_eess",
@@ -24,10 +20,6 @@ class StationAdmin(admin.ModelAdmin):
         "locality",
         "province",
         "postal_code",
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
     ]
     list_display = [
         "company",
@@ -62,10 +54,6 @@ class StationInline(admin.TabularInline):
         ("id_eess", "company", "address"),
         ("latitude", "longitude"),
         "schedule",
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
     ]
     readonly_fields = [
         "id_eess",
@@ -76,10 +64,6 @@ class StationInline(admin.TabularInline):
         "locality",
         "province",
         "postal_code",
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
     ]
     list_display = [
         "company",
@@ -105,6 +89,79 @@ class StationInline(admin.TabularInline):
         "locality",
         "province",
         "postal_code",
+    ]
+
+
+class StationPriceAdmin(admin.ModelAdmin):
+    fields = [
+        "station",
+        "date",
+        "gasoleo_a",
+        "gasolina_95",
+        "gasolina_98",
+        "glp",
+    ]
+    readonly_fields = [
+        "station",
+        "date",
+        "gasoleo_a",
+        "gasolina_95",
+        "gasolina_98",
+        "glp",
+    ]
+    list_display = [
+        "station",
+        "date",
+        "gasoleo_a",
+        "gasolina_95",
+        "gasolina_98",
+        "glp",
+    ]
+    list_display_links = [
+        "station",
+        "date",
+    ]
+    list_filter = [
+        "station",
+        "date",
+    ]
+    search_fields = [
+        "station",
+        "date",
+    ]
+
+
+class StationPriceInline(admin.TabularInline):
+    model = StationPrice
+    fields = [
+        "date",
+        "gasoleo_a",
+        "gasolina_95",
+        "gasolina_98",
+        "glp",
+    ]
+    readonly_fields = [
+        "date",
+        "gasoleo_a",
+        "gasolina_95",
+        "gasolina_98",
+        "glp",
+    ]
+    list_display = [
+        "date",
+        "gasoleo_a",
+        "gasolina_95",
+        "gasolina_98",
+        "glp",
+    ]
+    list_display_links = [
+        "date",
+    ]
+    list_filter = [
+        "date",
+    ]
+    search_fields = [
+        "date",
     ]
 
 

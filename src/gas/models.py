@@ -1,7 +1,8 @@
+from decimal import Decimal
+
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core.validators import MaxValueValidator
-from decimal import Decimal
 
 
 class Locality(models.Model):
@@ -66,6 +67,9 @@ class Station(models.Model):
         auto_created=False,
     )
 
+    last_update = models.DateTimeField(
+        verbose_name=_("Last update"), auto_now=True, editable=True
+    )
     company = models.CharField(verbose_name=_("Company"), max_length=128, blank=False)
     address = models.CharField(verbose_name=_("Address"), max_length=128, blank=False)
     schedule = models.CharField(verbose_name=_("Schedule"), max_length=64, blank=False)
@@ -76,7 +80,6 @@ class Station(models.Model):
         validators=[MaxValueValidator(99999)],
         default=00000,
     )
-
     latitude = models.CharField(
         verbose_name=_("Latitude"),
         max_length=10,
@@ -88,31 +91,6 @@ class Station(models.Model):
         max_length=10,
         blank=False,
         default="0",
-    )
-
-    gasoleo_a = models.DecimalField(
-        verbose_name="Gasoleo A",
-        max_digits=4,
-        decimal_places=3,
-        default=Decimal(0),
-    )
-    gasolina_95 = models.DecimalField(
-        verbose_name="Gasolina 95",
-        max_digits=4,
-        decimal_places=3,
-        default=Decimal(0),
-    )
-    gasolina_98 = models.DecimalField(
-        verbose_name="Gasolina 98",
-        max_digits=4,
-        decimal_places=3,
-        default=Decimal(0),
-    )
-    glp = models.DecimalField(
-        verbose_name="GLP",
-        max_digits=4,
-        decimal_places=3,
-        default=Decimal(0),
     )
 
     class Meta:
@@ -134,3 +112,55 @@ class Station(models.Model):
         yield "postal_code", self.postal_code
         yield "latitude", self.latitude
         yield "longitude", self.longitude
+
+
+class StationPrice(models.Model):
+    id_eess = models.ForeignKey(Station, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True, db_index=True)
+    gasoleo_a = models.DecimalField(
+        verbose_name="Gasoleo A",
+        max_digits=4,
+        decimal_places=3,
+        default=Decimal(0.0),
+    )
+    gasolina_95 = models.DecimalField(
+        verbose_name="Gasolina 95",
+        max_digits=4,
+        decimal_places=3,
+        default=Decimal(0.0),
+    )
+    gasolina_98 = models.DecimalField(
+        verbose_name="Gasolina 98",
+        max_digits=4,
+        decimal_places=3,
+        default=Decimal(0.0),
+    )
+    glp = models.DecimalField(
+        verbose_name="GLP",
+        max_digits=4,
+        decimal_places=3,
+        default=Decimal(0.0),
+    )
+
+    class Meta:
+        verbose_name = _("Gas station price")
+        verbose_name_plural = _("Gas station prices")
+
+        ordering = ["id_eess", "date"]
+
+        constraints = [
+            models.UniqueConstraint(
+                fields=["id_eess", "date"], name="unique_station_date_combination"
+            )
+        ]
+
+    def __str__(self):
+        return str(self.id_eess) + ", " + str(self.date)
+
+    def __iter__(self):
+        yield "id_eess", self.id_eess
+        yield "date", self.date
+        yield "gasoleo_a", self.gasoleo_a
+        yield "gasolina_95", self.gasolina_95
+        yield "gasolina_98", self.gasolina_98
+        yield "glp", self.glp
