@@ -10,12 +10,46 @@ from appuwrotethese.extras import (
 )
 from gas.models import Locality, Province, Station
 
+# Change the field names to match the ones in the model
+DB_FIELD_RENAME = {
+    "IDEESS": "id_eess",
+    "Dirección": "address",
+    "Horario": "schedule",
+    "Rótulo": "company",
+    "Latitud": "latitude",
+    "Longitud (WGS84)": "longitude",
+    "C.P.": "postal_code",
+}
+DB_FIELD_REMOVE = [
+    "Localidad",
+    "Municipio",
+    "Provincia",
+    "Margen",
+    "Precio Biodiesel",
+    "Precio Bioetanol",
+    "Precio Gas Natural Comprimido",
+    "Precio Gas Natural Licuado",
+    "Precio Gasoleo B",
+    "Precio Gasoleo Premium",
+    "Precio Gasolina 95 E10",
+    "Precio Gasolina 95 E5 Premium",
+    "Precio Gasolina 98 E10",
+    "Precio Hidrogeno",
+    "Remisión",
+    "Tipo Venta",
+    "% BioEtanol",
+    "% Éster metílico",
+    "IDCCAA",
+]
+DB_FIELD_FUELS = {
+    "Precio Gasoleo A": "gasoleo_a",
+    "Precio Gasolina 95 E5": "gasolina_95",
+    "Precio Gasolina 98 E5": "gasolina_98",
+    "Precio Gases licuados del petróleo": "glp",
+}
 
-# ############### #
-#   Get from fp   #
-# ############### #
 
-
+## Get from fp ##
 def get_localities() -> dict:
     """Get the localities from the file."""
     return get_json_data(PATH_LOCALITIES)
@@ -26,11 +60,7 @@ def get_provinces() -> dict:
     return get_json_data(PATH_PROVINCES)
 
 
-# ######################### #
-#  Data fetching functions  #
-# ######################### #
-
-
+## Data fetching functions ##
 def fetch_data() -> dict:
     """Get the data from the most recent source (file or remote).
 
@@ -72,9 +102,7 @@ def fetch_data() -> dict:
     return data
 
 
-# ###############################
-# Data transfer related function
-# ###############################
+## Create Locality and Province tables ##
 def _create_complementary_tables() -> None:
     """
     Update the side tables (gas_locality and gas_province) with the data from the API.
@@ -99,13 +127,14 @@ def _create_complementary_tables() -> None:
         Province.objects.bulk_create(
             [
                 Province(id_prov=province["IDPovincia"], name=province["Provincia"])
-                for province in provinces  # Typo in the original data
+                for province in provinces  # Typo in the API data
             ]
         )
 
     print("[✓] Updated complementary tables.")
 
 
+## Update database  ##
 def update_db() -> None:
     """
     Load the data from the API into the database.
@@ -118,61 +147,20 @@ def update_db() -> None:
     _create_complementary_tables()
 
     # Change station fields to match the database
-    changes = {
-        "IDEESS": "id_eess",
-        "Dirección": "address",
-        "Horario": "schedule",
-        "Rótulo": "company",
-        "Latitud": "latitude",
-        "Longitud (WGS84)": "longitude",
-        "Precio Gasoleo A": "gasoleo_a",
-        "Precio Gasolina 95 E5": "gasolina_95",
-        "Precio Gasolina 98 E5": "gasolina_98",
-        "Precio Gases licuados del petróleo": "glp",
-        "C.P.": "postal_code",
-    }
-    rm_fields = [
-        "Localidad",
-        "Municipio",
-        "Provincia",
-        "Margen",
-        "Precio Biodiesel",
-        "Precio Bioetanol",
-        "Precio Gas Natural Comprimido",
-        "Precio Gas Natural Licuado",
-        "Precio Gasoleo B",
-        "Precio Gasoleo Premium",
-        "Precio Gasolina 95 E10",
-        "Precio Gasolina 95 E5 Premium",
-        "Precio Gasolina 98 E10",
-        "Precio Hidrogeno",
-        "Remisión",
-        "Tipo Venta",
-        "% BioEtanol",
-        "% Éster metílico",
-        "IDCCAA",
-    ]
-    fuels = [
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
-    ]
-
     stations_to_create: list[Station] = []
     stations_to_update: list[Station] = []
 
     for idx, station in enumerate(stations):
         # Modify or remove fields
         for key in list(station.keys()):
-            if key in changes:
-                station[changes.get(key)] = station.pop(key)
-            elif key in rm_fields:
-                station.pop(key)
+            if key in DB_FIELD_RENAME:
+                station[DB_FIELD_RENAME[key]] = station.pop(key)
+            elif key in DB_FIELD_REMOVE:
+                del station[key]
 
-        for fuel in fuels:
-            station[fuel] = float(
-                (station[fuel] if station[fuel] else "0").replace(",", ".")
+        for old_name, new_name in DB_FIELD_FUELS.items():
+            station[new_name] = float(
+                (station[old_name] if station[old_name] else "0").replace(",", ".")
             )
 
         # Add the complementary fields
@@ -212,7 +200,7 @@ def update_db() -> None:
         print("[·] Updating stations...", end="\r")
         Station.objects.bulk_update(
             stations_to_update,
-            list(changes.values())[1:]  # Remove id_eess
+            list(DB_FIELD_RENAME.values())[1:]  # Remove id_eess
             + ["locality", "province"],  # Add locality and province
         )
         print("[✓] Updated stations.")
@@ -220,11 +208,7 @@ def update_db() -> None:
     print("---\n[✓] All stations refreshed.")
 
 
-# #################### #
-#    Purge stations    #
-# #################### #
-
-
+## Purge stations ##
 def purge_stations() -> None:
     """
     Remove all the stations from the database.
