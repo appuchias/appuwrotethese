@@ -16,6 +16,7 @@
             "name": "DB update",
             "type": "python",
             "request": "launch",
+            "cwd": "${workspaceFolder}/src",
             "program": "${workspaceFolder}/src/manage.py",
             "args": [
                 "update_db"
@@ -26,8 +27,8 @@
             "name": "Run tests",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/src/manage.py",
             "cwd": "${workspaceFolder}/src",
+            "program": "${workspaceFolder}/src/manage.py",
             "args": [
                 "test"
             ],
