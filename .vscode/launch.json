@@ -1,0 +1,37 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Web server run",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src",
+            "program": "${workspaceFolder}/src/manage.py",
+            "args": [
+                "runserver",
+            ],
+            "django": true
+        },
+        {
+            "name": "DB update",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/manage.py",
+            "args": [
+                "update_db"
+            ],
+            "django": true
+        },
+        {
+            "name": "Run tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/manage.py",
+            "cwd": "${workspaceFolder}/src",
+            "args": [
+                "test"
+            ],
+            "django": true
+        },
+    ]
+}
