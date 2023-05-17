@@ -1,7 +1,9 @@
-from django.utils.translation import gettext_lazy
-from django import forms
-from crispy_forms.layout import Layout, Div, Submit
+from datetime import date
+
 from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Div, Layout, Submit
+from django import forms
+from django.utils.translation import gettext_lazy as _
 
 
 class SearchStations(forms.Form):
@@ -10,26 +12,24 @@ class SearchStations(forms.Form):
     """
 
     query = forms.CharField(
-        label=gettext_lazy("Search query"),
+        label=_("Search query"),
         required=True,
-        help_text=gettext_lazy(
-            "Specific element to look for (e.g. Coruña, 15001, etc.)"
-        ),
+        help_text=_("Specific element to look for (e.g. Coruña, 15001, etc.)"),
     )
 
     type = forms.ChoiceField(
-        label=gettext_lazy("Search by"),
+        label=_("Search by"),
         choices=[
-            ("locality", gettext_lazy("Locality")),
-            ("province", gettext_lazy("Province")),
-            ("postal_code", gettext_lazy("Postal code (Inaccurate)")),
+            ("locality", _("Locality")),
+            ("province", _("Province")),
+            ("postal_code", _("Postal code (Inaccurate)")),
         ],
         required=True,
-        help_text=gettext_lazy("What the search query is"),
+        help_text=_("What the search query is"),
     )
 
     fuel = forms.ChoiceField(
-        label=gettext_lazy("Fuel"),
+        label=_("Fuel"),
         choices=[
             ("GOA", "Gasóleo A (Diesel)"),
             ("G95E5", "Gasolina 95"),
@@ -37,8 +37,20 @@ class SearchStations(forms.Form):
             ("GLP", "GLP"),
         ],
         required=True,
-        help_text=gettext_lazy(
-            "Fuel you're interested in (Results will be filtered by this)"
+        help_text=_("Fuel you're interested in (Results will be filtered by this)"),
+    )
+
+    query_date = forms.DateField(
+        label=_("Date"),
+        help_text=_("Date of the query"),
+        required=True,
+        widget=forms.widgets.DateInput(
+            attrs={
+                "type": "date",
+                "min": date(2007, 1, 1),
+                "max": date.today(),
+                "value": date.today(),
+            }
         ),
     )
 
@@ -48,15 +60,6 @@ class SearchStations(forms.Form):
     #     help_text=gettext_lazy(
     #         "(Save this query. Requires your account to be upgraded)"
     #     ),
-    # )
-
-    # show_all = forms.BooleanField(
-    #     label=gettext_lazy("Show all"),
-    #     required=False,
-    #     help_text=gettext_lazy(
-    #         "(Show all fuel types, not only the one you're looking for)"
-    #     ),
-    #     initial=True,
     # )
 
     def __init__(self, *args, **kwargs):
@@ -69,16 +72,16 @@ class SearchStations(forms.Form):
                     Div("type", css_class="col-md-6"),
                     css_class="row",
                 ),
-                "fuel",
+                Div(
+                    Div("fuel", css_class="col-md-6"),
+                    Div("query_date", css_class="col-md-6"),
+                    css_class="row",
+                ),
             ),
             Div(
-                # Div(
-                #     Div("show_all"),
-                #     # Div("star"),
-                # ),
                 Submit(
                     "submit",
-                    gettext_lazy("Search"),
+                    _("Search"),
                     css_class="btn btn-outline-dark",
                 ),
                 css_class="d-flex justify-content-end",

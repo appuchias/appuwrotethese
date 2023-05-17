@@ -117,14 +117,22 @@ def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
     query = str(form.get("query"))
     q_type = str(form.get("type"))
     prod_abbr = str(form.get("fuel"))
+    q_date = form.get("date", date.today())
 
     id_locality, id_province, postal_code = get_ids(query, q_type)
 
-    return get_stations_prod_name(id_locality, id_province, postal_code, prod_abbr)
+    return get_stations_prod_name(
+        request, id_locality, id_province, postal_code, prod_abbr, q_date
+    )
 
 
 def get_stations_prod_name(
-    id_locality: int, id_province: int, postal_code: int, prod_abbr: str
+    request: HttpRequest,
+    id_locality: int,
+    id_province: int,
+    postal_code: int,
+    prod_abbr: str,
+    q_date: date,
 ) -> tuple[Iterable, str]:
     """Get the stations from the database or the API, provided all details."""
 
@@ -142,7 +150,7 @@ def get_stations_prod_name(
     stations = models.Station.objects.filter(**station_filter)
 
     prices = (
-        models.StationPrice.objects.filter(station__in=stations, date=date.today())
+        models.StationPrice.objects.filter(station__in=stations, date=q_date)
         .exclude(**{f"{prod_name}": 0})
         .order_by(f"{prod_name}")
     )
