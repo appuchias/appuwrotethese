@@ -1,5 +1,3 @@
-from decimal import Decimal
-
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -160,3 +158,14 @@ class StationPrice(models.Model):
 
     def __str__(self):
         return str(self.station) + ", " + str(self.date)
+
+    def __eq__(self, __value: object) -> bool:
+        return (
+            isinstance(__value, StationPrice)
+            and self.station == __value.station
+            and self.date == __value.date
+            and self.price_goa == __value.price_goa
+            and self.price_g95 == __value.price_g95
+            and self.price_g98 == __value.price_g98
+            and self.price_glp == __value.price_glp
+        )

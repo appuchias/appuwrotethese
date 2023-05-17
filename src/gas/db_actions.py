@@ -1,13 +1,14 @@
-from datetime import date, datetime
-import django.utils.timezone as timezone
 import json, requests
+from datetime import date, datetime
+from decimal import Decimal
+import django.utils.timezone as timezone
 
 from appuwrotethese.extras import (
-    get_json_data,
     DATA_OLD_MINUTES,
     PATH_DATA,
     PATH_LOCALITIES,
     PATH_PROVINCES,
+    get_json_data,
 )
 from gas.models import Locality, Province, Station, StationPrice
 
@@ -231,7 +232,8 @@ def _update_prices(data: dict) -> None:
     """
 
     stations = sorted(data["ListaEESSPrecio"], key=lambda x: int(x["IDEESS"]))
-    prices = []
+    prices_to_create: list[StationPrice] = []
+    prices_to_update: list[StationPrice] = []
 
     print("[·] Updating prices...")
     len_stations = len(stations)
@@ -247,18 +249,38 @@ def _update_prices(data: dict) -> None:
             {"IDEESS": "station"},
         )
         station["station"] = Station.objects.get(id_eess=station["station"])
+        station["date"] = date.today()
 
         # Create the price
         for old_name, new_name in DB_FIELD_FUELS.items():
             value = station.pop(old_name)
             if value:
-                station[new_name] = float(value.replace(",", "."))
+                station[new_name] = Decimal(value.replace(",", "."))
             else:
                 station[new_name] = None
 
-        prices.append(StationPrice(**station))
-    print("  [·] Writing changes...", end="\r")
-    StationPrice.objects.bulk_create(prices)
+        new_price = StationPrice(**station)
+
+        # Create or update the price
+        db_price = StationPrice.objects.filter(
+            station=new_price.station, date=new_price.date
+        )
+        if db_price.exists():
+            if db_price.first() != new_price:
+                new_price.id = db_price.first().id  # type: ignore
+                prices_to_update.append(new_price)
+        else:
+            prices_to_create.append(new_price)
+
+    print(f"  [·] {len(prices_to_create)} prices to create.")
+    print(f"  [·] {len(prices_to_update)} prices to update.")
+    if prices_to_create:
+        StationPrice.objects.bulk_create(prices_to_create)
+    if prices_to_update:
+        StationPrice.objects.bulk_update(
+            prices_to_update,
+            fields=list(DB_FIELD_FUELS.values()),
+        )
 
     print("[✓] Updated prices.     ")
     print("---")
