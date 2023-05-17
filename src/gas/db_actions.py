@@ -165,11 +165,7 @@ def _update_stations(data: dict) -> None:
     print("[·] Updating stations...")
     stations = sorted(data["ListaEESSPrecio"], key=lambda x: int(x["IDEESS"]))
 
-    deleted_count, _ = Station.objects.exclude(
-        id_eess__in=[station["IDEESS"] for station in stations]
-    ).delete()
-    print(f"[✓] {deleted_count} old stations removed.")
-    if deleted_count == 0 and Station.objects.count() == len(stations):
+    if Station.objects.count() == len(stations):
         print("[✓] Stations are up to date.")
         print("---")
         return
