@@ -50,14 +50,14 @@ class SearchStations(forms.Form):
     #     ),
     # )
 
-    show_all = forms.BooleanField(
-        label=gettext_lazy("Show all"),
-        required=False,
-        help_text=gettext_lazy(
-            "(Show all fuel types, not only the one you're looking for)"
-        ),
-        initial=True,
-    )
+    # show_all = forms.BooleanField(
+    #     label=gettext_lazy("Show all"),
+    #     required=False,
+    #     help_text=gettext_lazy(
+    #         "(Show all fuel types, not only the one you're looking for)"
+    #     ),
+    #     initial=True,
+    # )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -72,15 +72,15 @@ class SearchStations(forms.Form):
                 "fuel",
             ),
             Div(
-                Div(
-                    Div("show_all"),
-                    # Div("star"),
-                ),
+                # Div(
+                #     Div("show_all"),
+                #     # Div("star"),
+                # ),
                 Submit(
                     "submit",
                     gettext_lazy("Search"),
                     css_class="btn btn-outline-dark",
                 ),
-                css_class="d-flex justify-content-between",
+                css_class="d-flex justify-content-end",
             ),
         )
