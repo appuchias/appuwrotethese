@@ -28,13 +28,13 @@ worker_connections = 200
 if DEBUG:
     reload = True
     workers = 1
-    bind = "0.0.0.0:8000"
     preload_app = False
-    certfile = None
-    keyfile = None
-    pidfile = None
+    # bind = "0.0.0.0:8000"
+    # certfile = None
+    # keyfile = None
+    # pidfile = None
 
 
 # Startup
 def when_ready(_):
-    print(BashColors.FG_GREEN + "\nReady!\n" + BashColors.RESET)
+    print(BashColors.FG_GREEN + "Ready!\n" + BashColors.RESET)
