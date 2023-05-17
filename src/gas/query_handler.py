@@ -17,19 +17,18 @@ ALL_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/Prec
 
 
 ## Short ID lookup ##
-def get_product_id(product_abbr: str) -> int:
+def get_product_id(product_abbr: str, default: int = 0) -> int:
     """Takes the short form of the product name and returns the API id"""
 
-    products = get_json_data(PATH_PRODUCTS)
-    for product in products:
+    for product in get_json_data(PATH_PRODUCTS):
         if product["NombreProductoAbreviatura"] == product_abbr:
             return int(product["IDProducto"])
 
-    return 0
+    return default
 
 
 ## DB name lookup ##
-def get_db_product_name(prod_abbr: str) -> str:
+def get_db_product_name(prod_abbr: str, default: str = "") -> str:
     """Takes the short form of the product name and returns the full DB name"""
 
     return {
@@ -37,11 +36,11 @@ def get_db_product_name(prod_abbr: str) -> str:
         "G95E5": "gasolina_95",
         "G98E5": "gasolina_98",
         "GLP": "glp",
-    }.get(prod_abbr, "")
+    }.get(prod_abbr, default)
 
 
 ## Long name lookup ##
-def get_product_name(product_abbr: str) -> str:
+def get_product_name(product_abbr: str, default: str = "") -> str:
     """Takes the short form of the product name and returns the full name"""
 
     return {
@@ -49,7 +48,7 @@ def get_product_name(product_abbr: str) -> str:
         "G95E5": "Gasolina 95",
         "G98E5": "Gasolina 98",
         "GLP": "GLP",
-    }.get(product_abbr, "Gasóleo A")
+    }.get(product_abbr, default)
 
 
 ## Query the API ##
