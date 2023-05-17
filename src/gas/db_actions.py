@@ -43,10 +43,10 @@ DB_FIELD_REMOVE = [
     "IDCCAA",
 ]
 DB_FIELD_FUELS = {
-    "Precio Gasoleo A": "gasoleo_a",
-    "Precio Gasolina 95 E5": "gasolina_95",
-    "Precio Gasolina 98 E5": "gasolina_98",
-    "Precio Gases licuados del petróleo": "glp",
+    "Precio Gasoleo A": "price_goa",
+    "Precio Gasolina 95 E5": "price_g95",
+    "Precio Gasolina 98 E5": "price_g98",
+    "Precio Gases licuados del petróleo": "price_glp",
 }
 
 
@@ -165,6 +165,15 @@ def _update_stations(data: dict) -> None:
     print("[·] Updating stations...")
     stations = sorted(data["ListaEESSPrecio"], key=lambda x: int(x["IDEESS"]))
 
+    deleted_count, _ = Station.objects.exclude(
+        id_eess__in=[station["IDEESS"] for station in stations]
+    ).delete()
+    print(f"[✓] {deleted_count} old stations removed.")
+    if deleted_count == 0 and Station.objects.count() == len(stations):
+        print("[✓] Stations are up to date.")
+        print("---")
+        return
+
     # Create the stations that are not in the database
     stations_to_create: list[Station] = []
     stations_to_update: list[Station] = []
@@ -215,11 +224,6 @@ def _update_stations(data: dict) -> None:
     print("[✓] Updated stations.   ")
     print("---")
 
-    deleted_count, _ = Station.objects.exclude(
-        id_eess__in=[station["id_eess"] for station in stations]
-    ).delete()
-    print(f"[✓] {deleted_count} old stations removed.")
-
 
 ## Create StationPrice table ##
 def _update_prices(data: dict) -> None:
@@ -235,7 +239,6 @@ def _update_prices(data: dict) -> None:
 
     print("[·] Updating prices...")
     len_stations = len(stations)
-    today = date.today()
     for station in stations:
         print(f"  [·] {stations.index(station) + 1}/{len_stations}", end="\r")
 
@@ -245,21 +248,23 @@ def _update_prices(data: dict) -> None:
             DB_FIELD_REMOVE
             + list(DB_FIELD_RENAME.keys())[1:]
             + ["IDMunicipio", "IDProvincia"],
-            {"IDEESS": "id_eess"},
+            {"IDEESS": "station"},
         )
-        db_station = Station.objects.get(id_eess=station["id_eess"])
+        station["station"] = Station.objects.get(id_eess=station["station"])
 
         # Create the price
         for old_name, new_name in DB_FIELD_FUELS.items():
-            station[new_name] = float(
-                (value if (value := station.pop(old_name)) else "0").replace(",", ".")
-            )
-        station["id_eess"] = db_station
-        station["date"] = today
-        prices.append(StationPrice(**station))
+            value = station.pop(old_name)
+            if value:
+                station[new_name] = float(value.replace(",", "."))
+            else:
+                station[new_name] = None
 
+        prices.append(StationPrice(**station))
+    print("  [·] Writing changes...", end="\r")
     StationPrice.objects.bulk_create(prices)
-    print("[✓] Updated prices.   ")
+
+    print("[✓] Updated prices.     ")
     print("---")
 
 
@@ -272,17 +277,15 @@ def update_db() -> None:
     Wrapper for _create_complementary_tables(), _update_stations() and _update_prices().
     """
 
-    data = fetch_data()
-
     # Update localities and provinces
     _create_complementary_tables()
 
     # Update stations
-    _update_stations(data)
+    _update_stations(fetch_data())
 
     # Update prices
-    if not StationPrice.objects.filter(date=date.today()).exists():
-        _update_prices(data)
+    if not StationPrice.objects.filter(date=date.today()).exists() or True:
+        _update_prices(fetch_data())
 
     print("[✓] All stations refreshed.")
 
