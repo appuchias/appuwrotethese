@@ -3,6 +3,7 @@ from datetime import date, datetime
 from typing import Iterable
 
 import requests
+from django.contrib import messages
 from django.db.models import Count
 from django.http import Http404, HttpRequest
 from django.utils.translation import gettext_lazy as _
@@ -36,7 +37,7 @@ def get_product_name(product_abbr: str, default: str = "") -> str:
 
 
 ## Get locality id/province id/postal code ##
-def get_ids(query: str, q_type: str) -> tuple[int, int, int]:
+def get_ids(request: HttpRequest, query: str, q_type: str) -> tuple[int, int, int]:
     """Gets the locality id, province id or postal code from the query"""
 
     id_locality = 0
@@ -53,6 +54,7 @@ def get_ids(query: str, q_type: str) -> tuple[int, int, int]:
 
             id_locality = locality.id_mun
         else:
+            messages.error(request, _("Locality not found"))
             raise Http404
 
     elif q_type == "province":
@@ -60,12 +62,14 @@ def get_ids(query: str, q_type: str) -> tuple[int, int, int]:
         if province:
             id_province = province.id_prov
         else:
+            messages.error(request, _("Province not found"))
             raise Http404
 
     elif q_type == "postal_code":
         if query.isdigit() and len(query) == 5:
             postal_code = int(query)
         else:
+            messages.error(request, _("Invalid postal code"))
             raise Http404
 
     return id_locality, id_province, postal_code
@@ -119,7 +123,7 @@ def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
     prod_abbr = str(form.get("fuel"))
     q_date = form.get("date", date.today())
 
-    id_locality, id_province, postal_code = get_ids(query, q_type)
+    id_locality, id_province, postal_code = get_ids(request, query, q_type)
 
     return get_stations_prod_name(
         request, id_locality, id_province, postal_code, prod_abbr, q_date
@@ -149,11 +153,21 @@ def get_stations_prod_name(
 
     stations = models.Station.objects.filter(**station_filter)
 
+    if not stations.exists():
+        messages.error(request, _("No stations found in the selected area."))
+        return [], prod_name
+
     prices = (
         models.StationPrice.objects.filter(station__in=stations, date=q_date)
         .exclude(**{f"{prod_name}": 0})
         .order_by(f"{prod_name}")
     )
+
+    if not prices.exists():
+        messages.error(
+            request, _("No prices found. Date may be missing or no sations were found.")
+        )
+        return [], prod_name
 
     return prices, prod_name
 

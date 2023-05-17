@@ -32,11 +32,6 @@ def result(request: HttpRequest):
     last_update = query_handler.get_last_update(form_data)
     prices, product_name = query_handler.process_search(request, form_data)
 
-    # Show notification in case no results are returned
-    if not prices:
-        messages.warning(request, _("No results found. Please try again."))
-        raise Http404()
-
     return render(
         request,
         "gas/results.html",
