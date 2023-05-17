@@ -96,37 +96,35 @@ class StationPriceAdmin(admin.ModelAdmin):
     fields = [
         "station",
         "date",
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
+        "price_goa",
+        "price_g95",
+        "price_g98",
+        "price_glp",
     ]
     readonly_fields = [
         "station",
         "date",
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
+        "price_goa",
+        "price_g95",
+        "price_g98",
+        "price_glp",
     ]
     list_display = [
         "station",
         "date",
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
+        "price_goa",
+        "price_g95",
+        "price_g98",
+        "price_glp",
     ]
     list_display_links = [
-        "station",
         "date",
+        "station",
     ]
     list_filter = [
-        "station",
         "date",
     ]
     search_fields = [
-        "station",
         "date",
     ]
 
@@ -135,27 +133,31 @@ class StationPriceInline(admin.TabularInline):
     model = StationPrice
     fields = [
         "date",
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
+        "station",
+        "price_goa",
+        "price_g95",
+        "price_g98",
+        "price_glp",
     ]
     readonly_fields = [
         "date",
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
+        "station",
+        "price_goa",
+        "price_g95",
+        "price_g98",
+        "price_glp",
     ]
     list_display = [
         "date",
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
+        "station",
+        "price_goa",
+        "price_g95",
+        "price_g98",
+        "price_glp",
     ]
     list_display_links = [
         "date",
+        "station",
     ]
     list_filter = [
         "date",

@@ -115,52 +115,48 @@ class Station(models.Model):
 
 
 class StationPrice(models.Model):
-    id_eess = models.ForeignKey(Station, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True, db_index=True)
-    gasoleo_a = models.DecimalField(
+    station = models.ForeignKey(Station, on_delete=models.CASCADE)
+    price_goa = models.DecimalField(
         verbose_name="Gasoleo A",
         max_digits=4,
         decimal_places=3,
-        default=Decimal(0.0),
+        null=True,  # This will go wrong at some point
+        default=None,
     )
-    gasolina_95 = models.DecimalField(
+    price_g95 = models.DecimalField(
         verbose_name="Gasolina 95",
         max_digits=4,
         decimal_places=3,
-        default=Decimal(0.0),
+        null=True,
+        default=None,
     )
-    gasolina_98 = models.DecimalField(
+    price_g98 = models.DecimalField(
         verbose_name="Gasolina 98",
         max_digits=4,
         decimal_places=3,
-        default=Decimal(0.0),
+        null=True,
+        default=None,
     )
-    glp = models.DecimalField(
+    price_glp = models.DecimalField(
         verbose_name="GLP",
         max_digits=4,
         decimal_places=3,
-        default=Decimal(0.0),
+        null=True,
+        default=None,
     )
 
     class Meta:
         verbose_name = _("Gas station price")
         verbose_name_plural = _("Gas station prices")
 
-        ordering = ["id_eess", "date"]
+        ordering = ["date", "station"]
 
         constraints = [
             models.UniqueConstraint(
-                fields=["id_eess", "date"], name="unique_station_date_combination"
+                fields=["station", "date"], name="unique_station_date_combination"
             )
         ]
 
     def __str__(self):
-        return str(self.id_eess) + ", " + str(self.date)
-
-    def __iter__(self):
-        yield "id_eess", self.id_eess
-        yield "date", self.date
-        yield "gasoleo_a", self.gasoleo_a
-        yield "gasolina_95", self.gasolina_95
-        yield "gasolina_98", self.gasolina_98
-        yield "glp", self.glp
+        return str(self.station) + ", " + str(self.date)
