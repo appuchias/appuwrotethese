@@ -188,3 +188,4 @@ class ProvinceAdmin(admin.ModelAdmin):
 admin.site.register(Locality, LocalityAdmin)
 admin.site.register(Province, ProvinceAdmin)
 admin.site.register(Station, StationAdmin)
+admin.site.register(StationPrice, StationPriceAdmin)
