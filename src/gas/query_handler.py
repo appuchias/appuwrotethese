@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import date, datetime
 from typing import Iterable
 
 import requests
@@ -16,10 +16,10 @@ def get_db_product_name(prod_abbr: str, default: str = "") -> str:
     """Takes the short form of the product name and returns the full DB name"""
 
     return {
-        "GOA": "gasoleo_a",
-        "G95E5": "gasolina_95",
-        "G98E5": "gasolina_98",
-        "GLP": "glp",
+        "GOA": "price_goa",
+        "G95E5": "price_g95",
+        "G98E5": "price_g98",
+        "GLP": "price_glp",
     }.get(prod_abbr, default)
 
 
@@ -141,7 +141,13 @@ def get_stations_prod_name(
 
     stations = models.Station.objects.filter(**station_filter)
 
-    return stations, prod_name
+    prices = (
+        models.StationPrice.objects.filter(station__in=stations, date=date.today())
+        .exclude(**{f"{prod_name}": 0})
+        .order_by(f"{prod_name}")
+    )
+
+    return prices, prod_name
 
 
 def get_last_update(form_data) -> str:

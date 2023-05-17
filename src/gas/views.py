@@ -30,10 +30,10 @@ def result(request: HttpRequest):
 
     form_data = form.cleaned_data
     last_update = query_handler.get_last_update(form_data)
-    results, product_name = query_handler.process_search(request, form_data)
+    prices, product_name = query_handler.process_search(request, form_data)
 
     # Show notification in case no results are returned
-    if not results:
+    if not prices:
         messages.warning(request, _("No results found. Please try again."))
         raise Http404()
 
@@ -42,7 +42,7 @@ def result(request: HttpRequest):
         "gas/results.html",
         {
             "product": product_name,
-            "results": results,
+            "results": prices,
             "last_update": last_update,
         },
     )

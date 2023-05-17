@@ -19,14 +19,15 @@
         <!-- Grid with gas stations -->
         <div class="container-xl row justify-content-center">
             {% for i in results %}
+            {% with s=i.station %}
             <figure class="col-sm-6 col-md-5 col-lg-4 col-xl-3">
                 <div class="figure-img img-fluid rounded tall">
-                    <h3 title="{{ i.company|title }}">
-                        <center class="truncate">{{ i.company|title }}</center>
+                    <h3 title="{{ s.company|title }}">
+                        <center class="truncate">{{ s.company|title }}</center>
                     </h3>
-                    <h6 class="direccion truncate" title="{{ i.address }}">{{ i.address }}</h6>
-                    <h6 class="direccion truncate" title="{{ i.locality }}">{{ i.locality }}</h6>
-                    <h6 class="horario">{{ i.schedule }}</h6>
+                    <h6 class="direccion truncate" title="{{ s.address }}">{{ s.address }}</h6>
+                    <h6 class="direccion truncate" title="{{ s.locality }}">{{ s.locality }}</h6>
+                    <h6 class="horario">{{ s.schedule }}</h6>
                     <!-- <div class="repo-text"></div> -->
                     <div class="prices">
                         <table class="table table-sm">
@@ -37,36 +38,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% if i.PrecioProducto %}
-                                <tr>
-                                    <th scope="row">{{ product }}</th>
-                                    <td>{{ i.PrecioProducto|default:"-" }}</td>
-                                </tr>
-                                {% else %}
                                 <tr>
                                     <th scope="row">Gasóleo A</th>
-                                    <td>{{ i.gasoleo_a|default:"-" }}</td>
+                                    <td>{{ i.price_goa|default:"-" }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Gasolina 95</th>
-                                    <td>{{ i.gasolina_95|default:"-" }}</td>
+                                    <td>{{ i.price_g95|default:"-" }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Gasolina 98</th>
-                                    <td>{{ i.gasolina_98|default:"-" }}</td>
+                                    <td>{{ i.price_g98|default:"-" }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">GLP</th>
-                                    <td>{{ i.glp|default:"-" }}</td>
+                                    <td>{{ i.price_glp|default:"-" }}</td>
                                 </tr>
-                                {% endif %}
                             </tbody>
                         </table>
                     </div>
                     <div class="card-footer d-flex justify-content-between">
                         <a class="directions text-decoration-none tooltip-slide" target="_blank"
                             aria-label="Open map directions" data-balloon-pos="up"
-                            onclick="openmaps({{ i.latitude|replace:',|.' }}, {{ i.longitude|replace:',|.' }})">
+                            onclick="openmaps({{ s.latitude|replace:',|.' }}, {{ s.longitude|replace:',|.' }})">
                             <i class="fas fa-directions"></i>
                         </a>
                         {% comment %} {% if user.is_authenticated %}<a class="eess-id" href="/gas/save/{{ i.id_eess }}"
@@ -75,6 +69,7 @@
                     </div>
                 </div>
             </figure>
+            {% endwith %}
             {% endfor %}
             <script>
                 function openmaps(lat, long) {
