@@ -280,8 +280,7 @@ def update_db() -> None:
     _update_stations(fetch_data())
 
     # Update prices
-    if not StationPrice.objects.filter(date=date.today()).exists() or True:
-        _update_prices(fetch_data())
+    _update_prices(fetch_data())
 
     print("[✓] All stations refreshed.")
 
