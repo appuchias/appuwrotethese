@@ -16,9 +16,7 @@ PROVINCE_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes
 ALL_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroProducto/"
 
 
-# ############################## #
-#    Product id/name lookups     #
-# ############################## #
+## Short ID lookup ##
 def get_product_id(product_abbr: str) -> int:
     """Takes the short form of the product name and returns the API id"""
 
@@ -30,6 +28,7 @@ def get_product_id(product_abbr: str) -> int:
     return 0
 
 
+## DB name lookup ##
 def get_db_product_name(prod_abbr: str) -> str:
     """Takes the short form of the product name and returns the full DB name"""
 
@@ -41,6 +40,7 @@ def get_db_product_name(prod_abbr: str) -> str:
     }.get(prod_abbr, "")
 
 
+## Long name lookup ##
 def get_product_name(product_abbr: str) -> str:
     """Takes the short form of the product name and returns the full name"""
 
@@ -52,9 +52,7 @@ def get_product_name(product_abbr: str) -> str:
     }.get(product_abbr, "Gasóleo A")
 
 
-# ################## #
-#    Make queries    #
-# ################## #
+## Query the API ##
 def search_api(
     id_locality: int, id_province: int, postal_code: int, prod_abbr: str
 ) -> Iterable:
@@ -96,6 +94,7 @@ def search_api(
     return sorted(stations, key=lambda x: x["PrecioProducto"])
 
 
+## Query the DB ##
 def search_db(
     id_locality: int, id_province: int, postal_code: int, prod_abbr: str
 ) -> Iterable:
@@ -117,9 +116,7 @@ def search_db(
     return stations.order_by(prod_name)
 
 
-# ############################ #
-#    Process the query form    #
-# ############################ #
+## Process the query form ##
 def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
     """Process a query and return the results.
 
