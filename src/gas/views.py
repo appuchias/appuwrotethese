@@ -1,5 +1,7 @@
+from datetime import date
+
 from django.contrib import messages
-from django.http import Http404, HttpRequest, HttpResponseNotAllowed
+from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
@@ -29,15 +31,14 @@ def result(request: HttpRequest):
         return render(request, "gas/noresults.html", {"results": []})
 
     form_data = form.cleaned_data
-    last_update = query_handler.get_last_update(form_data)
     prices, product_name = query_handler.process_search(request, form_data)
+
+    prices_date = form_data.get("query_date", date.today())
+    if prices_date == date.today():
+        prices_date = query_handler.get_last_update(form_data)
 
     return render(
         request,
         "gas/results.html",
-        {
-            "product": product_name,
-            "results": prices,
-            "last_update": last_update,
-        },
+        {"product": product_name, "results": prices, "last_update": prices_date},
     )
