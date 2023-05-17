@@ -56,7 +56,6 @@ ALLOWED_HOSTS = [
     "appu.ltd",
     "www.appu.ltd",
     # "beta.appu.ltd",
-    "10.100.1.20",
     "localhost",
 ]
 
