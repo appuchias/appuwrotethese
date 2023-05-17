@@ -150,7 +150,7 @@ class StationPrice(models.Model):
         verbose_name = _("Gas station price")
         verbose_name_plural = _("Gas station prices")
 
-        ordering = ["date", "station"]
+        ordering = ["-date", "station"]
 
         constraints = [
             models.UniqueConstraint(
