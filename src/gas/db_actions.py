@@ -161,8 +161,8 @@ def _update_stations(data: dict) -> None:
 
     len_stations = len(stations)
     now = timezone.now()
-    for station in stations:
-        print(f"  [·] {stations.index(station) + 1}/{len_stations}", end="\r")
+    for idx, station in enumerate(stations):
+        print(f"  [·] {idx + 1}/{len_stations}", end="\r")
 
         for key in list(station.keys()):
             if key in DB_FIELD_REMOVE or key in DB_FIELD_FUELS:
@@ -218,8 +218,8 @@ def _update_prices(data: dict) -> None:
 
     print("[·] Updating prices...")
     len_stations = len(stations)
-    for station in stations:
-        print(f"  [·] {stations.index(station) + 1}/{len_stations}", end="\r")
+    for idx, station in enumerate(stations):
+        print(f"  [·] {idx + 1}/{len_stations}", end="\r")
 
         remove_keys = (
             DB_FIELD_REMOVE
