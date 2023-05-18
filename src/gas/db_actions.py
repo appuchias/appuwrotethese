@@ -104,22 +104,6 @@ def fetch_data() -> dict:
     return data
 
 
-## Data filtering functions ##
-def _filter_station(station: dict, remove: list, rename: dict) -> dict:
-    """Filter the station data to match the model.
-
-    This function is called by update_db() and is not meant to be called directly.
-    """
-
-    for key in list(station.keys()):
-        if key in remove:
-            del station[key]
-        elif key in rename:
-            station[rename[key]] = station.pop(key)
-
-    return station
-
-
 ## Create Locality and Province tables ##
 def _create_complementary_tables() -> None:
     """
@@ -186,10 +170,6 @@ def _update_stations(data: dict) -> None:
             elif key in DB_FIELD_RENAME:
                 station[DB_FIELD_RENAME[key]] = station.pop(key)
 
-        station = _filter_station(
-            station, DB_FIELD_REMOVE + list(DB_FIELD_FUELS), DB_FIELD_RENAME
-        )
-
         locality = Locality.objects.filter(
             id_mun=int(station.pop("IDMunicipio"))
         ).first()
@@ -240,25 +220,23 @@ def _update_prices(data: dict) -> None:
     for station in stations:
         print(f"  [·] {stations.index(station) + 1}/{len_stations}", end="\r")
 
-        # Get the station
-        station = _filter_station(
-            station,
+        remove_keys = (
             DB_FIELD_REMOVE
             + list(DB_FIELD_RENAME.keys())[1:]
-            + ["IDMunicipio", "IDProvincia"],
-            {"IDEESS": "station"},
+            + ["IDMunicipio", "IDProvincia"]
         )
-        station["station"] = Station.objects.get(id_eess=station["station"])
+        # Get the station
+        for key in list(station.keys()):
+            if key in remove_keys:
+                del station[key]
+            elif key in DB_FIELD_FUELS:
+                value = station.pop(key)
+                if value:
+                    station[DB_FIELD_FUELS[key]] = Decimal(value.replace(",", "."))
+                else:
+                    station[DB_FIELD_FUELS[key]] = None
+        station["station"] = Station.objects.get(id_eess=station.pop("IDEESS"))
         station["date"] = date.today()
-
-        # Create the price
-        for old_name, new_name in DB_FIELD_FUELS.items():
-            value = station.pop(old_name)
-            if value:
-                station[new_name] = Decimal(value.replace(",", "."))
-            else:
-                station[new_name] = None
-
         new_price = StationPrice(**station)
 
         # Create or update the price
