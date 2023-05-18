@@ -100,17 +100,6 @@ class Station(models.Model):
     def __str__(self):
         return self.company + ", " + self.address
 
-    def __iter__(self):
-        yield "id_eess", self.id_eess
-        yield "company", self.company
-        yield "address", self.address
-        yield "schedule", self.schedule
-        yield "locality", self.locality
-        yield "province", self.province
-        yield "postal_code", self.postal_code
-        yield "latitude", self.latitude
-        yield "longitude", self.longitude
-
 
 class StationPrice(models.Model):
     date = models.DateField(auto_now_add=True, db_index=True)
