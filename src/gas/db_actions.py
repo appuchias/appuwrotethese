@@ -157,12 +157,12 @@ def _update_stations(data: dict) -> None:
 
     # Create the stations that are not in the database
     stations_to_create: list[Station] = []
-    stations_to_update: list[Station] = []
+    # stations_to_update: list[Station] = []
 
     len_stations = len(stations)
     now = timezone.now()
     for station in stations:
-        print(f"  [·] {stations.index(station) + 1}/{len_stations}", end="")
+        print(f"  [·] {stations.index(station) + 1}/{len_stations}", end="\r")
 
         for key in list(station.keys()):
             if key in DB_FIELD_REMOVE or key in DB_FIELD_FUELS:
@@ -185,19 +185,20 @@ def _update_stations(data: dict) -> None:
 
         if not db_stations.exists():
             stations_to_create.append(station_obj)
-            print(" [C]", end="\r")
-        else:
-            stations_to_update.append(station_obj)
-            print(" [U]", end="\r")
+            # print(" [C]", end="\r")
+        # elif db_stations.first() != station_obj:
+        #     stations_to_update.append(station_obj)
+        #     print(" [U]", end="\r")
 
     print("  [·] Writing changes...", end="\r")
-
+    print(f"  [·] Creating {len(stations_to_create)} stations...")
     Station.objects.bulk_create(stations_to_create)
-    Station.objects.bulk_update(
-        stations_to_update,
-        fields=list(DB_FIELD_RENAME.values())[1:]
-        + ["locality", "province", "last_update"],
-    )
+    # print(f"  [·] Updating {len(stations_to_update)} stations...")
+    # Station.objects.bulk_update(
+    #     stations_to_update,
+    #     fields=list(DB_FIELD_RENAME.values())[1:]
+    #     + ["locality", "province", "last_update"],
+    # )
     print("[✓] Updated stations.   ")
     print("---")
 
