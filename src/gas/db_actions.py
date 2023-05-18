@@ -63,7 +63,7 @@ def get_provinces() -> dict:
 
 
 ## Data fetching functions ##
-def fetch_data() -> dict:
+def get_data() -> dict:
     """Get the data from the most recent source (file or remote).
 
     If the file is older than 30 minutes, redownload it.
@@ -138,7 +138,7 @@ def _create_complementary_tables() -> None:
 
 
 ## Create Station table ##
-def _update_stations(data: dict) -> None:
+def _update_stations(stations: list) -> None:
     """Update the stations in the database.
 
     This function is called by update_db() and is not meant to be called directly.
@@ -148,7 +148,6 @@ def _update_stations(data: dict) -> None:
     """
 
     print("[·] Updating stations...")
-    stations = sorted(data["ListaEESSPrecio"], key=lambda x: int(x["IDEESS"]))
 
     if Station.objects.count() == len(stations):
         print("[✓] Stations are up to date.")
@@ -204,7 +203,7 @@ def _update_stations(data: dict) -> None:
 
 
 ## Create StationPrice table ##
-def _update_prices(data: dict) -> None:
+def _update_prices(stations: list) -> None:
     """Update the prices in the database.
 
     This function is called by update_db() and is not meant to be called directly.
@@ -212,7 +211,6 @@ def _update_prices(data: dict) -> None:
     It will add today's prices to the database.
     """
 
-    stations = sorted(data["ListaEESSPrecio"], key=lambda x: int(x["IDEESS"]))
     prices_to_create: list[StationPrice] = []
     prices_to_update: list[StationPrice] = []
 
@@ -277,10 +275,10 @@ def update_db() -> None:
     _create_complementary_tables()
 
     # Update stations
-    _update_stations(fetch_data())
+    _update_stations(get_data()["ListaEESSPrecio"])
 
     # Update prices
-    _update_prices(fetch_data())
+    _update_prices(get_data()["ListaEESSPrecio"])
 
     print("[✓] All stations refreshed.")
 
