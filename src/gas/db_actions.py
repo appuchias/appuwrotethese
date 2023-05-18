@@ -30,17 +30,6 @@ DB_FIELD_FUELS = {
 }
 
 
-## Get from fp ##
-def get_localities() -> dict:
-    """Get the localities from the file."""
-    return get_json_data(PATH_LOCALITIES)
-
-
-def get_provinces() -> dict:
-    """Get the provinces from the file."""
-    return get_json_data(PATH_PROVINCES)
-
-
 ## Data fetching functions ##
 def get_data() -> dict:
     """Get the data from the most recent source (file or remote).
@@ -85,14 +74,12 @@ def get_data() -> dict:
 
 ## Create Locality and Province tables ##
 def _create_complementary_tables() -> None:
-    """
-    Update the side tables (gas_locality and gas_province) with the data from the API.
-    """
+    """Update the aux tables (gas_locality and gas_province)."""
 
     print("[·] Updating complementary tables...")
 
-    localities = get_localities()
-    provinces = get_provinces()
+    localities = get_json_data(PATH_LOCALITIES)
+    provinces = get_json_data(PATH_PROVINCES)
 
     if Locality.objects.count() != len(localities):
         print("  [·] Updating localities...")
