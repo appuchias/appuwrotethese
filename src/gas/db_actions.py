@@ -243,23 +243,22 @@ def _update_prices(data: dict) -> None:
         # Create or update the price
         db_price = StationPrice.objects.filter(
             station=new_price.station, date=new_price.date
-        )
-        if db_price.exists():
-            if db_price.first() != new_price:
-                new_price.id = db_price.first().id  # type: ignore
-                prices_to_update.append(new_price)
-        else:
+        ).first()
+        if not db_price:
             prices_to_create.append(new_price)
+        elif db_price != new_price:
+            for key in DB_FIELD_FUELS.values():
+                setattr(db_price, key, getattr(new_price, key))
+            prices_to_update.append(db_price)
 
+    print("  [·] Writing changes...", end="\r")
     print(f"  [·] {len(prices_to_create)} prices to create.")
+    StationPrice.objects.bulk_create(prices_to_create)
     print(f"  [·] {len(prices_to_update)} prices to update.")
-    if prices_to_create:
-        StationPrice.objects.bulk_create(prices_to_create)
-    if prices_to_update:
-        StationPrice.objects.bulk_update(
-            prices_to_update,
-            fields=list(DB_FIELD_FUELS.values()),
-        )
+    StationPrice.objects.bulk_update(
+        prices_to_update,
+        fields=list(DB_FIELD_FUELS.values()),
+    )
 
     print("[✓] Updated prices.     ")
     print("---")
