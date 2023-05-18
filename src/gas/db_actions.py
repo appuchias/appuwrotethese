@@ -22,27 +22,6 @@ DB_FIELD_RENAME = {
     "Longitud (WGS84)": "longitude",
     "C.P.": "postal_code",
 }
-DB_FIELD_REMOVE = [
-    "Localidad",
-    "Municipio",
-    "Provincia",
-    "Margen",
-    "Precio Biodiesel",
-    "Precio Bioetanol",
-    "Precio Gas Natural Comprimido",
-    "Precio Gas Natural Licuado",
-    "Precio Gasoleo B",
-    "Precio Gasoleo Premium",
-    "Precio Gasolina 95 E10",
-    "Precio Gasolina 95 E5 Premium",
-    "Precio Gasolina 98 E10",
-    "Precio Hidrogeno",
-    "Remisión",
-    "Tipo Venta",
-    "% BioEtanol",
-    "% Éster metílico",
-    "IDCCAA",
-]
 DB_FIELD_FUELS = {
     "Precio Gasoleo A": "price_goa",
     "Precio Gasolina 95 E5": "price_g95",
@@ -163,12 +142,6 @@ def _update_stations(stations: list) -> None:
     for idx, station in enumerate(stations):
         print(f"  [·] {idx + 1}/{len_stations}", end="\r")
 
-        for key in list(station.keys()):
-            if key in DB_FIELD_REMOVE or key in DB_FIELD_FUELS:
-                del station[key]
-            elif key in DB_FIELD_RENAME:
-                station[DB_FIELD_RENAME[key]] = station.pop(key)
-
         locality = Locality.objects.filter(
             id_mun=int(station.pop("IDMunicipio"))
         ).first()
@@ -177,13 +150,20 @@ def _update_stations(stations: list) -> None:
         ).first()
 
         # Create the station
-        db_stations = Station.objects.filter(id_eess=station["id_eess"])
-        station_obj = Station(
-            locality=locality, province=province, last_update=now, **station
+        new_station = Station(
+            locality=locality,
+            province=province,
+            last_update=now,
+            **{
+                DB_FIELD_RENAME[key]: value
+                for key, value in station.items()
+                if key in DB_FIELD_RENAME
+            },
         )
+        db_stations = Station.objects.filter(id_eess=station["IDEESS"])
 
         if not db_stations.exists():
-            stations_to_create.append(station_obj)
+            stations_to_create.append(new_station)
             # print(" [C]", end="\r")
         # elif db_stations.first() != station_obj:
         #     stations_to_update.append(station_obj)
@@ -219,24 +199,15 @@ def _update_prices(stations: list) -> None:
     for idx, station in enumerate(stations):
         print(f"  [·] {idx + 1}/{len_stations}", end="\r")
 
-        remove_keys = (
-            DB_FIELD_REMOVE
-            + list(DB_FIELD_RENAME.keys())[1:]
-            + ["IDMunicipio", "IDProvincia"]
+        new_price = StationPrice(
+            station=Station.objects.get(id_eess=station.get("IDEESS")),
+            date=date.today(),
+            **{
+                DB_FIELD_FUELS[key]: Decimal(value.replace(",", ".")) if value else None
+                for key, value in station.items()
+                if key in DB_FIELD_FUELS
+            },
         )
-        # Get the station
-        for key in list(station.keys()):
-            if key in remove_keys:
-                del station[key]
-            elif key in DB_FIELD_FUELS:
-                value = station.pop(key)
-                if value:
-                    station[DB_FIELD_FUELS[key]] = Decimal(value.replace(",", "."))
-                else:
-                    station[DB_FIELD_FUELS[key]] = None
-        station["station"] = Station.objects.get(id_eess=station.pop("IDEESS"))
-        station["date"] = date.today()
-        new_price = StationPrice(**station)
 
         # Create or update the price
         db_price = StationPrice.objects.filter(
@@ -245,8 +216,7 @@ def _update_prices(stations: list) -> None:
         if not db_price:
             prices_to_create.append(new_price)
         elif db_price != new_price:
-            for key in DB_FIELD_FUELS.values():
-                setattr(db_price, key, getattr(new_price, key))
+            new_price.id = db_price.id  # PK needed for bulk_update  # type: ignore
             prices_to_update.append(db_price)
 
     print("  [·] Writing changes...", end="\r")
