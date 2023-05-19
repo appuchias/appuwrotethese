@@ -121,7 +121,7 @@ def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
     query = str(form.get("query"))
     q_type = str(form.get("type"))
     prod_abbr = str(form.get("fuel"))
-    q_date = form.get("date", date.today())
+    q_date = form.get("query_date", date.today())
 
     id_locality, id_province, postal_code = get_ids(request, query, q_type)
 
