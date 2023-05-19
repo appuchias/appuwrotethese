@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 00:36+0200\n"
+"POT-Creation-Date: 2023-05-19 08:55+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -117,11 +117,11 @@ msgstr ""
 msgid "Email is not registered"
 msgstr "El correo electrónico no está registrado"
 
-#: appuwrotethese/settings.py:232
+#: appuwrotethese/settings.py:230
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:233
+#: appuwrotethese/settings.py:231
 msgid "English"
 msgstr "Inglés"
 
@@ -165,11 +165,11 @@ msgstr "Elemento concreto a buscar (p.ej. Coruña, 15001, etc.)"
 msgid "Search by"
 msgstr "Buscar por"
 
-#: gas/forms.py:23 gas/models.py:21 gas/models.py:26
+#: gas/forms.py:23 gas/models.py:19 gas/models.py:24
 msgid "Locality"
 msgstr "Municipio"
 
-#: gas/forms.py:24 gas/models.py:48 gas/models.py:53
+#: gas/forms.py:24 gas/models.py:46 gas/models.py:51
 msgid "Province"
 msgstr "Provincia"
 
@@ -194,79 +194,79 @@ msgstr ""
 msgid "Date"
 msgstr "Fecha"
 
-#: gas/forms.py:45
-msgid "Date of the query"
-msgstr "Fecha de la petición"
+#: gas/forms.py:45 templates/gas/results.html:17
+msgid "Prices date"
+msgstr "Fecha de los precios"
 
 #: gas/forms.py:84 templates/gas/search.html:8
 msgid "Search"
 msgstr "Buscar"
 
-#: gas/models.py:14
+#: gas/models.py:12
 msgid "Municipality ID"
 msgstr "ID de municipio"
 
-#: gas/models.py:15
+#: gas/models.py:13
 msgid "ID of the municipality"
 msgstr "ID del municipio"
 
-#: gas/models.py:27
+#: gas/models.py:25
 msgid "Localities"
 msgstr "Municipios"
 
-#: gas/models.py:41
+#: gas/models.py:39
 msgid "Province ID"
 msgstr "ID de provincia"
 
-#: gas/models.py:42
+#: gas/models.py:40
 msgid "ID of the province"
 msgstr "ID de la provincia"
 
-#: gas/models.py:54
+#: gas/models.py:52
 msgid "Provinces"
 msgstr "Provincias"
 
-#: gas/models.py:71
+#: gas/models.py:69
 msgid "Last update"
 msgstr "Última actualización"
 
-#: gas/models.py:73
+#: gas/models.py:71
 msgid "Company"
 msgstr "Compañía"
 
-#: gas/models.py:74
+#: gas/models.py:72
 msgid "Address"
 msgstr "Dirección"
 
-#: gas/models.py:75
+#: gas/models.py:73
 msgid "Schedule"
 msgstr "Horario"
 
-#: gas/models.py:79
+#: gas/models.py:77
 msgid "Postal code"
 msgstr "Código postal"
 
-#: gas/models.py:84
+#: gas/models.py:82
 msgid "Latitude"
 msgstr "Latitud"
 
-#: gas/models.py:90
+#: gas/models.py:88
 msgid "Longitude"
 msgstr "Longitud"
 
-#: gas/models.py:97
+#: gas/models.py:95
 msgid "Gas station"
 msgstr "Gasolinera"
 
-#: gas/models.py:98 templates/gas/search.html:4
+#: gas/models.py:96 templates/gas/search.html:4
 msgid "Gas stations"
 msgstr "Gasolineras"
 
-#: gas/models.py:150
+#: gas/models.py:137
 msgid "Gas station price"
 msgstr "Precio"
 
-#: gas/models.py:151
+#: gas/models.py:138
 msgid "Gas station prices"
 msgstr "Precios"
 
@@ -288,9 +288,11 @@ msgstr "No se encontraron gasolineras en el área seleccionada."
 
 #: gas/query_handler.py:168
 msgid "No prices found. Date may be missing or no sations were found."
-msgstr "No se encontraron precios. Puede que falte la fecha o no se encontraran gasolineras."
+msgstr ""
+"No se encontraron precios. Puede que falte la fecha o no se encontraran "
+"gasolineras."
 
-#: gas/views.py:28
+#: gas/views.py:30
 msgid "Invalid form. Please try again."
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
@@ -463,10 +465,6 @@ msgstr ""
 "El icono en la parte inferior abre la dirección de la gasolinera en tu "
 "aplicación de mapas (Google maps para web)"
 
-#: templates/gas/results.html:17
-msgid "Prices date"
-msgstr "Fecha de los precios"
-
 #: templates/gas/search.html:11
 msgid ""
 "Here you will find the cheapest gas stations for each area sorted by fuel "
@@ -545,6 +543,9 @@ msgstr "Iconos usados en la web"
 #: templates/thanks.html:54
 msgid "Layout of the page"
 msgstr "Diseño principal de la web"
+
+#~ msgid "Date of the query"
+#~ msgstr "Fecha de la petición"
 
 #~ msgid "No results found. Please try again."
 #~ msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."

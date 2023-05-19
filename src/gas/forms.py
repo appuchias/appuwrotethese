@@ -42,7 +42,7 @@ class SearchStations(forms.Form):
 
     query_date = forms.DateField(
         label=_("Date"),
-        help_text=_("Date of the query"),
+        help_text=_("Prices date"),
         required=True,
         widget=forms.widgets.DateInput(
             attrs={
