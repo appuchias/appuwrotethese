@@ -81,6 +81,10 @@ def build(request: HttpRequest):
     return render(request, "build.html")
 
 
+def teapot(request: HttpRequest):
+    return render(request, "teapot.html", status=418)
+
+
 def redirect_static(request: HttpRequest, **kwargs):
     dest = kwargs.get("resource", "")
 

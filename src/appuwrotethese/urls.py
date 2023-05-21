@@ -21,4 +21,5 @@ urlpatterns += [
     path("text/", views.text, name="text"),
     path("build/", views.build, name="build"),
     path("projects/", views.projects, name="projects"),
+    path("teapot/", views.teapot, name="teapot"),
 ]
