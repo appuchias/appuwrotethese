@@ -242,10 +242,18 @@ def update_db() -> None:
 
 ## Purge stations ##
 def purge_stations() -> None:
-    """
-    Remove all the stations from the database.
-    """
+    """Remove all the stations from the database."""
 
     print("[·] Purging stations...", end="\r")
     Station.objects.all().delete()
     print("[✓] Purged stations.   ")
+
+
+## Purge prices ##
+def purge_prices() -> None:
+    """Remove all the prices from the database."""
+
+    print("[·] Purging prices...", end="\r")
+    StationPrice.objects.all().delete()
+    print("[✓] Purged prices.   ")
+
