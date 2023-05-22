@@ -146,7 +146,7 @@ class StationPrice(models.Model):
         ]
 
     def __str__(self):
-        return str(self.station) + ", " + str(self.date)
+        return str(self.station.id_eess) + ", " + str(self.date)
 
     def __eq__(self, __value: object) -> bool:
         return (
