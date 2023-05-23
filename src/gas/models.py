@@ -1,5 +1,6 @@
 from django.core.validators import MaxValueValidator
 from django.db import models
+from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 
@@ -102,7 +103,7 @@ class Station(models.Model):
 
 
 class StationPrice(models.Model):
-    date = models.DateField(auto_now_add=True, db_index=True)
+    date = models.DateField(db_index=True, default=now)
     station = models.ForeignKey(Station, on_delete=models.CASCADE)
     price_goa = models.DecimalField(
         verbose_name="Gasoleo A",
