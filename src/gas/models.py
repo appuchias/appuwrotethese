@@ -66,9 +66,6 @@ class Station(models.Model):
         auto_created=False,
     )
 
-    last_update = models.DateTimeField(
-        verbose_name=_("Last update"), auto_now=True, editable=True
-    )
     company = models.CharField(verbose_name=_("Company"), max_length=128, blank=False)
     address = models.CharField(verbose_name=_("Address"), max_length=128, blank=False)
     schedule = models.CharField(verbose_name=_("Schedule"), max_length=64, blank=False)
@@ -139,6 +136,7 @@ class StationPrice(models.Model):
         verbose_name_plural = _("Gas station prices")
 
         ordering = ["-date", "station"]
+        get_latest_by = ["date", "station"]
 
         constraints = [
             models.UniqueConstraint(
