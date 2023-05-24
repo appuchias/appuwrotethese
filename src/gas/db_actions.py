@@ -113,11 +113,11 @@ def _update_stations(stations: list) -> None:
     not in the API and update the ones that are in both if needed.
     """
 
-    print("[·] Updating stations...")
+    # print("[·] Updating stations...")
 
     if Station.objects.count() == len(stations):
-        print("[✓] Stations are up to date.")
-        print("---")
+        # print("[✓] Stations are up to date.")
+        # print("---")
         return
 
     # Create the stations that are not in the database
@@ -127,7 +127,7 @@ def _update_stations(stations: list) -> None:
     len_stations = len(stations)
     now = timezone.now()
     for idx, station in enumerate(stations):
-        print(f"  [·] {idx + 1}/{len_stations}", end="\r")
+        # print(f"  [·] {idx + 1}/{len_stations}", end="\r")
 
         locality = Locality.objects.filter(
             id_mun=int(station.pop("IDMunicipio"))
@@ -156,8 +156,8 @@ def _update_stations(stations: list) -> None:
         #     stations_to_update.append(station_obj)
         #     print(" [U]", end="\r")
 
-    print("  [·] Writing changes...", end="\r")
-    print(f"  [·] Creating {len(stations_to_create)} stations...")
+    # print("  [·] Writing changes...", end="\r")
+    # print(f"  [·] Creating {len(stations_to_create)} stations...")
     Station.objects.bulk_create(stations_to_create)
     # print(f"  [·] Updating {len(stations_to_update)} stations...")
     # Station.objects.bulk_update(
@@ -165,8 +165,9 @@ def _update_stations(stations: list) -> None:
     #     fields=list(DB_FIELD_RENAME.values())[1:]
     #     + ["locality", "province", "last_update"],
     # )
-    print("[✓] Updated stations.   ")
-    print("---")
+
+    # print("[✓] Updated stations.   ")
+    # print("---")
 
 
 ## Create StationPrice table ##
@@ -181,10 +182,10 @@ def _update_prices(stations: list) -> None:
     prices_to_create: list[StationPrice] = []
     prices_to_update: list[StationPrice] = []
 
-    print("[·] Updating prices...")
+    # print("[·] Updating prices...")
     len_stations = len(stations)
     for idx, station in enumerate(stations):
-        print(f"  [·] {idx + 1}/{len_stations}", end="\r")
+        # print(f"  [·] {idx + 1}/{len_stations}", end="\r")
 
         new_price = StationPrice(
             station=Station.objects.get(id_eess=station.get("IDEESS")),
@@ -206,17 +207,18 @@ def _update_prices(stations: list) -> None:
             new_price.id = db_price.id  # PK needed for bulk_update  # type: ignore
             prices_to_update.append(db_price)
 
-    print("  [·] Writing changes...", end="\r")
-    print(f"  [·] {len(prices_to_create)} prices to create.")
+    # print("  [·] Writing changes...", end="\r")
+    # print(f"  [·] {len(prices_to_create)} prices to create.")
     StationPrice.objects.bulk_create(prices_to_create)
-    print(f"  [·] {len(prices_to_update)} prices to update.")
+    # print(f"  [·] {len(prices_to_update)} prices to update.")
     StationPrice.objects.bulk_update(
         prices_to_update,
         fields=list(DB_FIELD_FUELS.values()),
     )
 
-    print("[✓] Updated prices.     ")
-    print("---")
+    # print("[✓] Updated prices.     ")
+    # print("---")
+
 
 
 ## Update database  ##
