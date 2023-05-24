@@ -1,7 +1,6 @@
 import json, requests
 from datetime import date, datetime
 from decimal import Decimal
-import django.utils.timezone as timezone
 
 from appuwrotethese.extras import (
     DATA_OLD_MINUTES,
@@ -125,7 +124,6 @@ def _update_stations(stations: list) -> None:
     # stations_to_update: list[Station] = []
 
     len_stations = len(stations)
-    now = timezone.now()
     for idx, station in enumerate(stations):
         # print(f"  [·] {idx + 1}/{len_stations}", end="\r")
 
@@ -140,12 +138,7 @@ def _update_stations(stations: list) -> None:
         new_station = Station(
             locality=locality,
             province=province,
-            last_update=now,
-            **{
-                DB_FIELD_RENAME[key]: value
-                for key, value in station.items()
-                if key in DB_FIELD_RENAME
-            },
+            **{DB_FIELD_RENAME[key]: station[key] for key in DB_FIELD_RENAME},
         )
         db_stations = Station.objects.filter(id_eess=station["IDEESS"])
 
@@ -171,41 +164,45 @@ def _update_stations(stations: list) -> None:
 
 
 ## Create StationPrice table ##
-def _update_prices(stations: list) -> None:
-    """Update the prices in the database.
+def _update_station_prices(stations: list, prices_date: date = date.today()) -> None:
+    """Update the database with today's stations and prices
 
     This function is called by update_db() and is not meant to be called directly.
-
-    It will add today's prices to the database.
     """
 
-    prices_to_create: list[StationPrice] = []
-    prices_to_update: list[StationPrice] = []
+    prices_to_create: list[StationPrice] = list()
+    prices_to_update: list[StationPrice] = list()
 
     # print("[·] Updating prices...")
     len_stations = len(stations)
     for idx, station in enumerate(stations):
         # print(f"  [·] {idx + 1}/{len_stations}", end="\r")
 
+        db_station = Station.objects.filter(id_eess=station["IDEESS"]).first()
+        if not db_station:
+            _update_stations([station])
+            db_station = Station.objects.get(id_eess=station["IDEESS"])
+
         new_price = StationPrice(
-            station=Station.objects.get(id_eess=station.get("IDEESS")),
-            date=date.today(),
+            station=db_station,
+            date=prices_date,
             **{
-                DB_FIELD_FUELS[key]: Decimal(value.replace(",", ".")) if value else None
-                for key, value in station.items()
-                if key in DB_FIELD_FUELS
+                DB_FIELD_FUELS[key]: Decimal(station[key].replace(",", "."))
+                if station[key]
+                else None
+                for key in DB_FIELD_FUELS
             },
         )
 
         # Create or update the price
         db_price = StationPrice.objects.filter(
-            station=new_price.station, date=new_price.date
+            station=new_price.station, date=prices_date
         ).first()
         if not db_price:
             prices_to_create.append(new_price)
         elif db_price != new_price:
             new_price.id = db_price.id  # PK needed for bulk_update  # type: ignore
-            prices_to_update.append(db_price)
+            prices_to_update.append(new_price)
 
     # print("  [·] Writing changes...", end="\r")
     # print(f"  [·] {len(prices_to_create)} prices to create.")
@@ -223,7 +220,7 @@ def _update_prices(stations: list) -> None:
 
 ## Update database  ##
 def update_db() -> None:
-    """Download the data from the API to the database.
+    """Store the data from the API in the database.
 
     This function will update the stations and prices in the database.
 
@@ -233,11 +230,8 @@ def update_db() -> None:
     # Update localities and provinces
     _create_complementary_tables()
 
-    # Update stations
-    _update_stations(get_data()["ListaEESSPrecio"])
-
-    # Update prices
-    _update_prices(get_data()["ListaEESSPrecio"])
+    # Update stations and prices
+    _update_station_prices(get_data()["ListaEESSPrecio"])
 
     print("[✓] All stations refreshed.")
 
