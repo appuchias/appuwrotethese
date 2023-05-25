@@ -111,7 +111,7 @@ def get_ids(request: HttpRequest, query: str, q_type: str) -> tuple[int, int, in
 
 
 ## Process the query form ##
-def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
+def process_search(request: HttpRequest, form: dict) -> Iterable:
     """Process a query and return the results.
 
     This function gets the request and the clean form data
@@ -125,22 +125,20 @@ def process_search(request: HttpRequest, form: dict) -> tuple[Iterable, str]:
 
     id_locality, id_province, postal_code = get_ids(request, query, q_type)
 
-    return get_stations_prod_name(
+    return get_stations(
         request, id_locality, id_province, postal_code, prod_abbr, q_date
     )
 
 
-def get_stations_prod_name(
+def get_stations(
     request: HttpRequest,
     id_locality: int,
     id_province: int,
     postal_code: int,
     prod_abbr: str,
     q_date: date,
-) -> tuple[Iterable, str]:
+) -> Iterable:
     """Get the stations from the database or the API, provided all details."""
-
-    prod_name = get_db_product_name(prod_abbr)
 
     if id_locality:
         station_filter = {"locality_id": id_locality}
@@ -149,14 +147,15 @@ def get_stations_prod_name(
     elif postal_code:
         station_filter = {"postal_code": postal_code}
     else:
-        return [], prod_name
+        return []
 
     stations = models.Station.objects.filter(**station_filter)
 
     if not stations.exists():
         messages.error(request, _("No stations found in the selected area."))
-        return [], prod_name
+        return []
 
+    prod_name = get_db_product_name(prod_abbr)
     prices = (
         models.StationPrice.objects.filter(station__in=stations, date=q_date)
         .exclude(**{f"{prod_name}": 0})
@@ -167,9 +166,9 @@ def get_stations_prod_name(
         messages.error(
             request, _("No prices found. Date may be missing or no sations were found.")
         )
-        return [], prod_name
+        return []
 
-    return prices, prod_name
+    return prices
 
 
 def get_last_update(form_data) -> str:

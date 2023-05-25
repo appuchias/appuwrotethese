@@ -31,7 +31,7 @@ def result(request: HttpRequest):
         return render(request, "gas/noresults.html", {"results": []})
 
     form_data = form.cleaned_data
-    prices, product_name = query_handler.process_search(request, form_data)
+    prices = query_handler.process_search(request, form_data)
 
     prices_date = form_data.get("query_date", date.today())
     if prices_date == date.today():
@@ -40,5 +40,5 @@ def result(request: HttpRequest):
     return render(
         request,
         "gas/results.html",
-        {"product": product_name, "results": prices, "last_update": prices_date},
+        {"results": prices, "last_update": prices_date},
     )
