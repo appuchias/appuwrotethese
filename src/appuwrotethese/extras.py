@@ -45,8 +45,7 @@ class ShellCodes:
 
     CLR = "\x1B[0K"
 
-    def up(self, n: int = 1) -> str:
-        return f"\x1B[{n}A"
+    up = lambda n: f"\x1B[{n}A"
 
 
 # First ocurrence that meets requirements
