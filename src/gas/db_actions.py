@@ -8,6 +8,7 @@ from appuwrotethese.extras import (
     PATH_LOCALITIES,
     PATH_PROVINCES,
     get_json_data,
+    ShellCodes as C,
 )
 from gas.models import Locality, Province, Station, StationPrice
 
@@ -159,17 +160,22 @@ def populate_historical_prices() -> None:
     """Populate the database with all old prices."""
 
     print("[·] Populating historical prices...")
+    lines = 2
 
     today = date.today()
     current_date = date(today.year - 1, today.month, today.day)
     days_left = (today - current_date).days
 
+    print("\n" * (lines - 1))
+
     while current_date <= today:
         start = time.perf_counter()
 
-        print(f" [·] Populating {current_date}. {days_left} days left.", end="")
+        print(
+            f"{C.up(lines)} [·] Populating {current_date}. {days_left} days left.{C.CLR}"
+        )
         if StationPrice.objects.filter(date=current_date).exists():
-            print("\r", end="")
+            print("\n" * (lines - 2))
             current_date += timedelta(days=1)
             days_left -= 1
             continue
@@ -182,15 +188,14 @@ def populate_historical_prices() -> None:
 
         elapsed_total = time.perf_counter() - start
         print(
-            f" (TOTAL=QUERY+DB: {elapsed_total:.2f}={elapsed_query:.2f}+{elapsed_total - elapsed_query:.2f}s. \
-                ETA ~{elapsed_total * days_left / 3600:.2f}h)",
-            end="\r",
+            f" {elapsed_total:.2f}={elapsed_query:.2f}+{elapsed_total - elapsed_query:.2f}s (TOTAL=QUERY+DB). ETA ~{elapsed_total * days_left / 3600:.2f}h{C.CLR}"
         )
         current_date += timedelta(days=1)
         days_left -= 1
 
-    print("[✓] Populated historical prices." + " " * 58)
-    # print("---")
+    print(f"{C.up(lines + 1)}[✓] Populated historical prices.{C.CLR}")
+    print(f"---{C.CLR}")
+    print(f"{C.CLR}\n" * (lines - 1))
 
 
 ## Update database  ##
