@@ -164,7 +164,7 @@ def populate_historical_prices() -> None:
     current_date = date(today.year - 1, today.month, today.day)
     days_left = (today - current_date).days
 
-    while days_left != 0:
+    while current_date <= today:
         start = time.perf_counter()
 
         print(f" [·] Populating {current_date}. {days_left} days left.", end="")
@@ -178,49 +178,14 @@ def populate_historical_prices() -> None:
             "ListaEESSPrecio"
         ]
         elapsed_query = time.perf_counter() - start
-        # _update_prices(data, prices_date=current_date)
+        _update_station_prices(data, prices_date=current_date)
 
-        stations = Station.objects.in_bulk(
-            (station["IDEESS"] for station in data), field_name="id_eess"
-        )
-        prices = dict()
-        new_stations = set()
-        for price in data:
-            id_eess = int(price["IDEESS"])
-            if not id_eess in stations:
-                station = Station(
-                    id_eess=id_eess,
-                    company=price["Rótulo"],
-                    address=price["Dirección"],
-                    locality=Locality.objects.get(id_mun=price["IDMunicipio"]),
-                    province=Province.objects.get(id_prov=price["IDProvincia"]),
-                )
-
-                stations[station.id_eess] = station
-                new_stations.add(station)
-
-            prices[id_eess] = StationPrice(
-                station=stations.get(id_eess, None),
-                date=current_date,
-                **{
-                    DB_FIELD_FUELS[key]: Decimal(price[key].replace(",", "."))
-                    if price[key]
-                    else None
-                    for key in DB_FIELD_FUELS
-                },
-            )
-
-        Station.objects.bulk_create(new_stations)
-        StationPrice.objects.bulk_create(prices.values())
-
-        elapsed = time.perf_counter() - start
+        elapsed_total = time.perf_counter() - start
         print(
-            f" (TOTAL=QUERY+DB: {elapsed:.2f}={elapsed_query:.2f}+{elapsed - elapsed_query:.2f}s. ETA ~{elapsed * days_left / 3600:.2f}h)",
+            f" (TOTAL=QUERY+DB: {elapsed_total:.2f}={elapsed_query:.2f}+{elapsed_total - elapsed_query:.2f}s. \
+                ETA ~{elapsed_total * days_left / 3600:.2f}h)",
             end="\r",
         )
-        del data
-        del stations
-        del prices
         current_date += timedelta(days=1)
         days_left -= 1
 
