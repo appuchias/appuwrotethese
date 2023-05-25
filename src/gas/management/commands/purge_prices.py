@@ -1,9 +1,10 @@
 from django.core.management.base import BaseCommand
-from gas import db_actions
+from gas import models
 
 
 class Command(BaseCommand):
     help = "Removes all prices from the database."
 
     def handle(self, *args, **options):
-        db_actions.purge_prices()
+        models.StationPrice.objects.all().delete()
+        self.stdout.write(self.style.SUCCESS("Prices purged."))

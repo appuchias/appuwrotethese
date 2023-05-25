@@ -6,4 +6,4 @@ class Command(BaseCommand):
     help = "Add all historical prices to the database."
 
     def handle(self, *args, **options):
-        db_actions.populate_historical_prices()
+        db_actions.store_historical_prices()

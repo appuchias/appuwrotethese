@@ -6,4 +6,5 @@ class Command(BaseCommand):
     help = "Updates the database for the gas app"
 
     def handle(self, *args, **options):
-        db_actions.update_db()
+        db_actions.create_localities_provinces()
+        db_actions.update_station_prices(db_actions.get_data()["ListaEESSPrecio"])
