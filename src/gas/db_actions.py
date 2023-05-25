@@ -163,59 +163,55 @@ def _update_stations(stations: list) -> None:
     # print("---")
 
 
-## Create StationPrice table ##
-def _update_station_prices(stations: list, prices_date: date = date.today()) -> None:
+## Update Station and StationPrice tables ##
+def _update_station_prices(data: list, prices_date: date = date.today()) -> None:
     """Update the database with today's stations and prices
 
     This function is called by update_db() and is not meant to be called directly.
     """
 
-    prices_to_create: list[StationPrice] = list()
-    prices_to_update: list[StationPrice] = list()
+    id_eess = (int(station["IDEESS"]) for station in data)
 
-    # print("[·] Updating prices...")
-    len_stations = len(stations)
-    for idx, station in enumerate(stations):
-        # print(f"  [·] {idx + 1}/{len_stations}", end="\r")
+    stations = Station.objects.in_bulk(id_eess, field_name="id_eess")
+    prices = [
+        price.station.id_eess for price in StationPrice.objects.filter(date=prices_date)
+    ]
 
-        db_station = Station.objects.filter(id_eess=station["IDEESS"]).first()
-        if not db_station:
-            _update_stations([station])
-            db_station = Station.objects.get(id_eess=station["IDEESS"])
+    new_prices = list()
+    new_stations = set()
+    for price in data:
+        id_eess = int(price["IDEESS"])
+        if not id_eess in stations:
+            station = Station(
+                id_eess=id_eess,
+                company=price["Rótulo"],
+                address=price["Dirección"],
+                locality=Locality.objects.get(id_mun=price["IDMunicipio"]),
+                province=Province.objects.get(id_prov=price["IDProvincia"]),
+            )
 
-        new_price = StationPrice(
-            station=db_station,
-            date=prices_date,
-            **{
-                DB_FIELD_FUELS[key]: Decimal(station[key].replace(",", "."))
-                if station[key]
-                else None
-                for key in DB_FIELD_FUELS
-            },
-        )
+            stations[station.id_eess] = station
+            new_stations.add(station)
 
-        # Create or update the price
-        db_price = StationPrice.objects.filter(
-            station=new_price.station, date=prices_date
-        ).first()
-        if not db_price:
-            prices_to_create.append(new_price)
-        elif db_price != new_price:
-            new_price.id = db_price.id  # PK needed for bulk_update  # type: ignore
-            prices_to_update.append(new_price)
+        if not id_eess in prices:
+            new_prices.append(
+                StationPrice(
+                    station=stations.get(id_eess, None),
+                    date=prices_date,
+                    **{
+                        DB_FIELD_FUELS[key]: Decimal(price[key].replace(",", "."))
+                        if price[key]
+                        else None
+                        for key in DB_FIELD_FUELS
+                    },
+                )
+            )
 
-    # print("  [·] Writing changes...", end="\r")
-    # print(f"  [·] {len(prices_to_create)} prices to create.")
-    StationPrice.objects.bulk_create(prices_to_create)
-    # print(f"  [·] {len(prices_to_update)} prices to update.")
-    StationPrice.objects.bulk_update(
-        prices_to_update,
-        fields=list(DB_FIELD_FUELS.values()),
-    )
+    Station.objects.bulk_create(new_stations)
+    StationPrice.objects.bulk_create(new_prices)
 
     # print("[✓] Updated prices.     ")
     # print("---")
-
 
 
 ## Update database  ##
