@@ -1,5 +1,5 @@
-import json, requests
-from datetime import date, datetime
+import json, requests, time
+from datetime import date, datetime, timedelta
 from decimal import Decimal
 
 from appuwrotethese.extras import (
@@ -11,7 +11,8 @@ from appuwrotethese.extras import (
 )
 from gas.models import Locality, Province, Station, StationPrice
 
-# Change the field names to match the ones in the model
+HIST_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestresHist/"
+HIST_PATH_BASE = "gas/data/hist"
 DB_FIELD_RENAME = {
     "IDEESS": "id_eess",
     "Dirección": "address",
@@ -211,6 +212,80 @@ def _update_station_prices(data: list, prices_date: date = date.today()) -> None
     StationPrice.objects.bulk_create(new_prices)
 
     # print("[✓] Updated prices.     ")
+    # print("---")
+
+
+## Populate historical prices ##
+def populate_historical_prices() -> None:
+    """Populate the database with all old prices."""
+
+    print("[·] Populating historical prices...")
+
+    today = date.today()
+    current_date = date(today.year - 1, today.month, today.day)
+    days_left = (today - current_date).days
+
+    while days_left != 0:
+        start = time.perf_counter()
+
+        print(f" [·] Populating {current_date}. {days_left} days left.", end="")
+        if StationPrice.objects.filter(date=current_date).exists():
+            print("\r", end="")
+            current_date += timedelta(days=1)
+            days_left -= 1
+            continue
+
+        data: list = requests.get(HIST_URL + current_date.strftime("%d-%m-%Y")).json()[
+            "ListaEESSPrecio"
+        ]
+        elapsed_query = time.perf_counter() - start
+        # _update_prices(data, prices_date=current_date)
+
+        stations = Station.objects.in_bulk(
+            (station["IDEESS"] for station in data), field_name="id_eess"
+        )
+        prices = dict()
+        new_stations = set()
+        for price in data:
+            id_eess = int(price["IDEESS"])
+            if not id_eess in stations:
+                station = Station(
+                    id_eess=id_eess,
+                    company=price["Rótulo"],
+                    address=price["Dirección"],
+                    locality=Locality.objects.get(id_mun=price["IDMunicipio"]),
+                    province=Province.objects.get(id_prov=price["IDProvincia"]),
+                )
+
+                stations[station.id_eess] = station
+                new_stations.add(station)
+
+            prices[id_eess] = StationPrice(
+                station=stations.get(id_eess, None),
+                date=current_date,
+                **{
+                    DB_FIELD_FUELS[key]: Decimal(price[key].replace(",", "."))
+                    if price[key]
+                    else None
+                    for key in DB_FIELD_FUELS
+                },
+            )
+
+        Station.objects.bulk_create(new_stations)
+        StationPrice.objects.bulk_create(prices.values())
+
+        elapsed = time.perf_counter() - start
+        print(
+            f" (TOTAL=QUERY+DB: {elapsed:.2f}={elapsed_query:.2f}+{elapsed - elapsed_query:.2f}s. ETA ~{elapsed * days_left / 3600:.2f}h)",
+            end="\r",
+        )
+        del data
+        del stations
+        del prices
+        current_date += timedelta(days=1)
+        days_left -= 1
+
+    print("[✓] Populated historical prices." + " " * 58)
     # print("---")
 
 

@@ -24,6 +24,17 @@
             "django": true
         },
         {
+            "name": "Populate hist",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src",
+            "program": "${workspaceFolder}/src/manage.py",
+            "args": [
+                "populate_past_year_prices",
+            ],
+            "django": true
+        },
+        {
             "name": "Run tests",
             "type": "python",
             "request": "launch",
