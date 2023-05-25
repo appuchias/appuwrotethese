@@ -43,10 +43,7 @@ def get_data() -> dict:
         with open(PATH_DATA, "r") as r:
             data = json.load(r)
     except FileNotFoundError:
-        # Fake the data exists and is obviously old
-        data = {
-            "Fecha": f"{str(datetime.fromtimestamp(0).strftime(r'%d/%m/%Y %H:%M:%S'))}"
-        }
+        data = {}  # Simulate the data is old
 
     # Determine if the data is old
     try:
