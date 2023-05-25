@@ -11,29 +11,13 @@ from django.utils.translation import gettext_lazy as _
 from appuwrotethese.extras import PATH_DATA
 from gas import models
 
-
 ## DB name lookup ##
-def get_db_product_name(prod_abbr: str, default: str = "") -> str:
-    """Takes the short form of the product name and returns the full DB name"""
-
-    return {
-        "GOA": "price_goa",
-        "G95E5": "price_g95",
-        "G98E5": "price_g98",
-        "GLP": "price_glp",
-    }.get(prod_abbr, default)
-
-
-## Long name lookup ##
-def get_product_name(product_abbr: str, default: str = "") -> str:
-    """Takes the short form of the product name and returns the full name"""
-
-    return {
-        "GOA": "Gasóleo A",
-        "G95E5": "Gasolina 95",
-        "G98E5": "Gasolina 98",
-        "GLP": "GLP",
-    }.get(product_abbr, default)
+get_db_product_name = lambda prod_abbr, default="": {
+    "GOA": "price_goa",
+    "G95E5": "price_g95",
+    "G98E5": "price_g98",
+    "GLP": "price_glp",
+}.get(prod_abbr, default)
 
 
 ## Get locality id/province id/postal code ##
