@@ -23,7 +23,7 @@ DATA_OLD_MINUTES = 30
 
 
 # BASH Colors
-class BashColors:
+class ShellCodes:
     FG_LIGHTGRAY = "\033[37m"
     FG_DARKGRAY = "\033[37m"
     FAIL = "\033[91m"
@@ -42,6 +42,11 @@ class BashColors:
     BLINK = "\033[5m"
     INVERTED = "\033[7m"
     HIDDEN = "\033[8m"
+
+    CLR = "\x1B[0K"
+
+    def up(self, n: int = 1) -> str:
+        return f"\x1B[{n}A"
 
 
 # First ocurrence that meets requirements

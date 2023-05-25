@@ -1,4 +1,4 @@
-from appuwrotethese.extras import BashColors
+from appuwrotethese.extras import ShellCodes
 from appuwrotethese.settings import DEBUG
 
 wsgi_app = "appuwrotethese.wsgi:application"
@@ -37,4 +37,4 @@ if DEBUG:
 
 # Startup
 def when_ready(_):
-    print(BashColors.FG_GREEN + "Ready!\n" + BashColors.RESET)
+    print(ShellCodes.FG_GREEN + "Ready!\n" + ShellCodes.RESET)
