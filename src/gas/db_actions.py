@@ -103,67 +103,6 @@ def _create_complementary_tables() -> None:
     print("---")
 
 
-## Create Station table ##
-def _update_stations(stations: list) -> None:
-    """Update the stations in the database.
-
-    This function is called by update_db() and is not meant to be called directly.
-
-    It will create the stations that are not in the database, remove the ones that are
-    not in the API and update the ones that are in both if needed.
-    """
-
-    # print("[·] Updating stations...")
-
-    if Station.objects.count() == len(stations):
-        # print("[✓] Stations are up to date.")
-        # print("---")
-        return
-
-    # Create the stations that are not in the database
-    stations_to_create: list[Station] = []
-    # stations_to_update: list[Station] = []
-
-    len_stations = len(stations)
-    for idx, station in enumerate(stations):
-        # print(f"  [·] {idx + 1}/{len_stations}", end="\r")
-
-        locality = Locality.objects.filter(
-            id_mun=int(station.pop("IDMunicipio"))
-        ).first()
-        province = Province.objects.filter(
-            id_prov=int(station.pop("IDProvincia"))
-        ).first()
-
-        # Create the station
-        new_station = Station(
-            locality=locality,
-            province=province,
-            **{DB_FIELD_RENAME[key]: station[key] for key in DB_FIELD_RENAME},
-        )
-        db_stations = Station.objects.filter(id_eess=station["IDEESS"])
-
-        if not db_stations.exists():
-            stations_to_create.append(new_station)
-            # print(" [C]", end="\r")
-        # elif db_stations.first() != station_obj:
-        #     stations_to_update.append(station_obj)
-        #     print(" [U]", end="\r")
-
-    # print("  [·] Writing changes...", end="\r")
-    # print(f"  [·] Creating {len(stations_to_create)} stations...")
-    Station.objects.bulk_create(stations_to_create)
-    # print(f"  [·] Updating {len(stations_to_update)} stations...")
-    # Station.objects.bulk_update(
-    #     stations_to_update,
-    #     fields=list(DB_FIELD_RENAME.values())[1:]
-    #     + ["locality", "province", "last_update"],
-    # )
-
-    # print("[✓] Updated stations.   ")
-    # print("---")
-
-
 ## Update Station and StationPrice tables ##
 def _update_station_prices(data: list, prices_date: date = date.today()) -> None:
     """Update the database with today's stations and prices
@@ -323,4 +262,3 @@ def purge_prices() -> None:
     print("[·] Purging prices...", end="\r")
     StationPrice.objects.all().delete()
     print("[✓] Purged prices.   ")
-
