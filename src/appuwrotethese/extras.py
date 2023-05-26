@@ -53,9 +53,8 @@ class ShellCodes:
     INVERTED = "\033[7m"
     HIDDEN = "\033[8m"
 
-    CLR = "\x1B[0K"
-
     up = lambda n: f"\x1B[{n}A"
+    CLR = "\x1B[0K"
 
 
 # First ocurrence that meets requirements
