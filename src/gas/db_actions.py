@@ -144,6 +144,7 @@ def update_station_prices(data: list, prices_date: date = date.today()) -> None:
             new_stations.add(station)
 
         if not id_eess in prices:
+            prices.append(id_eess)
             new_prices.append(
                 StationPrice(
                     station=stations.get(id_eess, None),
