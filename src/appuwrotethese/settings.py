@@ -27,8 +27,7 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = getenv("SECRETKEY")
-
+SECRET_KEY = getenv("SECRETKEY", None)
 if SECRET_KEY is None:
     SECRET_KEY = token_urlsafe(64)
     logging.warning("settings: SECRETKEY was not set in .env file. New one generated.")
@@ -46,9 +45,7 @@ CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "http://localhost",
-    # "https://beta.appu.ltd",
 ]
-COMPRESS_ENABLED = True
 
 ROOT_URLCONF = "appuwrotethese.urls"
 
@@ -76,7 +73,6 @@ INSTALLED_APPS = [
     "accounts",
     # "django_extensions",
 ]
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -92,11 +88,12 @@ MIDDLEWARE = [
     "middleware.permanent_messages_middleware.PermanentMessagesMiddleware",
 ]
 
+COMPRESS_ENABLED = True
+
 
 LOGFILE_NAME = r"log/appuwrotethese"
 LOGFILE_SIZE = 50 * 1024 * 1024  # 50 MB
 LOGFILE_COUNT = 2
-
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -177,12 +174,6 @@ LOGGING = {
     },
 }
 
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
 
 TEMPLATES = [
     {
@@ -238,8 +229,11 @@ TIME_ZONE = "Europe/Madrid"
 # Staticfiles
 STATIC_URL = "/s/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
-# Media
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 MEDIA_URL = "/m/"
 
 # User agents
