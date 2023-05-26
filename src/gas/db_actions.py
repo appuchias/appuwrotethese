@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import json, requests, time
+import json, lzma, requests, time
 from datetime import date, datetime, timedelta
 from decimal import Decimal
 
@@ -165,14 +165,21 @@ def update_station_prices(data: list, prices_date: date = date.today()) -> None:
 
 
 ## Store historical prices ##
-def store_historical_prices() -> None:
-    """Store all old prices in the database"""
+def store_historical_prices(local_folder: str = "") -> None:
+    """Store historical prices in the database.
+
+    If `local_folder` is provided, it will use all files in that folder.
+    Otherwise, it will store the data from the last year.
+    """
 
     print("[·] Storing historical prices")
     lines = 2
 
-    today = date.today()
-    current_date = date(today.year - 1, today.month, today.day)
+    today = date.today() - timedelta(days=1)
+    if local_folder:
+        current_date = date(2007, 1, 1)
+    else:
+        current_date = date(today.year - 1, today.month, today.day)
     days_left = (today - current_date).days
 
     print("\n" * (lines - 1))
@@ -189,13 +196,19 @@ def store_historical_prices() -> None:
             days_left -= 1
             continue
 
-        data: list = requests.get(HIST_URL + current_date.strftime("%d-%m-%Y")).json()[
-            "ListaEESSPrecio"
-        ]
+        if local_folder:
+            filename = local_folder + current_date.strftime("response_%Y-%m-%d.json.xz")
+            with lzma.open(filename) as f:
+                data: list = json.load(f)["ListaEESSPrecio"]
+        else:
+            data: list = requests.get(
+                HIST_URL + current_date.strftime("%d-%m-%Y")
+            ).json()["ListaEESSPrecio"]
+
         elapsed_query = time.perf_counter() - start
         update_station_prices(data, prices_date=current_date)
-
         elapsed_total = time.perf_counter() - start
+
         print(
             f"     {elapsed_total:.2f}={elapsed_query:.2f}+{elapsed_total - elapsed_query:.2f}s (TOTAL=QUERY+DB) ETA ~{elapsed_total * days_left / 3600:.2f}h{C.CLR}"
         )

@@ -24,13 +24,15 @@
             "django": true
         },
         {
-            "name": "Populate hist",
+            "name": "Store hist",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/src",
             "program": "${workspaceFolder}/src/manage.py",
             "args": [
-                "populate_past_year_prices",
+                "store_old_prices",
+                "-f",
+                "/home/appu/Code/gas_history/responses/"
             ],
             "django": true
         },
