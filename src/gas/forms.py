@@ -38,7 +38,7 @@ class SearchStations(forms.Form):
         choices=[
             ("locality", _("Locality")),
             ("province", _("Province")),
-            ("postal_code", _("Postal code (Inaccurate)")),
+            ("postal_code", _("Postal code")),
         ],
         required=True,
         help_text=_("What the search query is"),
@@ -47,7 +47,7 @@ class SearchStations(forms.Form):
     fuel = forms.ChoiceField(
         label=_("Fuel"),
         choices=[
-            ("GOA", "Gasóleo A (Diesel)"),
+            ("GOA", "Gasóleo A (Diésel)"),
             ("G95E5", "Gasolina 95"),
             ("G98E5", "Gasolina 98"),
             ("GLP", "GLP"),
