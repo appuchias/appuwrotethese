@@ -20,6 +20,10 @@ makemsgs:
 compilemsgs:
 		django-admin compilemessages --use-fuzzy --locale es
 
+lesscompile:
+	lessc staticfiles/res/styles.less staticfiles/res/styles.css
+	lessc staticfiles/res/project_styles.less staticfiles/res/project_styles.css
+
 update:
 	git fetch
 	git pull
