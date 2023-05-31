@@ -104,6 +104,7 @@ def create_files() -> None:
 class GasConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "gas"
+    verbose_name = "Gasolineras"
 
     # Run code ONCE when started
     def ready(self) -> None:
