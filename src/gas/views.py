@@ -1,5 +1,23 @@
+# Appu Wrote These
+# Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+from datetime import date
+
 from django.contrib import messages
-from django.http import Http404, HttpRequest, HttpResponseNotAllowed
+from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
@@ -29,20 +47,14 @@ def result(request: HttpRequest):
         return render(request, "gas/noresults.html", {"results": []})
 
     form_data = form.cleaned_data
-    last_update = query_handler.get_last_update(form_data)
-    results, product_name = query_handler.process_search(request, form_data)
+    prices = query_handler.process_search(request, form_data)
 
-    # Show notification in case no results are returned
-    if not results:
-        messages.warning(request, _("No results found. Please try again."))
-        raise Http404()
+    prices_date = form_data.get("query_date", date.today())
+    if prices_date == date.today():
+        prices_date = query_handler.get_last_update(form_data)
 
     return render(
         request,
         "gas/results.html",
-        {
-            "product": product_name,
-            "results": results,
-            "last_update": last_update,
-        },
+        {"results": prices, "last_update": prices_date},
     )

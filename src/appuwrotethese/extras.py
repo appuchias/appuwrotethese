@@ -1,8 +1,18 @@
-# -------------------------------------
-# This file includes all functions and
-# info that is not included in the
-# main files to keep things organized
-# -------------------------------------
+# Appu Wrote These
+# Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
 from django.core.exceptions import ObjectDoesNotExist
@@ -23,7 +33,7 @@ DATA_OLD_MINUTES = 30
 
 
 # BASH Colors
-class BashColors:
+class ShellCodes:
     FG_LIGHTGRAY = "\033[37m"
     FG_DARKGRAY = "\033[37m"
     FAIL = "\033[91m"
@@ -42,6 +52,9 @@ class BashColors:
     BLINK = "\033[5m"
     INVERTED = "\033[7m"
     HIDDEN = "\033[8m"
+
+    up = lambda n: f"\x1B[{n}A"
+    CLR = "\x1B[0K"
 
 
 # First ocurrence that meets requirements

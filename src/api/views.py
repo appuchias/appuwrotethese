@@ -1,5 +1,3 @@
-#! /usr/bin/env python
-
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 #
@@ -16,25 +14,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Django's command-line utility for administrative tasks."""
-
-import os
-import sys
+from django.utils.translation import gettext as _
+from django.http import HttpRequest, JsonResponse
 
 
-def main():
-    """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "appuwrotethese.settings")
-    try:
-        from django.core.management import execute_from_command_line
-    except ImportError as exc:
-        raise ImportError(
-            "Couldn't import Django. Are you sure it's installed and "
-            "available on your PYTHONPATH environment variable? Did you "
-            "forget to activate a virtual environment?"
-        ) from exc
-    execute_from_command_line(sys.argv)
+def home(request: HttpRequest):
+    return JsonResponse({"path": "API home page"})
 
 
-if __name__ == "__main__":
-    main()
+def health(request: HttpRequest):
+    return JsonResponse({"status": "OK"})

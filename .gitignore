@@ -1,12 +1,10 @@
 .env
-.vscode
-*.code-workspace
+db.sqlite3
+src/ssl/*
+
 .mypy_cache
 .pytest_cache
 __pycache__
 
-db.sqlite3
 *.log
-src/ssl/*
 src/gas/data/data.json
-src/log/queries.csv

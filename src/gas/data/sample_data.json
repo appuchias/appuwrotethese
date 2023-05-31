@@ -1,0 +1,41 @@
+{
+    "Fecha": "Contenido de la cadena",
+    "ListaEESSPrecio": [
+        {
+            "C.P.": "Contenido de la cadena",
+            "Direcci\u00f3n": "Contenido de la cadena",
+            "Horario": "Contenido de la cadena",
+            "Latitud": "Contenido de la cadena",
+            "Localidad": "Contenido de la cadena",
+            "Longitud (WGS84)": "Contenido de la cadena",
+            "Margen": "Contenido de la cadena",
+            "Municipio": "Contenido de la cadena",
+            "Precio Biodiesel": "Contenido de la cadena",
+            "Precio Bioetanol": "Contenido de la cadena",
+            "Precio Gas Natural Comprimido": "Contenido de la cadena",
+            "Precio Gas Natural Licuado": "Contenido de la cadena",
+            "Precio Gases licuados del petr\u00f3leo": "Contenido de la cadena",
+            "Precio Gasoleo A": "Contenido de la cadena",
+            "Precio Gasoleo B": "Contenido de la cadena",
+            "Precio Gasoleo Premium": "Contenido de la cadena",
+            "Precio Gasolina 95 E10": "Contenido de la cadena",
+            "Precio Gasolina 95 E5": "Contenido de la cadena",
+            "Precio Gasolina 95 E5 Premium": "Contenido de la cadena",
+            "Precio Gasolina 98 E10": "Contenido de la cadena",
+            "Precio Gasolina 98 E5": "Contenido de la cadena",
+            "Precio Hidrogeno": "Contenido de la cadena",
+            "Provincia": "Contenido de la cadena",
+            "Remisi\u00f3n": "Contenido de la cadena",
+            "R\u00f3tulo": "Contenido de la cadena",
+            "Tipo Venta": "Contenido de la cadena",
+            "% BioEtanol": "Contenido de la cadena",
+            "% \u00c9ster met\u00edlico": "Contenido de la cadena",
+            "IDEESS": "Contenido de la cadena",
+            "IDMunicipio": "Contenido de la cadena",
+            "IDProvincia": "Contenido de la cadena",
+            "IDCCAA": "Contenido de la cadena"
+        }
+    ],
+    "Nota": "Contenido de la cadena",
+    "ResultadoConsulta": "Contenido de la cadena"
+}

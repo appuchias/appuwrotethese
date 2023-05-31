@@ -1,7 +1,23 @@
-from django.db import models
-from django.utils.translation import gettext_lazy as _
+# Appu Wrote These
+# Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 from django.core.validators import MaxValueValidator
-from decimal import Decimal
+from django.db import models
+from django.utils.timezone import now
+from django.utils.translation import gettext_lazy as _
 
 
 class Locality(models.Model):
@@ -76,7 +92,6 @@ class Station(models.Model):
         validators=[MaxValueValidator(99999)],
         default=00000,
     )
-
     latitude = models.CharField(
         verbose_name=_("Latitude"),
         max_length=10,
@@ -90,31 +105,6 @@ class Station(models.Model):
         default="0",
     )
 
-    gasoleo_a = models.DecimalField(
-        verbose_name="Gasoleo A",
-        max_digits=4,
-        decimal_places=3,
-        default=Decimal(0),
-    )
-    gasolina_95 = models.DecimalField(
-        verbose_name="Gasolina 95",
-        max_digits=4,
-        decimal_places=3,
-        default=Decimal(0),
-    )
-    gasolina_98 = models.DecimalField(
-        verbose_name="Gasolina 98",
-        max_digits=4,
-        decimal_places=3,
-        default=Decimal(0),
-    )
-    glp = models.DecimalField(
-        verbose_name="GLP",
-        max_digits=4,
-        decimal_places=3,
-        default=Decimal(0),
-    )
-
     class Meta:
         verbose_name = _("Gas station")
         verbose_name_plural = _("Gas stations")
@@ -124,13 +114,62 @@ class Station(models.Model):
     def __str__(self):
         return self.company + ", " + self.address
 
-    def __iter__(self):
-        yield "id_eess", self.id_eess
-        yield "company", self.company
-        yield "address", self.address
-        yield "schedule", self.schedule
-        yield "locality", self.locality
-        yield "province", self.province
-        yield "postal_code", self.postal_code
-        yield "latitude", self.latitude
-        yield "longitude", self.longitude
+
+class StationPrice(models.Model):
+    date = models.DateField(db_index=True, default=now)
+    station = models.ForeignKey(Station, on_delete=models.CASCADE)
+    price_goa = models.DecimalField(
+        verbose_name="Gasoleo A",
+        max_digits=4,
+        decimal_places=3,
+        null=True,  # This will go wrong at some point
+        default=None,
+    )
+    price_g95 = models.DecimalField(
+        verbose_name="Gasolina 95",
+        max_digits=4,
+        decimal_places=3,
+        null=True,
+        default=None,
+    )
+    price_g98 = models.DecimalField(
+        verbose_name="Gasolina 98",
+        max_digits=4,
+        decimal_places=3,
+        null=True,
+        default=None,
+    )
+    price_glp = models.DecimalField(
+        verbose_name="GLP",
+        max_digits=4,
+        decimal_places=3,
+        null=True,
+        default=None,
+    )
+
+    class Meta:
+        verbose_name = _("Gas station price")
+        verbose_name_plural = _("Gas station prices")
+
+        ordering = ["-date", "station"]
+        get_latest_by = ["date", "station"]
+
+        constraints = [
+            models.UniqueConstraint(
+                fields=["station", "date"], name="unique_station_date_combination"
+            )
+        ]
+
+    def __str__(self):
+        return str(self.station.id_eess) + ", " + str(self.date)
+
+    def __eq__(self, __value: object) -> bool:
+        return (
+            isinstance(__value, StationPrice)
+            and self.station == __value.station
+            and self.date == __value.date
+            and self.price_goa == __value.price_goa
+            and self.price_g95 == __value.price_g95
+            and self.price_g98 == __value.price_g98
+            and self.price_glp == __value.price_glp
+        )

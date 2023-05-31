@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-15 22:29+0200\n"
+"POT-Creation-Date: 2023-05-31 16:08+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -117,19 +117,19 @@ msgstr ""
 msgid "Email is not registered"
 msgstr "El correo electrónico no está registrado"
 
-#: appuwrotethese/settings.py:231
+#: appuwrotethese/settings.py:220
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:232
+#: appuwrotethese/settings.py:221
 msgid "English"
 msgstr "Inglés"
 
-#: appuwrotethese/views.py:20
+#: appuwrotethese/views.py:36
 msgid "Fuel prices"
 msgstr "Gasolineras"
 
-#: appuwrotethese/views.py:22
+#: appuwrotethese/views.py:38
 msgid ""
 "A project where you can check the different prices of all gas stations in "
 "Spain to sort them from lowest to highest"
@@ -137,149 +137,155 @@ msgstr ""
 "Un proyecto en el que puedes ver los distintos precios de las gasolineras de "
 "España y ordenarlos de menor a mayor"
 
-#: appuwrotethese/views.py:29
+#: appuwrotethese/views.py:45
 msgid "Future"
 msgstr "Futuro"
 
-#: appuwrotethese/views.py:30
+#: appuwrotethese/views.py:46
 msgid "Future projects"
 msgstr "Futuros proyectos"
 
-#: appuwrotethese/views.py:52
+#: appuwrotethese/views.py:68
 msgid "Project placeholder #"
 msgstr "Proyecto de ejemplo #"
 
-#: appuwrotethese/views.py:55
+#: appuwrotethese/views.py:71
 msgid "Placeholder project description"
 msgstr "Descripción del proyecto de ejemplo"
 
-#: gas/forms.py:13
+#: gas/forms.py:31
 msgid "Search query"
 msgstr "Búsqueda"
 
-#: gas/forms.py:16
+#: gas/forms.py:33
 msgid "Specific element to look for (e.g. Coruña, 15001, etc.)"
 msgstr "Elemento concreto a buscar (p.ej. Coruña, 15001, etc.)"
 
-#: gas/forms.py:21
+#: gas/forms.py:37
 msgid "Search by"
 msgstr "Buscar por"
 
-#: gas/forms.py:23 gas/models.py:20 gas/models.py:25
+#: gas/forms.py:39 gas/models.py:36 gas/models.py:41
 msgid "Locality"
 msgstr "Municipio"
 
-#: gas/forms.py:24 gas/models.py:47 gas/models.py:52
+#: gas/forms.py:40 gas/models.py:63 gas/models.py:68
 msgid "Province"
 msgstr "Provincia"
 
-#: gas/forms.py:25
-msgid "Postal code (Inaccurate)"
-msgstr "Código postal (Inexacto)"
+#: gas/forms.py:41 gas/models.py:91
+msgid "Postal code"
+msgstr "Código postal"
 
-#: gas/forms.py:28
+#: gas/forms.py:44
 msgid "What the search query is"
 msgstr "Cuál es la búsqueda"
 
-#: gas/forms.py:32
+#: gas/forms.py:48
 msgid "Fuel"
 msgstr "Combustible"
 
-#: gas/forms.py:41
+#: gas/forms.py:56
 msgid "Fuel you're interested in (Results will be filtered by this)"
 msgstr ""
 "Combustible en el que estás interesado (Se usará para filtrar los resultados)"
 
-#: gas/forms.py:54
-msgid "Show all"
-msgstr "Ver todos"
+#: gas/forms.py:60
+msgid "Date"
+msgstr "Fecha"
 
-#: gas/forms.py:57
-msgid "(Show all fuel types, not only the one you're looking for)"
-msgstr "(Mostrar todos los combustibles, no solo el que estás buscando)"
+#: gas/forms.py:61 templates/gas/results.html:17
+msgid "Prices date"
+msgstr "Fecha de los precios"
 
-#: gas/forms.py:81 templates/gas/search.html:8
+#: gas/forms.py:100
 msgid "Search"
 msgstr "Buscar"
 
-#: gas/models.py:13
+#: gas/models.py:29
 msgid "Municipality ID"
 msgstr "ID de municipio"
 
-#: gas/models.py:14
+#: gas/models.py:30
 msgid "ID of the municipality"
 msgstr "ID del municipio"
 
-#: gas/models.py:26
+#: gas/models.py:42
 msgid "Localities"
 msgstr "Municipios"
 
-#: gas/models.py:40
+#: gas/models.py:56
 msgid "Province ID"
 msgstr "ID de provincia"
 
-#: gas/models.py:41
+#: gas/models.py:57
 msgid "ID of the province"
 msgstr "ID de la provincia"
 
-#: gas/models.py:53
+#: gas/models.py:69
 msgid "Provinces"
 msgstr "Provincias"
 
-#: gas/models.py:69
+#: gas/models.py:85
 msgid "Company"
 msgstr "Compañía"
 
-#: gas/models.py:70
+#: gas/models.py:86
 msgid "Address"
 msgstr "Dirección"
 
-#: gas/models.py:71
+#: gas/models.py:87
 msgid "Schedule"
 msgstr "Horario"
 
-#: gas/models.py:75
-msgid "Postal code"
-msgstr "Código postal"
-
-#: gas/models.py:81
+#: gas/models.py:96
 msgid "Latitude"
 msgstr "Latitud"
 
-#: gas/models.py:87
+#: gas/models.py:102
 msgid "Longitude"
 msgstr "Longitud"
 
-#: gas/models.py:119
+#: gas/models.py:109
 msgid "Gas station"
 msgstr "Gasolinera"
 
-#: gas/models.py:120 templates/gas/search.html:4
+#: gas/models.py:110 templates/gas/search.html:4 templates/gas/search.html:8
 msgid "Gas stations"
 msgstr "Gasolineras"
 
-#: gas/query_handler.py:150
+#: gas/models.py:151
+msgid "Gas station price"
+msgstr "Precio"
+
+#: gas/models.py:152
+msgid "Gas station prices"
+msgstr "Precios"
+
+#: gas/query_handler.py:57
 msgid "Locality not found"
 msgstr "Localidad no encontrada"
 
-#: gas/query_handler.py:158
+#: gas/query_handler.py:65
 msgid "Province not found"
 msgstr "Provincia no encontrada"
 
-#: gas/query_handler.py:166
-msgid "Postal code invalid or not found"
-msgstr "Código postal inválido o no encontrado"
+#: gas/query_handler.py:72
+msgid "Invalid postal code"
+msgstr "Código postal inválido"
 
-#: gas/query_handler.py:170
-msgid "Internal syntax error"
-msgstr "Error de sintaxis interno"
+#: gas/query_handler.py:155
+msgid "No stations found in the selected area."
+msgstr "No se encontraron gasolineras en el área seleccionada."
 
-#: gas/views.py:28
+#: gas/query_handler.py:167
+msgid "No prices found. Date may be missing or no sations were found."
+msgstr ""
+"No se encontraron precios. Puede que falte la fecha o no se encontraran "
+"gasolineras."
+
+#: gas/views.py:46
 msgid "Invalid form. Please try again."
-msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
-
-#: gas/views.py:37
-msgid "No results found. Please try again."
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
 #: middleware/permanent_messages_middleware.py:6
@@ -451,10 +457,6 @@ msgstr ""
 "El icono en la parte inferior abre la dirección de la gasolinera en tu "
 "aplicación de mapas (Google maps para web)"
 
-#: templates/gas/results.html:17
-msgid "Prices time"
-msgstr "Hora de los precios"
-
 #: templates/gas/search.html:11
 msgid ""
 "Here you will find the cheapest gas stations for each area sorted by fuel "
@@ -533,6 +535,30 @@ msgstr "Iconos usados en la web"
 #: templates/thanks.html:54
 msgid "Layout of the page"
 msgstr "Diseño principal de la web"
+
+#~ msgid "Postal code (Inaccurate)"
+#~ msgstr "Código postal (Inexacto)"
+
+#~ msgid "Last update"
+#~ msgstr "Última actualización"
+
+#~ msgid "Date of the query"
+#~ msgstr "Fecha de la petición"
+
+#~ msgid "No results found. Please try again."
+#~ msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
+
+#~ msgid "Show all"
+#~ msgstr "Ver todos"
+
+#~ msgid "(Show all fuel types, not only the one you're looking for)"
+#~ msgstr "(Mostrar todos los combustibles, no solo el que estás buscando)"
+
+#~ msgid "Postal code invalid or not found"
+#~ msgstr "Código postal inválido o no encontrado"
+
+#~ msgid "Internal syntax error"
+#~ msgstr "Error de sintaxis interno"
 
 #~ msgid ""
 #~ "Icons used in the web. The most visible one is the home button (The "

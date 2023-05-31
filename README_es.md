@@ -11,6 +11,9 @@ Esta es mi web personal donde subiré los proyectos que creo que pueden ser úti
 Estoy aprendiendo, así que muchas cosas que se muestran aquí tendrán errores y puede que algo esté roto.
 En caso de que algo suceda, puedes contactarme a través de cualquier red social de las que se encuentra en el pie de página de la web.
 
+El compilador oficial de less se utiliza para compilar las hojas de estilo, por lo que deberás instalarlo para compilar las hojas de estilo.
+Puedes encontrar la documentación oficial [aquí](http://lesscss.org/usage/#command-line-usage).
+
 ## Proyectos disponibles actualmente
 
 1. Precios del combustible

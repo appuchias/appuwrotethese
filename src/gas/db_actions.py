@@ -1,51 +1,65 @@
-from datetime import datetime
-import json, requests
+# Appu Wrote These
+# Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import json, lzma, os, requests, time
+from datetime import date, datetime, timedelta
+from decimal import Decimal
 
 from appuwrotethese.extras import (
-    get_json_data,
     DATA_OLD_MINUTES,
     PATH_DATA,
     PATH_LOCALITIES,
     PATH_PROVINCES,
+    get_json_data,
+    ShellCodes as C,
 )
-from gas.models import Locality, Province, Station
+from gas.models import Locality, Province, Station, StationPrice
+
+HIST_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestresHist/"
+HIST_PATH_BASE = "gas/data/hist"
+DB_FIELD_RENAME = {
+    "IDEESS": "id_eess",
+    "Dirección": "address",
+    "Horario": "schedule",
+    "Rótulo": "company",
+    "Latitud": "latitude",
+    "Longitud (WGS84)": "longitude",
+    "C.P.": "postal_code",
+}
+DB_FIELD_FUELS = {
+    "Precio Gasoleo A": "price_goa",
+    "Precio Gasolina 95 E5": "price_g95",
+    "Precio Gasolina 98 E5": "price_g98",
+    "Precio Gases licuados del petróleo": "price_glp",
+}
 
 
-# ############### #
-#   Get from fp   #
-# ############### #
+## Data fetching functions ##
+def get_data(path=PATH_DATA, data_old_minutes=DATA_OLD_MINUTES) -> dict:
+    """Get the latest data.
 
-
-def get_localities() -> dict:
-    """Get the localities from the file."""
-    return get_json_data(PATH_LOCALITIES)
-
-
-def get_provinces() -> dict:
-    """Get the provinces from the file."""
-    return get_json_data(PATH_PROVINCES)
-
-
-# ######################### #
-#  Data fetching functions  #
-# ######################### #
-
-
-def fetch_data() -> dict:
-    """Get the data from the most recent source (file or remote).
-
-    If the file is older than 30 minutes, redownload it.
+    If the file is older than `data_old_minutes` minutes, redownload it.
     """
 
-    # Get the data from the file or fake its existence
+    # Try to use the data in the file
     try:
-        with open(PATH_DATA, "r") as r:
+        with open(path, "r") as r:
             data = json.load(r)
     except FileNotFoundError:
-        # Fake the data exists and is obviously old
-        data = {
-            "Fecha": f"{str(datetime.fromtimestamp(0).strftime(r'%d/%m/%Y %H:%M:%S'))}"
-        }
+        data = {}  # Simulate the data is old
 
     # Determine if the data is old
     try:
@@ -54,39 +68,34 @@ def fetch_data() -> dict:
         data_is_old = True
     else:
         data_time = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
-        data_old_s = DATA_OLD_MINUTES * 60
         # True if data is older than DATA_OLD_MINUTES minutes
-        data_is_old = (datetime.now() - data_time).total_seconds() > data_old_s
+        data_is_old = datetime.now() - data_time > timedelta(minutes=data_old_minutes)
 
     # Refresh the data
     if data_is_old:
-        print("[!] Data was old, refreshing...")
         data = requests.get(
             "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/"
         ).json()
 
-        # Store the newly obtained data to a file
-        with open(PATH_DATA, "w") as w:
-            json.dump(data, w, indent=4, ensure_ascii=True)
+        with open(path, "w") as f:
+            json.dump(data, f, indent=4)
 
     return data
 
 
-# ###############################
-# Data transfer related function
-# ###############################
-def _create_complementary_tables() -> None:
-    """
-    Update the side tables (gas_locality and gas_province) with the data from the API.
-    """
+## Create Locality and Province tables ##
+def create_localities_provinces(
+    localities_path=PATH_LOCALITIES, provinces_path=PATH_PROVINCES
+) -> None:
+    """Update the aux tables (gas_locality and gas_province)."""
 
-    print("[·] Updating complementary tables...")
+    # print("[·] Updating complementary tables...")
 
-    localities = get_localities()
-    provinces = get_provinces()
+    localities = get_json_data(localities_path)
+    provinces = get_json_data(provinces_path)
 
     if Locality.objects.count() != len(localities):
-        print("  [·] Updating localities...")
+        # print("  [·] Updating localities...")
         Locality.objects.bulk_create(
             [
                 Locality(id_mun=locality["IDMunicipio"], name=locality["Municipio"])
@@ -95,141 +104,123 @@ def _create_complementary_tables() -> None:
         )
 
     if Province.objects.count() != len(provinces):
-        print("  [·] Updating provinces...")
+        # print("  [·] Updating provinces...")
         Province.objects.bulk_create(
-            [
+            [  # Typo exists in the API
                 Province(id_prov=province["IDPovincia"], name=province["Provincia"])
-                for province in provinces  # Typo in the original data
+                for province in provinces
             ]
         )
 
-    print("[✓] Updated complementary tables.")
+    # print("[✓] Updated complementary tables.")
+    # print("---")
 
 
-def update_db() -> None:
-    """
-    Load the data from the API into the database.
-    """
+## Update Station and StationPrice tables ##
+def update_station_prices(data: list, prices_date: date = date.today()) -> None:
+    """Update the database with `prices_date`'s stations and prices"""
 
-    stations = sorted(fetch_data()["ListaEESSPrecio"], key=lambda x: int(x["IDEESS"]))
-    stations_len = len(stations)
+    id_eess = (int(station["IDEESS"]) for station in data)
 
-    # Update localities and provinces
-    _create_complementary_tables()
-
-    # Change station fields to match the database
-    changes = {
-        "IDEESS": "id_eess",
-        "Dirección": "address",
-        "Horario": "schedule",
-        "Rótulo": "company",
-        "Latitud": "latitude",
-        "Longitud (WGS84)": "longitude",
-        "Precio Gasoleo A": "gasoleo_a",
-        "Precio Gasolina 95 E5": "gasolina_95",
-        "Precio Gasolina 98 E5": "gasolina_98",
-        "Precio Gases licuados del petróleo": "glp",
-        "C.P.": "postal_code",
-    }
-    rm_fields = [
-        "Localidad",
-        "Municipio",
-        "Provincia",
-        "Margen",
-        "Precio Biodiesel",
-        "Precio Bioetanol",
-        "Precio Gas Natural Comprimido",
-        "Precio Gas Natural Licuado",
-        "Precio Gasoleo B",
-        "Precio Gasoleo Premium",
-        "Precio Gasolina 95 E10",
-        "Precio Gasolina 95 E5 Premium",
-        "Precio Gasolina 98 E10",
-        "Precio Hidrogeno",
-        "Remisión",
-        "Tipo Venta",
-        "% BioEtanol",
-        "% Éster metílico",
-        "IDCCAA",
-    ]
-    fuels = [
-        "gasoleo_a",
-        "gasolina_95",
-        "gasolina_98",
-        "glp",
+    stations = Station.objects.in_bulk(id_eess, field_name="id_eess")
+    prices = [
+        price.station.id_eess for price in StationPrice.objects.filter(date=prices_date)
     ]
 
-    stations_to_create: list[Station] = []
-    stations_to_update: list[Station] = []
-
-    for idx, station in enumerate(stations):
-        # Modify or remove fields
-        for key in list(station.keys()):
-            if key in changes:
-                station[changes.get(key)] = station.pop(key)
-            elif key in rm_fields:
-                station.pop(key)
-
-        for fuel in fuels:
-            station[fuel] = float(
-                (station[fuel] if station[fuel] else "0").replace(",", ".")
+    new_prices = list()
+    new_stations = set()
+    for price in data:
+        id_eess = int(price["IDEESS"])
+        if not id_eess in stations:
+            station = Station(
+                id_eess=id_eess,
+                company=price["Rótulo"],
+                address=price["Dirección"],
+                locality=Locality.objects.get(id_mun=price["IDMunicipio"]),
+                province=Province.objects.get(id_prov=price["IDProvincia"]),
             )
 
-        # Add the complementary fields
+            stations[station.id_eess] = station
+            new_stations.add(station)
+
+        if not id_eess in prices:
+            prices.append(id_eess)
+            new_prices.append(
+                StationPrice(
+                    station=stations.get(id_eess, None),
+                    date=prices_date,
+                    **{
+                        DB_FIELD_FUELS[key]: Decimal(price[key].replace(",", "."))
+                        if price[key]
+                        else None
+                        for key in DB_FIELD_FUELS
+                    },
+                )
+            )
+
+    Station.objects.bulk_create(new_stations)
+    StationPrice.objects.bulk_create(new_prices)
+
+    # print("[✓] Updated prices.     ")
+    # print("---")
+
+
+## Store historical prices ##
+def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
+    """Store historical prices in the database.
+
+    If `local_folder` is provided, it will use all files in that folder.
+    Otherwise, it will store the data from the last year.
+    """
+
+    print("[·] Storing historical prices")
+    lines = 2
+    print("\n" * (lines - 1))
+
+    today = date.today()
+    if local_folder:
+        current_date = date(2007, 1, 1)
+    else:
+        current_date = today - timedelta(days=days)
+    days_left = (today - current_date).days
+
+    while current_date <= today:
+        start = time.perf_counter()
+
         print(
-            f"  [·] Clasifying station {idx}/{stations_len}",
-            end=" ",
+            f"{C.up(lines)} [·] Populating {current_date}. {days_left} days left{C.CLR}"
         )
-        locality = Locality.objects.filter(
-            id_mun=int(station.pop("IDMunicipio"))
-        ).first()
-        province = Province.objects.filter(
-            id_prov=int(station.pop("IDProvincia"))
-        ).first()
+        if StationPrice.objects.filter(date=current_date).exists():
+            print("\n" * (lines - 2))
+            current_date += timedelta(days=1)
+            days_left -= 1
+            continue
 
-        # Determine if the station has to be created or updated
-        station_new = Station(locality=locality, province=province, **station)
-        station_obj = Station.objects.filter(id_eess=station["id_eess"])
-        if not station_obj:
-            stations_to_create.append(station_new)
-            print(" [C]", end="\r")
-        elif station_new != station_obj.first():
-            stations_to_update.append(station_new)
-            print(" [U]", end="\r")
+        if local_folder:
+            filename = local_folder + current_date.strftime("response_%Y-%m-%d.json.xz")
+            if not os.path.isfile(filename):
+                print("\n" * (lines - 2))
+                current_date += timedelta(days=1)
+                days_left -= 1
+                continue
 
-    print("[✓] Clasified stations." + " " * 20)
-    print(f"    {len(stations_to_create)} stations to create.")
-    print(f"    {len(stations_to_update)} stations to update.")
+            with lzma.open(filename) as f:
+                data: list = json.load(f)["ListaEESSPrecio"]
+        else:
+            data: list = requests.get(
+                HIST_URL + current_date.strftime("%d-%m-%Y")
+            ).json()["ListaEESSPrecio"]
 
-    # Create the stations
-    if len(stations_to_create) > 0:
-        print("[·] Creating stations...", end="\r")
-        Station.objects.bulk_create(stations_to_create)
-        print("[✓] Created stations.   ")
+        elapsed_query = time.perf_counter() - start
+        update_station_prices(data, prices_date=current_date)
+        elapsed_total = time.perf_counter() - start
 
-    # Update the stations
-    if len(stations_to_update) > 0:
-        print("[·] Updating stations...", end="\r")
-        Station.objects.bulk_update(
-            stations_to_update,
-            list(changes.values())[1:]  # Remove id_eess
-            + ["locality", "province"],  # Add locality and province
+        print(
+            f"     {elapsed_total:.2f}={elapsed_query:.2f}+{elapsed_total - elapsed_query:.2f}s (TOTAL=QUERY+DB) ETA ~{elapsed_total * days_left / 3600:.2f}h{C.CLR}"
         )
-        print("[✓] Updated stations.")
+        current_date += timedelta(days=1)
+        days_left -= 1
 
-    print("---\n[✓] All stations refreshed.")
-
-
-# #################### #
-#    Purge stations    #
-# #################### #
-
-
-def purge_stations() -> None:
-    """
-    Remove all the stations from the database.
-    """
-
-    print("[·] Purging stations...", end="\r")
-    Station.objects.all().delete()
-    print("[✓] Purged stations.   ")
+    print(f"{C.up(lines + 1)}[✓] Stored historical prices{C.CLR}")
+    print(f"---{C.CLR}")
+    print(f"{C.CLR}\n" * (lines - 1), end="")
