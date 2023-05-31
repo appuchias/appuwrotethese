@@ -20,3 +20,7 @@ from django.http import HttpRequest, JsonResponse
 
 def home(request: HttpRequest):
     return JsonResponse({"path": "API home page"})
+
+
+def health(request: HttpRequest):
+    return JsonResponse({"status": "OK"})

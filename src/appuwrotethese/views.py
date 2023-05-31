@@ -110,10 +110,6 @@ def redirect_static(request: HttpRequest, **kwargs):
     return redirect("/")
 
 
-def health(request: HttpRequest):
-    return JsonResponse({"status": "ok"})
-
-
 def handler404(request: HttpRequest, exception):
     return render(request, "e404.html", status=404)
 

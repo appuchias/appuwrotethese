@@ -33,7 +33,6 @@ urlpatterns = [
 
 urlpatterns += [
     path("", views.home, name="home"),
-    path("health/", views.health, name="health"),
     path("thanks/", views.thanks, name="thanks"),
     path("text/", views.text, name="text"),
     path("build/", views.build, name="build"),
