@@ -23,6 +23,7 @@ handler500 = "appuwrotethese.views.handler500"
 
 urlpatterns = [
     path("admin/", admin.site.urls, name="admin"),
+    path("api/", include("api.urls")),
     path("gas/", include("gas.urls")),
     # path("account/", include("accounts.urls")),
     path("i18n/", include("django.conf.urls.i18n"), name="i18n"),
