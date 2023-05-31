@@ -12,6 +12,9 @@ This is my personal website where I will be uploading the projects I think might
 I am learning, so many things shown here will have bugs and there may be something broken.
 In case something happens, you can contact me through any social network found in the web footer.
 
+The official less compiler is used to compile the stylesheets, so you will need to install it in order to compile the stylesheets.
+You can find the official documentation [here](http://lesscss.org/usage/#command-line-usage).
+
 ## Projects currently available
 
 1. Gas prices
