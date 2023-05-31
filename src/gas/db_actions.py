@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import json, lzma, requests, time
+import json, lzma, os, requests, time
 from datetime import date, datetime, timedelta
 from decimal import Decimal
 
@@ -166,7 +166,7 @@ def update_station_prices(data: list, prices_date: date = date.today()) -> None:
 
 
 ## Store historical prices ##
-def store_historical_prices(local_folder: str = "") -> None:
+def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
     """Store historical prices in the database.
 
     If `local_folder` is provided, it will use all files in that folder.
@@ -175,15 +175,14 @@ def store_historical_prices(local_folder: str = "") -> None:
 
     print("[·] Storing historical prices")
     lines = 2
+    print("\n" * (lines - 1))
 
-    today = date.today() - timedelta(days=1)
+    today = date.today()
     if local_folder:
         current_date = date(2007, 1, 1)
     else:
-        current_date = date(today.year - 1, today.month, today.day)
+        current_date = today - timedelta(days=days)
     days_left = (today - current_date).days
-
-    print("\n" * (lines - 1))
 
     while current_date <= today:
         start = time.perf_counter()
@@ -199,6 +198,12 @@ def store_historical_prices(local_folder: str = "") -> None:
 
         if local_folder:
             filename = local_folder + current_date.strftime("response_%Y-%m-%d.json.xz")
+            if not os.path.isfile(filename):
+                print("\n" * (lines - 2))
+                current_date += timedelta(days=1)
+                days_left -= 1
+                continue
+
             with lzma.open(filename) as f:
                 data: list = json.load(f)["ListaEESSPrecio"]
         else:
@@ -218,4 +223,4 @@ def store_historical_prices(local_folder: str = "") -> None:
 
     print(f"{C.up(lines + 1)}[✓] Stored historical prices{C.CLR}")
     print(f"---{C.CLR}")
-    print(f"{C.CLR}\n" * (lines - 1))
+    print(f"{C.CLR}\n" * (lines - 1), end="")

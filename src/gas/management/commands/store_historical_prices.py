@@ -16,6 +16,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if options["local_folder"]:
-            db_actions.store_historical_prices(options["local_folder"])  # type: ignore
+            db_actions.store_historical_prices(local_folder=options["local_folder"])
         else:
             db_actions.store_historical_prices()
