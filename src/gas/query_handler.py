@@ -30,7 +30,7 @@ from gas import models
 ## DB name lookup ##
 get_db_product_name = lambda prod_abbr, default="": {
     "GOA": "price_goa",
-    "G95E5": "price_g95",
+    "G95E5": "price_g95e5",
     "G98E5": "price_g98",
     "GLP": "price_glp",
 }.get(prod_abbr, default)

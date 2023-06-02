@@ -125,14 +125,14 @@ class StationPrice(models.Model):
         null=True,  # This will go wrong at some point
         default=None,
     )
-    price_g95 = models.DecimalField(
+    price_g95e5 = models.DecimalField(
         verbose_name="Gasolina 95",
         max_digits=4,
         decimal_places=3,
         null=True,
         default=None,
     )
-    price_g98 = models.DecimalField(
+    price_g98e5 = models.DecimalField(
         verbose_name="Gasolina 98",
         max_digits=4,
         decimal_places=3,
@@ -169,7 +169,7 @@ class StationPrice(models.Model):
             and self.station == __value.station
             and self.date == __value.date
             and self.price_goa == __value.price_goa
-            and self.price_g95 == __value.price_g95
-            and self.price_g98 == __value.price_g98
+            and self.price_g95e5 == __value.price_g95e5
+            and self.price_g98e5 == __value.price_g98e5
             and self.price_glp == __value.price_glp
         )

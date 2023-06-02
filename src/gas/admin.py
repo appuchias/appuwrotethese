@@ -113,24 +113,24 @@ class StationPriceAdmin(admin.ModelAdmin):
         "station",
         "date",
         "price_goa",
-        "price_g95",
-        "price_g98",
+        "price_g95e5",
+        "price_g98e5",
         "price_glp",
     ]
     readonly_fields = [
         "station",
         "date",
         "price_goa",
-        "price_g95",
-        "price_g98",
+        "price_g95e5",
+        "price_g98e5",
         "price_glp",
     ]
     list_display = [
         "station",
         "date",
         "price_goa",
-        "price_g95",
-        "price_g98",
+        "price_g95e5",
+        "price_g98e5",
         "price_glp",
     ]
     list_display_links = [
@@ -151,24 +151,24 @@ class StationPriceInline(admin.TabularInline):
         "date",
         "station",
         "price_goa",
-        "price_g95",
-        "price_g98",
+        "price_g95e5",
+        "price_g98e5",
         "price_glp",
     ]
     readonly_fields = [
         "date",
         "station",
         "price_goa",
-        "price_g95",
-        "price_g98",
+        "price_g95e5",
+        "price_g98e5",
         "price_glp",
     ]
     list_display = [
         "date",
         "station",
         "price_goa",
-        "price_g95",
-        "price_g98",
+        "price_g95e5",
+        "price_g98e5",
         "price_glp",
     ]
     list_display_links = [
