@@ -111,7 +111,7 @@ def get_ids(request: HttpRequest, query: str, q_type: str) -> tuple[int, int, in
 
 
 ## Process the query form ##
-def process_search(request: HttpRequest, form: dict) -> Iterable:
+def process_search(request: HttpRequest, form: dict) -> Iterable[models.StationPrice]:
     """Process a query and return the results.
 
     This function gets the request and the clean form data
@@ -137,7 +137,7 @@ def get_stations(
     postal_code: int,
     prod_abbr: str,
     q_date: date,
-) -> Iterable:
+) -> Iterable[models.StationPrice]:
     """Get the stations from the database or the API, provided all details."""
 
     if id_locality:
