@@ -1,26 +1,22 @@
-<!DOCTYPE html>
-{% load user_agents i18n relevel %}
-{% get_current_language as LANG %}
-
+<!DOCTYPE html>{% load user_agents i18n relevel %}{% get_current_language as LANG %}
 <html lang="{{ LANG }}">
+<!--
+    Appu Wrote These
+    Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-    <!--
-     Appu Wrote These
-     Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-     This program is free software: you can redistribute it and/or modify
-     it under the terms of the GNU Affero General Public License as published by
-     the Free Software Foundation, either version 3 of the License, or
-     (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
 
-     This program is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     GNU Affero General Public License for more details.
-
-     You should have received a copy of the GNU Affero General Public License
-     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    -->
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
 
     <head>
         <!-- Required meta tags -->
@@ -34,7 +30,6 @@
         <!-- Custom Less CSS -->
         <link rel="stylesheet" type="text/css" href="/s/res/styles.css">
         <link rel="stylesheet" type="text/css" href="/s/res/project_styles.css">
-        {% comment %} <script src="/s/less/less.min.js"></script> {% endcomment %}
 
         <!-- Fonts CSS -->
         <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400&display=swap" rel="stylesheet">
@@ -59,8 +54,6 @@
         <meta name="theme-color" content="#eeeeee">
 
         {% block head %}{% endblock head %}
-
-        <!-- Tab -->
         <title>Appu · {% block title %}Web{% endblock title %}</title>
     </head>
 
@@ -123,8 +116,7 @@
             {% if messages %}{% for message in messages %}
             <div class="alert alert-{{ message.level_tag|relevel }} my-4{% if request|is_mobile %} mobile{% endif %}" role="alert">
                 {{ message }}
-            </div>
-            {% endfor %}{% endif %}
+            </div>{% endfor %}{% endif %}
             {% block content %}Content{% endblock content %}
         </div>
         <!-- - -->
@@ -142,5 +134,4 @@
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     </body>
-
 </html>
