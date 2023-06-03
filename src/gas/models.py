@@ -26,8 +26,8 @@ class Locality(models.Model):
     """
 
     id_mun = models.IntegerField(
-        verbose_name=_("Municipality ID"),
-        help_text=_("ID of the municipality"),
+        verbose_name=_("Locality ID"),
+        help_text=_("ID of the locality"),
         unique=True,
         primary_key=True,
     )

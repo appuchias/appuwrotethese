@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-31 16:08+0200\n"
+"POT-Creation-Date: 2023-06-03 23:01+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -117,6 +117,22 @@ msgstr ""
 msgid "Email is not registered"
 msgstr "El correo electrónico no está registrado"
 
+#: api/gas/views.py:28
+msgid "Welcome to the Gas API!"
+msgstr "Bienvenido a la API de Gas!"
+
+#: api/gas/views.py:37 api/gas/views.py:70
+msgid "Invalid request"
+msgstr "Petición inválida"
+
+#: api/gas/views.py:51 api/gas/views.py:84
+msgid "You must provide a valid locality, province, or postal code."
+msgstr "Debes proporcionar una localidad, provincia o código postal válido."
+
+#: api/views.py:24
+msgid "Welcome to the API!"
+msgstr "Bienvenido a la API!"
+
 #: appuwrotethese/settings.py:220
 msgid "Spanish"
 msgstr "Castellano"
@@ -153,70 +169,69 @@ msgstr "Proyecto de ejemplo #"
 msgid "Placeholder project description"
 msgstr "Descripción del proyecto de ejemplo"
 
+#: gas/forms.py:29
+msgid "Search term"
+msgstr "Término de búsqueda"
+
 #: gas/forms.py:31
-msgid "Search query"
-msgstr "Búsqueda"
+msgid "Specific term to look for (e.g. Coruña, 15001, etc.)"
+msgstr "Término concreto a buscar (p.ej. Coruña, 15001, etc.)"
 
-#: gas/forms.py:33
-msgid "Specific element to look for (e.g. Coruña, 15001, etc.)"
-msgstr "Elemento concreto a buscar (p.ej. Coruña, 15001, etc.)"
-
-#: gas/forms.py:37
+#: gas/forms.py:35
 msgid "Search by"
 msgstr "Buscar por"
 
-#: gas/forms.py:39 gas/models.py:36 gas/models.py:41
+#: gas/forms.py:37 gas/models.py:36 gas/models.py:41
 msgid "Locality"
-msgstr "Municipio"
+msgstr "Localidad"
 
-#: gas/forms.py:40 gas/models.py:63 gas/models.py:68
+#: gas/forms.py:38 gas/models.py:63 gas/models.py:68
 msgid "Province"
 msgstr "Provincia"
 
-#: gas/forms.py:41 gas/models.py:91
+#: gas/forms.py:39 gas/forms.py:122 gas/forms.py:124 gas/models.py:91
 msgid "Postal code"
 msgstr "Código postal"
 
-#: gas/forms.py:44
-msgid "What the search query is"
-msgstr "Cuál es la búsqueda"
+#: gas/forms.py:42
+msgid "Type of query"
+msgstr "Tipo de petición"
 
-#: gas/forms.py:48
+#: gas/forms.py:46 gas/forms.py:128
 msgid "Fuel"
 msgstr "Combustible"
 
-#: gas/forms.py:56
-msgid "Fuel you're interested in (Results will be filtered by this)"
-msgstr ""
-"Combustible en el que estás interesado (Se usará para filtrar los resultados)"
+#: gas/forms.py:54 gas/forms.py:136
+msgid "Fuel to use for sorting"
+msgstr "Combustible a usar para ordenar"
 
-#: gas/forms.py:60
+#: gas/forms.py:58 gas/forms.py:140
 msgid "Date"
 msgstr "Fecha"
 
-#: gas/forms.py:61 templates/gas/results.html:17
+#: gas/forms.py:59 gas/forms.py:141 templates/gas/results.html:17
 msgid "Prices date"
 msgstr "Fecha de los precios"
 
-#: gas/forms.py:100
+#: gas/forms.py:98
 msgid "Search"
 msgstr "Buscar"
 
-#: gas/models.py:29
-msgid "Municipality ID"
-msgstr "ID de municipio"
+#: gas/forms.py:110 gas/forms.py:112 gas/models.py:29
+msgid "Locality ID"
+msgstr "ID de la localidad"
+
+#: gas/forms.py:116 gas/forms.py:118 gas/models.py:56
+msgid "Province ID"
+msgstr "ID de provincia"
 
 #: gas/models.py:30
-msgid "ID of the municipality"
-msgstr "ID del municipio"
+msgid "ID of the locality"
+msgstr "ID de la localidad"
 
 #: gas/models.py:42
 msgid "Localities"
-msgstr "Municipios"
-
-#: gas/models.py:56
-msgid "Province ID"
-msgstr "ID de provincia"
+msgstr "Localidades"
 
 #: gas/models.py:57
 msgid "ID of the province"
@@ -274,17 +289,17 @@ msgstr "Provincia no encontrada"
 msgid "Invalid postal code"
 msgstr "Código postal inválido"
 
-#: gas/query_handler.py:155
+#: gas/query_handler.py:122
 msgid "No stations found in the selected area."
 msgstr "No se encontraron gasolineras en el área seleccionada."
 
-#: gas/query_handler.py:167
+#: gas/query_handler.py:134
 msgid "No prices found. Date may be missing or no sations were found."
 msgstr ""
 "No se encontraron precios. Puede que falte la fecha o no se encontraran "
 "gasolineras."
 
-#: gas/views.py:46
+#: gas/views.py:37
 msgid "Invalid form. Please try again."
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
@@ -382,15 +397,15 @@ msgstr "este enlace"
 
 #. Translators: Projects page tab title
 #. Translators: Projects page title
-#: templates/base.html:115 templates/projects.html:5 templates/projects.html:11
+#: templates/base.html:108 templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
 
-#: templates/base.html:118
+#: templates/base.html:111
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:139
+#: templates/base.html:131
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -536,14 +551,22 @@ msgstr "Iconos usados en la web"
 msgid "Layout of the page"
 msgstr "Diseño principal de la web"
 
+#~ msgid "Municipality ID"
+#~ msgstr "ID de la localidad"
+
+#~ msgid "What the search query is"
+#~ msgstr "Cuál es la búsqueda"
+
+#~ msgid "Fuel you're interested in (Results will be filtered by this)"
+#~ msgstr ""
+#~ "Combustible en el que estás interesado (Se usará para filtrar los "
+#~ "resultados)"
+
 #~ msgid "Postal code (Inaccurate)"
 #~ msgstr "Código postal (Inexacto)"
 
 #~ msgid "Last update"
 #~ msgstr "Última actualización"
-
-#~ msgid "Date of the query"
-#~ msgstr "Fecha de la petición"
 
 #~ msgid "No results found. Please try again."
 #~ msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
