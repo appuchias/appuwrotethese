@@ -74,41 +74,6 @@ def get_ids(request: HttpRequest, query: str, q_type: str) -> tuple[int, int, in
 
     return id_locality, id_province, postal_code
 
-    id_prod = get_product_id(prod_abbr)
-
-    if id_locality:
-        url = LOCALITY_URL + f"{id_locality}/{id_prod}"
-    elif id_province:
-        url = PROVINCE_URL + f"{id_province}/{id_prod}"
-    elif postal_code:
-        url = ALL_URL + f"{id_prod}"
-    else:
-        return []
-
-    stations = requests.get(url).json()["ListaEESSPrecio"]
-
-    if postal_code:
-        stations = [
-            station for station in stations if int(station["C.P."]) == postal_code
-        ]
-
-    changes = {
-        "Dirección": "address",
-        "Horario": "schedule",
-        "Rótulo": "company",
-        "IDEESS": "id_eess",
-        "Latitud": "latitude",
-        "Longitud (WGS84)": "longitude",
-        "Municipio": "locality",
-        "Provincia": "province",
-        "C.P.": "postal_code",
-    }
-    for station in stations:
-        for key, value in changes.items():
-            station[value] = station.pop(key)
-
-    return sorted(stations, key=lambda x: x["PrecioProducto"])
-
 
 ## Process the query form ##
 def process_search(request: HttpRequest, form: dict) -> Iterable[models.StationPrice]:

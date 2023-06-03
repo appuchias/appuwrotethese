@@ -25,13 +25,7 @@ from gas import forms, query_handler
 
 
 def search(request: HttpRequest):
-    return render(
-        request,
-        "gas/search.html",
-        {
-            "form": forms.SearchStations,
-        },
-    )
+    return render(request, "gas/search.html", {"form": forms.SearchPrices})
 
 
 def result(request: HttpRequest):
