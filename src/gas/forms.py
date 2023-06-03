@@ -22,15 +22,13 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 
-class SearchStations(forms.Form):
-    """
-    Form for searching stations
-    """
+class SearchPrices(forms.Form):
+    """Form for searching stations"""
 
     term = forms.CharField(
         label=_("Search term"),
         required=True,
-        help_text=_("Specific element to look for (e.g. Coruña, 15001, etc.)"),
+        help_text=_("Specific term to look for (e.g. Coruña, 15001, etc.)"),
     )
 
     q_type = forms.ChoiceField(
@@ -41,7 +39,7 @@ class SearchStations(forms.Form):
             ("postal_code", _("Postal code")),
         ],
         required=True,
-        help_text=_("What the search query is"),
+        help_text=_("Type of query"),
     )
 
     fuel_abbr = forms.ChoiceField(
@@ -53,7 +51,7 @@ class SearchStations(forms.Form):
             ("GLP", "GLP"),
         ],
         required=True,
-        help_text=_("Fuel you're interested in (Results will be filtered by this)"),
+        help_text=_("Fuel to use for sorting"),
     )
 
     q_date = forms.DateField(

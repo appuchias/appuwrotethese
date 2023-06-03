@@ -32,7 +32,7 @@ def result(request: HttpRequest):
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"], "Method not allowed")
 
-    form = forms.SearchStations(request.POST)
+    form = forms.SearchPrices(request.POST)
     if not form.is_valid():
         messages.error(request, _("Invalid form. Please try again."))
         return render(request, "gas/noresults.html", {"results": []})
