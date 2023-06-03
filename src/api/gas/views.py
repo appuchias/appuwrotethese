@@ -20,4 +20,6 @@ from django.shortcuts import render, redirect
 
 
 def home(request: HttpRequest):
-    return JsonResponse({"message": "Gas API home page"})
+    """Home page for the Gas API."""
+
+    return JsonResponse({"message": _("Welcome to the Gas API!")})

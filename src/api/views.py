@@ -19,8 +19,12 @@ from django.http import HttpRequest, JsonResponse
 
 
 def home(request: HttpRequest):
-    return JsonResponse({"path": "API home page"})
+    """Home page for the API."""
+
+    return JsonResponse({"path": _("Welcome to the API!")})
 
 
 def health(request: HttpRequest):
+    """Health check endpoint."""
+
     return JsonResponse({"status": "OK"})
