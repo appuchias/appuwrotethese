@@ -101,3 +101,51 @@ class SearchPrices(forms.Form):
                 css_class="d-flex justify-content-end",
             ),
         )
+
+
+class GetPrices(forms.Form):
+    """Form for getting prices, knowing specific IDs"""
+
+    locality_id = forms.IntegerField(
+        label=_("Locality ID"),
+        required=False,
+        help_text=_("Locality ID"),
+    )
+
+    province_id = forms.IntegerField(
+        label=_("Province ID"),
+        required=False,
+        help_text=_("Province ID"),
+    )
+
+    postal_code = forms.IntegerField(
+        label=_("Postal code"),
+        required=False,
+        help_text=_("Postal code"),
+    )
+
+    fuel_abbr = forms.ChoiceField(
+        label=_("Fuel"),
+        choices=[
+            ("GOA", "Gasóleo A (Diésel)"),
+            ("G95E5", "Gasolina 95"),
+            ("G98E5", "Gasolina 98"),
+            ("GLP", "GLP"),
+        ],
+        required=True,
+        help_text=_("Fuel to use for sorting"),
+    )
+
+    q_date = forms.DateField(
+        label=_("Date"),
+        help_text=_("Prices date"),
+        required=True,
+        widget=forms.widgets.DateInput(
+            attrs={
+                "type": "date",
+                "min": date(2007, 1, 1),
+                "max": date.today(),
+                "value": date.today(),
+            }
+        ),
+    )
