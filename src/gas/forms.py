@@ -27,13 +27,13 @@ class SearchStations(forms.Form):
     Form for searching stations
     """
 
-    query = forms.CharField(
-        label=_("Search query"),
+    term = forms.CharField(
+        label=_("Search term"),
         required=True,
         help_text=_("Specific element to look for (e.g. Coruña, 15001, etc.)"),
     )
 
-    type = forms.ChoiceField(
+    q_type = forms.ChoiceField(
         label=_("Search by"),
         choices=[
             ("locality", _("Locality")),
@@ -44,7 +44,7 @@ class SearchStations(forms.Form):
         help_text=_("What the search query is"),
     )
 
-    fuel = forms.ChoiceField(
+    fuel_abbr = forms.ChoiceField(
         label=_("Fuel"),
         choices=[
             ("GOA", "Gasóleo A (Diésel)"),
@@ -56,7 +56,7 @@ class SearchStations(forms.Form):
         help_text=_("Fuel you're interested in (Results will be filtered by this)"),
     )
 
-    query_date = forms.DateField(
+    q_date = forms.DateField(
         label=_("Date"),
         help_text=_("Prices date"),
         required=True,

@@ -118,19 +118,17 @@ def process_search(request: HttpRequest, form: dict) -> Iterable[models.StationP
     and returns the list of results and the product name.
     """
 
-    query = str(form.get("query"))
+    term = str(form.get("query"))
     q_type = str(form.get("type"))
-    prod_abbr = str(form.get("fuel"))
+    fuel_abbr = str(form.get("fuel"))
     q_date = form.get("query_date", date.today())
 
-    id_locality, id_province, postal_code = get_ids(request, query, q_type)
+    id_locality, id_province, postal_code = get_ids(request, term, q_type)
 
-    return get_stations(
-        request, id_locality, id_province, postal_code, prod_abbr, q_date
-    )
+    return db_prices(request, id_locality, id_province, postal_code, fuel_abbr, q_date)
 
 
-def get_stations(
+def db_prices(
     request: HttpRequest,
     id_locality: int,
     id_province: int,
@@ -138,7 +136,11 @@ def get_stations(
     prod_abbr: str,
     q_date: date,
 ) -> Iterable[models.StationPrice]:
-    """Get the stations from the database or the API, provided all details."""
+    """Get the prices from the database.
+
+    This function gets the request and the clean form data
+    and returns the list of results
+    """
 
     if id_locality:
         station_filter = {"locality_id": id_locality}
