@@ -100,8 +100,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav text-themed">
                     {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i class="fas fa-user-shield"></i></a>{% endif %}
-                    {% if not request|is_mobile %}<a class="text-reset nav-link" href="/">{% trans "Home" %}</a>{% endif %}
-                    <a class="text-reset nav-link" href="/account/">{% trans "Account" %}</a>
+                    <a class="text-reset nav-link" href="/accounts/">{% trans "Account" %}</a>
                     <a class="text-reset nav-link" href="/gas/">{% trans "Stations" %}</a>
                     <a class="text-reset nav-link" href="https://blog.appu.ltd/" rel="noopener noreferrer" target="_blank">Blog</a>
                     <div class="vertical-separator"></div>

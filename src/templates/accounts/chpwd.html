@@ -9,12 +9,12 @@
     <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Password change' %}</div>
     <div class="crwrapper">
         {% if user.is_authenticated %}
-        <form action="/account/chpwd/" method="post">
+        <form action="/accounts/chpwd/" method="post">
             {% csrf_token %}
             {% crispy chpwdform %}
         </form>
         {% else %}
-        {% trans "You're not logged in" %}. <a href="/account" class="btn btn-outline-dark">{% trans "Go back" %}</a>
+        {% trans "You're not logged in" %}. <a href="/accounts" class="btn btn-outline-dark">{% trans "Go back" %}</a>
         {% endif %}
     </div>
 </div>

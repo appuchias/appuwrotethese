@@ -18,6 +18,7 @@ import secrets, string
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.http import HttpRequest, HttpResponseNotAllowed
@@ -45,11 +46,9 @@ Best regards,
 )
 
 
+@login_required
 def account(request: HttpRequest):
     """Show account page"""
-
-    if not request.user.is_authenticated:
-        return redirect("/account/login")
 
     return render(request, "accounts/account.html", {"user": request.user})
 
@@ -58,7 +57,7 @@ def acct_login(request: HttpRequest):
     """Login a user"""
 
     if request.user.is_authenticated:
-        return redirect("/account")
+        return redirect("/accounts")
 
     if request.method not in ["GET", "POST"]:
         return HttpResponseNotAllowed(["GET", "POST"], "Method not allowed")
@@ -77,14 +76,14 @@ def acct_login(request: HttpRequest):
     else:  # Wrong username or password
         messages.error(request, _("Wrong username or password"))
 
-    return redirect("/account")
+    return redirect("/accounts")
 
 
 def acct_register(request: HttpRequest):
     """Register a new user"""
 
     if request.user.is_authenticated:
-        return redirect("/account")
+        return redirect("/accounts")
 
     if request.method not in ["GET", "POST"]:
         return HttpResponseNotAllowed(["GET", "POST"], "Method not allowed")
@@ -101,7 +100,7 @@ def acct_register(request: HttpRequest):
     if not form.is_valid():
         for msg in form.error_messages.values():
             messages.error(request, msg)
-        return redirect("/account")
+        return redirect("/accounts")
 
     data = form.cleaned_data
     user = User.objects.create_user(
@@ -114,14 +113,12 @@ def acct_register(request: HttpRequest):
     user.save()
     messages.success(request, _("You are now registered"))
 
-    return redirect("/account")
+    return redirect("/accounts")
 
 
+@login_required
 def acct_change_pwd(request: HttpRequest):
     """Change password"""
-
-    if not request.user.is_authenticated:
-        return redirect("/account/login")
 
     if request.method not in ["GET", "POST"]:
         return HttpResponseNotAllowed(["GET", "POST"], "Method not allowed")
@@ -138,7 +135,7 @@ def acct_change_pwd(request: HttpRequest):
     if not form.is_valid():
         for msg in form.errors.values():
             messages.error(request, msg)
-        return redirect("/account")
+        return redirect("/accounts")
 
     data = form.cleaned_data
     user = authenticate(
@@ -151,14 +148,12 @@ def acct_change_pwd(request: HttpRequest):
     else:
         messages.error(request, _("Old password is not correct"))
 
-    return redirect("/account")
+    return redirect("/accounts")
 
 
+@login_required
 def acct_reset_pwd(request: HttpRequest):
     """Reset password and send it to the user's email"""
-
-    if not request.user.is_authenticated:
-        return redirect("/account/login")
 
     if request.method not in ["GET", "POST"]:
         return HttpResponseNotAllowed(["GET", "POST"], "Method not allowed")
@@ -175,14 +170,14 @@ def acct_reset_pwd(request: HttpRequest):
     if not form.is_valid():
         for msg in form.errors.values():
             messages.error(request, msg)
-        return redirect("/account")
+        return redirect("/accounts")
 
     data = form.cleaned_data
 
     user = User.objects.get(email=data.get("email"))
     if not user:
         messages.error(request, _("Email is not registered"))
-        return redirect("/account")
+        return redirect("/accounts")
 
     new_pwd = "".join(secrets.choice(PASSWORD_CHARS) for _ in range(PASSWORD_LENGTH))
     user.set_password(new_pwd)
@@ -203,14 +198,12 @@ def acct_reset_pwd(request: HttpRequest):
         ),
     )
 
-    return redirect("/account")
+    return redirect("/accounts")
 
 
+@login_required
 def acct_logout(request: HttpRequest):
     """Logout a user"""
 
-    if not request.user.is_authenticated:
-        return redirect("/account/login")
-
     logout(request)
-    return redirect("/account")
+    return redirect("/accounts")
