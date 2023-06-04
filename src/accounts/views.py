@@ -18,13 +18,13 @@ import secrets, string
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
 
-from appuwrotethese import extras
-from accounts import forms, models
+from accounts import forms
 
 PASSWORD_CHARS = string.ascii_letters + string.digits + string.punctuation
 PASSWORD_LENGTH = 16
@@ -51,8 +51,7 @@ def account(request: HttpRequest):
     if not request.user.is_authenticated:
         return redirect("/account/login")
 
-    user = extras.get_user(request)
-    return render(request, "accounts/account.html", {"awtuser": user})
+    return render(request, "accounts/account.html", {"user": request.user})
 
 
 def acct_login(request: HttpRequest):
@@ -105,7 +104,7 @@ def acct_register(request: HttpRequest):
         return redirect("/account")
 
     data = form.cleaned_data
-    user = models.AWTUser.objects.create_user(
+    user = User.objects.create_user(
         username=data.get("username"),
         email=data.get("email"),
         first_name=data.get("first_name"),
@@ -180,7 +179,7 @@ def acct_reset_pwd(request: HttpRequest):
 
     data = form.cleaned_data
 
-    user = models.AWTUser.objects.get(email=data.get("email"))
+    user = User.objects.get(email=data.get("email"))
     if not user:
         messages.error(request, _("Email is not registered"))
         return redirect("/account")

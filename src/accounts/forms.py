@@ -14,17 +14,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Div, Layout, Submit
+from django import forms
 from django.contrib.auth.forms import (
     AuthenticationForm,
     PasswordChangeForm,
     UserCreationForm,
 )
+from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
-from django import forms
 from django.utils.translation import gettext_lazy as _
-from crispy_forms.layout import Layout, Div, Submit, HTML
-from crispy_forms.helper import FormHelper
-from accounts.models import AWTUser
 
 
 # User creation form for the web
@@ -39,7 +39,7 @@ class AWTUserCreationForm(UserCreationForm):
     )
 
     class Meta:
-        model = AWTUser
+        model = User
         fields = (
             "username",
             "email",
@@ -80,7 +80,7 @@ class AWTUserCreationForm(UserCreationForm):
 
 class AWTLoginForm(AuthenticationForm):
     class Meta:
-        model = AWTUser
+        model = User
         fields = (
             "username",
             "password",
@@ -116,7 +116,7 @@ class AWTLoginForm(AuthenticationForm):
 
 class AWTPasswordChangeForm(PasswordChangeForm):
     class Meta:
-        model = AWTUser
+        model = User
         fields = (
             "old_password",
             "new_password1",
@@ -154,7 +154,7 @@ class AWTPasswordResetForm(forms.Form):
     )
 
     class Meta:
-        model = AWTUser
+        model = User
         fields = ("email",)
 
     def __init__(self, *args, **kwargs):
@@ -187,7 +187,7 @@ class AWTUpgradeForm(forms.Form):
     )
 
     class Meta:
-        model = AWTUser
+        model = User
         fields = ("upgrade_uuid",)
 
     def __init__(self, *args, **kwargs):

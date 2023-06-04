@@ -9,7 +9,7 @@
     <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'AWT Account' %}</div>
         <div class="crwrapper">
             <div class="user-info">
-                <div class="username">{% trans "You're logged in as" %} '{{ user.get_username }}'. {% trans "Your account status is" %}: {% if not awtuser.is_upgraded %}{% trans "not " %}{% endif %}{% trans "upgraded" %}.</div>
+                <div class="username">{% trans "You're logged in as" %} '{{ user.get_username }}'.</div>
             </div>
             <div class="buttons">
                 <div class="row">
