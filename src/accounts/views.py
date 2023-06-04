@@ -53,6 +53,12 @@ def account(request: HttpRequest):
     return render(request, "accounts/account.html", {"user": request.user})
 
 
+def profile(request: HttpRequest):
+    """Show profile page"""
+
+    return redirect("/accounts")
+
+
 def acct_login(request: HttpRequest):
     """Login a user"""
 

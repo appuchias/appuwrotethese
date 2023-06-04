@@ -19,6 +19,7 @@ from accounts import views
 
 urlpatterns = [
     path("", views.account),
+    path("profile/", views.profile),
     path("login/", views.acct_login),
     path("register/", views.acct_register),
     path("chpwd/", views.acct_change_pwd),
