@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-03 23:01+0200\n"
+"POT-Creation-Date: 2023-06-04 20:34+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: accounts/forms.py:16 accounts/forms.py:132
+#: accounts/forms.py:33 accounts/forms.py:149
 msgid "Email"
 msgstr "Email"
 
-#: accounts/forms.py:19
+#: accounts/forms.py:36
 msgid ""
 "Required. Your email will be used for password resetting and account "
 "activation."
@@ -28,31 +28,31 @@ msgstr ""
 "Requerido. Tu correo electrónico se utilizará para restablecer la contraseña "
 "y la activación de la cuenta."
 
-#: accounts/forms.py:56 templates/accounts/register.html:12
+#: accounts/forms.py:73 templates/accounts/register.html:12
 msgid "Register"
 msgstr "Registrarse"
 
-#: accounts/forms.py:91 templates/accounts/login.html:13
+#: accounts/forms.py:108 templates/accounts/login.html:13
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: accounts/forms.py:122 templates/accounts/account.html:18
+#: accounts/forms.py:139 templates/accounts/account.html:18
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: accounts/forms.py:135
+#: accounts/forms.py:152
 msgid "Required. You will receive an email with your temporary password."
 msgstr "Requerido. Recibirás un correo electrónico con su contraseña temporal."
 
-#: accounts/forms.py:151
+#: accounts/forms.py:168
 msgid "Reset password"
 msgstr "Restablecer contraseña"
 
-#: accounts/forms.py:162 accounts/models.py:38
+#: accounts/forms.py:178
 msgid "Upgrade UUID"
 msgstr "UUID de mejora"
 
-#: accounts/forms.py:164
+#: accounts/forms.py:180
 msgid ""
 "You will receive an email regarding your purchase from sellix with your "
 "upgrade UUID."
@@ -60,62 +60,91 @@ msgstr ""
 "Recibirás un correo electrónico sobre tu compra de sellix con tu UUID de "
 "mejora."
 
-#: accounts/forms.py:185 templates/accounts/upgrade.html:5
+#: accounts/forms.py:201 templates/accounts/upgrade.html:5
 #: templates/accounts/upgrade.html:9
 msgid "Upgrade"
 msgstr "Mejorar"
 
-#: accounts/models.py:27
+#: accounts/models.py:41
 msgid "Preferred query"
 msgstr "Petición favorita"
 
-#: accounts/models.py:33
-msgid "Upgraded"
-msgstr "Mejorada"
-
-#: accounts/models.py:49
+#: accounts/models.py:47
 msgid "AWT User"
 msgstr "Usuario de AWT"
 
-#: accounts/models.py:50
+#: accounts/models.py:48
 msgid "AWT Users"
 msgstr "Usuarios de AWT"
 
-#: accounts/views.py:52
+#: accounts/views.py:32
+msgid ""
+"Hello, {}\n"
+"\n"
+"This is the response to your password reset request.\n"
+"If you did not request a password reset, you can ignore this email.\n"
+"\n"
+"Your new password is: {}\n"
+"\n"
+"I would recommend using a password manager to have passwords just like that "
+"one created and automatically saved for all services without having to "
+"remember them.\n"
+"A great option is Bitwarden (not sponsored).\n"
+"\n"
+"Best regards,\n"
+"- Appu\n"
+msgstr ""
+"Hola, {}\n"
+"\n"
+"Esta es la respuesta a tu solicitud de restablecimiento de contraseña.\n"
+"Si no solicitaste un restablecimiento de contraseña, puedes ignorar este "
+"correo.\n"
+"\n"
+"Tu nueva contraseña es: {}\n"
+"\n"
+"Recomendaría utilizar un gestor de contraseñas para tener contraseñas como "
+"esa creadas y guardadas automáticamente para todos los servicios sin tener "
+"que recordarlas.\n"
+"Una gran opción es Bitwarden (no patrocinado).\n"
+"\n"
+"Un saludo,\n"
+"- Appu\n"
+
+#: accounts/views.py:77
 msgid "You are now logged in"
 msgstr "Has iniciado sesión"
 
-#: accounts/views.py:54
+#: accounts/views.py:79
 msgid "Wrong username or password"
 msgstr "Nombre de usuario o contraseña incorrectos"
 
-#: accounts/views.py:76
+#: accounts/views.py:116
 msgid "You are now registered"
 msgstr "Te has registrado"
 
-#: accounts/views.py:102
+#: accounts/views.py:151
 msgid "Your password was successfully updated!"
 msgstr "Tu contraseña se actualizó correctamente."
 
-#: accounts/views.py:104
+#: accounts/views.py:153
 msgid "Old password is not correct"
 msgstr "La contraseña anterior no es correcta"
 
-#: accounts/views.py:147
+#: accounts/views.py:185
+msgid "Email is not registered"
+msgstr "El correo electrónico no está registrado"
+
+#: accounts/views.py:194
 msgid "[appu.ltd] Password reset email"
 msgstr "[appu.ltd] Restablecer contraseña"
 
-#: accounts/views.py:156
+#: accounts/views.py:203
 msgid ""
-"Your password was successfully reset.                        Please check "
-"your email with your new temporary password."
+"Your password was successfully reset. Please check your email with your new "
+"temporary password."
 msgstr ""
-"Tu contraseña se restableció correctamente.                        Por "
-"favor, comprueba tu correo electrónico con tu nueva contraseña temporal."
-
-#: accounts/views.py:161
-msgid "Email is not registered"
-msgstr "El correo electrónico no está registrado"
+"Tu contraseña se restableció correctamente. Por favor, comprueba tu correo "
+"electrónico con tu nueva contraseña temporal."
 
 #: api/gas/views.py:28
 msgid "Welcome to the Gas API!"
@@ -308,7 +337,7 @@ msgid "Province searching might be broken"
 msgstr "La búsqueda por provincias puede no funcionar"
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
-#: templates/accounts/register.html:5
+#: templates/accounts/register.html:5 templates/base.html:104
 msgid "Account"
 msgstr "Cuenta"
 
@@ -364,8 +393,8 @@ msgid "Forgot your password"
 msgstr "Olvidaste tu contrsaña"
 
 #: templates/accounts/register.html:17
-msgid "Have an account"
-msgstr "Tienes una cuenta"
+msgid "Already have an account"
+msgstr "Ya tienes una cuenta"
 
 #: templates/accounts/register.html:17
 msgid "Log in"
@@ -395,17 +424,20 @@ msgstr "Para mejorar, visita"
 msgid "this link"
 msgstr "este enlace"
 
-#. Translators: Projects page tab title
-#. Translators: Projects page title
-#: templates/base.html:108 templates/projects.html:5 templates/projects.html:11
-msgid "Projects"
-msgstr "Proyectos"
+#. Translators: Home page title
+#: templates/base.html:103 templates/home.html:5
+msgid "Home"
+msgstr "Inicio"
 
-#: templates/base.html:111
+#: templates/base.html:105 templates/gas/results.html:12
+msgid "Stations"
+msgstr "Gasolineras"
+
+#: templates/base.html:108
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:131
+#: templates/base.html:128
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -460,10 +492,6 @@ msgstr ""
 "Nota: Las gasolineras que no ofrezcan el combustible solicitado no serán "
 "mostradas"
 
-#: templates/gas/results.html:12
-msgid "Stations"
-msgstr "Gasolineras"
-
 #: templates/gas/results.html:15
 msgid ""
 "The icon at the bottom of every card opens the route to the station in your "
@@ -484,14 +512,15 @@ msgstr ""
 msgid "Only works for Spain"
 msgstr "Funciona solo en España"
 
-#. Translators: Home page title
-#: templates/home.html:5
-msgid "Home"
-msgstr "Inicio"
-
 #: templates/home.html:11
 msgid "View projects"
 msgstr "Ver proyectos"
+
+#. Translators: Projects page tab title
+#. Translators: Projects page title
+#: templates/projects.html:5 templates/projects.html:11
+msgid "Projects"
+msgstr "Proyectos"
 
 #. Translators: Thanks home page
 #. Translators: Thanks page title
@@ -550,6 +579,9 @@ msgstr "Iconos usados en la web"
 #: templates/thanks.html:54
 msgid "Layout of the page"
 msgstr "Diseño principal de la web"
+
+#~ msgid "Upgraded"
+#~ msgstr "Mejorada"
 
 #~ msgid "Municipality ID"
 #~ msgstr "ID de la localidad"

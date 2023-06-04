@@ -12,9 +12,9 @@
                 <div class="title ml-2 mt-2">{% trans "Register" %}</div>
                 <form action="/account/register/" method="post">
                     {% csrf_token %}
-                    {% crispy registrationform %}
+                    {% crispy form %}
                     <div class="links">
-                        <a href="/account/login">{% trans "Have an account" %}? {% trans "Log in" %}</a>
+                        <a href="/account/login">{% trans "Already have an account" %}? {% trans "Log in" %}</a>
                     </div>
                 </form>
             </div>
