@@ -73,7 +73,6 @@ INSTALLED_APPS = [
     "gas",
     "accounts",
     "api",
-    # "django_extensions",
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
