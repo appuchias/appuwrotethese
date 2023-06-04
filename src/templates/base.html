@@ -93,18 +93,16 @@
                 </svg>
             </a>
             <form action="{% url 'set_language' %}" method="post" id="langForm" class="invisible">
-                {% csrf_token%}
+                {% csrf_token %}
                 <input type="text" name="language" value="{% if LANG == 'es' %}en{% else %}es{% endif %}" class="invisible">
             </form>
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav text-themed">
-                    {% if user.is_staff %}
-                    <a href="/admin/" class="text-reset nav-link"><i class="fas fa-user-shield"></i></a>
-                    {% endif %}
-                    {% if not request|is_mobile %}<a class="text-reset nav-link" href="/">Home</a>{% endif %}
-                    {% comment %} <a class="text-reset nav-link" href="/account/">{% trans "Account" %}</a> {% endcomment %}
-                    <a class="text-reset nav-link" href="/projects/">{% trans "Projects" %}</a>
+                    {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i class="fas fa-user-shield"></i></a>{% endif %}
+                    {% if not request|is_mobile %}<a class="text-reset nav-link" href="/">{% trans "Home" %}</a>{% endif %}
+                    <a class="text-reset nav-link" href="/account/">{% trans "Account" %}</a>
+                    <a class="text-reset nav-link" href="/gas/">{% trans "Stations" %}</a>
                     <a class="text-reset nav-link" href="https://blog.appu.ltd/" rel="noopener noreferrer" target="_blank">Blog</a>
                     <div class="vertical-separator"></div>
                     <a href="javascript:{}" id="langChange" onclick="document.getElementById('langForm').submit();" class="text-reset nav-link">{% trans "Change language" %}</a>
