@@ -255,7 +255,7 @@ EMAIL_USE_SSL = False
 SERVER_EMAIL = "noreply@appu.ltd"
 
 # Messages setup
-MESSAGE_LEVEL = messages.DEBUG
+MESSAGE_LEVEL = messages.DEBUG if DEBUG else messages.INFO
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 MESSAGE_TAGS = {
     messages.DEBUG: "primary",
