@@ -21,6 +21,7 @@ from os import getenv
 from secrets import token_urlsafe
 import logging
 
+from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
@@ -86,7 +87,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_user_agents.middleware.UserAgentMiddleware",
-    "middleware.permanent_messages_middleware.PermanentMessagesMiddleware",
+    "middleware.persistent_messages_middleware.PersistentMessagesMiddleware",
 ]
 
 COMPRESS_ENABLED = True
@@ -254,4 +255,12 @@ EMAIL_USE_SSL = False
 SERVER_EMAIL = "noreply@appu.ltd"
 
 # Messages setup
+MESSAGE_LEVEL = messages.DEBUG
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+MESSAGE_TAGS = {
+    messages.DEBUG: "primary",
+    messages.INFO: "secondary",
+    messages.SUCCESS: "success",
+    messages.WARNING: "warning",
+    messages.ERROR: "danger",
+}

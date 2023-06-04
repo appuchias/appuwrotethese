@@ -1,4 +1,4 @@
-<!DOCTYPE html>{% load user_agents i18n relevel %}{% get_current_language as LANG %}
+<!DOCTYPE html>{% load user_agents i18n %}{% get_current_language as LANG %}
 <html lang="{{ LANG }}">
 <!--
     Appu Wrote These
@@ -111,7 +111,7 @@
         <!-- - -->
         <div id="content">
             {% if messages %}{% for message in messages %}
-            <div class="alert alert-{{ message.level_tag|relevel }} my-4{% if request|is_mobile %} mobile{% endif %}" role="alert">
+            <div class="alert alert-{{ message.level_tag }} my-4{% if request|is_mobile %} mobile{% endif %}" role="alert">
                 {{ message }}
             </div>{% endfor %}{% endif %}
             {% block content %}Content{% endblock content %}
