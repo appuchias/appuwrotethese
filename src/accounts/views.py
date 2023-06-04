@@ -20,7 +20,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.core.mail import send_mail
 from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
@@ -190,13 +189,12 @@ def acct_reset_pwd(request: HttpRequest):
     user.save()
 
     # Send email with new password through django
-    send_mail(
+    user.email_user(
         _("[appu.ltd] Password reset email"),
         PASSWORD_RESET_EMAIL.format(user.username, new_pwd),
         "noreply@appu.ltd",
-        [user.email],
-        fail_silently=False,
     )
+
     messages.success(
         request,
         _(
