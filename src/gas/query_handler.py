@@ -83,10 +83,10 @@ def process_search(request: HttpRequest, form: dict) -> Iterable[models.StationP
     and returns the list of results and the product name.
     """
 
-    term = str(form.get("query"))
-    q_type = str(form.get("type"))
-    fuel_abbr = str(form.get("fuel"))
-    q_date = form.get("query_date", date.today())
+    term = str(form.get("term"))
+    q_type = str(form.get("q_type"))
+    fuel_abbr = str(form.get("fuel_abbr"))
+    q_date = form.get("q_date", date.today())
 
     id_locality, id_province, postal_code = get_ids(request, term, q_type)
 
