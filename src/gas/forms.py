@@ -82,13 +82,13 @@ class SearchPrices(forms.Form):
         self.helper.layout = Layout(
             Div(
                 Div(
-                    Div("query", css_class="col-md-6"),
-                    Div("type", css_class="col-md-6"),
+                    Div("term", css_class="col-md-6"),
+                    Div("q_type", css_class="col-md-6"),
                     css_class="row",
                 ),
                 Div(
-                    Div("fuel", css_class="col-md-6"),
-                    Div("query_date", css_class="col-md-6"),
+                    Div("fuel_abbr", css_class="col-md-6"),
+                    Div("q_date", css_class="col-md-6"),
                     css_class="row",
                 ),
             ),
