@@ -96,12 +96,6 @@ class AWTLoginForm(AuthenticationForm):
                 css_class="col",
             ),
             Div(
-                # Div(
-                #     HTML(
-                #         "<a href='/account/respwd/' class='btn btn-outline-dark'><i class='fa-solid fa-lock'></i> Forgot your password?</a>"
-                #     ),
-                #     css_class="col-md",
-                # ),
                 Div(
                     Submit(
                         "submit",
