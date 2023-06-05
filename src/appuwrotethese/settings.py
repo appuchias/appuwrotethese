@@ -15,29 +15,26 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from pathlib import Path
-from dotenv import load_dotenv
-from os import getenv
-from secrets import token_urlsafe
 import logging
+from pathlib import Path
+from secrets import token_urlsafe
+from yaml import safe_load
 
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
-load_dotenv()
+with open("settings.yaml", "r") as f:
+    env = safe_load(f.read())
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = getenv("SECRETKEY", None)
+SECRET_KEY = env.get("SECRET_KEY")
 if SECRET_KEY is None:
     SECRET_KEY = token_urlsafe(64)
-    logging.warning("settings: SECRETKEY was not set in .env file. New one generated.")
-    try:
-        with open(BASE_DIR / ".env", "a") as f:
-            f.write(f"SECRETKEY={SECRET_KEY}\n")
-    except FileNotFoundError:
-        with open(BASE_DIR / ".env", "w") as f:
-            f.write(f"SECRETKEY={SECRET_KEY}\n")
+    logging.warning(
+        "settings: SECRETKEY was not set. New one generated for this session. Please set it as an environment variable or in `settings.yaml`."
+    )
+SECRET_KEY_FALLBACKS = env.get("SECRET_KEY_FALLBACKS", [])
 
 DEBUG = False
 
@@ -247,8 +244,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Email setup
 EMAIL_HOST = "in-v3.mailjet.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = getenv("SMTP_USER", "")
-EMAIL_HOST_PASSWORD = getenv("SMTP_PASS", "")
+EMAIL_HOST_USER = env.get("SMTP_USER", "")
+EMAIL_HOST_PASSWORD = env.get("SMTP_PASS", "")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 SERVER_EMAIL = "noreply@appu.ltd"
