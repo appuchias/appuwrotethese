@@ -20,9 +20,9 @@ makemsgs:
 compilemsgs:
 	django-admin compilemessages --use-fuzzy --locale es
 
-lesscompile:
-	lessc staticfiles/res/styles.less staticfiles/res/styles.css
-	lessc staticfiles/res/project_styles.less staticfiles/res/project_styles.css
+lesscompile: # Install AUR: nodejs-less and nodejs-less-plugin-clean-css
+	lessc staticfiles/res/styles.less staticfiles/res/styles.min.css --clean-css
+	lessc staticfiles/res/project_styles.less staticfiles/res/project_styles.min.css --clean-css
 
 update:
 	git fetch
