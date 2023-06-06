@@ -51,8 +51,7 @@ ROOT_URLCONF = "appuwrotethese.urls"
 ALLOWED_HOSTS = [
     "appu.ltd",
     "www.appu.ltd",
-    # "beta.appu.ltd",
-    "localhost",
+    "*" if DEBUG else None,
 ]
 
 ADMINS = [("Appu", "appuchia@appu.ltd")]
