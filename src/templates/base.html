@@ -24,19 +24,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="A website where I host the projects I create.">
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <!-- Libraries -->
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400&display=swap" rel="stylesheet">
+        <link href="/s/res/balloon.min.css" rel="stylesheet">
+        <link href="/s/res/bootstrap_5-2-3.min.css" rel="stylesheet">
+        <script src="/s/res/feather_4-29-0.min.js"></script>
 
-        <!-- Custom Less CSS -->
+        <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="/s/res/styles.css">
         <link rel="stylesheet" type="text/css" href="/s/res/project_styles.css">
-
-        <!-- Fonts CSS -->
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/f176ab2757.js" crossorigin="anonymous"></script>
-
-        <!-- Balloon css -->
-        <link rel="stylesheet" href="/s/res/balloon.min.css">
 
         <!-- Plausible analytics script -->
         <script defer data-domain="appu.ltd" src="https://plausible.appu.ltd/js/script.tagged-events.outbound-links.js"></script>
@@ -99,7 +95,7 @@
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav text-themed">
-                    {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i class="fas fa-user-shield"></i></a>{% endif %}
+                    {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i data-feather="cpu"></i></a>{% endif %}
                     <a class="text-reset nav-link" href="/accounts/">{% trans "Account" %}</a>
                     <a class="text-reset nav-link" href="/gas/">{% trans "Stations" %}</a>
                     <a class="text-reset nav-link" href="https://blog.appu.ltd/" rel="noopener noreferrer" target="_blank">Blog</a>
@@ -119,16 +115,17 @@
         <!-- - -->
         <div id="footer">
             <div class="footer-icons{% if request|is_mobile %} mobile{% endif %}">
-                <a href="https://links.appu.ltd/" class="text-reset icon" rel="noopener" target="_blank"><i class="fa-solid fa-link"></i></a>
-                <a href="https://l.appu.ltd/youtube" class="text-reset icon" rel="noopener noreferrer" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://l.appu.ltd/awt" class="text-reset icon" rel="noopener" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://links.appu.ltd/" class="text-reset icon" rel="noopener" target="_blank"><i data-feather="link" class="footer"></i></a>
+                <a href="https://l.appu.ltd/youtube" class="text-reset icon" rel="noopener noreferrer" target="_blank"><i data-feather="youtube" class="footer"></i></a>
+                <a href="https://l.appu.ltd/awt" class="text-reset icon" rel="noopener" target="_blank"><i data-feather="github" class="footer"></i></a>
             </div>
             <div class="footer-appu align-self-end{% if request|is_mobile %} mobile{% endif %}">
                 <a href="/thanks/" class="text-reset text-decoration-none">{% trans "Coded with 🖤 by Appu" %}</a>
             </div>
         </div>
+        <script>feather.replace()</script>
 
         <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+        <script rel="stylesheet" href="/s/res/bootstrap_5-2-3.min.js"></script>
     </body>
 </html>

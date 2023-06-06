@@ -73,6 +73,14 @@ div.vertical-separator {
   border-left-width: 1px;
   border-left-style: inset;
 }
+.feather {
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
+.feather.footer {
+  padding: 1px;
+  margin-bottom: 0;
+}
 #navbar {
   position: fixed;
   top: 0;

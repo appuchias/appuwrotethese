@@ -61,11 +61,14 @@
                         <a class="directions text-decoration-none tooltip-slide" target="_blank"
                             aria-label="Open map directions" data-balloon-pos="up"
                             onclick="openmaps({{ s.latitude|replace:',|.' }}, {{ s.longitude|replace:',|.' }})">
-                            <i class="fas fa-directions"></i>
+                            <i data-feather="compass"></i>
                         </a>
-                        {% comment %} {% if user.is_authenticated %}<a class="eess-id" href="/gas/save/{{ i.id_eess }}"
-                            aria-label="Save station" data-balloon-pos="up"> <i
-                                class="fa-solid fa-star"></i>{{ i.id_eess }}</a>{% endif %} {% endcomment %}
+                        {% comment %}
+                        {% if user.is_authenticated %}<a class="eess-id" href="/gas/save/{{ i.id_eess }}" aria-label="Save station" data-balloon-pos="up">
+                            <i data-feather="star"></i>
+                            {{ i.id_eess }}
+                        </a>{% endif %}
+                        {% endcomment %}
                     </div>
                 </div>
             </figure>
