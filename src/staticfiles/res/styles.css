@@ -73,11 +73,11 @@ div.vertical-separator {
   border-left-width: 1px;
   border-left-style: inset;
 }
-.feather {
+.lucide {
   vertical-align: middle;
   margin-bottom: 4px;
 }
-.feather.footer {
+.lucide.footer {
   padding: 1px;
   margin-bottom: 0;
 }
