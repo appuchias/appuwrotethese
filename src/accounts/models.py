@@ -67,7 +67,7 @@ class SavedQuery(models.Model):
         choices=[
             ("locality", _("Locality")),
             ("province", _("Province")),
-            ("postal_code", _("Postal Code")),
+            ("postal_code", _("Postal code")),
         ],
     )
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-04 20:34+0200\n"
+"POT-Creation-Date: 2023-06-06 22:57+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: accounts/forms.py:33 accounts/forms.py:149
+#: accounts/forms.py:33 accounts/forms.py:143
 msgid "Email"
 msgstr "Email"
 
@@ -32,27 +32,27 @@ msgstr ""
 msgid "Register"
 msgstr "Registrarse"
 
-#: accounts/forms.py:108 templates/accounts/login.html:13
+#: accounts/forms.py:102 templates/accounts/login.html:13
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: accounts/forms.py:139 templates/accounts/account.html:18
+#: accounts/forms.py:133 templates/accounts/account.html:16
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: accounts/forms.py:152
+#: accounts/forms.py:146
 msgid "Required. You will receive an email with your temporary password."
 msgstr "Requerido. Recibirás un correo electrónico con su contraseña temporal."
 
-#: accounts/forms.py:168
+#: accounts/forms.py:162
 msgid "Reset password"
 msgstr "Restablecer contraseña"
 
-#: accounts/forms.py:178
+#: accounts/forms.py:172
 msgid "Upgrade UUID"
 msgstr "UUID de mejora"
 
-#: accounts/forms.py:180
+#: accounts/forms.py:174
 msgid ""
 "You will receive an email regarding your purchase from sellix with your "
 "upgrade UUID."
@@ -60,22 +60,42 @@ msgstr ""
 "Recibirás un correo electrónico sobre tu compra de sellix con tu UUID de "
 "mejora."
 
-#: accounts/forms.py:201 templates/accounts/upgrade.html:5
-#: templates/accounts/upgrade.html:9
+#: accounts/forms.py:195
 msgid "Upgrade"
 msgstr "Mejorar"
 
 #: accounts/models.py:41
-msgid "Preferred query"
-msgstr "Petición favorita"
+msgid "Saved Station"
+msgstr "Gasolinera guardada"
 
-#: accounts/models.py:47
-msgid "AWT User"
-msgstr "Usuario de AWT"
+#: accounts/models.py:42
+msgid "Saved Stations"
+msgstr "Gasolineras guardadas"
 
-#: accounts/models.py:48
-msgid "AWT Users"
-msgstr "Usuarios de AWT"
+#: accounts/models.py:60
+msgid "Only alphanumeric characters and underscores are allowed."
+msgstr "Solo se permiten caracteres alfanuméricos y guiones bajos."
+
+#: accounts/models.py:68 gas/forms.py:37 gas/models.py:36 gas/models.py:41
+msgid "Locality"
+msgstr "Localidad"
+
+#: accounts/models.py:69 gas/forms.py:38 gas/models.py:63 gas/models.py:68
+msgid "Province"
+msgstr "Provincia"
+
+#: accounts/models.py:70 gas/forms.py:39 gas/forms.py:122 gas/forms.py:124
+#: gas/models.py:91
+msgid "Postal code"
+msgstr "Código postal"
+
+#: accounts/models.py:88
+msgid "Saved Query"
+msgstr "Consulta guardada"
+
+#: accounts/models.py:89
+msgid "Saved Queries"
+msgstr "Consultas guardadas"
 
 #: accounts/views.py:32
 msgid ""
@@ -110,35 +130,35 @@ msgstr ""
 "Un saludo,\n"
 "- Appu\n"
 
-#: accounts/views.py:77
+#: accounts/views.py:80
 msgid "You are now logged in"
 msgstr "Has iniciado sesión"
 
-#: accounts/views.py:79
+#: accounts/views.py:82
 msgid "Wrong username or password"
 msgstr "Nombre de usuario o contraseña incorrectos"
 
-#: accounts/views.py:116
+#: accounts/views.py:119
 msgid "You are now registered"
 msgstr "Te has registrado"
 
-#: accounts/views.py:151
+#: accounts/views.py:152
 msgid "Your password was successfully updated!"
 msgstr "Tu contraseña se actualizó correctamente."
 
-#: accounts/views.py:153
+#: accounts/views.py:154
 msgid "Old password is not correct"
 msgstr "La contraseña anterior no es correcta"
 
-#: accounts/views.py:185
+#: accounts/views.py:183
 msgid "Email is not registered"
 msgstr "El correo electrónico no está registrado"
 
-#: accounts/views.py:194
+#: accounts/views.py:192
 msgid "[appu.ltd] Password reset email"
 msgstr "[appu.ltd] Restablecer contraseña"
 
-#: accounts/views.py:203
+#: accounts/views.py:200
 msgid ""
 "Your password was successfully reset. Please check your email with your new "
 "temporary password."
@@ -162,11 +182,11 @@ msgstr "Debes proporcionar una localidad, provincia o código postal válido."
 msgid "Welcome to the API!"
 msgstr "Bienvenido a la API!"
 
-#: appuwrotethese/settings.py:220
+#: appuwrotethese/settings.py:218
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:221
+#: appuwrotethese/settings.py:219
 msgid "English"
 msgstr "Inglés"
 
@@ -209,18 +229,6 @@ msgstr "Término concreto a buscar (p.ej. Coruña, 15001, etc.)"
 #: gas/forms.py:35
 msgid "Search by"
 msgstr "Buscar por"
-
-#: gas/forms.py:37 gas/models.py:36 gas/models.py:41
-msgid "Locality"
-msgstr "Localidad"
-
-#: gas/forms.py:38 gas/models.py:63 gas/models.py:68
-msgid "Province"
-msgstr "Provincia"
-
-#: gas/forms.py:39 gas/forms.py:122 gas/forms.py:124 gas/models.py:91
-msgid "Postal code"
-msgstr "Código postal"
 
 #: gas/forms.py:42
 msgid "Type of query"
@@ -332,12 +340,12 @@ msgstr ""
 msgid "Invalid form. Please try again."
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
-#: middleware/permanent_messages_middleware.py:6
+#: middleware/persistent_messages_middleware.py:12
 msgid "Province searching might be broken"
 msgstr "La búsqueda por provincias puede no funcionar"
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
-#: templates/accounts/register.html:5 templates/base.html:104
+#: templates/accounts/register.html:5 templates/base.html:99
 msgid "Account"
 msgstr "Cuenta"
 
@@ -350,19 +358,7 @@ msgstr "Cuenta AWT"
 msgid "You're logged in as"
 msgstr "Estás conectado como"
 
-#: templates/accounts/account.html:12
-msgid "Your account status is"
-msgstr "El estado de tu cuenta es"
-
-#: templates/accounts/account.html:12
-msgid "not "
-msgstr "no "
-
-#: templates/accounts/account.html:12
-msgid "upgraded"
-msgstr "mejorada"
-
-#: templates/accounts/account.html:19
+#: templates/accounts/account.html:17
 msgid "Logout"
 msgstr "Cerrar sesión"
 
@@ -408,36 +404,15 @@ msgstr "Reiniciar contraseña"
 msgid "Please log out before coming here"
 msgstr "Por favor, cierra sesión antes de venir aquí"
 
-#: templates/accounts/upgrade.html:11
-msgid ""
-"Upgrading is a paid feature. Once your account is upgraded, you will have "
-"lifetime access to all web features"
-msgstr ""
-"Mejorar la cuenta es una característica de pago. Una vez que tu cuenta esté "
-"mejorada, tendrás acceso de por vida a todas las características de la web"
+#: templates/base.html:100
+msgid "Prices"
+msgstr "Precios"
 
-#: templates/accounts/upgrade.html:12
-msgid "To upgrade, visit"
-msgstr "Para mejorar, visita"
-
-#: templates/accounts/upgrade.html:12
-msgid "this link"
-msgstr "este enlace"
-
-#. Translators: Home page title
-#: templates/base.html:103 templates/home.html:5
-msgid "Home"
-msgstr "Inicio"
-
-#: templates/base.html:105 templates/gas/results.html:12
-msgid "Stations"
-msgstr "Gasolineras"
-
-#: templates/base.html:108
+#: templates/base.html:103
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:128
+#: templates/base.html:123
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -492,6 +467,10 @@ msgstr ""
 "Nota: Las gasolineras que no ofrezcan el combustible solicitado no serán "
 "mostradas"
 
+#: templates/gas/results.html:12
+msgid "Stations"
+msgstr "Gasolineras"
+
 #: templates/gas/results.html:15
 msgid ""
 "The icon at the bottom of every card opens the route to the station in your "
@@ -511,6 +490,11 @@ msgstr ""
 #: templates/gas/search.html:12
 msgid "Only works for Spain"
 msgstr "Funciona solo en España"
+
+#. Translators: Home page title
+#: templates/home.html:5
+msgid "Home"
+msgstr "Inicio"
 
 #: templates/home.html:11
 msgid "View projects"
@@ -579,6 +563,41 @@ msgstr "Iconos usados en la web"
 #: templates/thanks.html:54
 msgid "Layout of the page"
 msgstr "Diseño principal de la web"
+
+#~ msgid "Postal Code"
+#~ msgstr "Código postal"
+
+#~ msgid "Preferred query"
+#~ msgstr "Petición favorita"
+
+#~ msgid "AWT User"
+#~ msgstr "Usuario de AWT"
+
+#~ msgid "AWT Users"
+#~ msgstr "Usuarios de AWT"
+
+#~ msgid "Your account status is"
+#~ msgstr "El estado de tu cuenta es"
+
+#~ msgid "not "
+#~ msgstr "no "
+
+#~ msgid "upgraded"
+#~ msgstr "mejorada"
+
+#~ msgid ""
+#~ "Upgrading is a paid feature. Once your account is upgraded, you will have "
+#~ "lifetime access to all web features"
+#~ msgstr ""
+#~ "Mejorar la cuenta es una característica de pago. Una vez que tu cuenta "
+#~ "esté mejorada, tendrás acceso de por vida a todas las características de "
+#~ "la web"
+
+#~ msgid "To upgrade, visit"
+#~ msgstr "Para mejorar, visita"
+
+#~ msgid "this link"
+#~ msgstr "este enlace"
 
 #~ msgid "Upgraded"
 #~ msgstr "Mejorada"
