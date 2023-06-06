@@ -25,7 +25,9 @@ You can find the official documentation [here](http://lesscss.org/usage/#command
 ## License
 
 This project is licensed under the [AGPL 3.0+ License](https://github.com/appuchias/appuwrotethese/blob/master/LICENSE).
+
 Lucide icons are licensed under the [ISC License](https://github.com/lucide-icons/lucide/blob/main/LICENSE).
+
 All other used licenses can be found [here](https://app.fossa.com/attribution/a2b2b9c2-e587-42d8-a9ad-121fc1033b43)
 
 Built with 🖤 by Appu
