@@ -52,7 +52,8 @@
         {% block head %}{% endblock head %}
         <title>Appu · {% block title %}Web{% endblock title %}</title>
     </head>
-
+    
+    {% with request|is_mobile as phone %}
     <body>
         <nav id=navbar class="navbar navbar-expand d-flex">
             <a href="/">
@@ -83,10 +84,16 @@
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav text-themed">
-                    {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i data-lucide="shield"></i></a>{% endif %}
-                    <a class="text-reset nav-link" href="/accounts/">{% trans "Account" %}</a>
-                    <a class="text-reset nav-link" href="/gas/">{% trans "Prices" %}</a>
-                    <a class="text-reset nav-link" href="https://blog.appu.ltd/" rel="noopener" target="_blank">Blog</a>
+                    {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i data-lucide="cog"></i>Admin</a>{% endif %}
+                    <a class="text-reset nav-link" href="/accounts/" {% if phone %}aria-label="{% trans 'Account' %}" data-balloon-pos="down"{% endif %}>
+                        <i data-lucide="user"></i>{% if not phone %}{% trans "Account" %}{% endif %}
+                    </a>
+                    <a class="text-reset nav-link" href="/gas/" {% if phone %}aria-label="{% trans 'Prices' %}" data-balloon-pos="down"{% endif %}>
+                        <i data-lucide="fuel"></i>{% if not phone %}{% trans "Prices" %}{% endif %}
+                    </a>
+                    <a class="text-reset nav-link" href="https://blog.appu.ltd/" rel="noopener" target="_blank" {% if phone %}aria-label="Blog" data-balloon-pos="down"{% endif %}>
+                        <i data-lucide="newspaper"></i>{% if not phone %}Blog{% endif %}
+                    </a>
                     <div class="vertical-separator"></div>
                     <a href="javascript:{}" id="langChange" onclick="document.getElementById('langForm').submit();" class="text-reset nav-link">{% trans "Change language" %}</a>
                 </div>
@@ -95,19 +102,19 @@
         <!-- - -->
         <div id="content">
             {% if messages %}{% for message in messages %}
-            <div class="alert alert-{{ message.level_tag }} my-4{% if request|is_mobile %} mobile{% endif %}" role="alert">
+            <div class="alert alert-{{ message.level_tag }} my-4{% if phone %} mobile{% endif %}" role="alert">
                 {{ message }}
             </div>{% endfor %}{% endif %}
             {% block content %}Content{% endblock content %}
         </div>
         <!-- - -->
         <div id="footer">
-            <div class="footer-icons{% if request|is_mobile %} mobile{% endif %}">
+            <div class="footer-icons{% if phone %} mobile{% endif %}">
                 <a href="https://links.appu.ltd/" class="text-reset icon" rel="noopener" target="_blank"><i data-lucide="link" class="footer"></i></a>
                 <a href="https://l.appu.ltd/youtube" class="text-reset icon" rel="noopener noreferrer" target="_blank"><i data-lucide="youtube" class="footer"></i></a>
                 <a href="https://l.appu.ltd/awt" class="text-reset icon" rel="noopener" target="_blank"><i data-lucide="github" class="footer"></i></a>
             </div>
-            <div class="footer-appu align-self-end{% if request|is_mobile %} mobile{% endif %}">
+            <div class="footer-appu align-self-end{% if phone %} mobile{% endif %}">
                 <a href="/thanks/" class="text-reset text-decoration-none">{% trans "Coded with 🖤 by Appu" %}</a>
             </div>
         </div>
@@ -116,4 +123,6 @@
         <!-- Bootstrap JS -->
         <script rel="stylesheet" href="/s/res/bootstrap_5-2-3.min.js"></script>
     </body>
+    {% endwith %}
 </html>
+
