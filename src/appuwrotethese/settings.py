@@ -23,18 +23,18 @@ from yaml import safe_load
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
-with open("settings.yaml", "r") as f:
-    env = safe_load(f.read())
+with open("config.yaml", "r") as f:
+    config = safe_load(f.read())
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = env.get("SECRET_KEY")
+SECRET_KEY = config.get("SECRET_KEY")
 if SECRET_KEY is None:
     SECRET_KEY = token_urlsafe(64)
     logging.warning(
-        "settings: SECRETKEY was not set. New one generated for this session. Please set it as an environment variable or in `settings.yaml`."
+        "settings: SECRET_KEY was not set. New one generated for this session. Please set it as an environment variable or in `config.yaml`."
     )
-SECRET_KEY_FALLBACKS = env.get("SECRET_KEY_FALLBACKS", [])
+SECRET_KEY_FALLBACKS = config.get("SECRET_KEY_FALLBACKS", [])
 
 DEBUG = False
 
@@ -244,8 +244,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Email setup
 EMAIL_HOST = "in-v3.mailjet.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env.get("SMTP_USER", "")
-EMAIL_HOST_PASSWORD = env.get("SMTP_PASS", "")
+EMAIL_HOST_USER = config.get("SMTP_USER", "")
+EMAIL_HOST_PASSWORD = config.get("SMTP_PASS", "")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 SERVER_EMAIL = "noreply@appu.ltd"
