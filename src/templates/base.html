@@ -84,15 +84,15 @@
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav text-themed">
-                    {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i data-lucide="cog"></i>Admin</a>{% endif %}
+                    {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i data-lucide="cog"></i> Admin</a>{% endif %}
                     <a class="text-reset nav-link" href="/accounts/" {% if phone %}aria-label="{% trans 'Account' %}" data-balloon-pos="down"{% endif %}>
-                        <i data-lucide="user"></i>{% if not phone %}{% trans "Account" %}{% endif %}
+                        <i data-lucide="user"></i>{% if not phone %} {% trans "Account" %}{% endif %}
                     </a>
                     <a class="text-reset nav-link" href="/gas/" {% if phone %}aria-label="{% trans 'Prices' %}" data-balloon-pos="down"{% endif %}>
-                        <i data-lucide="fuel"></i>{% if not phone %}{% trans "Prices" %}{% endif %}
+                        <i data-lucide="fuel"></i>{% if not phone %} {% trans "Prices" %}{% endif %}
                     </a>
                     <a class="text-reset nav-link" href="https://blog.appu.ltd/" rel="noopener" target="_blank" {% if phone %}aria-label="Blog" data-balloon-pos="down"{% endif %}>
-                        <i data-lucide="newspaper"></i>{% if not phone %}Blog{% endif %}
+                        <i data-lucide="newspaper"></i>{% if not phone %} Blog{% endif %}
                     </a>
                     <div class="vertical-separator"></div>
                     <a href="javascript:{}" id="langChange" onclick="document.getElementById('langForm').submit();" class="text-reset nav-link">{% trans "Change language" %}</a>
