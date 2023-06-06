@@ -156,7 +156,6 @@ def acct_change_pwd(request: HttpRequest):
     return redirect("/accounts")
 
 
-@login_required
 def acct_reset_pwd(request: HttpRequest):
     """Reset password and send it to the user's email"""
 
@@ -166,8 +165,8 @@ def acct_reset_pwd(request: HttpRequest):
     if request.method == "GET":
         return render(
             request,
-            "accounts/resetpwd.html",
-            {"resetpwdform": forms.AWTPasswordResetForm()},
+            "accounts/respwd.html",
+            {"form": forms.AWTPasswordResetForm()},
         )
 
     # POST
