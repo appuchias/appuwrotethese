@@ -18,7 +18,6 @@ import json
 from datetime import date, datetime
 from typing import Iterable
 
-import requests
 from django.contrib import messages
 from django.db.models import Count
 from django.http import Http404, HttpRequest
