@@ -55,7 +55,7 @@
     
     {% with request|is_mobile as phone %}
     <body>
-        <nav id=navbar class="navbar navbar-expand d-flex">
+        <nav id=navbar class="navbar navbar-expand container-fluid">
             <a href="/">
                 <svg version="1.1" width="32" height="32" viewBox="0 0 1333.3333 1333.3333"
                     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
@@ -100,7 +100,7 @@
             </div>
         </nav>
         <!-- - -->
-        <div id="content">
+        <div id="content" class="container-fluid">
             {% if messages %}{% for message in messages %}
             <div class="alert alert-{{ message.level_tag }} my-4{% if phone %} mobile{% endif %}" role="alert">
                 {{ message }}
@@ -108,7 +108,7 @@
             {% block content %}Content{% endblock content %}
         </div>
         <!-- - -->
-        <div id="footer">
+        <div id="footer" class="container-fluid">
             <div class="footer-icons{% if phone %} mobile{% endif %}">
                 <a href="https://links.appu.ltd/" class="text-reset icon" rel="noopener" target="_blank"><i data-lucide="link" class="footer"></i></a>
                 <a href="https://l.appu.ltd/youtube" class="text-reset icon" rel="noopener noreferrer" target="_blank"><i data-lucide="youtube" class="footer"></i></a>
