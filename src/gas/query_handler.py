@@ -31,7 +31,7 @@ from gas import models
 get_db_product_name = lambda prod_abbr, default="": {
     "GOA": "price_goa",
     "G95E5": "price_g95e5",
-    "G98E5": "price_g98",
+    "G98E5": "price_g98e5",
     "GLP": "price_glp",
 }.get(prod_abbr, default)
 
@@ -125,7 +125,7 @@ def db_prices(
     prod_name = get_db_product_name(prod_abbr)
     prices = (
         models.StationPrice.objects.filter(station__in=stations, date=q_date)
-        .exclude(**{f"{prod_name}": 0})
+        .exclude(**{f"{prod_name}": None})
         .order_by(f"{prod_name}")
     )
 
