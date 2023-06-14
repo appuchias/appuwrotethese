@@ -41,8 +41,8 @@ DB_FIELD_RENAME = {
 }
 DB_FIELD_FUELS = {
     "Precio Gasoleo A": "price_goa",
-    "Precio Gasolina 95 E5": "price_g95",
-    "Precio Gasolina 98 E5": "price_g98",
+    "Precio Gasolina 95 E5": "price_g95e5",
+    "Precio Gasolina 98 E5": "price_g98e5",
     "Precio Gases licuados del petróleo": "price_glp",
 }
 

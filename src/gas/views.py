@@ -25,23 +25,14 @@ from gas import forms, query_handler
 
 
 def search(request: HttpRequest):
-    return render(
-        request,
-        "gas/search.html",
-        {
-            "form": forms.SearchStations,
-        },
-    )
+    return render(request, "gas/search.html", {"form": forms.SearchPrices})
 
 
 def result(request: HttpRequest):
-    if request.method not in ["GET", "POST"]:
-        return HttpResponseNotAllowed(["GET", "POST"], "Method not allowed")
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"], "Method not allowed")
 
-    form = forms.SearchStations(
-        request.GET if request.method == "GET" else request.POST
-    )
-
+    form = forms.SearchPrices(request.POST)
     if not form.is_valid():
         messages.error(request, _("Invalid form. Please try again."))
         return render(request, "gas/noresults.html", {"results": []})
@@ -49,7 +40,7 @@ def result(request: HttpRequest):
     form_data = form.cleaned_data
     prices = query_handler.process_search(request, form_data)
 
-    prices_date = form_data.get("query_date", date.today())
+    prices_date = form_data.get("q_date", date.today())
     if prices_date == date.today():
         prices_date = query_handler.get_last_update(form_data)
 

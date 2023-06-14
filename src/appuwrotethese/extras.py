@@ -15,9 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
-from django.core.exceptions import ObjectDoesNotExist
-from django.db.utils import OperationalError
-from django.http.request import HttpRequest
 from pathlib import Path
 from typing import Any, Iterable, Callable
 
@@ -89,14 +86,3 @@ def get_json_data(filepath: Path) -> dict:
         data = json.load(r)
 
     return data
-
-
-def get_user(request: HttpRequest):
-    try:
-        user = request.user.awtuser  # type: ignore
-    except (OperationalError, ObjectDoesNotExist, AttributeError):
-        # Error when user is not awtuser or it is not logged in
-        user = request.user
-        user.is_upgraded = True  # type: ignore
-
-    return user

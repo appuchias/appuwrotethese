@@ -75,84 +75,76 @@
         .row {
             margin: 0 auto;
 
-            h6.direccion {
-                height: 19px !important;
-                align-self: center !important;
-            }
-
-            h6.horario {
-                height: 38px !important;
-                align-self: center !important;
-            }
-
-
-            .truncate {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
             .last-update {
                 margin: 5px 0 25px 0;
 
                 color: darkgray;
             }
 
-            .figure-img.img-fluid.rounded.tall {
-                // min-width: 240px;
-                max-width: 400px;
+            div.card-wrapper {
+                width: 18rem;
+            }
 
+            .card {
                 margin: auto;
-                margin-bottom: 5% !important;
-                padding: 10px 5px 5px 5px;
+                margin-bottom: 1.5rem;
 
                 background-color: #ddd;
-            }
 
-            .card-content {
-                min-height: fit-content;
-            }
-
-            .prices .table {
-                border: darkgray;
-            }
-
-            .table {
-                th {
-                    text-align: left;
+                .truncate {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
-                td {
-                    text-align: right;
-                }
-            }
-
-            .card-footer {
-                height: 2.5em;
-
-                background-color: inherit;
-                border: none;
-
-                padding: 0 0 0 10px;
-
-                a.eess-id {
-                    font-size: 1em;
-                    margin: auto 0;
-                    color: var(--text-dark);
-                    text-decoration: none;
+                .card-header h2 {
+                    margin-bottom: 0;
                 }
 
-                a.directions {
-                    font-size: 2em;
-                    margin: auto 0;
+                .card-body {
+                    padding: 10px;
+                    text-align: center;
 
-                    color: var(--text-dark);
+                    p {
+                        margin: 0;
+
+                        &.horario {
+                            height: 3rem;
+                        }
+                    }
+
+
+
+                    .price-chart {
+                        padding: 0 5px;
+
+                        table {
+                            border: darkgray;
+                            margin-bottom: .5rem;
+
+                            th {
+                                padding: .1rem;
+                                text-align: left;
+                                background-color: #ddd;
+                            }
+
+                            td {
+                                padding: .1rem;
+                                text-align: right;
+                                background-color: #ddd;
+                            }
+                        }
+                    }
+
+                    div a {
+                        margin: 0 5px;
+                    }
+
+                    svg.lucide {
+                        color: var(--darker-text);
+                        margin-bottom: 2px;
+                    }
                 }
-            }
-
-            .prices {
-                // height : 240px;
-                padding: 0 10px;
             }
         }
     }
@@ -172,7 +164,7 @@
         }
 
         .crwrapper {
-            max-width: 95%;
+            // max-width: 95%;
 
             .title {
                 font-size: 4rem;

@@ -14,13 +14,23 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from django.urls import path
-from api.gas import views
+from datetime import date
+from typing import Iterable
 
-urlpatterns = [
-    path("", views.home, name="home"),
-    path("prices/", views.get_prices, name="get_prices"),
-    path("prices/search/", views.search_prices, name="search_prices"),
-    # path("stations/", views.get_stations, name="get_stations"),
-    # path("stations/search/", views.search_stations, name="search_stations"),
-]
+from gas.models import StationPrice
+
+
+def format_prices(prices: Iterable[StationPrice], fuel_abbr: str, q_date: date) -> dict:
+    fuels = ["GOA", "G95E5", "G98E5", "GLP"]
+
+    return {
+        "fuel_type": fuel_abbr,
+        "date": q_date,
+        "prices": {
+            price.station.id_eess: {
+                f"price_{fuel.lower()}": getattr(price, f"price_{fuel.lower()}")
+                for fuel in fuels
+            }
+            for price in prices
+        },
+    }

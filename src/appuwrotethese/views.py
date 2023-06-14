@@ -105,7 +105,7 @@ def redirect_static(request: HttpRequest, **kwargs):
     dest = kwargs.get("resource", "")
 
     if dest and os.path.isfile(STATIC_ROOT / dest):
-        return redirect(f"/s/{dest}")
+        return redirect(f"/s/{dest}", permanent=True)
 
     return redirect("/")
 

@@ -9,11 +9,12 @@ django = "*"
 django-crispy-forms = "*"
 django-user-agents = "*"
 gunicorn = "*"
-python-dotenv = "*"
 pytz = "*"
+pyyaml = "*"
 whitenoise = "*"
 tzdata = "*"
 requests = "*"
+pre-commit = "*"
 
 [dev-packages]
 black = "*"

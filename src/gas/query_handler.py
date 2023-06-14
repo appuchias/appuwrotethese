@@ -18,7 +18,6 @@ import json
 from datetime import date, datetime
 from typing import Iterable
 
-import requests
 from django.contrib import messages
 from django.db.models import Count
 from django.http import Http404, HttpRequest
@@ -30,8 +29,8 @@ from gas import models
 ## DB name lookup ##
 get_db_product_name = lambda prod_abbr, default="": {
     "GOA": "price_goa",
-    "G95E5": "price_g95",
-    "G98E5": "price_g98",
+    "G95E5": "price_g95e5",
+    "G98E5": "price_g98e5",
     "GLP": "price_glp",
 }.get(prod_abbr, default)
 
@@ -74,71 +73,38 @@ def get_ids(request: HttpRequest, query: str, q_type: str) -> tuple[int, int, in
 
     return id_locality, id_province, postal_code
 
-    id_prod = get_product_id(prod_abbr)
-
-    if id_locality:
-        url = LOCALITY_URL + f"{id_locality}/{id_prod}"
-    elif id_province:
-        url = PROVINCE_URL + f"{id_province}/{id_prod}"
-    elif postal_code:
-        url = ALL_URL + f"{id_prod}"
-    else:
-        return []
-
-    stations = requests.get(url).json()["ListaEESSPrecio"]
-
-    if postal_code:
-        stations = [
-            station for station in stations if int(station["C.P."]) == postal_code
-        ]
-
-    changes = {
-        "Dirección": "address",
-        "Horario": "schedule",
-        "Rótulo": "company",
-        "IDEESS": "id_eess",
-        "Latitud": "latitude",
-        "Longitud (WGS84)": "longitude",
-        "Municipio": "locality",
-        "Provincia": "province",
-        "C.P.": "postal_code",
-    }
-    for station in stations:
-        for key, value in changes.items():
-            station[value] = station.pop(key)
-
-    return sorted(stations, key=lambda x: x["PrecioProducto"])
-
 
 ## Process the query form ##
-def process_search(request: HttpRequest, form: dict) -> Iterable:
+def process_search(request: HttpRequest, form: dict) -> Iterable[models.StationPrice]:
     """Process a query and return the results.
 
     This function gets the request and the clean form data
     and returns the list of results and the product name.
     """
 
-    query = str(form.get("query"))
-    q_type = str(form.get("type"))
-    prod_abbr = str(form.get("fuel"))
-    q_date = form.get("query_date", date.today())
+    term = str(form.get("term"))
+    q_type = str(form.get("q_type"))
+    fuel_abbr = str(form.get("fuel_abbr"))
+    q_date = form.get("q_date", date.today())
 
-    id_locality, id_province, postal_code = get_ids(request, query, q_type)
+    id_locality, id_province, postal_code = get_ids(request, term, q_type)
 
-    return get_stations(
-        request, id_locality, id_province, postal_code, prod_abbr, q_date
-    )
+    return db_prices(request, id_locality, id_province, postal_code, fuel_abbr, q_date)
 
 
-def get_stations(
+def db_prices(
     request: HttpRequest,
     id_locality: int,
     id_province: int,
     postal_code: int,
     prod_abbr: str,
     q_date: date,
-) -> Iterable:
-    """Get the stations from the database or the API, provided all details."""
+) -> Iterable[models.StationPrice]:
+    """Get the prices from the database.
+
+    This function gets the request and the clean form data
+    and returns the list of results
+    """
 
     if id_locality:
         station_filter = {"locality_id": id_locality}
@@ -158,7 +124,7 @@ def get_stations(
     prod_name = get_db_product_name(prod_abbr)
     prices = (
         models.StationPrice.objects.filter(station__in=stations, date=q_date)
-        .exclude(**{f"{prod_name}": 0})
+        .exclude(**{f"{prod_name}": None})
         .order_by(f"{prod_name}")
     )
 

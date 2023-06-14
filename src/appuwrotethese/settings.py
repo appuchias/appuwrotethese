@@ -15,31 +15,30 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from pathlib import Path
-from dotenv import load_dotenv
-from os import getenv
-from secrets import token_urlsafe
 import logging
+from pathlib import Path
+from secrets import token_urlsafe
+from yaml import safe_load
 
+from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
-load_dotenv()
+with open("config.yaml", "r") as f:
+    config = safe_load(f.read())
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = getenv("SECRETKEY", None)
+SECRET_KEY = config.get("SECRET_KEY")
 if SECRET_KEY is None:
     SECRET_KEY = token_urlsafe(64)
-    logging.warning("settings: SECRETKEY was not set in .env file. New one generated.")
-    try:
-        with open(BASE_DIR / ".env", "a") as f:
-            f.write(f"SECRETKEY={SECRET_KEY}\n")
-    except FileNotFoundError:
-        with open(BASE_DIR / ".env", "w") as f:
-            f.write(f"SECRETKEY={SECRET_KEY}\n")
+    logging.warning(
+        "settings: SECRET_KEY was not set. New one generated for this session. Please set it as an environment variable or in `config.yaml`."
+    )
+SECRET_KEY_FALLBACKS = config.get("SECRET_KEY_FALLBACKS", [])
 
 DEBUG = False
 
+SECURE_SSL_REDIRECT = not DEBUG
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [
@@ -52,8 +51,7 @@ ROOT_URLCONF = "appuwrotethese.urls"
 ALLOWED_HOSTS = [
     "appu.ltd",
     "www.appu.ltd",
-    # "beta.appu.ltd",
-    "localhost",
+    "*" if DEBUG else None,
 ]
 
 ADMINS = [("Appu", "appuchia@appu.ltd")]
@@ -70,9 +68,8 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "gas",
-    # "accounts",
+    "accounts",
     "api",
-    # "django_extensions",
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -86,7 +83,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_user_agents.middleware.UserAgentMiddleware",
-    "middleware.permanent_messages_middleware.PermanentMessagesMiddleware",
+    "middleware.persistent_messages_middleware.PersistentMessagesMiddleware",
 ]
 
 COMPRESS_ENABLED = True
@@ -98,6 +95,14 @@ LOGFILE_COUNT = 2
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        },
+        "require_debug_true": {
+            "()": "django.utils.log.RequireDebugTrue",
+        },
+    },
     "formatters": {
         "django.server": {
             "()": "django.utils.log.ServerFormatter",
@@ -109,29 +114,21 @@ LOGGING = {
             "datefmt": "%d/%b/%Y %H:%M:%S",
         },
     },
-    "filters": {
-        "require_debug_false": {
-            "()": "django.utils.log.RequireDebugFalse",
-        },
-        "require_debug_true": {
-            "()": "django.utils.log.RequireDebugTrue",
-        },
-    },
     "handlers": {
+        "console": {
+            "level": "INFO",
+            "filters": ["require_debug_true"],
+            "class": "logging.StreamHandler",
+        },
         "django.server": {
             "level": "INFO",
             "class": "logging.StreamHandler",
             "formatter": "django.server",
         },
         "mail_admins": {
-            "level": "WARN",
+            "level": "ERROR",
             "filters": ["require_debug_false"],
             "class": "django.utils.log.AdminEmailHandler",
-        },
-        "console": {
-            "level": "INFO",
-            "filters": ["require_debug_true"],
-            "class": "logging.StreamHandler",
         },
         "logfile": {
             "level": "INFO",
@@ -247,11 +244,19 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Email setup
 EMAIL_HOST = "in-v3.mailjet.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = getenv("SMTP_USER", "")
-EMAIL_HOST_PASSWORD = getenv("SMTP_PASS", "")
+EMAIL_HOST_USER = config.get("SMTP_USER", "")
+EMAIL_HOST_PASSWORD = config.get("SMTP_PASS", "")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 SERVER_EMAIL = "noreply@appu.ltd"
 
 # Messages setup
+MESSAGE_LEVEL = messages.DEBUG if DEBUG else messages.INFO
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+MESSAGE_TAGS = {
+    messages.DEBUG: "primary",
+    messages.INFO: "secondary",
+    messages.SUCCESS: "success",
+    messages.WARNING: "warning",
+    messages.ERROR: "danger",
+}

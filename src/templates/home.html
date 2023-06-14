@@ -5,10 +5,10 @@
 {% block title %}{% trans "Home" %}{% endblock %}
 
 {% block content %}
-<div id="home">
+<div id="home" class="container-fluid">
     <div class="text-themed title{% if request|is_mobile %} mobile{% endif %}">Appu Wrote These</div>
     <div class="projects">
-        <a href="/projects/" class="btn btn-outline-light"><i class="fas fa-project-diagram"></i> {% trans "View projects" %}</a>
+        <a href="/projects/" class="btn btn-outline-light"><i data-lucide="cpu"></i> {% trans "View projects" %}</a>
     </div>
 </div>
 {% endblock %}
