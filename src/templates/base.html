@@ -52,7 +52,7 @@
         {% block head %}{% endblock head %}
         <title>Appu · {% block title %}Web{% endblock title %}</title>
     </head>
-    
+
     {% with request|is_mobile as phone %}
     <body>
         <nav id=navbar class="navbar navbar-expand container-fluid">
@@ -85,9 +85,9 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav text-themed">
                     {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i data-lucide="cog"></i> Admin</a>{% endif %}
-                    <a class="text-reset nav-link" href="/accounts/" {% if phone %}aria-label="{% trans 'Account' %}" data-balloon-pos="down"{% endif %}>
+                    {% comment %} <a class="text-reset nav-link" href="/accounts/" {% if phone %}aria-label="{% trans 'Account' %}" data-balloon-pos="down"{% endif %}>
                         <i data-lucide="user"></i>{% if not phone %} {% trans "Account" %}{% endif %}
-                    </a>
+                    </a> {% endcomment %}
                     <a class="text-reset nav-link" href="/gas/" {% if phone %}aria-label="{% trans 'Prices' %}" data-balloon-pos="down"{% endif %}>
                         <i data-lucide="fuel"></i>{% if not phone %} {% trans "Prices" %}{% endif %}
                     </a>
@@ -125,4 +125,3 @@
     </body>
     {% endwith %}
 </html>
-
