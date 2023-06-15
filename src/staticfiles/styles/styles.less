@@ -186,6 +186,15 @@ div.vertical-separator {
     background: radial-gradient(ellipse 200% 110% at 50% 10%, var(--background) 10%, var(--background-alternate) 150%);
     // background: radial-gradient(ellipse 70% 120% at 0%, #333, #333 50%, #eee 75%, #333 75%); // Horizontal elliptical gradient
 
+    // Centered rounded wrapper
+    .crwrapper {
+        margin: 5% auto 0 auto;
+        padding: min(5%, 40px);
+
+        background-color: var(--accent-background);
+        border-radius: 15px;
+    }
+
     // Custom buttons
     .btn {
         &.btn-outline-dark {
@@ -429,17 +438,6 @@ div.vertical-separator {
         margin: 100px 10% 0 10%;
     }
 
-    // Centered rounded wrapper
-    .crwrapper {
-        max-width: min(1600px, 90%);
-        max-height: 100%;
-        margin: 5% auto 0 auto;
-        padding: min(5%, 40px);
-        align-items: center;
-
-        background-color: var(--accent-background);
-        border-radius: 15px;
-    }
 
 }
 

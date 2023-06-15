@@ -7,7 +7,7 @@
 {% block content %}
 <div id="chpwd">
     <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Password reset' %}</div>
-    <div class="crwrapper">
+    <div class="container crwrapper">
         {% if not user.is_authenticated %}
         <form action="/accounts/respwd/" method="post">
             {% csrf_token %}

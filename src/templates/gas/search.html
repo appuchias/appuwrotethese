@@ -12,7 +12,7 @@
             <div class="text-themed dark">({% trans 'Only works for Spain' %})</div>
         </center>
     </div>
-    <div class="crwrapper">
+    <div class="container crwrapper">
         <form action="/gas/results/" method="post">
             {% csrf_token %}
             {% crispy form %}

@@ -18,7 +18,6 @@
 
 // Theming for apps
 #content {
-
     #search {
         .title {
             margin: 30px auto 10px auto;
@@ -226,11 +225,6 @@
         }
 
         .crwrapper {
-            max-width: max(40%, 700px);
-
-            &.mobile {
-                max-width: 95%;
-            }
 
             .title {
                 font-size: 4rem;
@@ -286,7 +280,6 @@
         }
     }
 
-
     #chpwd {
         .title {
             margin: 30px auto 10px auto;
@@ -301,71 +294,15 @@
             }
         }
 
-        .crwrapper {
-            margin: 0 auto;
-            height: 50%;
-            max-width: 95%;
-
-            .title {
-                font-size: 3rem;
-                margin: 0 auto 50px auto;
-                color: var(--darker-text);
-
-                &.mobile {
-                    font-size: 2rem;
-                }
-            }
-        }
-    }
-
-    #upgrade {
-        .title {
-            margin: 30px auto 10px auto;
-
-            font-size: 5rem;
-            color: var(--text-color);
-            text-align: center;
-            text-shadow: 10px 10px 20px var(--darker-text);
-
-            &.mobile {
-                font-size: 3rem;
-            }
-        }
-
-        .subtitle {
-            font-size: 1rem;
-            max-width: 95%;
-            margin: 0 auto 40px auto;
-            text-align: center;
-
-            &.mobile {
-                font-size: 0.9rem;
-            }
-        }
-    }
-
-    #import {
-        max-width: calc(100% - 20px);
-
-        .title {
-            margin: 30px 0;
-            font-size: 5rem;
-            color: var(--text-color);
-            text-align: center;
-            text-shadow: 10px 10px 20px var(--darker-text);
-            overflow: hidden;
-
-            &.mobile {
-                font-size: 3rem;
-            }
-        }
-
-        a {
+        .crwrapper .title {
+            font-size: 3rem;
+            margin: 0 auto 50px auto;
             color: var(--darker-text);
+
+            &.mobile {
+                font-size: 2rem;
+            }
         }
 
-        .form-text {
-            color: var(--darker-text) !important;
-        }
     }
 }

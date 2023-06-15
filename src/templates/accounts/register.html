@@ -7,7 +7,7 @@
 {% block content %}
 <div id="register">
     <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'AWT Account' %}</div>
-        <div class="crwrapper{% if request|is_mobile %} mobile{% endif %}">
+        <div class="container crwrapper">
             <div class="user-login-register">
                 <div class="title ml-2 mt-2">{% trans "Register" %}</div>
                 <form action="/accounts/register/" method="post">
