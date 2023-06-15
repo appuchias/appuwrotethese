@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 13:24+0200\n"
+"POT-Creation-Date: 2023-06-15 14:19+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -413,7 +413,7 @@ msgstr "Precios"
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:118
+#: templates/base.html:119
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -491,6 +491,10 @@ msgstr "en"
 #: templates/gas/results.html:13
 msgid "on the"
 msgstr "para el día"
+
+#: templates/gas/results.html:57
+msgid "Open maps route"
+msgstr "Abrir ruta en maps"
 
 #: templates/gas/search.html:11
 msgid ""
