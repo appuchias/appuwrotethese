@@ -101,10 +101,11 @@
         </nav>
         <!-- - -->
         <div id="content" class="container-fluid">
-            {% if messages %}{% for message in messages %}
-            <div class="alert alert-{{ message.level_tag }} my-4{% if phone %} mobile{% endif %}" role="alert">
-                {{ message }}
-            </div>{% endfor %}{% endif %}
+            <div class="container-fluid messages">{% if messages %}{% for message in messages %}
+                <div class="alert alert-{{ message.level_tag }} my-4{% if phone %} mobile{% endif %}" role="alert">
+                    {{ message }}
+                </div>{% endfor %}{% endif %}
+            </div>
             {% block content %}Content{% endblock content %}
         </div>
         <!-- - -->
