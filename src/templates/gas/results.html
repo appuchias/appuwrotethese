@@ -9,8 +9,8 @@
 <div id="search-result">
     <div class="text-center">
         <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Stations' %}</div>
-        <p class="text-themed">{% trans "The icon at the bottom of every card opens the route to the station in your preferred maps app" %}. <br> {% trans "If you're in a desktop, it will be in Google Maps" %}.</p>
-        <p class="last-update text-themed">{% trans 'Prices date' %}: {{ last_update }}</p>
+        <p class="text-themed">{% trans "The icon at the bottom of every card opens the route to the station in your maps app" %}.</p>
+        <p class="last-update text-themed">{% trans "Price of" %} {{ fuel }} {% trans "in" %} {{ term }} {% trans "on the" %} {{ date }}</p>
 
         <!-- Grid with gas stations -->
         <div class="container">

@@ -23,6 +23,13 @@ from django.utils.translation import gettext_lazy as _
 
 from gas import forms, query_handler
 
+FUEL_NAMES = {
+    "GOA": "diésel",
+    "G95E5": "gasolina 95",
+    "G98E5": "gasolina 98",
+    "GLP": "gas licuado del petróleo",
+}
+
 
 def search(request: HttpRequest):
     return render(request, "gas/search.html", {"form": forms.SearchPrices})
@@ -47,5 +54,10 @@ def result(request: HttpRequest):
     return render(
         request,
         "gas/results.html",
-        {"results": prices, "last_update": prices_date},
+        {
+            "results": prices,
+            "term": form_data.get("term"),
+            "fuel": FUEL_NAMES.get(form_data.get("fuel_abbr")),
+            "date": prices_date,
+        },
     )

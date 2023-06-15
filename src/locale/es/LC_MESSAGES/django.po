@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-06 22:57+0200\n"
+"POT-Creation-Date: 2023-06-15 13:24+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -182,11 +182,11 @@ msgstr "Debes proporcionar una localidad, provincia o código postal válido."
 msgid "Welcome to the API!"
 msgstr "Bienvenido a la API!"
 
-#: appuwrotethese/settings.py:218
+#: appuwrotethese/settings.py:217
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:219
+#: appuwrotethese/settings.py:218
 msgid "English"
 msgstr "Inglés"
 
@@ -234,7 +234,7 @@ msgstr "Buscar por"
 msgid "Type of query"
 msgstr "Tipo de petición"
 
-#: gas/forms.py:46 gas/forms.py:128
+#: gas/forms.py:46 gas/forms.py:128 templates/gas/results.html:32
 msgid "Fuel"
 msgstr "Combustible"
 
@@ -246,7 +246,7 @@ msgstr "Combustible a usar para ordenar"
 msgid "Date"
 msgstr "Fecha"
 
-#: gas/forms.py:59 gas/forms.py:141 templates/gas/results.html:17
+#: gas/forms.py:59 gas/forms.py:141
 msgid "Prices date"
 msgstr "Fecha de los precios"
 
@@ -314,29 +314,29 @@ msgstr "Precio"
 msgid "Gas station prices"
 msgstr "Precios"
 
-#: gas/query_handler.py:57
+#: gas/query_handler.py:56
 msgid "Locality not found"
 msgstr "Localidad no encontrada"
 
-#: gas/query_handler.py:65
+#: gas/query_handler.py:64
 msgid "Province not found"
 msgstr "Provincia no encontrada"
 
-#: gas/query_handler.py:72
+#: gas/query_handler.py:71
 msgid "Invalid postal code"
 msgstr "Código postal inválido"
 
-#: gas/query_handler.py:122
+#: gas/query_handler.py:121
 msgid "No stations found in the selected area."
 msgstr "No se encontraron gasolineras en el área seleccionada."
 
-#: gas/query_handler.py:134
+#: gas/query_handler.py:133
 msgid "No prices found. Date may be missing or no sations were found."
 msgstr ""
 "No se encontraron precios. Puede que falte la fecha o no se encontraran "
 "gasolineras."
 
-#: gas/views.py:37
+#: gas/views.py:44
 msgid "Invalid form. Please try again."
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
@@ -345,7 +345,8 @@ msgid "Province searching might be broken"
 msgstr "La búsqueda por provincias puede no funcionar"
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
-#: templates/accounts/register.html:5 templates/base.html:99
+#: templates/accounts/register.html:5 templates/base.html:88
+#: templates/base.html:89
 msgid "Account"
 msgstr "Cuenta"
 
@@ -404,15 +405,15 @@ msgstr "Reiniciar contraseña"
 msgid "Please log out before coming here"
 msgstr "Por favor, cierra sesión antes de venir aquí"
 
-#: templates/base.html:100
+#: templates/base.html:91 templates/base.html:92
 msgid "Prices"
 msgstr "Precios"
 
-#: templates/base.html:103
+#: templates/base.html:98
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:123
+#: templates/base.html:118
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -467,17 +468,29 @@ msgstr ""
 "Nota: Las gasolineras que no ofrezcan el combustible solicitado no serán "
 "mostradas"
 
-#: templates/gas/results.html:12
+#: templates/gas/results.html:11
 msgid "Stations"
 msgstr "Gasolineras"
 
-#: templates/gas/results.html:15
+#: templates/gas/results.html:12
 msgid ""
 "The icon at the bottom of every card opens the route to the station in your "
-"maps app (Google maps for the web)"
+"maps app"
 msgstr ""
 "El icono en la parte inferior abre la dirección de la gasolinera en tu "
-"aplicación de mapas (Google maps para web)"
+"aplicación de mapas"
+
+#: templates/gas/results.html:13
+msgid "Price of"
+msgstr "Precio de"
+
+#: templates/gas/results.html:13
+msgid "in"
+msgstr "en"
+
+#: templates/gas/results.html:13
+msgid "on the"
+msgstr "para el día"
 
 #: templates/gas/search.html:11
 msgid ""
