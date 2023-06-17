@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.utils.translation import gettext as _
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
 import os
 
@@ -79,8 +79,8 @@ def projects(request: HttpRequest):
         return no_project(request)
 
 
-def thanks(request: HttpRequest):
-    return render(request, "thanks.html")
+def legal(request: HttpRequest):
+    return render(request, "legal.html")
 
 
 def text(request: HttpRequest):

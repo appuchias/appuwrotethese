@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load user_agents i18n %}
+
+{% block title %}{% trans "Legal" %}{% endblock title %}
+
+{% block content %}
+<div id="thanks" class="container-fluid">
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Legal" %}</div>
+
+    <div class="container">
+        <h2 class="text-themed">{% trans "Privacy" %}</h2>
+        <p class="text-themed">
+            {% trans "Some personal information is temporarily stored in logs for attack investigation and mitigation" %}. {% trans "This includes IP addresses and user-agents" %}.
+            <br>
+            {% trans "This information is automatically removed after 3 months using logrotate" %}. {% trans "For any specific information deletion request you can contact me through" %}
+            <a href="mailto:appuchia@appu.ltd" class="text-themed"> {% trans "my contact email" %}</a>.
+        </p>
+        <p class="text-themed">
+            {% trans "Any information provided in forms or any similar way (usernames, real names, emails and passwords) will be stored in the web's database" %}.
+            <br>
+            {% trans "You can request its deletion at any time through the same email that is registered in the web" %}. {% trans "All requests will be fulfilled within 30 days from the first notification when possible" %}.
+        </p>
+        <p class="text-themed">{% trans "Passwords are stored hashed and salted for users' protection in case of a security breach" %}.</p>
+
+        <h2 class="text-themed">{% trans "Analytics" %}</h2>
+        <p class="text-themed">
+            {% trans "I use a self-hosted instance of Plausible to store web analytics and be able to monitor traffic" %}.
+            <br>
+            {% trans "None of the information tracked by the analytics script can be used to uniquely identify a specific user" %}.
+        </p>
+
+        <h2 class="text-themed">{% trans "Thanks" %}</h2>
+        <p class="text-themed">{% trans "This website would not be possible without the help of" %}:</p>
+        <ul>
+            <li class="text-themed">{% trans "My mother" %}, {% trans "specifically for her help with learning CSS and more UI recommendations" %}.</li>
+            <li class="text-themed"><a href="http://instagram.com/paauu_31" class="text-themed" rel="noopener noreferrer" target="_blank"><strong>@paauu_31</strong></a>, {% trans "for her support while building the web and debugging it (especially debugging)" %}.</li>
+            {% comment %} <li class="text-themed"></li> {% endcomment %}
+        </ul>
+    </div>
+</div>
+{% endblock content %}
