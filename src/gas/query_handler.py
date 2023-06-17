@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Iterable
 
 from django.contrib import messages
@@ -108,7 +108,7 @@ def db_prices(
     prices = (
         models.StationPrice.objects.filter(station__in=stations, date=q_date)
         .exclude(**{f"{prod_name}": None})
-        .order_by(f"{prod_name}")
+        .order_by(prod_name)
     )
 
     if not prices.exists():
@@ -118,6 +118,45 @@ def db_prices(
         return []
 
     return prices
+
+
+def get_stations_prices(
+    station_ids: int | Iterable[int], fuel: str, q_date: date
+) -> Iterable[models.StationPrice]:
+    """Get the prices from the database.
+
+    This function gets the request and the clean form data
+    and returns the list of results
+    """
+
+    prod_name = get_db_product_name(fuel)
+
+    if isinstance(station_ids, int):
+        raw_prices = models.StationPrice.objects.filter(
+            station_id=station_ids, date=q_date
+        )
+    else:
+        raw_prices = models.StationPrice.objects.filter(
+            station_id__in=station_ids, date=q_date
+        )
+
+    prices = raw_prices.exclude(**{f"{prod_name}": None}).order_by(prod_name)
+
+    return prices
+
+
+def get_prev_week_prices(prices, fuel: str, q_date: date) -> dict[int, float]:
+    """Get the previous week date prices"""
+
+    prev_week = q_date - timedelta(days=7)
+    prev_prices = get_stations_prices(
+        (price.station.id_eess for price in prices), fuel, prev_week
+    )
+
+    return {
+        price.station.id_eess: getattr(price, get_db_product_name(fuel))
+        for price in prev_prices
+    }
 
 
 def get_last_update(form_data) -> str:

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 14:19+0200\n"
+"POT-Creation-Date: 2023-06-18 01:07+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -234,7 +234,7 @@ msgstr "Buscar por"
 msgid "Type of query"
 msgstr "Tipo de petición"
 
-#: gas/forms.py:46 gas/forms.py:128 templates/gas/results.html:32
+#: gas/forms.py:46 gas/forms.py:128 templates/gas/results.html:43
 msgid "Fuel"
 msgstr "Combustible"
 
@@ -326,11 +326,11 @@ msgstr "Provincia no encontrada"
 msgid "Invalid postal code"
 msgstr "Código postal inválido"
 
-#: gas/query_handler.py:121
+#: gas/query_handler.py:104
 msgid "No stations found in the selected area."
 msgstr "No se encontraron gasolineras en el área seleccionada."
 
-#: gas/query_handler.py:133
+#: gas/query_handler.py:116
 msgid "No prices found. Date may be missing or no sations were found."
 msgstr ""
 "No se encontraron precios. Puede que falte la fecha o no se encontraran "
@@ -481,18 +481,37 @@ msgstr ""
 "aplicación de mapas"
 
 #: templates/gas/results.html:13
+msgid ""
+"A red icon means last week price was lower. A green one means now it's "
+"cheaper"
+msgstr "Un icono rojo significa que la semana pasada era más barato. "
+"Un icono verde significa que ahora es más barato"
+
+#: templates/gas/results.html:14
 msgid "Price of"
 msgstr "Precio de"
 
-#: templates/gas/results.html:13
+#: templates/gas/results.html:14
 msgid "in"
 msgstr "en"
 
-#: templates/gas/results.html:13
+#: templates/gas/results.html:14
 msgid "on the"
 msgstr "para el día"
 
-#: templates/gas/results.html:57
+#: templates/gas/results.html:24
+msgid "More expensive"
+msgstr "Más caro"
+
+#: templates/gas/results.html:24
+msgid "Cheaper"
+msgstr "Más barato"
+
+#: templates/gas/results.html:24
+msgid "Same price"
+msgstr "Mismo precio"
+
+#: templates/gas/results.html:68
 msgid "Open maps route"
 msgstr "Abrir ruta en maps"
 

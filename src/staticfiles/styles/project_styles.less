@@ -71,77 +71,75 @@
             }
         }
 
-        .row {
-            margin: 0 auto;
+        #results-cards {
+            margin-top: 2.5rem;
 
-            .last-update {
-                margin: 5px 0 25px 0;
+            .row {
+                margin: 0 auto;
 
-                color: darkgray;
-            }
-
-            div.card-wrapper {
-                width: 18rem;
-            }
-
-            .card {
-                margin: auto;
-                margin-bottom: 1.5rem;
-
-                background-color: #ddd;
-
-                .truncate {
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                div.card-wrapper {
+                    width: 18rem;
                 }
 
-                .card-header h2 {
-                    margin-bottom: 0;
-                }
+                .card {
+                    margin: auto;
+                    margin-bottom: 1.5rem;
 
-                .card-body {
-                    padding: 10px;
-                    text-align: center;
+                    background-color: #ddd;
 
-                    p {
-                        margin: 0;
-
-                        &.horario {
-                            height: 3rem;
-                        }
+                    .truncate {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
 
+                    .card-header h2 {
+                        margin-bottom: 0;
+                    }
 
+                    .card-body {
+                        padding: 10px;
+                        text-align: center;
 
-                    .price-chart {
-                        padding: 0 5px;
+                        p {
+                            margin: 0;
 
-                        table {
-                            border: darkgray;
-                            margin-bottom: .5rem;
-
-                            th {
-                                padding: .1rem;
-                                text-align: left;
-                                background-color: #ddd;
-                            }
-
-                            td {
-                                padding: .1rem;
-                                text-align: right;
-                                background-color: #ddd;
+                            &.horario {
+                                height: 3rem;
                             }
                         }
-                    }
 
-                    div a {
-                        margin: 0 5px;
-                    }
 
-                    svg.lucide {
-                        color: var(--darker-text);
-                        margin-bottom: 2px;
+
+                        .price-chart {
+                            padding: 0 5px;
+
+                            table {
+                                border: darkgray;
+                                margin-bottom: .5rem;
+
+                                th {
+                                    padding: .1rem;
+                                    text-align: left;
+                                    background-color: #ddd;
+                                }
+
+                                td {
+                                    padding: .1rem;
+                                    text-align: right;
+                                    background-color: #ddd;
+                                }
+                            }
+                        }
+
+                        div a {
+                            margin: 0 5px;
+                        }
+
+                        svg.lucide {
+                            color: var(--darker-text);
+                            margin-bottom: 2px;
+                        }
                     }
                 }
             }

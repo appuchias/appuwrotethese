@@ -59,6 +59,32 @@ def result(request: HttpRequest):
     if prices_date == date.today():
         prices_date = query_handler.get_last_update(form_data)
 
+    if not request.user.is_authenticated:
+        return render(
+            request,
+            "gas/results.html",
+            {
+                "results": prices,
+                "term": form_data.get("term"),
+                "fuel": FUEL_NAMES.get(form_data.get("fuel_abbr")),
+                "date": prices_date,
+            },
+        )
+
+    prod_name = query_handler.get_db_product_name(form_data.get("fuel_abbr"))
+    prev_week_prices = query_handler.get_prev_week_prices(
+        prices, form_data.get("fuel_abbr"), form_data.get("q_date")
+    )
+
+    prev_lower = {}
+    for price in prices:
+        if getattr(price, prod_name) > prev_week_prices.get(price.station.id_eess):
+            prev_lower[price.station.id_eess] = 1
+        elif getattr(price, prod_name) < prev_week_prices.get(price.station.id_eess):
+            prev_lower[price.station.id_eess] = -1
+        else:
+            prev_lower[price.station.id_eess] = 0
+
     return render(
         request,
         "gas/results.html",
@@ -67,5 +93,6 @@ def result(request: HttpRequest):
             "term": form_data.get("term"),
             "fuel": FUEL_NAMES.get(form_data.get("fuel_abbr")),
             "date": prices_date,
+            "prev_lower": prev_lower,
         },
     )
