@@ -45,7 +45,15 @@ def result(request: HttpRequest):
         return render(request, "gas/noresults.html", {"results": []})
 
     form_data = form.cleaned_data
-    prices = query_handler.process_search(request, form_data)
+    term = str(form_data.get("term"))
+    q_type = str(form_data.get("q_type"))
+    fuel_abbr = str(form_data.get("fuel_abbr"))
+    q_date = form_data.get("q_date", date.today())
+
+    id_locality, id_province, postal_code = query_handler.get_ids(request, term, q_type)
+    prices = query_handler.db_prices(
+        request, id_locality, id_province, postal_code, fuel_abbr, q_date
+    )
 
     prices_date = form_data.get("q_date", date.today())
     if prices_date == date.today():

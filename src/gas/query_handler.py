@@ -75,23 +75,6 @@ def get_ids(request: HttpRequest, query: str, q_type: str) -> tuple[int, int, in
 
 
 ## Process the query form ##
-def process_search(request: HttpRequest, form: dict) -> Iterable[models.StationPrice]:
-    """Process a query and return the results.
-
-    This function gets the request and the clean form data
-    and returns the list of results and the product name.
-    """
-
-    term = str(form.get("term"))
-    q_type = str(form.get("q_type"))
-    fuel_abbr = str(form.get("fuel_abbr"))
-    q_date = form.get("q_date", date.today())
-
-    id_locality, id_province, postal_code = get_ids(request, term, q_type)
-
-    return db_prices(request, id_locality, id_province, postal_code, fuel_abbr, q_date)
-
-
 def db_prices(
     request: HttpRequest,
     id_locality: int,
