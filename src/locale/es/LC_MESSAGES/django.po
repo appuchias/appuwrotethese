@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-18 01:49+0200\n"
+"POT-Creation-Date: 2023-06-18 01:57+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -629,22 +629,26 @@ msgstr ""
 "para identificar a un usuario específico"
 
 #: templates/legal.html:32
+msgid "External resources"
+msgstr "Recursos externos"
+
+#: templates/legal.html:40
 msgid "Thanks"
 msgstr "Agradecimientos"
 
-#: templates/legal.html:33
+#: templates/legal.html:41
 msgid "This website would not be possible without the help of"
 msgstr "Esta web no sería posible sin la ayuda de"
 
-#: templates/legal.html:35
+#: templates/legal.html:43
 msgid "My mother"
 msgstr "Mi madre"
 
-#: templates/legal.html:35
+#: templates/legal.html:43
 msgid "specifically for her help with learning CSS and more UI recommendations"
 msgstr "específicamente por su ayuda con CSS y más recomendaciones de UI"
 
-#: templates/legal.html:36
+#: templates/legal.html:44
 msgid ""
 "for her support while building the web and debugging it (especially "
 "debugging)"
