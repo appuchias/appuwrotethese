@@ -110,13 +110,14 @@
         </div>
         <!-- - -->
         <div id="footer" class="container-fluid">
-            <div class="footer-icons{% if phone %} mobile{% endif %}">
-                <a href="https://links.appu.ltd/" class="text-reset icon" rel="noopener" target="_blank"><i data-lucide="link" class="footer"></i></a>
-                <a href="https://l.appu.ltd/youtube" class="text-reset icon" rel="noopener noreferrer" target="_blank"><i data-lucide="youtube" class="footer"></i></a>
-                <a href="https://l.appu.ltd/awt" class="text-reset icon" rel="noopener" target="_blank"><i data-lucide="github" class="footer"></i></a>
+            <div class="float-start">
+                <a href="https://links.appu.ltd/" class="text-themed icon" rel="noopener" target="_blank"><i data-lucide="link" class="footer"></i></a>
+                <a href="https://l.appu.ltd/youtube" class="text-themed icon" rel="noopener noreferrer" target="_blank"><i data-lucide="youtube" class="footer"></i></a>
+                <a href="https://l.appu.ltd/awt" class="text-themed icon" rel="noopener" target="_blank"><i data-lucide="github" class="footer"></i></a>
+                <a href="https://coindrop.to/appuchia" class="text-themed icon" rel="noopener noreferrer" target="_blank" aria-label="{% trans "Support me" %}!" data-balloon-pos="up"><i data-lucide="coins" class="footer"></i></a>
             </div>
-            <div class="footer-appu align-self-end{% if phone %} mobile{% endif %}">
-                <a href="/legal/" class="text-reset text-decoration-none">{% trans "Coded with 🖤 by Appu" %}</a>
+            <div class="float-end">
+                <a href="/legal/" class="text-themed text-decoration-none">{% trans "Coded with 🖤 by Appu" %}</a>
             </div>
         </div>
         <script>lucide.createIcons()</script>
