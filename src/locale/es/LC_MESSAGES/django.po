@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 02:31+0200\n"
+"POT-Creation-Date: 2023-06-19 03:27+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -36,7 +36,7 @@ msgstr "Registrarse"
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: accounts/forms.py:133 templates/accounts/account.html:14
+#: accounts/forms.py:133 templates/accounts/account.html:16
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
@@ -359,15 +359,17 @@ msgstr "Cuenta AWT"
 msgid "You're logged in as"
 msgstr "Estás conectado como"
 
-#: templates/accounts/account.html:13
+#: templates/accounts/account.html:12 templates/legal.html:11
+#: templates/legal.html:58
 msgid "Hosting is not free"
 msgstr "La web no es gratis"
 
-#: templates/accounts/account.html:13
+#: templates/accounts/account.html:12 templates/legal.html:11
+#: templates/legal.html:58
 msgid "Support me"
 msgstr "Apóyame"
 
-#: templates/accounts/account.html:15
+#: templates/accounts/account.html:17
 msgid "Logout"
 msgstr "Cerrar sesión"
 
@@ -549,11 +551,11 @@ msgstr "Ver proyectos"
 msgid "Legal"
 msgstr "Legal"
 
-#: templates/legal.html:11
+#: templates/legal.html:16
 msgid "Privacy"
 msgstr "Privacidad"
 
-#: templates/legal.html:13
+#: templates/legal.html:18
 msgid ""
 "Some personal information is temporarily stored in logs for attack "
 "investigation and mitigation"
@@ -561,29 +563,29 @@ msgstr ""
 "Alguna información personal se almacena temporalmente en los logs para "
 "investigar y mitigar ataques"
 
-#: templates/legal.html:13
+#: templates/legal.html:18
 msgid "This includes IP addresses and user-agents"
 msgstr "Esto incluye direcciones IP y user-agents"
 
-#: templates/legal.html:15
+#: templates/legal.html:20
 msgid ""
 "This information is automatically removed after 3 months using logrotate"
 msgstr ""
 "Esta información se elimina automáticamente después de 3 meses usando "
 "logrotate"
 
-#: templates/legal.html:15
+#: templates/legal.html:20
 msgid ""
 "For any specific information deletion request you can contact me through"
 msgstr ""
 "Para cualquier petición de eliminación de información específica puedes "
 "contactar conmigo a través de"
 
-#: templates/legal.html:16
+#: templates/legal.html:21
 msgid "my contact email"
 msgstr "mi correo de contacto"
 
-#: templates/legal.html:19
+#: templates/legal.html:24
 msgid ""
 "Any information provided in forms or any similar way (usernames, real names, "
 "emails and passwords) will be stored in the web's database"
@@ -592,7 +594,7 @@ msgstr ""
 "(nombres de usuario, nombres reales, correos electrónicos y contraseñas) se "
 "almacenará en la base de datos de la web"
 
-#: templates/legal.html:21
+#: templates/legal.html:26
 msgid ""
 "You can request its deletion at any time through the same email that is "
 "registered in the web"
@@ -600,7 +602,7 @@ msgstr ""
 "Puedes solicitar su eliminación en cualquier momento a través del mismo "
 "correo electrónico que está registrado en la web"
 
-#: templates/legal.html:21
+#: templates/legal.html:26
 msgid ""
 "All requests will be fulfilled within 30 days from the first notification "
 "when possible"
@@ -608,7 +610,15 @@ msgstr ""
 "Todas las solicitudes se cumplirán en un plazo de 30 días desde la primera "
 "notificación siempre que sea posible"
 
-#: templates/legal.html:23
+#: templates/legal.html:28
+msgid ""
+"None of the information stored by this service is or will be shared with any "
+"third party unless required by law"
+msgstr ""
+"Ninguna información almacenada por este servicio es o será compartida con "
+"terceros a menos que sea requerido por ley"
+
+#: templates/legal.html:30
 msgid ""
 "Passwords are stored hashed and salted for users' protection in case of a "
 "security breach"
@@ -616,11 +626,11 @@ msgstr ""
 "Las contraseñas se almacenan hasheadas y 'salted' para la protección de los "
 "usuarios en caso de una brecha de seguridad"
 
-#: templates/legal.html:25
+#: templates/legal.html:32
 msgid "Analytics"
 msgstr "Analíticas"
 
-#: templates/legal.html:27
+#: templates/legal.html:34
 msgid ""
 "I use a self-hosted instance of Plausible to store web analytics and be able "
 "to monitor traffic"
@@ -628,7 +638,7 @@ msgstr ""
 "Uso una instancia self-hosted de Plausible para almacenar las analíticas web "
 "y poder monitorizar el tráfico"
 
-#: templates/legal.html:29
+#: templates/legal.html:36
 msgid ""
 "None of the information tracked by the analytics script can be used to "
 "uniquely identify a specific user"
@@ -636,27 +646,27 @@ msgstr ""
 "Ninguna información obtenida por el script de analíticas puede ser usada "
 "para identificar a un usuario específico"
 
-#: templates/legal.html:32
+#: templates/legal.html:39
 msgid "External resources"
 msgstr "Recursos externos"
 
-#: templates/legal.html:40
+#: templates/legal.html:47
 msgid "Thanks"
 msgstr "Agradecimientos"
 
-#: templates/legal.html:41
+#: templates/legal.html:48
 msgid "This website would not be possible without the help of"
 msgstr "Esta web no sería posible sin la ayuda de"
 
-#: templates/legal.html:43
+#: templates/legal.html:50
 msgid "My mother"
 msgstr "Mi madre"
 
-#: templates/legal.html:43
+#: templates/legal.html:50
 msgid "specifically for her help with learning CSS and more UI recommendations"
 msgstr "específicamente por su ayuda con CSS y más recomendaciones de UI"
 
-#: templates/legal.html:44
+#: templates/legal.html:51
 msgid ""
 "for her support while building the web and debugging it (especially "
 "debugging)"
