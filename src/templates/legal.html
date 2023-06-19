@@ -8,6 +8,11 @@
     <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Legal" %}</div>
 
     <div class="container">
+        <a href="coindrop.to/appuchia" class="text-themed text-decoration-none float-end p-1 border border-light rounded-3" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="up"><i data-lucide="coins"></i> {% trans "Support me" %}!</a>
+
+        <br>
+        <br>
+
         <h2 class="text-themed">{% trans "Privacy" %}</h2>
         <p class="text-themed">
             {% trans "Some personal information is temporarily stored in logs for attack investigation and mitigation" %}. {% trans "This includes IP addresses and user-agents" %}.
@@ -44,6 +49,10 @@
             <li class="text-themed"><a href="http://instagram.com/paauu_31" class="text-themed" rel="noopener noreferrer" target="_blank"><strong>@paauu_31</strong></a>, {% trans "for her support while building the web and debugging it (especially debugging)" %}.</li>
             {% comment %} <li class="text-themed"></li> {% endcomment %}
         </ul>
+
+        <br>
+
+        <a href="coindrop.to/appuchia" class="text-themed text-decoration-none float-end p-1 border border-light rounded-3" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="up"><i data-lucide="coins"></i> {% trans "Support me" %}!</a>
     </div>
 </div>
 {% endblock content %}

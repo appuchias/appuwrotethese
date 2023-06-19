@@ -8,14 +8,13 @@
 <div id="account">
     <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'AWT Account' %}</div>
         <div class="container crwrapper">
-            <div class="user-info">
-                <div class="username">{% trans "You're logged in as" %} '{{ user.get_username }}'.</div>
-            </div>
-            <div class="buttons">
-                <div class="row">
-                <a href="/accounts/chpwd/" class="btn btn-outline-dark"><i data-lucide="lock"></i> {% trans "Change password" %}</a>
-                <a href="/accounts/logout/" class="btn btn-outline-dark"><i data-lucide="log-out"></i> {% trans "Logout" %}</a>
-                </div>
+            <p>{% trans "You're logged in as" %} '{{ user.get_username }}'.</p>
+            <p><a href="coindrop.to/appuchia" class="btn btn-dark" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="down"><i data-lucide="coins"></i> {% trans "Support me" %}!</a></p>
+            <hr>
+
+            <div class="row justify-content-end">
+                <a href="/accounts/chpwd/" class="col-md-4 ms-auto me-2 btn btn-outline-dark"><i data-lucide="lock"></i> {% trans "Change password" %}</a>
+                <a href="/accounts/logout/" class="col-md-3 btn btn-outline-dark"><i data-lucide="log-out"></i> {% trans "Logout" %}</a>
             </div>
         </div>
     </div>
