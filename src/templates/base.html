@@ -77,11 +77,7 @@
                     </g>
                 </svg>
             </a>
-            <form action="{% url 'set_language' %}" method="post" id="langForm" class="invisible">
-                {% csrf_token %}
-                <input type="text" name="language" value="{% if LANG == 'es' %}en{% else %}es{% endif %}" class="invisible">
-            </form>
-
+            <form action="{% url 'set_language' %}" method="post" class="invisible" id="langForm">{% csrf_token %}<input type="text" name="language" value="{% if LANG == 'es' %}en{% else %}es{% endif %}"></form>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav text-themed">
                     {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i data-lucide="cog"></i> Admin</a>{% endif %}
