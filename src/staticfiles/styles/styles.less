@@ -56,19 +56,19 @@ html {
     color: var(--text-color);
 
     .accent {
-        color: var(--accent-text) !important;
+        color: var(--accent-text);
 
         &:hover {
-            color: var(--accent-text) !important;
+            color: var(--accent-text);
         }
     }
 
     .link {
-        color: var(--text-color) !important;
+        color: var(--text-color);
         text-decoration: none;
 
         &:hover {
-            color: var(--accent-text) !important;
+            color: var(--accent-text);
         }
     }
 
@@ -102,9 +102,6 @@ div.vertical-separator {
     }
 }
 
-// ////////////////////////////////// //
-// BASE PAGE SETTINGS AND COMPONENTS //
-// ////////////////////////////////// //
 // Header
 #navbar {
     position: fixed;
@@ -151,33 +148,9 @@ div.vertical-separator {
 #footer {
     position: fixed;
     bottom: 0;
-    width: 100%;
     padding: 0 10px;
 
-    background: black;
     background: linear-gradient(0deg, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, 0) 100%);
-
-
-    .footer-icons {
-        float: left;
-        color: var(--text-color);
-        font-size: 1.1rem;
-
-        &.mobile {
-            font-size: 1rem;
-        }
-    }
-
-    .footer-appu {
-        float: right;
-        color: var(--text-color);
-        text-align: right;
-        font-size: 1rem;
-
-        &.mobile {
-            font-size: .9em;
-        }
-    }
 }
 
 // Content
