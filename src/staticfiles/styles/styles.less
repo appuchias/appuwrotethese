@@ -116,8 +116,13 @@ div.vertical-separator {
 
     background-color: var(--navbar-color);
 
-    .nav-icon {
-        height: 2rem;
+    #nav-home-icon {
+        rotate: 0deg;
+        transition: .25s cubic-bezier(.25, -0.5, .2, 2);
+
+        &:hover {
+            transform: rotate(-5deg) scale(1.1);
+        }
     }
 
     .navbar-nav a.nav-link {
