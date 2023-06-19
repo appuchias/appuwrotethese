@@ -16,14 +16,14 @@
         <!-- Grid with gas stations -->
         <div id="results-cards" class="container">
             <div class="row justify-content-sm-around justify-content-center g-1">
-                {% for i in results %}{% with s=i.station %}
+                {% for i in results %}{% with s=i.station %}{% with prev_lower|access:s.id_eess as diff %}
                 <div class="card-wrapper col-xl-2 col-md-3 col-sm-4 col-12">
                     <div class="card">
-                        <div class="card-header{% if user.is_authenticated %} container row justify-content-start{% endif %}">
+                        <div class="card-header{% if user.is_authenticated %} container row justify-content-start g-1 p-1{% endif %}">
                             {% if user.is_authenticated %}
-                            <h2 class="col-1" title="{% if prev_lower|access:s.id_eess == -1 %}{% trans "More expensive" %}{% elif prev_lower|access:s.id_eess == 1 %}{% trans "Cheaper" %}{% else %}{% trans "Same price" %}{% endif %}">
-                                {% if prev_lower|access:s.id_eess == -1 %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-                                {% elif prev_lower|access:s.id_eess == 1 %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="lightgreen" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-down"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+                            <h2 class="col-2" title="{% if diff == -1 %}{% trans "More expensive" %}{% elif diff == 1 %}{% trans "Cheaper" %}{% else %}{% trans "Same price" %}{% endif %}">
+                                {% if diff == -1 %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                                {% elif diff == 1 %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-down"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
                                 {% else %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-equal"><line x1="5" x2="19" y1="9" y2="9"/><line x1="5" x2="19" y1="15" y2="15"/></svg>
                                 {% endif %}
                             </h2>
@@ -72,19 +72,12 @@
                             </div>
                         </div>
                     </div>
-                </div>{% endwith %}{% endfor %}
+                </div>{% endwith %}{% endwith %}{% endfor %}
             </div>
             <a href="https://coindrop.to/appuchia" class="text-themed text-decoration-none float-center p-2 border border-light rounded-3" rel="noopener noreferrer" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="up"><i data-lucide="coins"></i> {% trans "Support me" %}!</a>
             <script>
                 function openmaps(lat, long, name, address) {
                     window.open("https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll=" + lat + "," + long + "&daddr=" + name + " " + address);
-                    // // If it's an iPhone..
-                    // if ((navigator.platform.indexOf("iPhone") != -1) ||
-                    //     (navigator.platform.indexOf("iPod") != -1) ||
-                    //     (navigator.platform.indexOf("iPad") != -1))
-                    //     window.open("maps://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=" + lat + "," + long);
-                    // else
-                    //     window.open("https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll=" + lat + "," + long + "&daddr=" + name + "");
                 }
             </script>
         </div>
