@@ -112,9 +112,7 @@ def db_prices(
     )
 
     if not prices.exists():
-        messages.error(
-            request, _("No prices found. Date may be missing or no sations were found.")
-        )
+        messages.error(request, _("No prices were found. Try with a broader search."))
         return []
 
     return prices
