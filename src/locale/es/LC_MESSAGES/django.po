@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 17:16+0200\n"
+"POT-Creation-Date: 2023-06-22 00:34+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -234,7 +234,7 @@ msgstr "Buscar por"
 msgid "Type of query"
 msgstr "Tipo de petición"
 
-#: gas/forms.py:46 gas/forms.py:128 templates/gas/results.html:43
+#: gas/forms.py:46 gas/forms.py:128 templates/gas/results.html:36
 msgid "Fuel"
 msgstr "Combustible"
 
@@ -330,11 +330,9 @@ msgstr "Código postal inválido"
 msgid "No stations found in the selected area."
 msgstr "No se encontraron gasolineras en el área seleccionada."
 
-#: gas/query_handler.py:116
-msgid "No prices found. Date may be missing or no sations were found."
-msgstr ""
-"No se encontraron precios. Puede que falte la fecha o no se encontraran "
-"gasolineras."
+#: gas/query_handler.py:115
+msgid "No prices were found. Try with a broader search."
+msgstr "No se encontraron precios. Prueba con una búsqueda más amplia."
 
 #: gas/views.py:44
 msgid "Invalid form. Please try again."
@@ -359,13 +357,13 @@ msgstr "Cuenta AWT"
 msgid "You're logged in as"
 msgstr "Estás conectado como"
 
-#: templates/accounts/account.html:12 templates/gas/results.html:77
+#: templates/accounts/account.html:12 templates/gas/results.html:95
 #: templates/legal.html:11 templates/legal.html:58
 msgid "Hosting is not free"
 msgstr "La web no es gratis"
 
 #: templates/accounts/account.html:12 templates/base.html:113
-#: templates/gas/results.html:77 templates/legal.html:11
+#: templates/gas/results.html:95 templates/legal.html:11
 #: templates/legal.html:58
 msgid "Support me"
 msgstr "Apóyame"
@@ -483,49 +481,41 @@ msgstr ""
 msgid "Stations"
 msgstr "Gasolineras"
 
-#: templates/gas/results.html:12
-msgid ""
-"The icon at the bottom of every card opens the route to the station in your "
-"maps app"
-msgstr ""
-"El icono en la parte inferior abre la dirección de la gasolinera en tu "
-"aplicación de mapas"
-
-#: templates/gas/results.html:13
-msgid ""
-"A red icon means last week price was lower. A green one means now it's "
-"cheaper"
-msgstr ""
-"Un icono rojo significa que la semana pasada era más barato. Un icono verde "
-"significa que ahora es más barato"
-
-#: templates/gas/results.html:14
+#: templates/gas/results.html:16
 msgid "Price of"
 msgstr "Precio de"
 
-#: templates/gas/results.html:14
+#: templates/gas/results.html:16
 msgid "in"
 msgstr "en"
 
-#: templates/gas/results.html:14
+#: templates/gas/results.html:16
 msgid "on the"
 msgstr "para el día"
 
-#: templates/gas/results.html:24
-msgid "More expensive"
-msgstr "Más caro"
+#: templates/gas/results.html:17
+msgid ""
+"The 3 bottom icons show if the price in the past was cheaper (green) or more "
+"expensive (red)"
+msgstr ""
+"Los 3 iconos de abajo muestran si el combustible era más barato (verde) o más"
+" caro (rojo)"
 
-#: templates/gas/results.html:24
-msgid "Cheaper"
-msgstr "Más barato"
-
-#: templates/gas/results.html:24
-msgid "Same price"
-msgstr "Mismo precio"
-
-#: templates/gas/results.html:68
+#: templates/gas/results.html:61
 msgid "Open maps route"
 msgstr "Abrir ruta en maps"
+
+#: templates/gas/results.html:67
+msgid "Yesterday"
+msgstr "Ayer"
+
+#: templates/gas/results.html:74
+msgid "Last week"
+msgstr "Semana pasada"
+
+#: templates/gas/results.html:81
+msgid "Last month"
+msgstr "Mes pasado"
 
 #: templates/gas/search.html:11
 msgid ""
@@ -679,6 +669,41 @@ msgstr ""
 msgid "Projects"
 msgstr "Proyectos"
 
+#~ msgid ""
+#~ "The icon at the bottom of every card opens the route to the station in "
+#~ "your maps app"
+#~ msgstr ""
+#~ "El icono en la parte inferior abre la dirección de la gasolinera en tu "
+#~ "aplicación de mapas"
+
+#~ msgid ""
+#~ "The 3 icons on the bootom of cards show the price difference with "
+#~ "yesterday, last week and last month, respectively"
+#~ msgstr ""
+#~ "Los 3 iconos de la parte inferior de las tarjetas muestran la diferencia "
+#~ "de precio respecto a ayer, hace una semana y hace un mes, respectivamente"
+
+#~ msgid ""
+#~ "A red icon means the corresponding price was lower, while a green one "
+#~ "means now it's cheaper"
+#~ msgstr ""
+#~ "Un icono rojo significa que ese día era más barato, mientras que un icono "
+#~ "verde significa que ahora es más barato"
+
+#~ msgid "More expensive"
+#~ msgstr "Más caro"
+
+#~ msgid "Cheaper"
+#~ msgstr "Más barato"
+
+#~ msgid "Same price"
+#~ msgstr "Mismo precio"
+
+#~ msgid "No prices found. Date may be missing or no sations were found."
+#~ msgstr ""
+#~ "No se encontraron precios. Puede que falte la fecha o no se encontraran "
+#~ "gasolineras."
+
 #~ msgid "Honorable mentions"
 #~ msgstr "Menciones honoríficas"
 
@@ -761,9 +786,6 @@ msgstr "Proyectos"
 
 #~ msgid "Postal code (Inaccurate)"
 #~ msgstr "Código postal (Inexacto)"
-
-#~ msgid "Last update"
-#~ msgstr "Última actualización"
 
 #~ msgid "No results found. Please try again."
 #~ msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."

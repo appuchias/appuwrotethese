@@ -47,12 +47,12 @@ def result(request: HttpRequest):
     form_data = form.cleaned_data
     term = str(form_data.get("term"))
     q_type = str(form_data.get("q_type"))
-    fuel_abbr = str(form_data.get("fuel_abbr"))
+    fuel = str(form_data.get("fuel_abbr"))
     q_date = form_data.get("q_date", date.today())
 
     id_locality, id_province, postal_code = query_handler.get_ids(request, term, q_type)
     prices = query_handler.db_prices(
-        request, id_locality, id_province, postal_code, fuel_abbr, q_date
+        request, id_locality, id_province, postal_code, fuel, q_date
     )
 
     prices_date = form_data.get("q_date", date.today())
@@ -71,19 +71,9 @@ def result(request: HttpRequest):
             },
         )
 
-    prod_name = query_handler.get_db_product_name(form_data.get("fuel_abbr"))
-    prev_week_prices = query_handler.get_prev_week_prices(
-        prices, form_data.get("fuel_abbr"), form_data.get("q_date")
-    )
-
-    prev_lower = {}
-    for price in prices:
-        if getattr(price, prod_name) > prev_week_prices.get(price.station.id_eess):
-            prev_lower[price.station.id_eess] = 1
-        elif getattr(price, prod_name) < prev_week_prices.get(price.station.id_eess):
-            prev_lower[price.station.id_eess] = -1
-        else:
-            prev_lower[price.station.id_eess] = 0
+    past_day_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 1)
+    past_week_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 7)
+    past_month_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 30)
 
     return render(
         request,
@@ -93,6 +83,8 @@ def result(request: HttpRequest):
             "term": form_data.get("term"),
             "fuel": FUEL_NAMES.get(form_data.get("fuel_abbr")),
             "date": prices_date,
-            "prev_lower": prev_lower,
+            "past_day_lower": past_day_lower,
+            "past_week_lower": past_week_lower,
+            "past_month_lower": past_month_lower,
         },
     )

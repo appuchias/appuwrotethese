@@ -143,18 +143,34 @@ def get_stations_prices(
     return prices
 
 
-def get_prev_week_prices(prices, fuel: str, q_date: date) -> dict[int, float]:
-    """Get the previous week date prices"""
+def are_past_prices_lower(
+    curr_prices, fuel: str, q_date: date, day_diff: int
+) -> dict[int, str]:
+    """Get the a past date's prices"""
 
-    prev_week = q_date - timedelta(days=7)
-    prev_prices = get_stations_prices(
-        (price.station.id_eess for price in prices), fuel, prev_week
+    prev_week = q_date - timedelta(days=day_diff)
+    prod_name = get_db_product_name(fuel)
+    past_prices = get_stations_prices(
+        (price.station.id_eess for price in curr_prices), fuel, prev_week
     )
-
-    return {
-        price.station.id_eess: getattr(price, get_db_product_name(fuel))
-        for price in prev_prices
+    past_prices = {
+        price.station.id_eess: getattr(price, prod_name) for price in past_prices
     }
+
+    prev_lower = {}
+    for price in curr_prices:
+        if not past_prices.get(price.station.id_eess):
+            prev_lower[price.station.id_eess] = "u"
+            continue
+
+        if getattr(price, prod_name) > past_prices.get(price.station.id_eess):
+            prev_lower[price.station.id_eess] = "l"
+        elif getattr(price, prod_name) < past_prices.get(price.station.id_eess):
+            prev_lower[price.station.id_eess] = "h"
+        else:
+            prev_lower[price.station.id_eess] = "e"
+
+    return prev_lower
 
 
 def get_last_update(form_data) -> str:
