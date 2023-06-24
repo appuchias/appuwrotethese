@@ -4,25 +4,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('gas', '0001_initial'),
+        ("gas", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='station',
-            name='locality',
-            field=models.CharField(max_length=128, verbose_name='Localidad'),
+            model_name="station",
+            name="locality",
+            field=models.CharField(max_length=128, verbose_name="Localidad"),
         ),
         migrations.AlterField(
-            model_name='station',
-            name='postal_code',
-            field=models.CharField(max_length=128, verbose_name='Código postal'),
+            model_name="station",
+            name="postal_code",
+            field=models.CharField(max_length=128, verbose_name="Código postal"),
         ),
         migrations.AlterField(
-            model_name='station',
-            name='province',
-            field=models.CharField(max_length=128, verbose_name='Provincia'),
+            model_name="station",
+            name="province",
+            field=models.CharField(max_length=128, verbose_name="Provincia"),
         ),
     ]
