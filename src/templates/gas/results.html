@@ -7,92 +7,92 @@
 
 {% block content %}
 <div id="search-result">
-    <div class="text-center">
-        <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Stations' %}</div>
-        {% comment %}<p class="text-themed">{% trans "The icon at the bottom of every card opens the route to the station in your maps app" %}.</p>{% endcomment %}
-        {% comment %}{% if user.is_authenticated %}<p class="text-themed">{% trans "The 3 icons on the bootom of cards show the price difference with yesterday, last week and last month, respectively" %}.<br>{% trans "A red icon means the corresponding price was lower, while a green one means now it's cheaper" %}.</p>{% endif %}{% endcomment %}
-        <p class="last-update text-themed">{% trans "Price of" %} {{ fuel }} {% trans "in" %} {{ term }} {% trans "on the" %} {{ date }}</p>
-        {% if user.is_authenticated %}<p class="text-themed">{% trans "The 3 bottom icons show if the price in the past was cheaper (green) or more expensive (red)" %}.</p>{% endif %}
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Stations' %}</div>
+    {% comment %}<p class="text-themed">{% trans "The icon at the bottom of every card opens the route to the station in your maps app" %}.</p>{% endcomment %}
+    {% comment %}{% if user.is_authenticated %}<p class="text-themed">{% trans "The 3 icons on the bootom of cards show the price difference with yesterday, last week and last month, respectively" %}.<br>{% trans "A red icon means the corresponding price was lower, while a green one means now it's cheaper" %}.</p>{% endif %}{% endcomment %}
+    <p class="text-themed text-center">{% trans "Price of" %} {{ fuel }} {% trans "in" %} {{ term }} {% trans "on the" %} {{ date }}</p>
+    {% if user.is_authenticated %}<p class="text-themed text-center">{% trans "The 3 bottom icons show if the price in the past was cheaper (green) or more expensive (red)" %}.</p>{% endif %}
 
-        <!-- Grid with gas stations -->
-        <div id="results-cards" class="container">
-            <div class="row justify-content-sm-around justify-content-center g-1">
-                {% for i in results %}{% with s=i.station %}
-                <div class="card-wrapper col-xl-2 col-md-3 col-sm-4 col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 title="{{ s.company|title }}" class="truncate">{{ s.company|title }}</h2>
+    <!-- Grid with gas stations -->
+    <div id="results-cards" class="container">
+        <div class="row justify-content-sm-around justify-content-center g-1">
+            {% for i in results %}{% with s=i.station %}
+            <div class="card-wrapper col-xl-2 col-md-3 col-sm-4 col-12">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h2 title="{{ s.company|title }}" class="truncate">{{ s.company|title }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="truncate" title="{{ s.address }}">{{ s.address }}</p>
+                        <p>{{ s.locality }}</p>
+                        <p class="horario">{{ s.schedule }}</p>
+                        <div class="price-chart">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">{% trans "Fuel" %}</th>
+                                        <td scope="col"><strong>€/L</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Diésel</th>
+                                        <td>{{ i.price_goa|default:"-" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gasolina 95</th>
+                                        <td>{{ i.price_g95e5|default:"-" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gasolina 98</th>
+                                        <td>{{ i.price_g98e5|default:"-" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">GLP</th>
+                                        <td>{{ i.price_glp|default:"-" }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="card-body">
-                            <p class="truncate" title="{{ s.address }}">{{ s.address }}</p>
-                            <p>{{ s.locality }}</p>
-                            <p class="horario">{{ s.schedule }}</p>
-                            <div class="price-chart">
-                                <table class="table table-sm table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">{% trans "Fuel" %}</th>
-                                            <td scope="col"><strong>€/L</strong></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Diésel</th>
-                                            <td>{{ i.price_goa|default:"-" }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Gasolina 95</th>
-                                            <td>{{ i.price_g95e5|default:"-" }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Gasolina 98</th>
-                                            <td>{{ i.price_g98e5|default:"-" }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">GLP</th>
-                                            <td>{{ i.price_glp|default:"-" }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <a href="#" class="text-decoration-none" aria-label="{% trans 'Open maps route' %}" data-balloon-pos="up"
-                                    onclick="openmaps({{ s.latitude|replace:',|.' }}, {{ s.longitude|replace:',|.' }}, '{{ s.company }}', '{{ s.address }}')">
-                                    <i data-lucide="compass"></i>
-                                </a>
-                                {% if user.is_authenticated %}{% with ytd=past_day_lower|access:s.id_eess lw=past_week_lower|access:s.id_eess lm=past_month_lower|access:s.id_eess %}
-                                <div class="row m-0">
-                                    <div class="col px-1" aria-label="{% trans 'Yesterday' %}" data-balloon-pos="up">
-                                        {% if ytd == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
-                                        {% elif ytd == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
-                                        {% elif ytd == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
-                                        {% else %}<i data-lucide="x-square"></i>
-                                        {% endif %}
-                                    </div>
-                                    <div class="col px-1" aria-label="{% trans 'Last week' %}" data-balloon-pos="up">
-                                        {% if lw == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
-                                        {% elif lw == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
-                                        {% elif lw == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
-                                        {% else %}<i data-lucide="x-square"></i>
-                                        {% endif %}
-                                    </div>
-                                    <div class="col px-1" aria-label="{% trans 'Last month' %}" data-balloon-pos="up">
-                                        {% if lm == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
-                                        {% elif lm == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
-                                        {% elif lm == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
-                                        {% else %}<i data-lucide="x-square"></i>
-                                        {% endif %}
-                                    </div>
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="text-decoration-none" aria-label="{% trans 'Open maps route' %}" data-balloon-pos="up"
+                                onclick="openmaps({{ s.latitude|replace:',|.' }}, {{ s.longitude|replace:',|.' }}, '{{ s.company }}', '{{ s.address }}')">
+                                <i data-lucide="compass"></i>
+                            </a>
+                            {% if user.is_authenticated %}{% with ytd=past_day_lower|access:s.id_eess lw=past_week_lower|access:s.id_eess lm=past_month_lower|access:s.id_eess %}
+                            <div class="row m-0">
+                                <div class="col px-1" aria-label="{% trans 'Yesterday' %}" data-balloon-pos="up">
+                                    {% if ytd == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                                    {% elif ytd == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                                    {% elif ytd == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                                    {% else %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                                    {% endif %}
                                 </div>
-                                {% endwith %}{% endif %}
+                                <div class="col px-1" aria-label="{% trans 'Last week' %}" data-balloon-pos="up">
+                                    {% if lw == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                                    {% elif lw == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                                    {% elif lw == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                                    {% else %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                                    {% endif %}
+                                </div>
+                                <div class="col px-1" aria-label="{% trans 'Last month' %}" data-balloon-pos="up">
+                                    {% if lm == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                                    {% elif lm == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                                    {% elif lm == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                                    {% else %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                                    {% endif %}
+                                </div>
                             </div>
+                            {% endwith %}{% endif %}
                         </div>
                     </div>
-                </div>{% endwith %}{% endfor %}
-            </div>
-            <a href="https://coindrop.to/appuchia" class="text-themed text-decoration-none float-center p-2 border border-light rounded-3" rel="noopener noreferrer" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="up"><i data-lucide="coins"></i> {% trans "Support me" %}!</a>
-            <script>function openmaps(lat, long, name, address) {window.open("https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll=" + lat + "," + long + "&daddr=" + name + " " + address);}</script>
+                </div>
+            </div>{% endwith %}{% endfor %}
         </div>
+        <div class="text-center">
+            <a href="https://coindrop.to/appuchia" class="text-themed text-decoration-none p-2 border border-light rounded-3" rel="noopener noreferrer" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="up"><i data-lucide="coins"></i> {% trans "Support me" %}!</a>
+        </div>
+        <script>function openmaps(lat, long, name, address) {window.open("https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll=" + lat + "," + long + "&daddr=" + name + " " + address);}</script>
     </div>
 </div>
 {% endblock %}
