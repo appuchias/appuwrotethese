@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 00:34+0200\n"
+"POT-Creation-Date: 2023-06-26 17:10+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -16,43 +16,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: accounts/forms.py:33 accounts/forms.py:143
+#: accounts/forms.py:33 accounts/forms.py:141
 msgid "Email"
 msgstr "Email"
 
-#: accounts/forms.py:36
-msgid ""
-"Required. Your email will be used for password resetting and account "
-"activation."
+#: accounts/forms.py:35
+msgid "Required. Your email will be used for password resetting."
 msgstr ""
-"Requerido. Tu correo electrónico se utilizará para restablecer la contraseña "
-"y la activación de la cuenta."
+"Requerido. Tu correo electrónico se utilizará para restablecer la contraseña."
 
-#: accounts/forms.py:73 templates/accounts/register.html:12
+#: accounts/forms.py:71 templates/accounts/register.html:12
 msgid "Register"
 msgstr "Registrarse"
 
-#: accounts/forms.py:102 templates/accounts/login.html:13
+#: accounts/forms.py:100 templates/accounts/login.html:13
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: accounts/forms.py:133 templates/accounts/account.html:16
+#: accounts/forms.py:131 templates/accounts/account.html:16
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: accounts/forms.py:146
+#: accounts/forms.py:144
 msgid "Required. You will receive an email with your temporary password."
 msgstr "Requerido. Recibirás un correo electrónico con su contraseña temporal."
 
-#: accounts/forms.py:162
+#: accounts/forms.py:160
 msgid "Reset password"
 msgstr "Restablecer contraseña"
 
-#: accounts/forms.py:172
+#: accounts/forms.py:170
 msgid "Upgrade UUID"
 msgstr "UUID de mejora"
 
-#: accounts/forms.py:174
+#: accounts/forms.py:172
 msgid ""
 "You will receive an email regarding your purchase from sellix with your "
 "upgrade UUID."
@@ -60,7 +57,7 @@ msgstr ""
 "Recibirás un correo electrónico sobre tu compra de sellix con tu UUID de "
 "mejora."
 
-#: accounts/forms.py:195
+#: accounts/forms.py:193
 msgid "Upgrade"
 msgstr "Mejorar"
 
@@ -234,7 +231,7 @@ msgstr "Buscar por"
 msgid "Type of query"
 msgstr "Tipo de petición"
 
-#: gas/forms.py:46 gas/forms.py:128 templates/gas/results.html:36
+#: gas/forms.py:46 gas/forms.py:128 templates/gas/results.html:35
 msgid "Fuel"
 msgstr "Combustible"
 
@@ -477,43 +474,43 @@ msgstr ""
 "Nota: Las gasolineras que no ofrezcan el combustible solicitado no serán "
 "mostradas"
 
-#: templates/gas/results.html:11
+#: templates/gas/results.html:10
 msgid "Stations"
 msgstr "Gasolineras"
 
-#: templates/gas/results.html:16
+#: templates/gas/results.html:15
 msgid "Price of"
 msgstr "Precio de"
 
-#: templates/gas/results.html:16
+#: templates/gas/results.html:15
 msgid "in"
 msgstr "en"
 
-#: templates/gas/results.html:16
+#: templates/gas/results.html:15
 msgid "on the"
 msgstr "para el día"
 
-#: templates/gas/results.html:17
+#: templates/gas/results.html:16
 msgid ""
 "The 3 bottom icons show if the price in the past was cheaper (green) or more "
 "expensive (red)"
 msgstr ""
-"Los 3 iconos de abajo muestran si el combustible era más barato (verde) o más"
-" caro (rojo)"
+"Los 3 iconos de abajo muestran si el combustible era más barato (verde) o "
+"más caro (rojo)"
 
-#: templates/gas/results.html:61
+#: templates/gas/results.html:60
 msgid "Open maps route"
 msgstr "Abrir ruta en maps"
 
-#: templates/gas/results.html:67
+#: templates/gas/results.html:66
 msgid "Yesterday"
 msgstr "Ayer"
 
-#: templates/gas/results.html:74
+#: templates/gas/results.html:73
 msgid "Last week"
 msgstr "Semana pasada"
 
-#: templates/gas/results.html:81
+#: templates/gas/results.html:80
 msgid "Last month"
 msgstr "Mes pasado"
 
