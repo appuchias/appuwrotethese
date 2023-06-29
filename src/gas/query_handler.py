@@ -36,7 +36,7 @@ get_db_product_name = lambda prod_abbr, default="": {
 
 
 ## Get locality id/province id/postal code ##
-def get_ids(request: HttpRequest, query: str, q_type: str) -> tuple[int, int, int]:
+def get_ids(query: str, q_type: str) -> tuple[int, int, int]:
     """Gets the locality id, province id or postal code from the query"""
 
     id_locality = 0
@@ -44,32 +44,37 @@ def get_ids(request: HttpRequest, query: str, q_type: str) -> tuple[int, int, in
     postal_code = 0
 
     if q_type == "locality":
-        locality = models.Locality.objects.filter(name__icontains=query)
-        if locality.exists():
-            # Select locality with more stations
-            locality = locality.annotate(num_stations=Count("station")).order_by(
-                "-num_stations"
-            )[0]
+        locality = models.Locality.objects.filter(name__iexact=query).first()
+        if not locality:
+            locality = models.Locality.objects.filter(name__icontains=query)
+            if locality.exists():
+                # Select locality with more stations
+                locality = locality.annotate(num_stations=Count("station")).order_by(
+                    "-num_stations"
+                )[0]
 
-            id_locality = locality.id_mun
+                id_locality = locality.id_mun
         else:
-            messages.error(request, _("Locality not found"))
-            raise Http404
+            id_locality = locality.id_mun
 
     elif q_type == "province":
-        province = models.Province.objects.filter(name__icontains=query).first()
-        if province:
-            id_province = province.id_prov
+        province = models.Province.objects.filter(name__iexact=query.upper()).first()
+        if not province:
+            # Provinces are uppercase in the DB
+            province = models.Province.objects.filter(name__icontains=query.upper())
+            if province.exists():
+                # Select province with more stations
+                province = province.annotate(num_stations=Count("station")).order_by(
+                    "-num_stations"
+                )[0]
+
+                id_province = province.id_prov
         else:
-            messages.error(request, _("Province not found"))
-            raise Http404
+            id_province = province.id_prov
 
     elif q_type == "postal_code":
         if query.isdigit() and len(query) == 5:
             postal_code = int(query)
-        else:
-            messages.error(request, _("Invalid postal code"))
-            raise Http404
 
     return id_locality, id_province, postal_code
 
@@ -86,7 +91,10 @@ def db_prices(
     """Get the prices from the database.
 
     This function gets the request and the clean form data
-    and returns the list of results
+    and returns the list of results.
+
+    You must pass either id_locality, id_province or postal_code.
+    If more than one is passed, the first one (in that order) will be used.
     """
 
     if id_locality:

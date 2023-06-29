@@ -20,5 +20,7 @@ from gas import views
 urlpatterns = [
     path("", views.search),
     path("results/", views.result),
+    path("localities/", views.localities),
+    path("provinces/", views.provinces),
     # path("save/<int:id>", views.save),
 ]

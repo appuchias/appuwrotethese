@@ -21,7 +21,7 @@ from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
-from gas import forms, query_handler
+from gas import models, forms, query_handler
 
 FUEL_NAMES = {
     "GOA": "diésel",
@@ -50,7 +50,10 @@ def result(request: HttpRequest):
     fuel = str(form_data.get("fuel_abbr"))
     q_date = form_data.get("q_date", date.today())
 
-    id_locality, id_province, postal_code = query_handler.get_ids(request, term, q_type)
+    id_locality, id_province, postal_code = query_handler.get_ids(term, q_type)
+    if not any((id_locality, id_province, postal_code)):
+        messages.error(request, _("No results found. Check your query and try again."))
+        return render(request, "gas/noresults.html", {"results": []})
     prices = query_handler.db_prices(
         request, id_locality, id_province, postal_code, fuel, q_date
     )
@@ -88,3 +91,25 @@ def result(request: HttpRequest):
             "past_month_lower": past_month_lower,
         },
     )
+
+
+def localities(request: HttpRequest):
+    if request.method != "GET":
+        return HttpResponseNotAllowed(["GET"], "Method not allowed")
+
+    localities = models.Locality.objects.all()
+
+    return render(
+        request,
+        "gas/localities.html",
+        {"localities": [locality.name for locality in localities]},
+    )
+
+
+def provinces(request: HttpRequest):
+    if request.method != "GET":
+        return HttpResponseNotAllowed(["GET"], "Method not allowed")
+
+    provinces = models.Province.objects.all()
+
+    return render(request, "gas/provinces.html", {"provinces": provinces})
