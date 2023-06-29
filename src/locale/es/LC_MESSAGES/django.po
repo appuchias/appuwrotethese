@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-29 19:37+0200\n"
+"POT-Creation-Date: 2023-06-30 00:15+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -263,9 +263,7 @@ msgstr "ID de provincia"
 msgid "ID of the locality"
 msgstr "ID de la localidad"
 
-#: gas/models.py:42 templates/gas/localities.html:4
-#: templates/gas/localities.html:8 templates/gas/provinces.html:4
-#: templates/gas/provinces.html:8
+#: gas/models.py:42 gas/views.py:119 templates/gas/search.html:22
 msgid "Localities"
 msgstr "Localidades"
 
@@ -273,7 +271,7 @@ msgstr "Localidades"
 msgid "ID of the province"
 msgstr "ID de la provincia"
 
-#: gas/models.py:69
+#: gas/models.py:69 gas/views.py:108 templates/gas/search.html:23
 msgid "Provinces"
 msgstr "Provincias"
 
@@ -313,15 +311,11 @@ msgstr "Precio"
 msgid "Gas station prices"
 msgstr "Precios"
 
-#: gas/query_handler.py:78
-msgid "Invalid postal code"
-msgstr "Código postal inválido"
-
-#: gas/query_handler.py:114
+#: gas/query_handler.py:112
 msgid "No stations found in the selected area."
 msgstr "No se encontraron gasolineras en el área seleccionada."
 
-#: gas/query_handler.py:125
+#: gas/query_handler.py:123
 msgid "No prices were found. Try with a broader search."
 msgstr "No se encontraron precios. Prueba con una búsqueda más amplia."
 
@@ -333,10 +327,6 @@ msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 msgid "No results found. Check your query and try again."
 msgstr ""
 "No se encontraron resultados. Comprueba la búsqueda e inténtalo de nuevo."
-
-#: middleware/persistent_messages_middleware.py:12
-msgid "Special characters are not searched correctly (ñ, accents, ...)"
-msgstr "Los caracteres especiales no se buscan correctamente (ñ, acentos, ...)"
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
 #: templates/accounts/register.html:5 templates/base.html:84
@@ -459,11 +449,13 @@ msgstr ""
 "Hubo un error interno al cargar la página. Por favor, contacta conmigo para "
 "que pueda solucionarlo."
 
-#: templates/gas/localities.html:9
+#: templates/gas/names.html:9
 msgid "These are the names stored in the database. Use them in your searches"
-msgstr "Estos son los nombres almacenados en la base de datos. Úsalos en tus búsquedas"
+msgstr ""
+"Estos son los nombres almacenados en la base de datos. Úsalos en tus "
+"búsquedas"
 
-#: templates/gas/localities.html:10
+#: templates/gas/names.html:10
 msgid "Tip: Use CTRL+F or tap 'search in page' in the browser menu"
 msgstr "Tip: Usa CTRL+F o pulsa 'buscar en la página' en el menú del navegador"
 
@@ -672,6 +664,13 @@ msgstr ""
 #: templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
+
+#~ msgid "Invalid postal code"
+#~ msgstr "Código postal inválido"
+
+#~ msgid "Special characters are not searched correctly (ñ, accents, ...)"
+#~ msgstr ""
+#~ "Los caracteres especiales no se buscan correctamente (ñ, acentos, ...)"
 
 #~ msgid "Locality not found"
 #~ msgstr "Localidad no encontrada"
