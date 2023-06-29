@@ -93,23 +93,29 @@ def result(request: HttpRequest):
     )
 
 
-def localities(request: HttpRequest):
+def names(request: HttpRequest, **kwargs):
     if request.method != "GET":
         return HttpResponseNotAllowed(["GET"], "Method not allowed")
+
+    if kwargs.get("q_type") == "province":
+        provinces = models.Province.objects.all()
+
+        return render(
+            request,
+            "gas/names.html",
+            {
+                "names": [province.name for province in provinces],
+                "q_type": _("Provinces"),
+            },
+        )
 
     localities = models.Locality.objects.all()
 
     return render(
         request,
-        "gas/localities.html",
-        {"localities": [locality.name for locality in localities]},
+        "gas/names.html",
+        {
+            "names": [locality.name for locality in localities],
+            "q_type": _("Localities"),
+        },
     )
-
-
-def provinces(request: HttpRequest):
-    if request.method != "GET":
-        return HttpResponseNotAllowed(["GET"], "Method not allowed")
-
-    provinces = models.Province.objects.all()
-
-    return render(request, "gas/provinces.html", {"provinces": provinces})

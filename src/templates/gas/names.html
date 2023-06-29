@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% load i18n user_agents %}
 
-{% block title %}{% trans 'Localities' %}{% endblock %}
+{% block title %}{{ q_type }}{% endblock %}
 
 {% block content %}
-<div id="localities" class="container text-themed">
-    <div class="title {% if request|is_mobile %} mobile{% endif %}">{% trans 'Localities' %}</div>
+<div id="db-list" class="container text-themed">
+    <div class="title {% if request|is_mobile %} mobile{% endif %}">{{ q_type }}</div>
     <p class="text-center">{% trans "These are the names stored in the database. Use them in your searches" %}.</p>
     <p class="text-center">{% trans "Tip: Use CTRL+F or tap 'search in page' in the browser menu" %}.</p>
     <div class="row">
-        {% for name in localities %}
-        <div class="col-4 my-1 text-center">{{ name|lower|capfirst }}</div>
+        {% for name in names %}
+        <div class="col-sm-6 col-md-4 my-1 text-center">{{ name|lower|capfirst }}</div>
         {% endfor %}
     </div>
 </div>
