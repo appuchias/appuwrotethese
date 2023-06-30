@@ -98,23 +98,17 @@ def db_prices(
     """
 
     if id_locality:
-        station_filter = {"locality_id": id_locality}
+        station_filter = {"station__locality_id": id_locality}
     elif id_province:
-        station_filter = {"province_id": id_province}
+        station_filter = {"station__province_id": id_province}
     elif postal_code:
-        station_filter = {"postal_code": postal_code}
+        station_filter = {"station__postal_code": postal_code}
     else:
-        return []
-
-    stations = models.Station.objects.filter(**station_filter)
-
-    if not stations.exists():
-        messages.error(request, _("No stations found in the selected area."))
         return []
 
     prod_name = get_db_product_name(prod_abbr)
     prices = (
-        models.StationPrice.objects.filter(station__in=stations, date=q_date)
+        models.StationPrice.objects.filter(date=q_date, **station_filter)
         .exclude(**{f"{prod_name}": None})
         .order_by(prod_name)
     )
