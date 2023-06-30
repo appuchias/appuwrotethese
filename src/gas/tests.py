@@ -35,6 +35,284 @@ FUELS = {
     "GLP": "gas licuado del petróleo",
 }
 
+
+class GasSearch(TestCase):
+    """Test the gas search view.
+
+    Things tested:
+        - The view is reachable (status code 200).
+    """
+
+    def test_search(self):
+        """Test that the search view is reachable."""
+        response = self.client.get("/gas/")
+        self.assertEqual(response.status_code, 200)
+
+
+class GasResults(TestCase):
+    """Test the gas results view.
+
+    Things tested:
+        - The view is reachable (status code 200) with GET and POST
+        - The view rejects invalid methods
+        - The view rejects invalid form data
+        - The view returns the correct results
+        - The view returns the correct fuel
+    """
+
+    @classmethod
+    def setUpTestData(cls) -> None:
+        """Set up the test database."""
+
+        create_localities_provinces()
+        update_station_prices(SAMPLE_DATA)
+
+    def test_view(self):
+        """Test that the results view is reachable."""
+
+        response = self.client.post("/gas/results/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_results_rejects_invalid_methods(self):
+        """Test that the results view rejects invalid methods."""
+
+        response = self.client.get("/gas/results/")
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.put("/gas/results/")
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.delete("/gas/results/")
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.patch("/gas/results/")
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.head("/gas/results/")
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.options("/gas/results/")
+        self.assertEqual(response.status_code, 405)
+
+    def test_results_rejects_invalid_form_data(self):
+        """Test that the results view rejects invalid form data."""
+
+        response = self.client.post(
+            "/gas/results/",
+            {
+                "term": LOCALITY_NAME,
+                "q_type": "locality",
+                "fuel_abbr": "GOA",
+                "q_date": date.today() + timedelta(days=1),
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["results"], [])
+
+        response = self.client.post(
+            "/gas/results/",
+            {
+                "term": LOCALITY_NAME,
+                "q_type": "locality",
+                "fuel_abbr": "GOA",
+                "q_date": date.today() - timedelta(days=1),
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["results"], [])
+
+        response = self.client.post(
+            "/gas/results/",
+            {
+                "term": LOCALITY_NAME,
+                "q_type": "locality",
+                "fuel_abbr": "GOA",
+                "q_date": "invalid",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["results"], [])
+
+        response = self.client.post(
+            "/gas/results/",
+            {
+                "term": LOCALITY_NAME,
+                "q_type": "locality",
+                "fuel_abbr": "GOA",
+                "q_date": "",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["results"], [])
+
+        response = self.client.post(
+            "/gas/results/",
+            {
+                "term": LOCALITY_NAME,
+                "q_type": "locality",
+                "fuel_abbr": "invalid",
+                "q_date": date.today(),
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["results"], [])
+
+        response = self.client.post(
+            "/gas/results/",
+            {
+                "term": LOCALITY_NAME,
+                "q_type": "invalid",
+                "fuel_abbr": "GOA",
+                "q_date": date.today(),
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["results"], [])
+
+        response = self.client.post(
+            "/gas/results/",
+            {
+                "term": "",
+                "q_type": "locality",
+                "fuel_abbr": "GOA",
+                "q_date": date.today(),
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["results"], [])
+
+    def test_results_correct_results(self):
+        """Test that the results view returns the correct results."""
+
+        response = self.client.post("/gas/results/")
+        self.assertEqual(response.context["results"], [])
+
+        response = self.client.post(
+            "/gas/results/",
+            {
+                "term": LOCALITY_NAME,
+                "q_type": "locality",
+                "fuel_abbr": FUEL_ABBR,
+                "q_date": date.today(),
+            },
+        )
+        self.assertNotEqual(response.context["results"], [])
+
+        response = self.client.post(
+            "/gas/results/",
+            {
+                "term": PROVINCE_NAME,
+                "q_type": "province",
+                "fuel_abbr": FUEL_ABBR,
+                "q_date": date.today(),
+            },
+        )
+        self.assertNotEqual(response.context["results"], [])
+
+        response = self.client.post(
+            "/gas/results/",
+            {
+                "term": POSTAL_CODE,
+                "q_type": "postal_code",
+                "fuel_abbr": FUEL_ABBR,
+                "q_date": date.today(),
+            },
+        )
+        self.assertNotEqual(response.context["results"], [])
+
+    def test_results_correct_fuel(self):
+        """Test that the results view returns the correct product name."""
+
+        for fuel_abbr, fuel_name in FUELS.items():
+            response = self.client.post(
+                "/gas/results/",
+                {
+                    "term": LOCALITY_NAME,
+                    "q_type": "locality",
+                    "fuel_abbr": fuel_abbr,
+                    "q_date": date.today(),
+                },
+            )
+
+            self.assertEqual(response.context["fuel"], fuel_name)
+
+
+class GasQueryHandlerTests(TestCase):
+    """Test the gas query handler.
+
+    Things tested:
+        - The handler returns the correct product name
+        - The handler returns the correct last update date
+    """
+
+    @classmethod
+    def setUpTestData(cls) -> None:
+        """Set up the test database."""
+
+        create_localities_provinces()
+        update_station_prices(get_data()["ListaEESSPrecio"])
+
+    def test_ids(self):
+        """Test that the query handler returns the correct product name."""
+
+        self.assertEqual(get_ids(LOCALITY_NAME, "locality")[0], LOCALITY_ID)
+        self.assertEqual(get_ids(PROVINCE_NAME, "province")[1], PROVINCE_ID)
+        self.assertEqual(get_ids(str(POSTAL_CODE), "postal_code")[2], int(POSTAL_CODE))
+
+
+class GasListsTests(TestCase):
+    """Test the gas lists view.
+
+    Things tested:
+        - The view is reachable (status code 200) with GET
+        - The view rejects invalid methods
+        - The view returns the correct results
+    """
+
+    @classmethod
+    def setUpTestData(cls) -> None:
+        """Set up the test database."""
+
+        create_localities_provinces()
+
+    def test_localities(self):
+        response = self.client.get("/gas/localities/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Madrid")
+
+    def test_provinces(self):
+        response = self.client.get("/gas/provinces/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Madrid")
+
+    def test_invalid_methods(self):
+        response = self.client.post("/gas/localities/")
+        self.assertEqual(response.status_code, 405)
+        response = self.client.put("/gas/localities/")
+        self.assertEqual(response.status_code, 405)
+        response = self.client.delete("/gas/localities/")
+        self.assertEqual(response.status_code, 405)
+        response = self.client.patch("/gas/localities/")
+        self.assertEqual(response.status_code, 405)
+        response = self.client.head("/gas/localities/")
+        self.assertEqual(response.status_code, 405)
+        response = self.client.options("/gas/localities/")
+        self.assertEqual(response.status_code, 405)
+
+        response = self.client.post("/gas/provinces/")
+        self.assertEqual(response.status_code, 405)
+        response = self.client.put("/gas/provinces/")
+        self.assertEqual(response.status_code, 405)
+        response = self.client.delete("/gas/provinces/")
+        self.assertEqual(response.status_code, 405)
+        response = self.client.patch("/gas/provinces/")
+        self.assertEqual(response.status_code, 405)
+        response = self.client.head("/gas/provinces/")
+        self.assertEqual(response.status_code, 405)
+        response = self.client.options("/gas/provinces/")
+        self.assertEqual(response.status_code, 405)
+
+
 SAMPLE_DATA = [
     {
         "C.P.": "28008",
@@ -649,280 +927,3 @@ SAMPLE_DATA = [
         "IDCCAA": "13",
     },
 ]
-
-
-class GasSearch(TestCase):
-    """Test the gas search view.
-
-    Things tested:
-        - The view is reachable (status code 200).
-    """
-
-    def test_search(self):
-        """Test that the search view is reachable."""
-        response = self.client.get("/gas/")
-        self.assertEqual(response.status_code, 200)
-
-
-class GasResults(TestCase):
-    """Test the gas results view.
-
-    Things tested:
-        - The view is reachable (status code 200) with GET and POST
-        - The view rejects invalid methods
-        - The view rejects invalid form data
-        - The view returns the correct results
-        - The view returns the correct fuel
-    """
-
-    @classmethod
-    def setUpTestData(cls) -> None:
-        """Set up the test database."""
-
-        create_localities_provinces()
-        update_station_prices(SAMPLE_DATA)
-
-    def test_view(self):
-        """Test that the results view is reachable."""
-
-        response = self.client.post("/gas/results/")
-        self.assertEqual(response.status_code, 200)
-
-    def test_results_rejects_invalid_methods(self):
-        """Test that the results view rejects invalid methods."""
-
-        response = self.client.get("/gas/results/")
-        self.assertEqual(response.status_code, 405)
-
-        response = self.client.put("/gas/results/")
-        self.assertEqual(response.status_code, 405)
-
-        response = self.client.delete("/gas/results/")
-        self.assertEqual(response.status_code, 405)
-
-        response = self.client.patch("/gas/results/")
-        self.assertEqual(response.status_code, 405)
-
-        response = self.client.head("/gas/results/")
-        self.assertEqual(response.status_code, 405)
-
-        response = self.client.options("/gas/results/")
-        self.assertEqual(response.status_code, 405)
-
-    def test_results_rejects_invalid_form_data(self):
-        """Test that the results view rejects invalid form data."""
-
-        response = self.client.post(
-            "/gas/results/",
-            {
-                "term": LOCALITY_NAME,
-                "q_type": "locality",
-                "fuel_abbr": "GOA",
-                "q_date": date.today() + timedelta(days=1),
-            },
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context["results"], [])
-
-        response = self.client.post(
-            "/gas/results/",
-            {
-                "term": LOCALITY_NAME,
-                "q_type": "locality",
-                "fuel_abbr": "GOA",
-                "q_date": date.today() - timedelta(days=1),
-            },
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context["results"], [])
-
-        response = self.client.post(
-            "/gas/results/",
-            {
-                "term": LOCALITY_NAME,
-                "q_type": "locality",
-                "fuel_abbr": "GOA",
-                "q_date": "invalid",
-            },
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context["results"], [])
-
-        response = self.client.post(
-            "/gas/results/",
-            {
-                "term": LOCALITY_NAME,
-                "q_type": "locality",
-                "fuel_abbr": "GOA",
-                "q_date": "",
-            },
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context["results"], [])
-
-        response = self.client.post(
-            "/gas/results/",
-            {
-                "term": LOCALITY_NAME,
-                "q_type": "locality",
-                "fuel_abbr": "invalid",
-                "q_date": date.today(),
-            },
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context["results"], [])
-
-        response = self.client.post(
-            "/gas/results/",
-            {
-                "term": LOCALITY_NAME,
-                "q_type": "invalid",
-                "fuel_abbr": "GOA",
-                "q_date": date.today(),
-            },
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context["results"], [])
-
-        response = self.client.post(
-            "/gas/results/",
-            {
-                "term": "",
-                "q_type": "locality",
-                "fuel_abbr": "GOA",
-                "q_date": date.today(),
-            },
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context["results"], [])
-
-    def test_results_correct_results(self):
-        """Test that the results view returns the correct results."""
-
-        response = self.client.post("/gas/results/")
-        self.assertEqual(response.context["results"], [])
-
-        response = self.client.post(
-            "/gas/results/",
-            {
-                "term": LOCALITY_NAME,
-                "q_type": "locality",
-                "fuel_abbr": FUEL_ABBR,
-                "q_date": date.today(),
-            },
-        )
-        self.assertNotEqual(response.context["results"], [])
-
-        response = self.client.post(
-            "/gas/results/",
-            {
-                "term": PROVINCE_NAME,
-                "q_type": "province",
-                "fuel_abbr": FUEL_ABBR,
-                "q_date": date.today(),
-            },
-        )
-        self.assertNotEqual(response.context["results"], [])
-
-        response = self.client.post(
-            "/gas/results/",
-            {
-                "term": POSTAL_CODE,
-                "q_type": "postal_code",
-                "fuel_abbr": FUEL_ABBR,
-                "q_date": date.today(),
-            },
-        )
-        self.assertNotEqual(response.context["results"], [])
-
-    def test_results_correct_fuel(self):
-        """Test that the results view returns the correct product name."""
-
-        for fuel_abbr, fuel_name in FUELS.items():
-            response = self.client.post(
-                "/gas/results/",
-                {
-                    "term": LOCALITY_NAME,
-                    "q_type": "locality",
-                    "fuel_abbr": fuel_abbr,
-                    "q_date": date.today(),
-                },
-            )
-
-            self.assertEqual(response.context["fuel"], fuel_name)
-
-
-class GasQueryHandlerTests(TestCase):
-    """Test the gas query handler.
-
-    Things tested:
-        - The handler returns the correct product name
-        - The handler returns the correct last update date
-    """
-
-    @classmethod
-    def setUpTestData(cls) -> None:
-        """Set up the test database."""
-
-        create_localities_provinces()
-        update_station_prices(get_data()["ListaEESSPrecio"])
-
-    def test_ids(self):
-        """Test that the query handler returns the correct product name."""
-
-        self.assertEqual(get_ids(LOCALITY_NAME, "locality")[0], LOCALITY_ID)
-        self.assertEqual(get_ids(PROVINCE_NAME, "province")[1], PROVINCE_ID)
-        self.assertEqual(get_ids(str(POSTAL_CODE), "postal_code")[2], int(POSTAL_CODE))
-
-
-class GasListsTests(TestCase):
-    """Test the gas lists view.
-
-    Things tested:
-        - The view is reachable (status code 200) with GET
-        - The view rejects invalid methods
-        - The view returns the correct results
-    """
-
-    @classmethod
-    def setUpTestData(cls) -> None:
-        """Set up the test database."""
-
-        create_localities_provinces()
-
-    def test_localities(self):
-        response = self.client.get("/gas/localities/")
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Madrid")
-
-    def test_provinces(self):
-        response = self.client.get("/gas/provinces/")
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Madrid")
-
-    def test_invalid_methods(self):
-        response = self.client.post("/gas/localities/")
-        self.assertEqual(response.status_code, 405)
-        response = self.client.put("/gas/localities/")
-        self.assertEqual(response.status_code, 405)
-        response = self.client.delete("/gas/localities/")
-        self.assertEqual(response.status_code, 405)
-        response = self.client.patch("/gas/localities/")
-        self.assertEqual(response.status_code, 405)
-        response = self.client.head("/gas/localities/")
-        self.assertEqual(response.status_code, 405)
-        response = self.client.options("/gas/localities/")
-        self.assertEqual(response.status_code, 405)
-
-        response = self.client.post("/gas/provinces/")
-        self.assertEqual(response.status_code, 405)
-        response = self.client.put("/gas/provinces/")
-        self.assertEqual(response.status_code, 405)
-        response = self.client.delete("/gas/provinces/")
-        self.assertEqual(response.status_code, 405)
-        response = self.client.patch("/gas/provinces/")
-        self.assertEqual(response.status_code, 405)
-        response = self.client.head("/gas/provinces/")
-        self.assertEqual(response.status_code, 405)
-        response = self.client.options("/gas/provinces/")
-        self.assertEqual(response.status_code, 405)
