@@ -102,7 +102,7 @@ class GasResults(TestCase):
             {
                 "term": LOCALITY_NAME,
                 "q_type": "locality",
-                "fuel_abbr": "GOA",
+                "fuel_abbr": FUEL_ABBR,
                 "q_date": date.today() + timedelta(days=1),
             },
         )
@@ -114,7 +114,7 @@ class GasResults(TestCase):
             {
                 "term": LOCALITY_NAME,
                 "q_type": "locality",
-                "fuel_abbr": "GOA",
+                "fuel_abbr": FUEL_ABBR,
                 "q_date": date.today() - timedelta(days=1),
             },
         )
@@ -126,7 +126,7 @@ class GasResults(TestCase):
             {
                 "term": LOCALITY_NAME,
                 "q_type": "locality",
-                "fuel_abbr": "GOA",
+                "fuel_abbr": FUEL_ABBR,
                 "q_date": "invalid",
             },
         )
@@ -138,7 +138,7 @@ class GasResults(TestCase):
             {
                 "term": LOCALITY_NAME,
                 "q_type": "locality",
-                "fuel_abbr": "GOA",
+                "fuel_abbr": FUEL_ABBR,
                 "q_date": "",
             },
         )
@@ -162,7 +162,7 @@ class GasResults(TestCase):
             {
                 "term": LOCALITY_NAME,
                 "q_type": "invalid",
-                "fuel_abbr": "GOA",
+                "fuel_abbr": FUEL_ABBR,
                 "q_date": date.today(),
             },
         )
@@ -174,7 +174,7 @@ class GasResults(TestCase):
             {
                 "term": "",
                 "q_type": "locality",
-                "fuel_abbr": "GOA",
+                "fuel_abbr": FUEL_ABBR,
                 "q_date": date.today(),
             },
         )
@@ -275,16 +275,6 @@ class GasListsTests(TestCase):
 
         create_localities_provinces()
 
-    def test_localities(self):
-        response = self.client.get("/gas/localities/")
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Madrid")
-
-    def test_provinces(self):
-        response = self.client.get("/gas/provinces/")
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Madrid")
-
     def test_invalid_methods(self):
         response = self.client.post("/gas/localities/")
         self.assertEqual(response.status_code, 405)
@@ -311,6 +301,16 @@ class GasListsTests(TestCase):
         self.assertEqual(response.status_code, 405)
         response = self.client.options("/gas/provinces/")
         self.assertEqual(response.status_code, 405)
+
+    def test_localities(self):
+        response = self.client.get("/gas/localities/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, LOCALITY_NAME)
+
+    def test_provinces(self):
+        response = self.client.get("/gas/provinces/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, PROVINCE_NAME)
 
 
 SAMPLE_DATA = [
