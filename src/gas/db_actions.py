@@ -219,8 +219,12 @@ def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
         update_station_prices(data, prices_date=current_date)
         elapsed_total = time.perf_counter() - start
 
+        eta = elapsed_total * days_left
+        eta_h = int(eta // 3600)
+        eta_m = int((eta % 3600) // 60)
+
         print(
-            f"     {elapsed_total:.2f}={elapsed_query:.2f}+{elapsed_total - elapsed_query:.2f}s (TOTAL=QUERY+DB) ETA ~{elapsed_total * days_left / 3600:.2f}h{C.CLR}"
+            f"     TOTAL:{elapsed_total:.2f}s [QUERY:{elapsed_query:.2f}s, DB:{elapsed_total - elapsed_query:.2f}s] ETA {eta_h}:{eta_m}h{C.CLR}"
         )
         current_date += timedelta(days=1)
         days_left -= 1
