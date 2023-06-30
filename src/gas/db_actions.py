@@ -135,9 +135,13 @@ def update_station_prices(data: list, prices_date: date = date.today()) -> None:
             station = Station(
                 id_eess=id_eess,
                 company=price["Rótulo"],
+                schedule=price["Horario"],
                 address=price["Dirección"],
+                latitude=price["Latitud"].replace(",", "."),
+                longitude=price["Longitud (WGS84)"].replace(",", "."),
                 locality=Locality.objects.get(id_mun=price["IDMunicipio"]),
                 province=Province.objects.get(id_prov=price["IDProvincia"]),
+                postal_code=int(price["C.P."]),
             )
 
             stations[station.id_eess] = station
