@@ -56,7 +56,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <a href="#" class="text-decoration-none" aria-label="{% trans 'Open maps route' %}" data-balloon-pos="up"
-                                onclick="openmaps({{ s.latitude|replace:',|.' }}, {{ s.longitude|replace:',|.' }}, '{{ s.company }}', '{{ s.address }}')">
+                                onclick="openmaps({{ s.latitude|replace:',|.' }}, {{ s.longitude|replace:',|.' }}, '{{ s.company|lower|capfirst }}', '{{ s.postal_code|lower|capfirst }}', '{{ s.locality|lower|capfirst }}', '{{ s.address|lower|capfirst }}')">
                                 <i data-lucide="compass"></i>
                             </a>
                             {% if user.is_authenticated %}{% with ytd=past_day_lower|access:s.id_eess lw=past_week_lower|access:s.id_eess lm=past_month_lower|access:s.id_eess %}
@@ -92,7 +92,7 @@
         <div class="text-center">
             <a href="https://coindrop.to/appuchia" class="text-themed text-decoration-none p-2 border border-light rounded-3" rel="noopener noreferrer" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="up"><i data-lucide="coins"></i> {% trans "Support me" %}!</a>
         </div>
-        <script>function openmaps(lat, long, name, address) {window.open("https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll=" + lat + "," + long + "&daddr=" + name + " " + address);}</script>
+        <script>function openmaps(lat, long, name, postal_code, locality, address) {window.open("https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll=" + lat + "," + long + "&daddr=" + name + " " + locality + " " + postal_code + " " + + address);}</script>
     </div>
 </div>
 {% endblock %}
