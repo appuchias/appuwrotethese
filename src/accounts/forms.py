@@ -32,9 +32,7 @@ class AWTUserCreationForm(UserCreationForm):
     email = forms.EmailField(
         label=_("Email"),
         max_length=254,
-        help_text=_(
-            "Required. Your email will be used for password resetting and account activation."
-        ),
+        help_text=_("Required. Your email will be used for password resetting."),
         required=True,
     )
 

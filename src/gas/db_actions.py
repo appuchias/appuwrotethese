@@ -135,9 +135,13 @@ def update_station_prices(data: list, prices_date: date = date.today()) -> None:
             station = Station(
                 id_eess=id_eess,
                 company=price["Rótulo"],
+                schedule=price["Horario"],
                 address=price["Dirección"],
+                latitude=price["Latitud"].replace(",", "."),
+                longitude=price["Longitud (WGS84)"].replace(",", "."),
                 locality=Locality.objects.get(id_mun=price["IDMunicipio"]),
                 province=Province.objects.get(id_prov=price["IDProvincia"]),
+                postal_code=int(price["C.P."]),
             )
 
             stations[station.id_eess] = station
@@ -215,8 +219,12 @@ def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
         update_station_prices(data, prices_date=current_date)
         elapsed_total = time.perf_counter() - start
 
+        eta = elapsed_total * days_left
+        eta_h = int(eta // 3600)
+        eta_m = int((eta % 3600) // 60)
+
         print(
-            f"     {elapsed_total:.2f}={elapsed_query:.2f}+{elapsed_total - elapsed_query:.2f}s (TOTAL=QUERY+DB) ETA ~{elapsed_total * days_left / 3600:.2f}h{C.CLR}"
+            f"     Last:{elapsed_total:.2f}s [Query:{elapsed_query:.2f}s, DB:{elapsed_total - elapsed_query:.2f}s] ETA {eta_h}h{eta_m:02}min{C.CLR}"
         )
         current_date += timedelta(days=1)
         days_left -= 1

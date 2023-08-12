@@ -56,19 +56,19 @@ html {
     color: var(--text-color);
 
     .accent {
-        color: var(--accent-text) !important;
+        color: var(--accent-text);
 
         &:hover {
-            color: var(--accent-text) !important;
+            color: var(--accent-text);
         }
     }
 
     .link {
-        color: var(--text-color) !important;
+        color: var(--text-color);
         text-decoration: none;
 
         &:hover {
-            color: var(--accent-text) !important;
+            color: var(--accent-text);
         }
     }
 
@@ -102,9 +102,6 @@ div.vertical-separator {
     }
 }
 
-// ////////////////////////////////// //
-// BASE PAGE SETTINGS AND COMPONENTS //
-// ////////////////////////////////// //
 // Header
 #navbar {
     position: fixed;
@@ -116,8 +113,13 @@ div.vertical-separator {
 
     background-color: var(--navbar-color);
 
-    .nav-icon {
-        height: 2rem;
+    #nav-home-icon {
+        rotate: 0deg;
+        transition: .25s cubic-bezier(.25, -0.5, .2, 2);
+
+        &:hover {
+            transform: rotate(-5deg) scale(1.1);
+        }
     }
 
     .navbar-nav a.nav-link {
@@ -146,33 +148,9 @@ div.vertical-separator {
 #footer {
     position: fixed;
     bottom: 0;
-    width: 100%;
     padding: 0 10px;
 
-    background: black;
     background: linear-gradient(0deg, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, 0) 100%);
-
-
-    .footer-icons {
-        float: left;
-        color: var(--text-color);
-        font-size: 1.1rem;
-
-        &.mobile {
-            font-size: 1rem;
-        }
-    }
-
-    .footer-appu {
-        float: right;
-        color: var(--text-color);
-        text-align: right;
-        font-size: 1rem;
-
-        &.mobile {
-            font-size: .9em;
-        }
-    }
 }
 
 // Content
@@ -186,45 +164,58 @@ div.vertical-separator {
     background: radial-gradient(ellipse 200% 110% at 50% 10%, var(--background) 10%, var(--background-alternate) 150%);
     // background: radial-gradient(ellipse 70% 120% at 0%, #333, #333 50%, #eee 75%, #333 75%); // Horizontal elliptical gradient
 
+    // Centered rounded wrapper
+    .crwrapper {
+        margin: 3rem auto 1rem auto;
+        padding: min(5%, 40px);
+
+        background-color: var(--accent-background);
+        border-radius: 15px;
+    }
+
     // Custom buttons
     .btn {
         &.btn-outline-dark {
             color: var(--background);
-            background-color: var(--palette-5);
+            background-color: var(--accent-background);
             border: var(--background) thin solid;
 
             &:hover {
-                color: var(--palette-5);
+                color: var(--accent-background);
                 background-color: var(--background);
                 border: var(--background) thin solid;
             }
         }
 
         &.btn-outline-light {
-            color: var(--palette-5);
+            color: var(--accent-background);
             background-color: var(--background);
-            border: var(--palette-5) thin solid;
+            border: var(--accent-background) thin solid;
 
             &:hover {
                 color: var(--background);
-                background-color: var(--palette-5);
-                border: var(--palette-5) thin solid;
+                background-color: var(--accent-background);
+                border: var(--accent-background) thin solid;
             }
         }
 
         &.btn-dark {
-            color: var(--palette-5);
+            color: var(--accent-background);
             background-color: var(--background);
             border: var(--background) thin solid;
 
             &:hover {
                 color: var(--background);
-                background-color: var(--palette-5);
+                background-color: var(--accent-background);
                 border: var(--background) thin solid;
             }
         }
 
         transition: ease-in .1s;
+    }
+
+    .messages {
+        width: min(100%, 1600px);
     }
 
     .alert {
@@ -429,17 +420,6 @@ div.vertical-separator {
         margin: 100px 10% 0 10%;
     }
 
-    // Centered rounded wrapper
-    .crwrapper {
-        max-width: min(1600px, 90%);
-        max-height: 100%;
-        margin: 5% auto 0 auto;
-        padding: min(5%, 40px);
-        align-items: center;
-
-        background-color: var(--accent-background);
-        border-radius: 15px;
-    }
 
 }
 

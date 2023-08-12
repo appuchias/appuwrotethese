@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-06 22:57+0200\n"
+"POT-Creation-Date: 2023-08-12 22:06+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -16,43 +16,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: accounts/forms.py:33 accounts/forms.py:143
+#: accounts/forms.py:33 accounts/forms.py:141
 msgid "Email"
 msgstr "Email"
 
-#: accounts/forms.py:36
-msgid ""
-"Required. Your email will be used for password resetting and account "
-"activation."
+#: accounts/forms.py:35
+msgid "Required. Your email will be used for password resetting."
 msgstr ""
-"Requerido. Tu correo electrónico se utilizará para restablecer la contraseña "
-"y la activación de la cuenta."
+"Requerido. Tu correo electrónico se utilizará para restablecer la contraseña."
 
-#: accounts/forms.py:73 templates/accounts/register.html:12
+#: accounts/forms.py:71 templates/accounts/register.html:12
 msgid "Register"
 msgstr "Registrarse"
 
-#: accounts/forms.py:102 templates/accounts/login.html:13
+#: accounts/forms.py:100 templates/accounts/login.html:13
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: accounts/forms.py:133 templates/accounts/account.html:16
+#: accounts/forms.py:131 templates/accounts/account.html:16
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: accounts/forms.py:146
+#: accounts/forms.py:144
 msgid "Required. You will receive an email with your temporary password."
 msgstr "Requerido. Recibirás un correo electrónico con su contraseña temporal."
 
-#: accounts/forms.py:162
+#: accounts/forms.py:160
 msgid "Reset password"
 msgstr "Restablecer contraseña"
 
-#: accounts/forms.py:172
+#: accounts/forms.py:170
 msgid "Upgrade UUID"
 msgstr "UUID de mejora"
 
-#: accounts/forms.py:174
+#: accounts/forms.py:172
 msgid ""
 "You will receive an email regarding your purchase from sellix with your "
 "upgrade UUID."
@@ -60,7 +57,7 @@ msgstr ""
 "Recibirás un correo electrónico sobre tu compra de sellix con tu UUID de "
 "mejora."
 
-#: accounts/forms.py:195
+#: accounts/forms.py:193
 msgid "Upgrade"
 msgstr "Mejorar"
 
@@ -182,11 +179,11 @@ msgstr "Debes proporcionar una localidad, provincia o código postal válido."
 msgid "Welcome to the API!"
 msgstr "Bienvenido a la API!"
 
-#: appuwrotethese/settings.py:218
+#: appuwrotethese/settings.py:217
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:219
+#: appuwrotethese/settings.py:218
 msgid "English"
 msgstr "Inglés"
 
@@ -234,7 +231,7 @@ msgstr "Buscar por"
 msgid "Type of query"
 msgstr "Tipo de petición"
 
-#: gas/forms.py:46 gas/forms.py:128
+#: gas/forms.py:46 gas/forms.py:128 templates/gas/results.html:35
 msgid "Fuel"
 msgstr "Combustible"
 
@@ -246,7 +243,7 @@ msgstr "Combustible a usar para ordenar"
 msgid "Date"
 msgstr "Fecha"
 
-#: gas/forms.py:59 gas/forms.py:141 templates/gas/results.html:17
+#: gas/forms.py:59 gas/forms.py:141
 msgid "Prices date"
 msgstr "Fecha de los precios"
 
@@ -266,7 +263,7 @@ msgstr "ID de provincia"
 msgid "ID of the locality"
 msgstr "ID de la localidad"
 
-#: gas/models.py:42
+#: gas/models.py:42 gas/views.py:119 templates/gas/search.html:22
 msgid "Localities"
 msgstr "Localidades"
 
@@ -274,7 +271,7 @@ msgstr "Localidades"
 msgid "ID of the province"
 msgstr "ID de la provincia"
 
-#: gas/models.py:69
+#: gas/models.py:69 gas/views.py:108 templates/gas/search.html:23
 msgid "Provinces"
 msgstr "Provincias"
 
@@ -314,38 +311,22 @@ msgstr "Precio"
 msgid "Gas station prices"
 msgstr "Precios"
 
-#: gas/query_handler.py:57
-msgid "Locality not found"
-msgstr "Localidad no encontrada"
+#: gas/query_handler.py:117
+msgid "No prices were found. Try with a broader search."
+msgstr "No se encontraron precios. Prueba con una búsqueda más amplia."
 
-#: gas/query_handler.py:65
-msgid "Province not found"
-msgstr "Provincia no encontrada"
-
-#: gas/query_handler.py:72
-msgid "Invalid postal code"
-msgstr "Código postal inválido"
-
-#: gas/query_handler.py:122
-msgid "No stations found in the selected area."
-msgstr "No se encontraron gasolineras en el área seleccionada."
-
-#: gas/query_handler.py:134
-msgid "No prices found. Date may be missing or no sations were found."
-msgstr ""
-"No se encontraron precios. Puede que falte la fecha o no se encontraran "
-"gasolineras."
-
-#: gas/views.py:37
+#: gas/views.py:44
 msgid "Invalid form. Please try again."
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
-#: middleware/persistent_messages_middleware.py:12
-msgid "Province searching might be broken"
-msgstr "La búsqueda por provincias puede no funcionar"
+#: gas/views.py:55
+msgid "No results found. Check your query and try again."
+msgstr ""
+"No se encontraron resultados. Comprueba la búsqueda e inténtalo de nuevo."
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
-#: templates/accounts/register.html:5 templates/base.html:99
+#: templates/accounts/register.html:5 templates/accounts/why.html:5
+#: templates/base.html:84 templates/base.html:85
 msgid "Account"
 msgstr "Cuenta"
 
@@ -354,9 +335,20 @@ msgstr "Cuenta"
 msgid "AWT Account"
 msgstr "Cuenta AWT"
 
-#: templates/accounts/account.html:12
+#: templates/accounts/account.html:11
 msgid "You're logged in as"
 msgstr "Estás conectado como"
+
+#: templates/accounts/account.html:12 templates/gas/results.html:95
+#: templates/legal.html:11 templates/legal.html:58
+msgid "Hosting is not free"
+msgstr "La web no es gratis"
+
+#: templates/accounts/account.html:12 templates/base.html:113
+#: templates/gas/results.html:95 templates/legal.html:11
+#: templates/legal.html:58
+msgid "Support me"
+msgstr "Apóyame"
 
 #: templates/accounts/account.html:17
 msgid "Logout"
@@ -388,6 +380,10 @@ msgstr "Crea una aquí"
 msgid "Forgot your password"
 msgstr "Olvidaste tu contrsaña"
 
+#: templates/accounts/login.html:25 templates/accounts/register.html:22
+msgid "Why should you"
+msgstr "Por qué deberías"
+
 #: templates/accounts/register.html:17
 msgid "Already have an account"
 msgstr "Ya tienes una cuenta"
@@ -404,15 +400,66 @@ msgstr "Reiniciar contraseña"
 msgid "Please log out before coming here"
 msgstr "Por favor, cierra sesión antes de venir aquí"
 
-#: templates/base.html:100
+#: templates/accounts/why.html:9
+msgid "Advantages of an account"
+msgstr "Ventajas de una cuenta"
+
+#: templates/accounts/why.html:12
+msgid "Done"
+msgstr "Completado"
+
+#: templates/accounts/why.html:13
+msgid ""
+"See price comparisons with yesterday, last week and last month for all "
+"stations in your searches"
+msgstr ""
+"Ver comparaciones de precios con ayer, la semana pasada y el mes pasado para "
+"todas las estaciones en tus búsquedas"
+
+#: templates/accounts/why.html:14
+msgid "Pending"
+msgstr "Pendiente"
+
+#: templates/accounts/why.html:15
+msgid ""
+"Viewing a personal dashboard with your favourite station and your saved "
+"query to find your usual prices faster"
+msgstr ""
+"Ver un panel personal con tu estación favorita y tu búsqueda guardada para "
+"encontrar tus precios habituales más rápido"
+
+#: templates/accounts/why.html:17
+msgid "Why you shouldn't create an account"
+msgstr "Por qué no deberías crear una cuenta"
+
+#: templates/accounts/why.html:18
+msgid ""
+"By creating an account, you are giving me (Appu) come details about you. "
+"Please don't create an account if you're uncomfortable with providing those "
+"details"
+msgstr ""
+"Al crear una cuenta, me estás dando (Appu) algunos detalles sobre ti. Por "
+"favor, no crees una cuenta si no te sientes cómodo proporcionando esos "
+"detalles"
+
+#: templates/accounts/why.html:19
+msgid ""
+"I'm still learning, so I may lose your data and you may need to create your "
+"account again. I will try to avoid it, but I can't promise it won't happen"
+msgstr ""
+"Aún estoy aprendiendo, así que puedo perder tus datos y puede que tengas que "
+"crear tu cuenta de nuevo. Intentaré evitarlo, pero no puedo prometer que no "
+"vaya a suceder"
+
+#: templates/base.html:87 templates/base.html:88
 msgid "Prices"
 msgstr "Precios"
 
-#: templates/base.html:103
+#: templates/base.html:94
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:123
+#: templates/base.html:116
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -453,6 +500,16 @@ msgstr ""
 "Hubo un error interno al cargar la página. Por favor, contacta conmigo para "
 "que pueda solucionarlo."
 
+#: templates/gas/names.html:10
+msgid "These are the names stored in the database. Use them in your searches"
+msgstr ""
+"Estos son los nombres almacenados en la base de datos. Úsalos en tus "
+"búsquedas"
+
+#: templates/gas/names.html:11
+msgid "Tip: Use CTRL+F or tap 'search in page' in the browser menu"
+msgstr "Tip: Usa CTRL+F o pulsa 'buscar en la página' en el menú del navegador"
+
 #: templates/gas/noresults.html:1
 msgid "No results"
 msgstr "Sin resultados"
@@ -467,17 +524,45 @@ msgstr ""
 "Nota: Las gasolineras que no ofrezcan el combustible solicitado no serán "
 "mostradas"
 
-#: templates/gas/results.html:12
+#: templates/gas/results.html:10
 msgid "Stations"
 msgstr "Gasolineras"
 
 #: templates/gas/results.html:15
+msgid "Price of"
+msgstr "Precio de"
+
+#: templates/gas/results.html:15
+msgid "in"
+msgstr "en"
+
+#: templates/gas/results.html:15
+msgid "on the"
+msgstr "para el día"
+
+#: templates/gas/results.html:16
 msgid ""
-"The icon at the bottom of every card opens the route to the station in your "
-"maps app (Google maps for the web)"
+"The 3 bottom icons show if the price in the past was cheaper (green) or more "
+"expensive (red)"
 msgstr ""
-"El icono en la parte inferior abre la dirección de la gasolinera en tu "
-"aplicación de mapas (Google maps para web)"
+"Los 3 iconos de abajo muestran si el combustible era más barato (verde) o "
+"más caro (rojo)"
+
+#: templates/gas/results.html:60
+msgid "Open maps route"
+msgstr "Abrir ruta en maps"
+
+#: templates/gas/results.html:66
+msgid "Yesterday"
+msgstr "Ayer"
+
+#: templates/gas/results.html:73
+msgid "Last week"
+msgstr "Semana pasada"
+
+#: templates/gas/results.html:80
+msgid "Last month"
+msgstr "Mes pasado"
 
 #: templates/gas/search.html:11
 msgid ""
@@ -500,69 +585,221 @@ msgstr "Inicio"
 msgid "View projects"
 msgstr "Ver proyectos"
 
+#: templates/legal.html:4 templates/legal.html:8
+msgid "Legal"
+msgstr "Legal"
+
+#: templates/legal.html:16
+msgid "Privacy"
+msgstr "Privacidad"
+
+#: templates/legal.html:18
+msgid ""
+"Some personal information is temporarily stored in logs for attack "
+"investigation and mitigation"
+msgstr ""
+"Alguna información personal se almacena temporalmente en los logs para "
+"investigar y mitigar ataques"
+
+#: templates/legal.html:18
+msgid "This includes IP addresses and user-agents"
+msgstr "Esto incluye direcciones IP y user-agents"
+
+#: templates/legal.html:20
+msgid ""
+"This information is automatically removed after 3 months using logrotate"
+msgstr ""
+"Esta información se elimina automáticamente después de 3 meses usando "
+"logrotate"
+
+#: templates/legal.html:20
+msgid ""
+"For any specific information deletion request you can contact me through"
+msgstr ""
+"Para cualquier petición de eliminación de información específica puedes "
+"contactar conmigo a través de"
+
+#: templates/legal.html:21
+msgid "my contact email"
+msgstr "mi correo de contacto"
+
+#: templates/legal.html:24
+msgid ""
+"Any information provided in forms or any similar way (usernames, real names, "
+"emails and passwords) will be stored in the web's database"
+msgstr ""
+"Cualquier información proporcionada en formularios o de cualquier otra forma "
+"(nombres de usuario, nombres reales, correos electrónicos y contraseñas) se "
+"almacenará en la base de datos de la web"
+
+#: templates/legal.html:26
+msgid ""
+"You can request its deletion at any time through the same email that is "
+"registered in the web"
+msgstr ""
+"Puedes solicitar su eliminación en cualquier momento a través del mismo "
+"correo electrónico que está registrado en la web"
+
+#: templates/legal.html:26
+msgid ""
+"All requests will be fulfilled within 30 days from the first notification "
+"when possible"
+msgstr ""
+"Todas las solicitudes se cumplirán en un plazo de 30 días desde la primera "
+"notificación siempre que sea posible"
+
+#: templates/legal.html:28
+msgid ""
+"None of the information stored by this service is or will be shared with any "
+"third party unless required by law"
+msgstr ""
+"Ninguna información almacenada por este servicio es o será compartida con "
+"terceros a menos que sea requerido por ley"
+
+#: templates/legal.html:30
+msgid ""
+"Passwords are stored hashed and salted for users' protection in case of a "
+"security breach"
+msgstr ""
+"Las contraseñas se almacenan hasheadas y 'salted' para la protección de los "
+"usuarios en caso de una brecha de seguridad"
+
+#: templates/legal.html:32
+msgid "Analytics"
+msgstr "Analíticas"
+
+#: templates/legal.html:34
+msgid ""
+"I use a self-hosted instance of Plausible to store web analytics and be able "
+"to monitor traffic"
+msgstr ""
+"Uso una instancia self-hosted de Plausible para almacenar las analíticas web "
+"y poder monitorizar el tráfico"
+
+#: templates/legal.html:36
+msgid ""
+"None of the information tracked by the analytics script can be used to "
+"uniquely identify a specific user"
+msgstr ""
+"Ninguna información obtenida por el script de analíticas puede ser usada "
+"para identificar a un usuario específico"
+
+#: templates/legal.html:39
+msgid "External resources"
+msgstr "Recursos externos"
+
+#: templates/legal.html:47
+msgid "Thanks"
+msgstr "Agradecimientos"
+
+#: templates/legal.html:48
+msgid "This website would not be possible without the help of"
+msgstr "Esta web no sería posible sin la ayuda de"
+
+#: templates/legal.html:50
+msgid "My mother"
+msgstr "Mi madre"
+
+#: templates/legal.html:50
+msgid "specifically for her help with learning CSS and more UI recommendations"
+msgstr "específicamente por su ayuda con CSS y más recomendaciones de UI"
+
+#: templates/legal.html:51
+msgid ""
+"for her support while building the web and debugging it (specially debugging)"
+msgstr ""
+"por su apoyo mientras construía la web y depuraba (especialmente depurándola)"
+
 #. Translators: Projects page tab title
 #. Translators: Projects page title
 #: templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
 
-#. Translators: Thanks home page
-#. Translators: Thanks page title
-#: templates/thanks.html:5 templates/thanks.html:10
-msgid "Thanks"
-msgstr "Agradecimientos"
+#~ msgid "No stations found in the selected area."
+#~ msgstr "No se encontraron gasolineras en el área seleccionada."
 
-#. Translators: First table title
-#: templates/thanks.html:13
-msgid "Honorable mentions"
-msgstr "Menciones honoríficas"
+#~ msgid "Invalid postal code"
+#~ msgstr "Código postal inválido"
 
-#. Translators: First table headers
-#: templates/thanks.html:17
-msgid "Who"
-msgstr "Quién"
+#~ msgid "Special characters are not searched correctly (ñ, accents, ...)"
+#~ msgstr ""
+#~ "Los caracteres especiales no se buscan correctamente (ñ, acentos, ...)"
 
-#: templates/thanks.html:18
-msgid "Why"
-msgstr "Por qué"
+#~ msgid "Locality not found"
+#~ msgstr "Localidad no encontrada"
 
-#: templates/thanks.html:23
-msgid "My mother"
-msgstr "Mi madre"
+#~ msgid "Province not found"
+#~ msgstr "Provincia no encontrada"
 
-#. Translators: Table content
-#: templates/thanks.html:25
-msgid "A CSS master who got me through the painful design problems"
-msgstr "Una maestra de CSS que me ayudó con los dolorosos problemas del diseño"
+#~ msgid "Province searching might be broken"
+#~ msgstr "La búsqueda por provincias puede no funcionar"
 
-#. Translators: Table content
-#: templates/thanks.html:30
-msgid "Bug hunting and moral support throughout all page development"
-msgstr "Caza de bugs y apoyo moral durante toda la creación de la web"
+#~ msgid ""
+#~ "The icon at the bottom of every card opens the route to the station in "
+#~ "your maps app"
+#~ msgstr ""
+#~ "El icono en la parte inferior abre la dirección de la gasolinera en tu "
+#~ "aplicación de mapas"
 
-#. Translators: Second table title
-#: templates/thanks.html:37
-msgid "Services"
-msgstr "Servicios"
+#~ msgid ""
+#~ "The 3 icons on the bootom of cards show the price difference with "
+#~ "yesterday, last week and last month, respectively"
+#~ msgstr ""
+#~ "Los 3 iconos de la parte inferior de las tarjetas muestran la diferencia "
+#~ "de precio respecto a ayer, hace una semana y hace un mes, respectivamente"
 
-#. Translators: Second table headers
-#: templates/thanks.html:41
-msgid "Webpage"
-msgstr "Página web"
+#~ msgid ""
+#~ "A red icon means the corresponding price was lower, while a green one "
+#~ "means now it's cheaper"
+#~ msgstr ""
+#~ "Un icono rojo significa que ese día era más barato, mientras que un icono "
+#~ "verde significa que ahora es más barato"
 
-#: templates/thanks.html:42
-msgid "Service provided"
-msgstr "Servicio ofrecido"
+#~ msgid "More expensive"
+#~ msgstr "Más caro"
 
-#. Translators: Table content
-#: templates/thanks.html:49
-msgid "Icons used in the web"
-msgstr "Iconos usados en la web"
+#~ msgid "Cheaper"
+#~ msgstr "Más barato"
 
-#. Translators: Table content
-#: templates/thanks.html:54
-msgid "Layout of the page"
-msgstr "Diseño principal de la web"
+#~ msgid "Same price"
+#~ msgstr "Mismo precio"
+
+#~ msgid "No prices found. Date may be missing or no sations were found."
+#~ msgstr ""
+#~ "No se encontraron precios. Puede que falte la fecha o no se encontraran "
+#~ "gasolineras."
+
+#~ msgid "Honorable mentions"
+#~ msgstr "Menciones honoríficas"
+
+#~ msgid "Who"
+#~ msgstr "Quién"
+
+#~ msgid "Why"
+#~ msgstr "Por qué"
+
+#~ msgid "A CSS master who got me through the painful design problems"
+#~ msgstr ""
+#~ "Una maestra de CSS que me ayudó con los dolorosos problemas del diseño"
+
+#~ msgid "Bug hunting and moral support throughout all page development"
+#~ msgstr "Caza de bugs y apoyo moral durante toda la creación de la web"
+
+#~ msgid "Services"
+#~ msgstr "Servicios"
+
+#~ msgid "Webpage"
+#~ msgstr "Página web"
+
+#~ msgid "Service provided"
+#~ msgstr "Servicio ofrecido"
+
+#~ msgid "Icons used in the web"
+#~ msgstr "Iconos usados en la web"
+
+#~ msgid "Layout of the page"
+#~ msgstr "Diseño principal de la web"
 
 #~ msgid "Postal Code"
 #~ msgstr "Código postal"
@@ -615,12 +852,6 @@ msgstr "Diseño principal de la web"
 
 #~ msgid "Postal code (Inaccurate)"
 #~ msgstr "Código postal (Inexacto)"
-
-#~ msgid "Last update"
-#~ msgstr "Última actualización"
-
-#~ msgid "No results found. Please try again."
-#~ msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
 #~ msgid "Show all"
 #~ msgstr "Ver todos"

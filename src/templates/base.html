@@ -28,7 +28,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400&display=swap" rel="stylesheet">
         <link href="/s/balloon.min.css" rel="stylesheet">
         <link href="/s/bootstrap-5.3.0/bootstrap.min.css" rel="stylesheet">
-        <script src="/s/lucide-0.240.0.min.js"></script>
+        <script src="/s/lucide-0.265.0.min.js"></script>
 
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="/s/styles/styles.min.css">
@@ -56,7 +56,7 @@
     {% with request|is_mobile as phone %}
     <body>
         <nav id=navbar class="navbar navbar-expand container-fluid">
-            <a href="/">
+            <a href="/" id="nav-home-icon">
                 <svg version="1.1" width="32" height="32" viewBox="0 0 1333.3333 1333.3333"
                     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
                     <defs id="defs22">
@@ -77,17 +77,13 @@
                     </g>
                 </svg>
             </a>
-            <form action="{% url 'set_language' %}" method="post" id="langForm" class="invisible">
-                {% csrf_token %}
-                <input type="text" name="language" value="{% if LANG == 'es' %}en{% else %}es{% endif %}" class="invisible">
-            </form>
-
+            <form action="{% url 'set_language' %}" method="post" class="invisible" id="langForm">{% csrf_token %}<input type="text" name="language" value="{% if LANG == 'es' %}en{% else %}es{% endif %}"></form>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav text-themed">
                     {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i data-lucide="cog"></i> Admin</a>{% endif %}
-                    {% comment %} <a class="text-reset nav-link" href="/accounts/" {% if phone %}aria-label="{% trans 'Account' %}" data-balloon-pos="down"{% endif %}>
+                    <a class="text-reset nav-link" href="/accounts/" {% if phone %}aria-label="{% trans 'Account' %}" data-balloon-pos="down"{% endif %}>
                         <i data-lucide="user"></i>{% if not phone %} {% trans "Account" %}{% endif %}
-                    </a> {% endcomment %}
+                    </a>
                     <a class="text-reset nav-link" href="/gas/" {% if phone %}aria-label="{% trans 'Prices' %}" data-balloon-pos="down"{% endif %}>
                         <i data-lucide="fuel"></i>{% if not phone %} {% trans "Prices" %}{% endif %}
                     </a>
@@ -101,21 +97,23 @@
         </nav>
         <!-- - -->
         <div id="content" class="container-fluid">
-            {% if messages %}{% for message in messages %}
-            <div class="alert alert-{{ message.level_tag }} my-4{% if phone %} mobile{% endif %}" role="alert">
-                {{ message }}
-            </div>{% endfor %}{% endif %}
+            <div class="container-fluid messages">{% if messages %}{% for message in messages %}
+                <div class="alert alert-{{ message.level_tag }} my-4{% if phone %} mobile{% endif %}" role="alert">
+                    {{ message }}
+                </div>{% endfor %}{% endif %}
+            </div>
             {% block content %}Content{% endblock content %}
         </div>
         <!-- - -->
         <div id="footer" class="container-fluid">
-            <div class="footer-icons{% if phone %} mobile{% endif %}">
-                <a href="https://links.appu.ltd/" class="text-reset icon" rel="noopener" target="_blank"><i data-lucide="link" class="footer"></i></a>
-                <a href="https://l.appu.ltd/youtube" class="text-reset icon" rel="noopener noreferrer" target="_blank"><i data-lucide="youtube" class="footer"></i></a>
-                <a href="https://l.appu.ltd/awt" class="text-reset icon" rel="noopener" target="_blank"><i data-lucide="github" class="footer"></i></a>
+            <div class="float-start">
+                <a href="https://links.appu.ltd/" class="text-themed icon" rel="noopener" target="_blank"><i data-lucide="link" class="footer"></i></a>
+                <a href="https://l.appu.ltd/youtube" class="text-themed icon" rel="noopener noreferrer" target="_blank"><i data-lucide="youtube" class="footer"></i></a>
+                <a href="https://l.appu.ltd/awt" class="text-themed icon" rel="noopener" target="_blank"><i data-lucide="github" class="footer"></i></a>
+                <a href="https://coindrop.to/appuchia" class="text-themed icon" rel="noopener noreferrer" target="_blank" aria-label="{% trans "Support me" %}!" data-balloon-pos="up"><i data-lucide="coins" class="footer"></i></a>
             </div>
-            <div class="footer-appu align-self-end{% if phone %} mobile{% endif %}">
-                <a href="/thanks/" class="text-reset text-decoration-none">{% trans "Coded with 🖤 by Appu" %}</a>
+            <div class="float-end">
+                <a href="/legal/" class="text-themed text-decoration-none">{% trans "Coded with 🖤 by Appu" %}</a>
             </div>
         </div>
         <script>lucide.createIcons()</script>

@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Iterable
 
 from django.contrib import messages
@@ -36,7 +36,7 @@ get_db_product_name = lambda prod_abbr, default="": {
 
 
 ## Get locality id/province id/postal code ##
-def get_ids(request: HttpRequest, query: str, q_type: str) -> tuple[int, int, int]:
+def get_ids(query: str, q_type: str) -> tuple[int, int, int]:
     """Gets the locality id, province id or postal code from the query"""
 
     id_locality = 0
@@ -44,54 +44,42 @@ def get_ids(request: HttpRequest, query: str, q_type: str) -> tuple[int, int, in
     postal_code = 0
 
     if q_type == "locality":
-        locality = models.Locality.objects.filter(name__icontains=query)
-        if locality.exists():
-            # Select locality with more stations
-            locality = locality.annotate(num_stations=Count("station")).order_by(
-                "-num_stations"
-            )[0]
+        locality = models.Locality.objects.filter(name__iexact=query).first()
+        if not locality:
+            locality = models.Locality.objects.filter(name__icontains=query)
+            if locality.exists():
+                # Select locality with more stations
+                locality = locality.annotate(num_stations=Count("station")).order_by(
+                    "-num_stations"
+                )[0]
 
-            id_locality = locality.id_mun
+                id_locality = locality.id_mun
         else:
-            messages.error(request, _("Locality not found"))
-            raise Http404
+            id_locality = locality.id_mun
 
     elif q_type == "province":
-        province = models.Province.objects.filter(name__icontains=query).first()
-        if province:
-            id_province = province.id_prov
+        province = models.Province.objects.filter(name__iexact=query.upper()).first()
+        if not province:
+            # Provinces are uppercase in the DB
+            province = models.Province.objects.filter(name__icontains=query.upper())
+            if province.exists():
+                # Select province with more stations
+                province = province.annotate(num_stations=Count("station")).order_by(
+                    "-num_stations"
+                )[0]
+
+                id_province = province.id_prov
         else:
-            messages.error(request, _("Province not found"))
-            raise Http404
+            id_province = province.id_prov
 
     elif q_type == "postal_code":
         if query.isdigit() and len(query) == 5:
             postal_code = int(query)
-        else:
-            messages.error(request, _("Invalid postal code"))
-            raise Http404
 
     return id_locality, id_province, postal_code
 
 
 ## Process the query form ##
-def process_search(request: HttpRequest, form: dict) -> Iterable[models.StationPrice]:
-    """Process a query and return the results.
-
-    This function gets the request and the clean form data
-    and returns the list of results and the product name.
-    """
-
-    term = str(form.get("term"))
-    q_type = str(form.get("q_type"))
-    fuel_abbr = str(form.get("fuel_abbr"))
-    q_date = form.get("q_date", date.today())
-
-    id_locality, id_province, postal_code = get_ids(request, term, q_type)
-
-    return db_prices(request, id_locality, id_province, postal_code, fuel_abbr, q_date)
-
-
 def db_prices(
     request: HttpRequest,
     id_locality: int,
@@ -103,38 +91,88 @@ def db_prices(
     """Get the prices from the database.
 
     This function gets the request and the clean form data
-    and returns the list of results
+    and returns the list of results.
+
+    You must pass either id_locality, id_province or postal_code.
+    If more than one is passed, the first one (in that order) will be used.
     """
 
     if id_locality:
-        station_filter = {"locality_id": id_locality}
+        station_filter = {"station__locality_id": id_locality}
     elif id_province:
-        station_filter = {"province_id": id_province}
+        station_filter = {"station__province_id": id_province}
     elif postal_code:
-        station_filter = {"postal_code": postal_code}
+        station_filter = {"station__postal_code": postal_code}
     else:
-        return []
-
-    stations = models.Station.objects.filter(**station_filter)
-
-    if not stations.exists():
-        messages.error(request, _("No stations found in the selected area."))
         return []
 
     prod_name = get_db_product_name(prod_abbr)
     prices = (
-        models.StationPrice.objects.filter(station__in=stations, date=q_date)
+        models.StationPrice.objects.filter(date=q_date, **station_filter)
         .exclude(**{f"{prod_name}": None})
-        .order_by(f"{prod_name}")
+        .order_by(prod_name)
     )
 
     if not prices.exists():
-        messages.error(
-            request, _("No prices found. Date may be missing or no sations were found.")
-        )
+        messages.error(request, _("No prices were found. Try with a broader search."))
         return []
 
     return prices
+
+
+def get_stations_prices(
+    station_ids: int | Iterable[int], fuel: str, q_date: date
+) -> Iterable[models.StationPrice]:
+    """Get the prices from the database.
+
+    This function gets the request and the clean form data
+    and returns the list of results
+    """
+
+    prod_name = get_db_product_name(fuel)
+
+    if isinstance(station_ids, int):
+        raw_prices = models.StationPrice.objects.filter(
+            station_id=station_ids, date=q_date
+        )
+    else:
+        raw_prices = models.StationPrice.objects.filter(
+            station_id__in=station_ids, date=q_date
+        )
+
+    prices = raw_prices.exclude(**{f"{prod_name}": None}).order_by(prod_name)
+
+    return prices
+
+
+def are_past_prices_lower(
+    curr_prices, fuel: str, q_date: date, day_diff: int
+) -> dict[int, str]:
+    """Get the a past date's prices"""
+
+    prev_week = q_date - timedelta(days=day_diff)
+    prod_name = get_db_product_name(fuel)
+    past_prices = get_stations_prices(
+        (price.station.id_eess for price in curr_prices), fuel, prev_week
+    )
+    past_prices = {
+        price.station.id_eess: getattr(price, prod_name) for price in past_prices
+    }
+
+    prev_lower = {}
+    for price in curr_prices:
+        if not past_prices.get(price.station.id_eess):
+            prev_lower[price.station.id_eess] = "u"
+            continue
+
+        if getattr(price, prod_name) > past_prices.get(price.station.id_eess):
+            prev_lower[price.station.id_eess] = "l"
+        elif getattr(price, prod_name) < past_prices.get(price.station.id_eess):
+            prev_lower[price.station.id_eess] = "h"
+        else:
+            prev_lower[price.station.id_eess] = "e"
+
+    return prev_lower
 
 
 def get_last_update(form_data) -> str:

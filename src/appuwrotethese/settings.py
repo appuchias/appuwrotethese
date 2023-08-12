@@ -36,7 +36,7 @@ if SECRET_KEY is None:
     )
 SECRET_KEY_FALLBACKS = config.get("SECRET_KEY_FALLBACKS", [])
 
-DEBUG = False
+DEBUG = True
 
 SECURE_SSL_REDIRECT = not DEBUG
 SESSION_COOKIE_SECURE = True
@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "gas",
-    # "accounts",
+    "accounts",
     "api",
 ]
 MIDDLEWARE = [

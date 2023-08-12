@@ -25,7 +25,7 @@ urlpatterns = [
     path("admin/", admin.site.urls, name="admin"),
     path("api/", include("api.urls")),
     path("gas/", include("gas.urls")),
-    # path("accounts/", include("accounts.urls")),
+    path("accounts/", include("accounts.urls")),
     path("i18n/", include("django.conf.urls.i18n"), name="i18n"),
     path("robots.txt", views.redirect_static, kwargs={"resource": "robots.txt"}),
     path("favicon.ico", views.redirect_static, kwargs={"resource": "favicon.ico"}),
@@ -33,7 +33,7 @@ urlpatterns = [
 
 urlpatterns += [
     path("", views.home, name="home"),
-    path("thanks/", views.thanks, name="thanks"),
+    path("legal/", views.legal, name="legal"),
     path("text/", views.text, name="text"),
     path("build/", views.build, name="build"),
     path("projects/", views.projects, name="projects"),

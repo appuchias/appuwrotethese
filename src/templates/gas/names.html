@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n user_agents %}
+
+{% block title %}{{ q_type }}{% endblock %}
+
+{% block content %}
+<div id="db-list" class="container text-themed">
+    <div class="title {% if request|is_mobile %} mobile{% endif %}">{{ q_type }}</div>
+    <div class="subtitle">
+        <p class="text-center">{% trans "These are the names stored in the database. Use them in your searches" %}.</p>
+        <p class="text-center">{% trans "Tip: Use CTRL+F or tap 'search in page' in the browser menu" %}.</p>
+    </div>
+    <div class="row">
+        {% for name in names %}
+        <div class="col-sm-6 col-md-4 my-1 text-center">{{ name|lower|capfirst }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

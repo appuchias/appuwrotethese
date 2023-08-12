@@ -7,11 +7,6 @@ MESSAGES = [
     #     "text": _("The web is under development. It HAS bugs"),
     #     "path": "",
     # },
-    {
-        "level": messages.WARNING,
-        "text": _("Province searching might be broken") + ".",
-        "path": "gas",
-    },
 ]
 
 
