@@ -210,3 +210,9 @@ def acct_logout(request: HttpRequest):
 
     logout(request)
     return redirect("/accounts")
+
+
+def why(request: HttpRequest):
+    """Why page"""
+
+    return render(request, "accounts/why.html")

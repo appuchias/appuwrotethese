@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-30 00:15+0200\n"
+"POT-Creation-Date: 2023-08-12 22:06+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -311,11 +311,7 @@ msgstr "Precio"
 msgid "Gas station prices"
 msgstr "Precios"
 
-#: gas/query_handler.py:112
-msgid "No stations found in the selected area."
-msgstr "No se encontraron gasolineras en el área seleccionada."
-
-#: gas/query_handler.py:123
+#: gas/query_handler.py:117
 msgid "No prices were found. Try with a broader search."
 msgstr "No se encontraron precios. Prueba con una búsqueda más amplia."
 
@@ -329,8 +325,8 @@ msgstr ""
 "No se encontraron resultados. Comprueba la búsqueda e inténtalo de nuevo."
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
-#: templates/accounts/register.html:5 templates/base.html:84
-#: templates/base.html:85
+#: templates/accounts/register.html:5 templates/accounts/why.html:5
+#: templates/base.html:84 templates/base.html:85
 msgid "Account"
 msgstr "Cuenta"
 
@@ -384,6 +380,10 @@ msgstr "Crea una aquí"
 msgid "Forgot your password"
 msgstr "Olvidaste tu contrsaña"
 
+#: templates/accounts/login.html:25 templates/accounts/register.html:22
+msgid "Why should you"
+msgstr "Por qué deberías"
+
 #: templates/accounts/register.html:17
 msgid "Already have an account"
 msgstr "Ya tienes una cuenta"
@@ -399,6 +399,57 @@ msgstr "Reiniciar contraseña"
 #: templates/accounts/respwd.html:17
 msgid "Please log out before coming here"
 msgstr "Por favor, cierra sesión antes de venir aquí"
+
+#: templates/accounts/why.html:9
+msgid "Advantages of an account"
+msgstr "Ventajas de una cuenta"
+
+#: templates/accounts/why.html:12
+msgid "Done"
+msgstr "Completado"
+
+#: templates/accounts/why.html:13
+msgid ""
+"See price comparisons with yesterday, last week and last month for all "
+"stations in your searches"
+msgstr ""
+"Ver comparaciones de precios con ayer, la semana pasada y el mes pasado para "
+"todas las estaciones en tus búsquedas"
+
+#: templates/accounts/why.html:14
+msgid "Pending"
+msgstr "Pendiente"
+
+#: templates/accounts/why.html:15
+msgid ""
+"Viewing a personal dashboard with your favourite station and your saved "
+"query to find your usual prices faster"
+msgstr ""
+"Ver un panel personal con tu estación favorita y tu búsqueda guardada para "
+"encontrar tus precios habituales más rápido"
+
+#: templates/accounts/why.html:17
+msgid "Why you shouldn't create an account"
+msgstr "Por qué no deberías crear una cuenta"
+
+#: templates/accounts/why.html:18
+msgid ""
+"By creating an account, you are giving me (Appu) come details about you. "
+"Please don't create an account if you're uncomfortable with providing those "
+"details"
+msgstr ""
+"Al crear una cuenta, me estás dando (Appu) algunos detalles sobre ti. Por "
+"favor, no crees una cuenta si no te sientes cómodo proporcionando esos "
+"detalles"
+
+#: templates/accounts/why.html:19
+msgid ""
+"I'm still learning, so I may lose your data and you may need to create your "
+"account again. I will try to avoid it, but I can't promise it won't happen"
+msgstr ""
+"Aún estoy aprendiendo, así que puedo perder tus datos y puede que tengas que "
+"crear tu cuenta de nuevo. Intentaré evitarlo, pero no puedo prometer que no "
+"vaya a suceder"
 
 #: templates/base.html:87 templates/base.html:88
 msgid "Prices"
@@ -449,13 +500,13 @@ msgstr ""
 "Hubo un error interno al cargar la página. Por favor, contacta conmigo para "
 "que pueda solucionarlo."
 
-#: templates/gas/names.html:9
+#: templates/gas/names.html:10
 msgid "These are the names stored in the database. Use them in your searches"
 msgstr ""
 "Estos son los nombres almacenados en la base de datos. Úsalos en tus "
 "búsquedas"
 
-#: templates/gas/names.html:10
+#: templates/gas/names.html:11
 msgid "Tip: Use CTRL+F or tap 'search in page' in the browser menu"
 msgstr "Tip: Usa CTRL+F o pulsa 'buscar en la página' en el menú del navegador"
 
@@ -664,6 +715,9 @@ msgstr ""
 #: templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
+
+#~ msgid "No stations found in the selected area."
+#~ msgstr "No se encontraron gasolineras en el área seleccionada."
 
 #~ msgid "Invalid postal code"
 #~ msgstr "Código postal inválido"

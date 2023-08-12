@@ -7,18 +7,18 @@
 {% block content %}
 <div id="register">
     <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'AWT Account' %}</div>
-        <div class="container crwrapper">
-            <div class="user-login-register">
-                <div class="title ml-2 mt-2">{% trans "Register" %}</div>
-                <form action="/accounts/register/" method="post">
-                    {% csrf_token %}
-                    {% crispy form %}
-                    <div class="links">
-                        <a href="/accounts/login">{% trans "Already have an account" %}? {% trans "Log in" %}</a>
-                    </div>
-                </form>
-            </div>
+    <div class="container crwrapper">
+        <div class="user-login-register">
+            <div class="title ml-2 mt-2">{% trans "Register" %}</div>
+            <form action="/accounts/register/" method="post">
+                {% csrf_token %}
+                {% crispy form %}
+                <div class="links">
+                    <a href="/accounts/login">{% trans "Already have an account" %}? {% trans "Log in" %}</a>
+                </div>
+            </form>
         </div>
     </div>
+    <div class="text-center"><a href="/accounts/why" class="text-themed">{% trans "Why should you" %}?</a></div>
 </div>
 {% endblock %}

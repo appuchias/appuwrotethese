@@ -25,4 +25,5 @@ urlpatterns = [
     path("chpwd/", views.acct_change_pwd),
     path("respwd/", views.acct_reset_pwd),
     path("logout/", views.acct_logout),
+    path("why/", views.why),
 ]

@@ -7,21 +7,21 @@
 {% block content %}
 <div id="login">
     <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'AWT Account' %}</div>
-        <div class="container crwrapper">
-            <div class="user-login-register">
-                <div class="row">
-                    <div class="title mx-2 my-2">{% trans "Login" %}</div>
-                    <form action="/accounts/login/" method="post">
-                        {% csrf_token %}
-                        {% crispy form %}
-                        <div class="links">
-                            <a href="/accounts/register" class="col-md-6">{% trans "Don't have an account" %}? {% trans "Create one here" %}</a>
-                            <a href='/accounts/respwd/'  class="col-md-6"><i data-lucide="key"></i> {% trans "Forgot your password" %}?</a>
-                        </div>
-                    </form>
-                </div>
+    <div class="container crwrapper">
+        <div class="user-login-register">
+            <div class="row">
+                <div class="title mx-2 my-2">{% trans "Login" %}</div>
+                <form action="/accounts/login/" method="post">
+                    {% csrf_token %}
+                    {% crispy form %}
+                    <div class="links">
+                        <a href="/accounts/register" class="col-md-6">{% trans "Don't have an account" %}? {% trans "Create one here" %}</a>
+                        <a href='/accounts/respwd/'  class="col-md-6"><i data-lucide="key"></i> {% trans "Forgot your password" %}?</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+    <div class="text-center"><a href="/accounts/why" class="text-themed">{% trans "Why should you" %}?</a></div>
 </div>
 {% endblock %}
