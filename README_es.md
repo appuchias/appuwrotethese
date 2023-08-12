@@ -14,6 +14,8 @@ En caso de que algo suceda, puedes contactarme a través de cualquier red social
 El compilador oficial de less se utiliza para compilar las hojas de estilo, por lo que deberás instalarlo para compilar las hojas de estilo.
 Puedes encontrar la documentación oficial [aquí](http://lesscss.org/usage/#command-line-usage).
 
+Este proyecto antes era de código cerrado, y fue creado después de 750 commits que todavía se mantienen en privado pero son fundamentales para esta web.
+
 ## Proyectos disponibles actualmente
 
 1. Precios del combustible

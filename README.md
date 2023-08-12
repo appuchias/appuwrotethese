@@ -15,6 +15,8 @@ In case something happens, you can contact me through any social network found i
 The official less compiler is used to compile the stylesheets, so you will need to install it in order to compile the stylesheets.
 You can find the official documentation [here](http://lesscss.org/usage/#command-line-usage).
 
+This project was previously closed-source, and it was created after 750 commits that are still kept privately but are fundamental to this website.
+
 ## Projects currently available
 
 1. Gas prices
