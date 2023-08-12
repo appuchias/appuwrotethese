@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
