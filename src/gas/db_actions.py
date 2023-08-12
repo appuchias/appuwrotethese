@@ -224,7 +224,7 @@ def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
         eta_m = int((eta % 3600) // 60)
 
         print(
-            f"     TOTAL:{elapsed_total:.2f}s [QUERY:{elapsed_query:.2f}s, DB:{elapsed_total - elapsed_query:.2f}s] ETA {eta_h}:{eta_m}h{C.CLR}"
+            f"     Last:{elapsed_total:.2f}s [Query:{elapsed_query:.2f}s, DB:{elapsed_total - elapsed_query:.2f}s] ETA {eta_h}h{eta_m:02}min{C.CLR}"
         )
         current_date += timedelta(days=1)
         days_left -= 1
