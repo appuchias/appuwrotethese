@@ -11,7 +11,8 @@
     {% comment %}<p class="text-themed">{% trans "The icon at the bottom of every card opens the route to the station in your maps app" %}.</p>{% endcomment %}
     {% comment %}{% if user.is_authenticated %}<p class="text-themed">{% trans "The 3 icons on the bootom of cards show the price difference with yesterday, last week and last month, respectively" %}.<br>{% trans "A red icon means the corresponding price was lower, while a green one means now it's cheaper" %}.</p>{% endif %}{% endcomment %}
     <p class="text-themed text-center">{% trans "Price of" %} {{ fuel }} {% trans "in" %} {{ term }} {% trans "on the" %} {{ date }}</p>
-    {% if user.is_authenticated %}<p class="text-themed text-center">{% trans "The 3 bottom icons show if the price in the past was cheaper (green) or more expensive (red)" %}.</p>{% endif %}
+    {% if user.is_authenticated %}<br><p class="text-themed text-center">{% trans "The 3 bottom icons show if the price in the past was cheaper (green) or more expensive (red)" %}.</p>{% endif %}
+    {% if user.is_authenticated and request|is_mobile %}<p class="text-themed text-center">{% trans "In order: Yesterday, last week, last month" %}.</p>{% endif %}
 
     <!-- Grid with gas stations -->
     <div id="results-cards" class="container">
