@@ -26,6 +26,8 @@ def result(request: HttpRequest):
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"], "Method not allowed")
 
+    hx = bool(request.headers.get("HX-Request", ""))
+
     form = forms.SearchPrices(request.POST)
     if not form.is_valid():
         messages.error(request, _("Invalid form. Please try again."))
@@ -54,6 +56,7 @@ def result(request: HttpRequest):
             request,
             "gas/results.html",
             {
+                "hx": hx,
                 "results": prices,
                 "term": form_data.get("term"),
                 "fuel": FUEL_NAMES.get(form_data.get("fuel_abbr")),
@@ -69,6 +72,7 @@ def result(request: HttpRequest):
         request,
         "gas/results.html",
         {
+            "hx": hx,
             "results": prices,
             "term": form_data.get("term"),
             "fuel": FUEL_NAMES.get(form_data.get("fuel_abbr")),

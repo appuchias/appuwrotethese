@@ -13,7 +13,7 @@
         </center>
     </div>
     <div class="container crwrapper">
-        <form action="/gas/results/" method="post">
+        <form hx-post="/gas/search/" hx-trigger="keyup delay:500ms, change delay=500ms" hx-target="#search-result" hx-indicator="#indicator">
             {% csrf_token %}
             {% crispy form %}
         </form>
@@ -22,5 +22,13 @@
         <div class="col text-start"><a href="localities/" class="text-themed">{% trans "Localities" %}</a></div>
         <div class="col text-end"><a href="provinces/" class="text-themed">{% trans "Provinces" %}</a></div>
     </div>
+
+    <hr class="text-themed" style="margin-top: 3rem; margin-bottom: 2rem;">
+
+    <center>
+        <img id="indicator" class="htmx-indicator" src="/s/spinner.svg"/>
+    </center>
+
+    <div id="search-result"></div>
 </div>
 {% endblock %}

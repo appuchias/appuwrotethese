@@ -1,4 +1,9 @@
-{% extends 'base.html' %} {% load i18n %} {% block title %}{% trans 'No results' %}{% endblock %} {% block content %}
+{% extends hx|yesno:'onlycontent.html,base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'No results' %}{% endblock %}
+
+{% block content %}
 <center class="mt-5">
     <div class="text-themed">
         {% trans 'Results were not found' %}
