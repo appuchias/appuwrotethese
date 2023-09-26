@@ -68,25 +68,20 @@ class SearchPrices(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
-                Div(
-                    Div("term", css_class="col-md-6"),
-                    Div("q_type", css_class="col-md-6"),
-                    css_class="row",
-                ),
-                Div(
-                    Div("fuel_abbr", css_class="col-md-6"),
-                    Div("q_date", css_class="col-md-6"),
-                    css_class="row",
-                ),
+                Div("term", css_class="col-md-6"),
+                Div("q_type", css_class="col-md-6"),
+                Div("fuel_abbr", css_class="col-md-6"),
+                Div("q_date", css_class="col-md-6"),
+                css_class="row",
             ),
-            Div(
-                Submit(
-                    "submit",
-                    _("Search"),
-                    css_class="btn btn-outline-dark",
-                ),
-                css_class="d-flex justify-content-end",
-            ),
+            # Div(
+            #     Submit(
+            #         "submit",
+            #         _("Search"),
+            #         css_class="btn btn-outline-dark",
+            #     ),
+            #     css_class="d-flex justify-content-end",
+            # ),
         )
 
 
