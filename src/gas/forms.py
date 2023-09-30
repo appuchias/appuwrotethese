@@ -74,14 +74,14 @@ class SearchPrices(forms.Form):
                 Div("q_date", css_class="col-md-6"),
                 css_class="row",
             ),
-            # Div(
-            #     Submit(
-            #         "submit",
-            #         _("Search"),
-            #         css_class="btn btn-outline-dark",
-            #     ),
-            #     css_class="d-flex justify-content-end",
-            # ),
+            Div(
+                Submit(
+                    "submit",
+                    _("Search"),
+                    css_class="btn btn-outline-dark",
+                ),
+                css_class="d-flex justify-content-end",
+            ),
         )
 
 
