@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-19 16:23+0200\n"
+"POT-Creation-Date: 2023-09-30 02:55+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -16,40 +16,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: accounts/forms.py:33 accounts/forms.py:141
+#: accounts/forms.py:20 accounts/forms.py:128
 msgid "Email"
 msgstr "Email"
 
-#: accounts/forms.py:35
+#: accounts/forms.py:22
 msgid "Required. Your email will be used for password resetting."
 msgstr ""
 "Requerido. Tu correo electrónico se utilizará para restablecer la contraseña."
 
-#: accounts/forms.py:71 templates/accounts/register.html:12
+#: accounts/forms.py:58 templates/accounts/register.html:12
 msgid "Register"
 msgstr "Registrarse"
 
-#: accounts/forms.py:100 templates/accounts/login.html:13
+#: accounts/forms.py:87 templates/accounts/login.html:13
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: accounts/forms.py:131 templates/accounts/account.html:16
+#: accounts/forms.py:118 templates/accounts/account.html:16
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: accounts/forms.py:144
+#: accounts/forms.py:131
 msgid "Required. You will receive an email with your temporary password."
 msgstr "Requerido. Recibirás un correo electrónico con su contraseña temporal."
 
-#: accounts/forms.py:160
+#: accounts/forms.py:147
 msgid "Reset password"
 msgstr "Restablecer contraseña"
 
-#: accounts/forms.py:170
+#: accounts/forms.py:157
 msgid "Upgrade UUID"
 msgstr "UUID de mejora"
 
-#: accounts/forms.py:172
+#: accounts/forms.py:159
 msgid ""
 "You will receive an email regarding your purchase from sellix with your "
 "upgrade UUID."
@@ -57,44 +57,44 @@ msgstr ""
 "Recibirás un correo electrónico sobre tu compra de sellix con tu UUID de "
 "mejora."
 
-#: accounts/forms.py:193
+#: accounts/forms.py:180
 msgid "Upgrade"
 msgstr "Mejorar"
 
-#: accounts/models.py:41
+#: accounts/models.py:28
 msgid "Saved Station"
 msgstr "Gasolinera guardada"
 
-#: accounts/models.py:42
+#: accounts/models.py:29
 msgid "Saved Stations"
 msgstr "Gasolineras guardadas"
 
-#: accounts/models.py:60
+#: accounts/models.py:47
 msgid "Only alphanumeric characters and underscores are allowed."
 msgstr "Solo se permiten caracteres alfanuméricos y guiones bajos."
 
-#: accounts/models.py:68 gas/forms.py:37 gas/models.py:36 gas/models.py:41
+#: accounts/models.py:55 gas/forms.py:24 gas/models.py:23 gas/models.py:28
 msgid "Locality"
 msgstr "Localidad"
 
-#: accounts/models.py:69 gas/forms.py:38 gas/models.py:63 gas/models.py:68
+#: accounts/models.py:56 gas/forms.py:25 gas/models.py:50 gas/models.py:55
 msgid "Province"
 msgstr "Provincia"
 
-#: accounts/models.py:70 gas/forms.py:39 gas/forms.py:122 gas/forms.py:124
-#: gas/models.py:91
+#: accounts/models.py:57 gas/forms.py:26 gas/forms.py:104 gas/forms.py:106
+#: gas/models.py:78
 msgid "Postal code"
 msgstr "Código postal"
 
-#: accounts/models.py:88
+#: accounts/models.py:75
 msgid "Saved Query"
 msgstr "Consulta guardada"
 
-#: accounts/models.py:89
+#: accounts/models.py:76
 msgid "Saved Queries"
 msgstr "Consultas guardadas"
 
-#: accounts/views.py:32
+#: accounts/views.py:19
 msgid ""
 "Hello, {}\n"
 "\n"
@@ -127,35 +127,35 @@ msgstr ""
 "Un saludo,\n"
 "- Appu\n"
 
-#: accounts/views.py:80
+#: accounts/views.py:67
 msgid "You are now logged in"
 msgstr "Has iniciado sesión"
 
-#: accounts/views.py:82
+#: accounts/views.py:69
 msgid "Wrong username or password"
 msgstr "Nombre de usuario o contraseña incorrectos"
 
-#: accounts/views.py:119
+#: accounts/views.py:106
 msgid "You are now registered"
 msgstr "Te has registrado"
 
-#: accounts/views.py:152
+#: accounts/views.py:139
 msgid "Your password was successfully updated!"
 msgstr "Tu contraseña se actualizó correctamente."
 
-#: accounts/views.py:154
+#: accounts/views.py:141
 msgid "Old password is not correct"
 msgstr "La contraseña anterior no es correcta"
 
-#: accounts/views.py:183
+#: accounts/views.py:170
 msgid "Email is not registered"
 msgstr "El correo electrónico no está registrado"
 
-#: accounts/views.py:192
+#: accounts/views.py:179
 msgid "[appu.ltd] Password reset email"
 msgstr "[appu.ltd] Restablecer contraseña"
 
-#: accounts/views.py:200
+#: accounts/views.py:187
 msgid ""
 "Your password was successfully reset. Please check your email with your new "
 "temporary password."
@@ -163,35 +163,35 @@ msgstr ""
 "Tu contraseña se restableció correctamente. Por favor, comprueba tu correo "
 "electrónico con tu nueva contraseña temporal."
 
-#: api/gas/views.py:28
+#: api/gas/views.py:15
 msgid "Welcome to the Gas API!"
 msgstr "Bienvenido a la API de Gas!"
 
-#: api/gas/views.py:37 api/gas/views.py:70
+#: api/gas/views.py:24 api/gas/views.py:57
 msgid "Invalid request"
 msgstr "Petición inválida"
 
-#: api/gas/views.py:51 api/gas/views.py:84
+#: api/gas/views.py:38 api/gas/views.py:71
 msgid "You must provide a valid locality, province, or postal code."
 msgstr "Debes proporcionar una localidad, provincia o código postal válido."
 
-#: api/views.py:24
+#: api/views.py:11
 msgid "Welcome to the API!"
 msgstr "Bienvenido a la API!"
 
-#: appuwrotethese/settings.py:217
+#: appuwrotethese/settings.py:204
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:218
+#: appuwrotethese/settings.py:205
 msgid "English"
 msgstr "Inglés"
 
-#: appuwrotethese/views.py:36
+#: appuwrotethese/views.py:23
 msgid "Fuel prices"
 msgstr "Gasolineras"
 
-#: appuwrotethese/views.py:38
+#: appuwrotethese/views.py:25
 msgid ""
 "A project where you can check the different prices of all gas stations in "
 "Spain to sort them from lowest to highest"
@@ -199,134 +199,133 @@ msgstr ""
 "Un proyecto en el que puedes ver los distintos precios de las gasolineras de "
 "España y ordenarlos de menor a mayor"
 
-#: appuwrotethese/views.py:45
+#: appuwrotethese/views.py:32
 msgid "Future"
 msgstr "Futuro"
 
-#: appuwrotethese/views.py:46
+#: appuwrotethese/views.py:33
 msgid "Future projects"
 msgstr "Futuros proyectos"
 
-#: appuwrotethese/views.py:68
+#: appuwrotethese/views.py:55
 msgid "Project placeholder #"
 msgstr "Proyecto de ejemplo #"
 
-#: appuwrotethese/views.py:71
+#: appuwrotethese/views.py:58
 msgid "Placeholder project description"
 msgstr "Descripción del proyecto de ejemplo"
 
-#: gas/forms.py:29
+#: gas/forms.py:16
 msgid "Search term"
 msgstr "Término de búsqueda"
 
-#: gas/forms.py:31
+#: gas/forms.py:18
 msgid "Specific term to look for (e.g. Coruña, 15001, etc.)"
 msgstr "Término concreto a buscar (p.ej. Coruña, 15001, etc.)"
 
-#: gas/forms.py:35
+#: gas/forms.py:22
 msgid "Search by"
 msgstr "Buscar por"
 
-#: gas/forms.py:42
+#: gas/forms.py:29
 msgid "Type of query"
 msgstr "Tipo de petición"
 
-#: gas/forms.py:46 gas/forms.py:128 templates/gas/results.html:35
+#: gas/forms.py:33 gas/forms.py:110 templates/gas/results.html:41
 msgid "Fuel"
 msgstr "Combustible"
 
-#: gas/forms.py:54 gas/forms.py:136
+#: gas/forms.py:41 gas/forms.py:118
 msgid "Fuel to use for sorting"
 msgstr "Combustible a usar para ordenar"
 
-#: gas/forms.py:58 gas/forms.py:140
+#: gas/forms.py:45 gas/forms.py:122
 msgid "Date"
 msgstr "Fecha"
 
-#: gas/forms.py:59 gas/forms.py:141
+#: gas/forms.py:46 gas/forms.py:123
 msgid "Prices date"
 msgstr "Fecha de los precios"
 
-#: gas/forms.py:98
+#: gas/forms.py:80
 msgid "Search"
 msgstr "Buscar"
 
-#: gas/forms.py:110 gas/forms.py:112 gas/models.py:29
+#: gas/forms.py:92 gas/forms.py:94 gas/models.py:16
 msgid "Locality ID"
 msgstr "ID de la localidad"
 
-#: gas/forms.py:116 gas/forms.py:118 gas/models.py:56
+#: gas/forms.py:98 gas/forms.py:100 gas/models.py:43
 msgid "Province ID"
 msgstr "ID de provincia"
 
-#: gas/models.py:30
+#: gas/models.py:17
 msgid "ID of the locality"
 msgstr "ID de la localidad"
 
-#: gas/models.py:42 gas/views.py:119 templates/gas/search.html:22
+#: gas/models.py:29 gas/views.py:135 templates/gas/search.html:22
 msgid "Localities"
 msgstr "Localidades"
 
-#: gas/models.py:57
+#: gas/models.py:44
 msgid "ID of the province"
 msgstr "ID de la provincia"
 
-#: gas/models.py:69 gas/views.py:108 templates/gas/search.html:23
+#: gas/models.py:56 gas/views.py:124 templates/gas/search.html:23
 msgid "Provinces"
 msgstr "Provincias"
 
-#: gas/models.py:85
+#: gas/models.py:72
 msgid "Company"
 msgstr "Compañía"
 
-#: gas/models.py:86
+#: gas/models.py:73
 msgid "Address"
 msgstr "Dirección"
 
-#: gas/models.py:87
+#: gas/models.py:74
 msgid "Schedule"
 msgstr "Horario"
 
-#: gas/models.py:96
+#: gas/models.py:83
 msgid "Latitude"
 msgstr "Latitud"
 
-#: gas/models.py:102
+#: gas/models.py:89
 msgid "Longitude"
 msgstr "Longitud"
 
-#: gas/models.py:109
+#: gas/models.py:96
 msgid "Gas station"
 msgstr "Gasolinera"
 
-#: gas/models.py:110 templates/gas/search.html:4 templates/gas/search.html:8
+#: gas/models.py:97 templates/gas/search.html:4 templates/gas/search.html:8
 msgid "Gas stations"
 msgstr "Gasolineras"
 
-#: gas/models.py:151
+#: gas/models.py:138
 msgid "Gas station price"
 msgstr "Precio"
 
-#: gas/models.py:152
+#: gas/models.py:139
 msgid "Gas station prices"
 msgstr "Precios"
 
-#: gas/query_handler.py:117
-msgid "No prices were found. Try with a broader search."
-msgstr "No se encontraron precios. Prueba con una búsqueda más amplia."
-
-#: gas/views.py:44
-msgid "Invalid form. Please try again."
+#: gas/views.py:35
+msgid "Invalid form. Please try again"
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
-#: gas/views.py:55
-msgid "No results found. Check your query and try again."
-msgstr ""
-"No se encontraron resultados. Comprueba la búsqueda e inténtalo de nuevo."
+#: gas/views.py:50
+msgid "The location you're looking for could not be found"
+msgstr "No se pudo encontrar la ubicación que estás buscando"
+
+#: gas/views.py:62
+msgid "There were no prices in the database for that location and date"
+msgstr "No hay precios en la base de datos para esa ubicación y fecha"
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
 #: templates/accounts/register.html:5 templates/accounts/why.html:5
-#: templates/base.html:84 templates/base.html:85
+#: templates/base.html:87 templates/base.html:88
 msgid "Account"
 msgstr "Cuenta"
 
@@ -339,13 +338,13 @@ msgstr "Cuenta AWT"
 msgid "You're logged in as"
 msgstr "Estás conectado como"
 
-#: templates/accounts/account.html:12 templates/gas/results.html:95
+#: templates/accounts/account.html:12 templates/gas/results.html:101
 #: templates/legal.html:11 templates/legal.html:58
 msgid "Hosting is not free"
 msgstr "La web no es gratis"
 
-#: templates/accounts/account.html:12 templates/base.html:113
-#: templates/gas/results.html:95 templates/legal.html:11
+#: templates/accounts/account.html:12 templates/base.html:116
+#: templates/gas/results.html:101 templates/legal.html:11
 #: templates/legal.html:58
 msgid "Support me"
 msgstr "Apóyame"
@@ -364,7 +363,8 @@ msgstr "No has iniciado sesión"
 
 #. Translators: Button to go to last page visited
 #: templates/accounts/chpwd.html:17 templates/accounts/respwd.html:17
-#: templates/build.html:14 templates/gas/noresults.html:13
+#: templates/build.html:14 templates/gas/noresults.html:18
+#: templates/gas/results.html:108
 msgid "Go back"
 msgstr "Volver atrás"
 
@@ -451,15 +451,15 @@ msgstr ""
 "crear tu cuenta de nuevo. Intentaré evitarlo, pero no puedo prometer que no "
 "vaya a suceder"
 
-#: templates/base.html:87 templates/base.html:88
+#: templates/base.html:90 templates/base.html:91
 msgid "Prices"
 msgstr "Precios"
 
-#: templates/base.html:94
+#: templates/base.html:97
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:116
+#: templates/base.html:119
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -510,15 +510,15 @@ msgstr ""
 msgid "Tip: Use CTRL+F or tap 'search in page' in the browser menu"
 msgstr "Tip: Usa CTRL+F o pulsa 'buscar en la página' en el menú del navegador"
 
-#: templates/gas/noresults.html:1
+#: templates/gas/noresults.html:4
 msgid "No results"
 msgstr "Sin resultados"
 
-#: templates/gas/noresults.html:4
+#: templates/gas/noresults.html:9
 msgid "Results were not found"
 msgstr "No se encontraron resultados"
 
-#: templates/gas/noresults.html:11
+#: templates/gas/noresults.html:16
 msgid "Note: Stations that don't offer the wanted fuel type will not be shown"
 msgstr ""
 "Nota: Las gasolineras que no ofrezcan el combustible solicitado no serán "
@@ -540,7 +540,7 @@ msgstr "en"
 msgid "on the"
 msgstr "para el día"
 
-#: templates/gas/results.html:16
+#: templates/gas/results.html:19
 msgid ""
 "The 3 bottom icons show if the price in the past was cheaper (green) or more "
 "expensive (red)"
@@ -548,25 +548,29 @@ msgstr ""
 "Los 3 iconos de abajo muestran si el combustible era más barato (verde) o "
 "más caro (rojo)"
 
-#: templates/gas/results.html:16
+#: templates/gas/results.html:20
 msgid "In order: Yesterday, last week, last month"
 msgstr "En orden: Ayer, la semana pasada, el mes pasado"
 
-#: templates/gas/results.html:60
+#: templates/gas/results.html:66
 msgid "Open maps route"
 msgstr "Abrir ruta en maps"
 
-#: templates/gas/results.html:66
+#: templates/gas/results.html:72
 msgid "Yesterday"
 msgstr "Ayer"
 
-#: templates/gas/results.html:73
+#: templates/gas/results.html:79
 msgid "Last week"
 msgstr "Semana pasada"
 
-#: templates/gas/results.html:80
+#: templates/gas/results.html:86
 msgid "Last month"
 msgstr "Mes pasado"
+
+#: templates/gas/results.html:107
+msgid "No station prices were found"
+msgstr "No se encontraron precios para las gasolineras"
 
 #: templates/gas/search.html:11
 msgid ""
@@ -719,6 +723,13 @@ msgstr ""
 #: templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
+
+#~ msgid "No prices were found. Try with a broader search."
+#~ msgstr "No se encontraron precios. Prueba con una búsqueda más amplia."
+
+#~ msgid "No results found. Check your query and try again."
+#~ msgstr ""
+#~ "No se encontraron resultados. Comprueba la búsqueda e inténtalo de nuevo."
 
 #~ msgid "No stations found in the selected area."
 #~ msgstr "No se encontraron gasolineras en el área seleccionada."

@@ -32,8 +32,12 @@ def result(request: HttpRequest):
 
     form = forms.SearchPrices(request.POST)
     if not form.is_valid():
-        messages.error(request, _("Invalid form. Please try again."))
-        return render(request, "gas/noresults.html", {"results": []})
+        error_msg = _("Invalid form. Please try again") + "."
+        if not hx:
+            messages.error(request, error_msg)
+        return render(
+            request, "gas/results.html", {"hx": hx, "results": [], "error": error_msg}
+        )
 
     form_data = form.cleaned_data
     term = str(form_data.get("term"))
@@ -43,11 +47,27 @@ def result(request: HttpRequest):
 
     id_locality, id_province, postal_code = query_handler.get_ids(term, q_type)
     if not any((id_locality, id_province, postal_code)):
-        messages.error(request, _("No results found. Check your query and try again."))
-        return render(request, "gas/noresults.html", {"results": []})
+        error_msg = _("The location you're looking for could not be found") + "."
+        if not hx:
+            messages.error(request, error_msg)
+        return render(
+            request, "gas/results.html", {"hx": hx, "results": [], "error": error_msg}
+        )
     prices = query_handler.db_prices(
-        request, id_locality, id_province, postal_code, fuel, q_date
+        id_locality, id_province, postal_code, fuel, q_date
     )
+
+    if not prices:
+        error_msg = (
+            _("There were no prices in the database for that location and date") + "."
+        )
+        if not hx:
+            messages.error(request, error_msg)
+        return render(
+            request,
+            "gas/results.html",
+            {"hx": hx, "results": [], "error": error_msg},
+        )
 
     prices_date = form_data.get("q_date", date.today())
     if prices_date == date.today():

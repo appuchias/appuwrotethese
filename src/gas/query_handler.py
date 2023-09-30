@@ -66,7 +66,6 @@ def get_ids(query: str, q_type: str) -> tuple[int, int, int]:
 
 ## Process the query form ##
 def db_prices(
-    request: HttpRequest,
     id_locality: int,
     id_province: int,
     postal_code: int,
@@ -99,8 +98,7 @@ def db_prices(
     )
 
     if not prices.exists():
-        messages.error(request, _("No prices were found. Try with a broader search."))
-        return []
+        return list()
 
     return prices
 

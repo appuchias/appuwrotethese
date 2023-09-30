@@ -13,7 +13,7 @@
         </center>
     </div>
     <div class="container crwrapper">
-        <form hx-post="/gas/search/" hx-trigger="keyup delay:500ms, change delay=500ms" hx-target="#search-result" hx-indicator="#indicator" action="/gas/search/" method="POST">
+        <form hx-post="/gas/search/" hx-trigger="load, change throttle:500ms, keyup delay:500ms" hx-target="#search-result" hx-indicator="#indicator" action="/gas/search/" method="POST">
             {% csrf_token %}
             {% crispy form %}
         </form>

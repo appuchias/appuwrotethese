@@ -13,10 +13,13 @@
     <p class="text-themed text-center">{% trans "Price of" %} {{ fuel }} {% trans "in" %} {{ term }} {% trans "on the" %} {{ date }}</p>
     {% endif %}
 
+    {% if results %}
     {% if user.is_authenticated %}<br><p class="text-themed text-center">{% trans "The 3 bottom icons show if the price in the past was cheaper (green) or more expensive (red)" %}.</p>{% endif %}
     {% if user.is_authenticated and request|is_mobile %}<p class="text-themed text-center">{% trans "In order: Yesterday, last week, last month" %}.</p>{% endif %}
+    {% endif %}
 
     <!-- Grid with gas stations -->
+    {% if results %}
     <div id="results-cards" class="container">
         <div class="row justify-content-sm-around justify-content-center g-1">
             {% for i in results %}{% with s=i.station %}
@@ -97,5 +100,11 @@
         </div>
         <script>function openmaps(lat, long, name, postal_code, locality, address) {window.open("https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll=" + lat + "," + long + "&daddr=" + name + " " + locality + " " + postal_code + " " + + address);}</script>
     </div>
+    {% else %}
+    <center>
+        <p class="text-themed">{% trans "No station prices were found" %}: {{ error }}</p>
+        <a class="text-themed dark" href="javascript:history.back()">{% trans 'Go back' %}</a>
+    </center>
+    {% endif %}
 </div>
 {% endblock %}
