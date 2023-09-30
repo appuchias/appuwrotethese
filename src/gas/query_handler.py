@@ -6,10 +6,9 @@ from typing import Iterable
 
 from django.contrib import messages
 from django.db.models import Count
-from django.http import Http404, HttpRequest
+from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
-from appuwrotethese.extras import PATH_DATA
 from gas import models
 
 ## DB name lookup ##

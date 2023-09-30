@@ -10,6 +10,7 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
 from gas import models, forms, query_handler
+from appuwrotethese.extras import PATH_DATA
 
 FUEL_NAMES = {
     "GOA": "diésel",
@@ -50,7 +51,7 @@ def result(request: HttpRequest):
 
     prices_date = form_data.get("q_date", date.today())
     if prices_date == date.today():
-        with open(query_handler.PATH_DATA, "r") as f:
+        with open(PATH_DATA, "r") as f:
             prices_date = json.load(f).get(
                 "Fecha", datetime.now().strftime("%d/%m/%Y %H:%M:%S")
             )
