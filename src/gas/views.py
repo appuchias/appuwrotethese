@@ -1,7 +1,8 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-from datetime import date
+import json
+from datetime import date, datetime
 
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponseNotAllowed
@@ -49,7 +50,10 @@ def result(request: HttpRequest):
 
     prices_date = form_data.get("q_date", date.today())
     if prices_date == date.today():
-        prices_date = query_handler.get_last_update(form_data)
+        with open(query_handler.PATH_DATA, "r") as f:
+            prices_date = json.load(f).get(
+                "Fecha", datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+            )
 
     if not request.user.is_authenticated:
         return render(

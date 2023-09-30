@@ -1,8 +1,7 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-import json
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 from typing import Iterable
 
 from django.contrib import messages
@@ -160,12 +159,3 @@ def are_past_prices_lower(
             prev_lower[price.station.id_eess] = "e"
 
     return prev_lower
-
-
-def get_last_update(form_data) -> str:
-    last_update = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    if form_data.get("show_all", True):
-        with open(PATH_DATA, "r") as f:
-            last_update = json.load(f).get("Fecha", last_update)
-
-    return last_update
