@@ -110,8 +110,9 @@ def get_stations_prices(
 ) -> Iterable[models.StationPrice]:
     """Get the prices from the database.
 
-    This function gets the request and the clean form data
-    and returns the list of results
+    This function gets the station id(s), the fuel used to sort the prices
+    and the date and returns the list of prices.
+    It accepts a single station id or an iterable of station ids.
     """
 
     prod_name = get_db_product_name(fuel)
@@ -144,6 +145,7 @@ def are_past_prices_lower(
         price.station.id_eess: getattr(price, prod_name) for price in past_prices
     }
 
+    # Stores for each ideess if the price is higher, lower, equal or unknown
     prev_lower = {}
     for price in curr_prices:
         if not past_prices.get(price.station.id_eess):
