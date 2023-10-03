@@ -169,10 +169,7 @@ def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
     print("\n" * (lines - 1))
 
     today = date.today()
-    if local_folder:
-        current_date = date(2007, 1, 1)
-    else:
-        current_date = today - timedelta(days=days)
+    current_date = today - timedelta(days=days)
     days_left = (today - current_date).days
 
     while current_date <= today:
@@ -188,7 +185,7 @@ def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
             continue
 
         if local_folder:
-            filename = local_folder + current_date.strftime("response_%Y-%m-%d.json.xz")
+            filename = local_folder + current_date.strftime("%Y-%m-%d.json.xz")
             if not os.path.isfile(filename):
                 print("\n" * (lines - 2))
                 current_date += timedelta(days=1)

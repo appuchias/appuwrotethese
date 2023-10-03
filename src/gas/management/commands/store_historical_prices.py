@@ -13,9 +13,18 @@ class Command(BaseCommand):
             help="Local folder to retrieve historical prices from.",
             default="",
         )
+        parser.add_argument(
+            "-d",
+            "--days",
+            type=int,
+            help="Days to fetch",
+            default=365,
+        )
 
     def handle(self, *args, **options):
         if options["local_folder"]:
-            db_actions.store_historical_prices(local_folder=options["local_folder"])
+            db_actions.store_historical_prices(
+                days=options["days"], local_folder=options["local_folder"]
+            )
         else:
-            db_actions.store_historical_prices()
+            db_actions.store_historical_prices(options["days"])
