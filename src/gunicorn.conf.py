@@ -15,7 +15,6 @@ certfile = "./ssl/cert.pem"
 keyfile = "./ssl/key.pem"
 
 pidfile = "/tmp/gunicorn.pid"
-# bind = "unix:/tmp/gunicorn.sock"
 
 # Logging
 access_log_format = '%(t)s %({cf-connecting-ip}i)s[%({cf-ipcountry}i)s]  "%(f)s" "%(r)s" -> %(s)s %(b)s "%(a)s"'
@@ -24,20 +23,13 @@ errorlog = "./log/gunicorn.log"
 loglevel = "info"
 
 # Connections
-backlog = 256
+backlog = 128
 worker_connections = 200
 
-# Local development overrides
-if DEBUG:
-    reload = True
-    workers = 1
-    preload_app = False
-    # bind = "0.0.0.0:8000"
-    # certfile = None
-    # keyfile = None
-    # pidfile = None
+# Reload when in debug mode
+reload = DEBUG
 
 
-# Startup
+# Startup message
 def when_ready(_):
-    print(ShellCodes.FG_GREEN + "Ready!\n" + ShellCodes.RESET)
+    print(ShellCodes.FG_YELLOW + "Ready!\n" + ShellCodes.RESET)
