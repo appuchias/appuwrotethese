@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 02:55+0200\n"
+"POT-Creation-Date: 2023-10-11 18:45+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -338,13 +338,13 @@ msgstr "Cuenta AWT"
 msgid "You're logged in as"
 msgstr "Estás conectado como"
 
-#: templates/accounts/account.html:12 templates/gas/results.html:101
+#: templates/accounts/account.html:12 templates/gas/results.html:106
 #: templates/legal.html:11 templates/legal.html:58
 msgid "Hosting is not free"
 msgstr "La web no es gratis"
 
 #: templates/accounts/account.html:12 templates/base.html:116
-#: templates/gas/results.html:101 templates/legal.html:11
+#: templates/gas/results.html:106 templates/legal.html:11
 #: templates/legal.html:58
 msgid "Support me"
 msgstr "Apóyame"
@@ -363,8 +363,7 @@ msgstr "No has iniciado sesión"
 
 #. Translators: Button to go to last page visited
 #: templates/accounts/chpwd.html:17 templates/accounts/respwd.html:17
-#: templates/build.html:14 templates/gas/noresults.html:18
-#: templates/gas/results.html:108
+#: templates/build.html:14 templates/gas/results.html:112
 msgid "Go back"
 msgstr "Volver atrás"
 
@@ -510,20 +509,6 @@ msgstr ""
 msgid "Tip: Use CTRL+F or tap 'search in page' in the browser menu"
 msgstr "Tip: Usa CTRL+F o pulsa 'buscar en la página' en el menú del navegador"
 
-#: templates/gas/noresults.html:4
-msgid "No results"
-msgstr "Sin resultados"
-
-#: templates/gas/noresults.html:9
-msgid "Results were not found"
-msgstr "No se encontraron resultados"
-
-#: templates/gas/noresults.html:16
-msgid "Note: Stations that don't offer the wanted fuel type will not be shown"
-msgstr ""
-"Nota: Las gasolineras que no ofrezcan el combustible solicitado no serán "
-"mostradas"
-
 #: templates/gas/results.html:10
 msgid "Stations"
 msgstr "Gasolineras"
@@ -552,23 +537,27 @@ msgstr ""
 msgid "In order: Yesterday, last week, last month"
 msgstr "En orden: Ayer, la semana pasada, el mes pasado"
 
-#: templates/gas/results.html:66
-msgid "Open maps route"
-msgstr "Abrir ruta en maps"
+#: templates/gas/results.html:67
+msgid "Open location in map"
+msgstr "Abrir ubicación en mapa"
 
-#: templates/gas/results.html:72
+#: templates/gas/results.html:70
+msgid "Open GMaps route"
+msgstr "Abrir ruta en GMaps"
+
+#: templates/gas/results.html:77
 msgid "Yesterday"
 msgstr "Ayer"
 
-#: templates/gas/results.html:79
+#: templates/gas/results.html:84
 msgid "Last week"
 msgstr "Semana pasada"
 
-#: templates/gas/results.html:86
+#: templates/gas/results.html:91
 msgid "Last month"
 msgstr "Mes pasado"
 
-#: templates/gas/results.html:107
+#: templates/gas/results.html:111
 msgid "No station prices were found"
 msgstr "No se encontraron precios para las gasolineras"
 
@@ -723,6 +712,18 @@ msgstr ""
 #: templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
+
+#~ msgid "No results"
+#~ msgstr "Sin resultados"
+
+#~ msgid "Results were not found"
+#~ msgstr "No se encontraron resultados"
+
+#~ msgid ""
+#~ "Note: Stations that don't offer the wanted fuel type will not be shown"
+#~ msgstr ""
+#~ "Nota: Las gasolineras que no ofrezcan el combustible solicitado no serán "
+#~ "mostradas"
 
 #~ msgid "No prices were found. Try with a broader search."
 #~ msgstr "No se encontraron precios. Prueba con una búsqueda más amplia."

@@ -61,9 +61,15 @@
                             </table>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <a href="geo:{{ s.latitude|replace:',|.' }},{{ s.longitude|replace:',|.' }}" class="text-decoration-none" aria-label="{% trans 'Open maps route' %}" data-balloon-pos="up">
-                                <i data-lucide="compass"></i>
-                            </a>
+                            <div>
+                                <a href="geo:{{ s.latitude|replace:',|.' }},{{ s.longitude|replace:',|.' }}" class="text-decoration-none" aria-label="{% trans 'Open location in map' %}" data-balloon-pos="up">
+                                    <i data-lucide="map-pin"></i>
+                                </a>
+                                <a href="#" class="text-decoration-none" aria-label="{% trans 'Open GMaps route' %}" data-balloon-pos="up"
+                                    onclick="https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll={{ s.latitude|replace:',|.' }},{{ s.longitude|replace:',|.' }}&daddr={{ s.company|lower }} {{ s.locality|lower }} {{ s.postal_code|lower }} {{ s.address|lower }}">
+                                    <i data-lucide="compass"></i>
+                                </a>
+                            </div>
                             {% if user.is_authenticated %}{% with ytd=past_day_lower|access:s.id_eess lw=past_week_lower|access:s.id_eess lm=past_month_lower|access:s.id_eess %}
                             <div class="row m-0">
                                 <div class="col px-1" aria-label="{% trans 'Yesterday' %}" data-balloon-pos="up">
