@@ -60,8 +60,6 @@ class StationInline(admin.TabularInline):
         "id_eess",
         "company",
         "address",
-        "latitude",
-        "longitude",
         "locality",
         "province",
         "postal_code",
