@@ -1,4 +1,4 @@
-settings.yaml
+settings.conf
 db.sqlite3
 src/ssl/*
 

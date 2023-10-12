@@ -5,13 +5,12 @@
 import logging
 from pathlib import Path
 from secrets import token_urlsafe
-from yaml import safe_load
 
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
-with open("config.yaml", "r") as f:
-    config = safe_load(f.read())
+with open("settings.conf", "r") as f:
+    config = {k: v.strip() for k, v in [line.split("=") for line in f]}
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
