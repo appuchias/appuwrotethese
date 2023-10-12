@@ -43,8 +43,8 @@ class StationAdmin(admin.ModelAdmin):
     search_fields = [
         "company",
         "address",
-        "locality",
-        "province",
+        "locality__name",
+        "province__name",
         "postal_code",
     ]
 
@@ -87,8 +87,8 @@ class StationInline(admin.TabularInline):
     search_fields = [
         "company",
         "address",
-        "locality",
-        "province",
+        "locality__name",
+        "province__name",
         "postal_code",
     ]
 
