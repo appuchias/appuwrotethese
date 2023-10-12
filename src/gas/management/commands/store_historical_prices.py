@@ -22,9 +22,6 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        if options["local_folder"]:
-            db_actions.store_historical_prices(
-                days=options["days"], local_folder=options["local_folder"]
-            )
-        else:
-            db_actions.store_historical_prices(options["days"])
+        db_actions.store_historical_prices(
+            days=options["days"], local_folder=options["local_folder"]
+        )

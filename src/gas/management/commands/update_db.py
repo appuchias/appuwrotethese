@@ -1,4 +1,6 @@
+from datetime import date
 from django.core.management.base import BaseCommand
+
 from gas import db_actions
 
 
@@ -7,4 +9,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         db_actions.create_localities_provinces()
-        db_actions.update_station_prices(db_actions.get_data()["ListaEESSPrecio"])
+        db_actions.update_station_prices(
+            {date.today(): db_actions.get_data()["ListaEESSPrecio"]}
+        )

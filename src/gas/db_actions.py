@@ -104,56 +104,62 @@ def create_localities_provinces(
 
 
 ## Update Station and StationPrice tables ##
-def update_station_prices(data: list, prices_date: date = date.today()) -> None:
-    """Update the database with `prices_date`'s stations and prices"""
+def update_station_prices(all_data: dict[date, list]) -> None:
+    """Update the database with `prices_date`'s stations and prices
 
-    id_eess = (int(station["IDEESS"]) for station in data)
+    `all_data` is a dict with the following structure:
+    { 1999-12-31: [ { <station fields> }, <more stations> ], <more dates> }
+    """
 
-    stations = Station.objects.in_bulk(id_eess, field_name="id_eess")
-    prices = [
-        price.station.id_eess for price in StationPrice.objects.filter(date=prices_date)
-    ]
+    for prices_date, data in all_data.items():
+        new_prices = list()
+        new_stations = set()
+        id_eess = (int(station["IDEESS"]) for station in data)
 
-    new_prices = list()
-    new_stations = set()
-    for price in data:
-        id_eess = int(price["IDEESS"])
-        if not id_eess in stations:
-            station = Station(
-                id_eess=id_eess,
-                company=price["Rótulo"],
-                schedule=price["Horario"],
-                address=price["Dirección"],
-                latitude=price["Latitud"].replace(",", "."),
-                longitude=price["Longitud (WGS84)"].replace(",", "."),
-                locality=Locality.objects.get(id_mun=price["IDMunicipio"]),
-                province=Province.objects.get(id_prov=price["IDProvincia"]),
-                postal_code=int(price["C.P."]),
-            )
+        stations = Station.objects.in_bulk(id_eess, field_name="id_eess")
+        prices = [
+            price.station.id_eess
+            for price in StationPrice.objects.filter(date=prices_date)
+        ]
 
-            stations[station.id_eess] = station
-            new_stations.add(station)
-
-        if not id_eess in prices:
-            prices.append(id_eess)
-            new_prices.append(
-                StationPrice(
-                    station=stations.get(id_eess, None),
-                    date=prices_date,
-                    **{
-                        DB_FIELD_FUELS[key]: Decimal(price[key].replace(",", "."))
-                        if price[key]
-                        else None
-                        for key in DB_FIELD_FUELS
-                    },
+        for price in data:
+            id_eess = int(price["IDEESS"])
+            if not id_eess in stations:
+                station = Station(
+                    id_eess=id_eess,
+                    company=price["Rótulo"],
+                    schedule=price["Horario"],
+                    address=price["Dirección"],
+                    latitude=price["Latitud"].replace(",", "."),
+                    longitude=price["Longitud (WGS84)"].replace(",", "."),
+                    locality=Locality.objects.get(id_mun=price["IDMunicipio"]),
+                    province=Province.objects.get(id_prov=price["IDProvincia"]),
+                    postal_code=int(price["C.P."]),
                 )
-            )
 
-    Station.objects.bulk_create(new_stations)
-    StationPrice.objects.bulk_create(new_prices)
+                stations[station.id_eess] = station
+                new_stations.add(station)
 
-    # print("[✓] Updated prices.     ")
-    # print("---")
+            if not id_eess in prices:
+                prices.append(id_eess)
+                new_prices.append(
+                    StationPrice(
+                        station=stations.get(id_eess, None),
+                        date=prices_date,
+                        **{
+                            DB_FIELD_FUELS[key]: Decimal(price[key].replace(",", "."))
+                            if price[key]
+                            else None
+                            for key in DB_FIELD_FUELS
+                        },
+                    )
+                )
+
+        Station.objects.bulk_create(new_stations)
+        StationPrice.objects.bulk_create(new_prices)
+
+    print("[✓] Updated prices.     ")
+    print("---")
 
 
 ## Store historical prices ##
@@ -164,32 +170,21 @@ def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
     Otherwise, it will store the data from the last year.
     """
 
-    print("[·] Storing historical prices")
-    lines = 2
-    print("\n" * (lines - 1))
+    print("[·] Fetching prices", end="\r")
 
     today = date.today()
     current_date = today - timedelta(days=days)
-    days_left = (today - current_date).days
+    all_data = dict()
 
     while current_date <= today:
-        start = time.perf_counter()
-
-        print(
-            f"{C.up(lines)} [·] Populating {current_date}. {days_left} days left{C.CLR}"
-        )
         if StationPrice.objects.filter(date=current_date).exists():
-            print("\n" * (lines - 2))
             current_date += timedelta(days=1)
-            days_left -= 1
             continue
 
         if local_folder:
             filename = local_folder + current_date.strftime("%Y-%m-%d.json.xz")
             if not os.path.isfile(filename):
-                print("\n" * (lines - 2))
                 current_date += timedelta(days=1)
-                days_left -= 1
                 continue
 
             with lzma.open(filename) as f:
@@ -199,20 +194,13 @@ def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
                 HIST_URL + current_date.strftime("%d-%m-%Y")
             ).json()["ListaEESSPrecio"]
 
-        elapsed_query = time.perf_counter() - start
-        update_station_prices(data, prices_date=current_date)
-        elapsed_total = time.perf_counter() - start
+        all_data[current_date] = data
+        del data
 
-        eta = elapsed_total * days_left
-        eta_h = int(eta // 3600)
-        eta_m = int((eta % 3600) // 60)
-
-        print(
-            f"     Last:{elapsed_total:.2f}s [Query:{elapsed_query:.2f}s, DB:{elapsed_total - elapsed_query:.2f}s] ETA {eta_h}h{eta_m:02}min{C.CLR}"
-        )
         current_date += timedelta(days=1)
-        days_left -= 1
 
-    print(f"{C.up(lines + 1)}[✓] Stored historical prices{C.CLR}")
-    print(f"---{C.CLR}")
-    print(f"{C.CLR}\n" * (lines - 1), end="")
+    print("[·] Storing all prices", end="\r")
+    update_station_prices(all_data)
+
+    print("[✓] Stored historical prices")
+    print("---")
