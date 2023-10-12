@@ -21,7 +21,7 @@ class SearchPrices(forms.Form):
     fuel_abbr = forms.ChoiceField(
         label=_("Fuel"),
         choices=[
-            ("GOA", "Gasóleo A (Diésel)"),
+            ("GOA", "Diésel (Gasóleo A)"),
             ("G95E5", "Gasolina 95"),
             ("G98E5", "Gasolina 98"),
             ("GLP", "GLP"),
