@@ -66,7 +66,7 @@
                                     <i data-lucide="map-pin"></i>
                                 </a>
                                 <a href="#" class="text-decoration-none" aria-label="{% trans 'Open GMaps route' %}" data-balloon-pos="up"
-                                    onclick="https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll={{ s.latitude|replace:',|.' }},{{ s.longitude|replace:',|.' }}&daddr={{ s.company|lower }} {{ s.locality|lower }} {{ s.postal_code|lower }} {{ s.address|lower }}">
+                                    onclick="window.open('https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll={{ s.latitude|replace:',|.' }},{{ s.longitude|replace:',|.' }}&daddr={{ s.company|lower }} {{ s.locality|lower }} {{ s.postal_code|lower }} {{ s.address|lower }}')">
                                     <i data-lucide="compass"></i>
                                 </a>
                             </div>
