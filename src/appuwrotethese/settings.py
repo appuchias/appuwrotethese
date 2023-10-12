@@ -9,6 +9,10 @@ from secrets import token_urlsafe
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
+
+DEBUG = False
+
+
 with open("settings.conf", "r") as f:
     config = {k: v.strip() for k, v in [line.split("=") for line in f]}
 
@@ -20,9 +24,7 @@ if SECRET_KEY is None:
     logging.warning(
         "settings: SECRET_KEY was not set. New one generated for this session. Please set it as an environment variable or in `config.yaml`."
     )
-SECRET_KEY_FALLBACKS = config.get("SECRET_KEY_FALLBACKS", [])
-
-DEBUG = False
+# SECRET_KEY_FALLBACKS = config.get("SECRET_KEY_FALLBACKS", [])
 
 SECURE_SSL_REDIRECT = not DEBUG
 SESSION_COOKIE_SECURE = True
