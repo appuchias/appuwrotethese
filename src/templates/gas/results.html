@@ -62,7 +62,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <div>
-                                <a href="geo:{{ s.latitude|replace:',|.' }},{{ s.longitude|replace:',|.' }}" class="text-decoration-none" aria-label="{% trans 'Open location in map' %}" data-balloon-pos="up">
+                                <a href="geo:{{ s.latitude|replace:',|.' }},{{ s.longitude|replace:',|.' }}?q={{ s.latitude|replace:',|.' }},{{ s.longitude|replace:',|.' }}" class="text-decoration-none" aria-label="{% trans 'Open location in map' %}" data-balloon-pos="up">
                                     <i data-lucide="map-pin"></i>
                                 </a>
                                 <a href="#" class="text-decoration-none" aria-label="{% trans 'Open GMaps route' %}" data-balloon-pos="up"
