@@ -18,8 +18,6 @@ class StationAdmin(admin.ModelAdmin):
         "id_eess",
         "company",
         "address",
-        "latitude",
-        "longitude",
         "locality",
         "province",
         "postal_code",
