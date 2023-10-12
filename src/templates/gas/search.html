@@ -20,15 +20,11 @@
     </div>
     <div class="row justify-content-between my-3 text-themed">
         <div class="col text-start"><a href="localities/" class="text-themed">{% trans "Localities" %}</a></div>
+        <img id="indicator" class="col htmx-indicator" src="/s/spinner.svg" height="24"/>
         <div class="col text-end"><a href="provinces/" class="text-themed">{% trans "Provinces" %}</a></div>
     </div>
 
-    <hr class="text-themed" style="margin-top: 3rem; margin-bottom: 2rem;">
-
-    <center>
-        <img id="indicator" class="htmx-indicator" src="/s/spinner.svg"/>
-    </center>
-
+    <hr class="text-themed my-2">
     <div id="search-result"></div>
 </div>
 {% endblock %}
