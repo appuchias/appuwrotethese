@@ -38,7 +38,6 @@ ROOT_URLCONF = "appuwrotethese.urls"
 
 ALLOWED_HOSTS = [
     "appu.ltd",
-    "www.appu.ltd",
     "*" if DEBUG else None,
 ]
 
