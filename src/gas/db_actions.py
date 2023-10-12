@@ -157,9 +157,11 @@ def update_station_prices(all_data: dict[date, list]) -> None:
 
         Station.objects.bulk_create(new_stations)
         StationPrice.objects.bulk_create(new_prices)
+        del new_stations
+        del new_prices
 
-    print("[✓] Updated prices.     ")
-    print("---")
+    # print("[✓] Updated prices.     ")
+    # print("---")
 
 
 ## Same function but optimized for minimal disk access. Not used ##
@@ -236,11 +238,10 @@ def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
     Otherwise, it will store the data from the last year.
     """
 
-    print("[·] Fetching prices", end="\r")
+    print("[·] Fetching prices")
 
     today = date.today()
     current_date = today - timedelta(days=days)
-    all_data = dict()
 
     while current_date <= today:
         if StationPrice.objects.filter(date=current_date).exists():
@@ -260,13 +261,10 @@ def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
                 HIST_URL + current_date.strftime("%d-%m-%Y")
             ).json()["ListaEESSPrecio"]
 
-        all_data[current_date] = data
+        print(current_date, end="\r")
+        update_station_prices({current_date: data})
         del data
-
         current_date += timedelta(days=1)
 
-    print("[·] Storing all prices", end="\r")
-    update_station_prices(all_data)
-
-    print("[✓] Stored historical prices")
     print("---")
+    print("[✓] Stored historical prices")
