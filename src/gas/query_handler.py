@@ -20,75 +20,57 @@ get_db_product_name = lambda prod_abbr, default="": {
 }.get(prod_abbr, default)
 
 
-## Get locality id/province id/postal code ##
-def get_ids(query: str, q_type: str) -> tuple[int, int, int]:
+## Get locality/province id ##
+def get_ids(term: str) -> tuple[int, int]:
     """Gets the locality id, province id or postal code from the query"""
 
-    id_locality = 0
-    id_province = 0
-    postal_code = 0
-
-    if q_type == "locality":
-        locality = models.Locality.objects.filter(name__iexact=query).first()
-        if not locality:
-            locality = models.Locality.objects.filter(name__icontains=query)
+    if isinstance(term, str):
+        # Look it up as a locality
+        locality = models.Locality.objects.filter(name__iexact=term).first()
+        if locality:
+            return locality.id_mun, 0
+        else:
+            locality = models.Locality.objects.filter(name__icontains=term)
             if locality.exists():
                 # Select locality with more stations
                 locality = locality.annotate(num_stations=Count("station")).order_by(
                     "-num_stations"
                 )[0]
 
-                id_locality = locality.id_mun
-        else:
-            id_locality = locality.id_mun
+                return locality.id_mun, 0
 
-    elif q_type == "province":
-        province = models.Province.objects.filter(name__iexact=query.upper()).first()
+        province = models.Province.objects.filter(name__iexact=term.upper()).first()
         if not province:
             # Provinces are uppercase in the DB
-            province = models.Province.objects.filter(name__icontains=query.upper())
+            province = models.Province.objects.filter(name__icontains=term.upper())
             if province.exists():
                 # Select province with more stations
                 province = province.annotate(num_stations=Count("station")).order_by(
                     "-num_stations"
                 )[0]
 
-                id_province = province.id_prov
+                return 0, province.id_prov
         else:
-            id_province = province.id_prov
+            return 0, province.id_prov
 
-    elif q_type == "postal_code":
-        if query.isdigit() and len(query) == 5:
-            postal_code = int(query)
-
-    return id_locality, id_province, postal_code
+    return 0, 0
 
 
 ## Process the query form ##
 def db_prices(
-    id_locality: int,
-    id_province: int,
-    postal_code: int,
+    term_id: int,
+    term_type: str,
     prod_abbr: str,
     q_date: date,
 ) -> Iterable[models.StationPrice]:
     """Get the prices from the database.
 
-    This function gets the request and the clean form data
-    and returns the list of results.
+    This function gets query data and returns the list of results.
 
-    You must pass either id_locality, id_province or postal_code.
-    If more than one is passed, the first one (in that order) will be used.
+    The term type must be one of (locality_id, province_id, postal_code)
     """
 
-    if id_locality:
-        station_filter = {"station__locality_id": id_locality}
-    elif id_province:
-        station_filter = {"station__province_id": id_province}
-    elif postal_code:
-        station_filter = {"station__postal_code": postal_code}
-    else:
-        return []
+    station_filter = {f"station__{term_type}": term_id}
 
     prod_name = get_db_product_name(prod_abbr)
     prices = (

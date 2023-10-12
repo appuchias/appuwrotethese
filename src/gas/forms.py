@@ -18,17 +18,6 @@ class SearchPrices(forms.Form):
         help_text=_("Specific term to look for (e.g. Coruña, 15001, etc.)"),
     )
 
-    q_type = forms.ChoiceField(
-        label=_("Search by"),
-        choices=[
-            ("locality", _("Locality")),
-            ("province", _("Province")),
-            ("postal_code", _("Postal code")),
-        ],
-        required=True,
-        help_text=_("Type of query"),
-    )
-
     fuel_abbr = forms.ChoiceField(
         label=_("Fuel"),
         choices=[
@@ -55,23 +44,14 @@ class SearchPrices(forms.Form):
         ),
     )
 
-    # star = forms.BooleanField(
-    #     label=gettext_lazy("Star query"),
-    #     required=False,
-    #     help_text=gettext_lazy(
-    #         "(Save this query. Requires your account to be upgraded)"
-    #     ),
-    # )
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
-                Div("term", css_class="col-md-6"),
-                Div("q_type", css_class="col-md-6"),
-                Div("fuel_abbr", css_class="col-md-6"),
-                Div("q_date", css_class="col-md-6"),
+                Div("term", css_class="col-md-7"),
+                Div("fuel_abbr", css_class="col"),
+                Div("q_date", css_class="col"),
                 css_class="row",
             ),
             Div(

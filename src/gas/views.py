@@ -41,21 +41,31 @@ def result(request: HttpRequest):
 
     form_data = form.cleaned_data
     term = str(form_data.get("term"))
-    q_type = str(form_data.get("q_type"))
-    fuel = str(form_data.get("fuel_abbr"))
+    fuel = form_data.get("fuel_abbr")
     q_date = form_data.get("q_date", date.today())
 
-    id_locality, id_province, postal_code = query_handler.get_ids(term, q_type)
-    if not any((id_locality, id_province, postal_code)):
-        error_msg = _("The location you're looking for could not be found") + "."
-        if not hx:
-            messages.error(request, error_msg)
-        return render(
-            request, "gas/results.html", {"hx": hx, "results": [], "error": error_msg}
-        )
-    prices = query_handler.db_prices(
-        id_locality, id_province, postal_code, fuel, q_date
-    )
+    if term.isdigit() and len(term) == 5:
+        term_id = int(term)
+        id_type = "postal_code"
+    else:
+        id_locality, id_province = query_handler.get_ids(term)
+        if id_locality:
+            term_id = id_locality
+            id_type = "locality_id"
+        elif id_province:
+            term_id = id_province
+            id_type = "province_id"
+        else:
+            error_msg = _("The location you're looking for could not be found") + "."
+            if not hx:
+                messages.error(request, error_msg)
+            return render(
+                request,
+                "gas/results.html",
+                {"hx": hx, "results": [], "error": error_msg},
+            )
+
+    prices = query_handler.db_prices(term_id, id_type, fuel, q_date)
 
     if not prices:
         error_msg = (
