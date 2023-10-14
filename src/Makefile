@@ -21,12 +21,10 @@ compilemsgs:
 	django-admin compilemessages --use-fuzzy --locale es
 
 lesscompile: # Install AUR: nodejs-less and nodejs-less-plugin-clean-css
-	lessc staticfiles/styles/styles.less staticfiles/styles/styles.min.css --clean-css
-	lessc staticfiles/styles/project_styles.less staticfiles/styles/project_styles.min.css --clean-css
+	cat staticfiles/styles/styles.less staticfiles/styles/project_styles.less | lessc - staticfiles/styles/styles.min.css --clean-css
 
 update:
 	git fetch
 	git pull
 	$(MAKE) migrate
 	$(MAKE) collectstatic
-
