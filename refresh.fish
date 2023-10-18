@@ -6,6 +6,6 @@ end
 
 pipenv run make update
 
-# sudo reboot
-
-killall gunicorn && pipenv run gunicorn & disown
+killall gunicorn
+sleep 2
+pipenv run gunicorn & disown
