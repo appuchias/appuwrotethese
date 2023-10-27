@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-11 18:45+0200\n"
+"POT-Creation-Date: 2023-10-27 13:07+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -73,16 +73,15 @@ msgstr "Gasolineras guardadas"
 msgid "Only alphanumeric characters and underscores are allowed."
 msgstr "Solo se permiten caracteres alfanuméricos y guiones bajos."
 
-#: accounts/models.py:55 gas/forms.py:24 gas/models.py:23 gas/models.py:28
+#: accounts/models.py:55 gas/models.py:23 gas/models.py:28
 msgid "Locality"
 msgstr "Localidad"
 
-#: accounts/models.py:56 gas/forms.py:25 gas/models.py:50 gas/models.py:55
+#: accounts/models.py:56 gas/models.py:50 gas/models.py:55
 msgid "Province"
 msgstr "Provincia"
 
-#: accounts/models.py:57 gas/forms.py:26 gas/forms.py:104 gas/forms.py:106
-#: gas/models.py:78
+#: accounts/models.py:57 gas/forms.py:84 gas/forms.py:86 gas/models.py:78
 msgid "Postal code"
 msgstr "Código postal"
 
@@ -223,39 +222,31 @@ msgstr "Término de búsqueda"
 msgid "Specific term to look for (e.g. Coruña, 15001, etc.)"
 msgstr "Término concreto a buscar (p.ej. Coruña, 15001, etc.)"
 
-#: gas/forms.py:22
-msgid "Search by"
-msgstr "Buscar por"
-
-#: gas/forms.py:29
-msgid "Type of query"
-msgstr "Tipo de petición"
-
-#: gas/forms.py:33 gas/forms.py:110 templates/gas/results.html:41
+#: gas/forms.py:22 gas/forms.py:90 templates/gas/results.html:41
 msgid "Fuel"
 msgstr "Combustible"
 
-#: gas/forms.py:41 gas/forms.py:118
+#: gas/forms.py:30 gas/forms.py:98
 msgid "Fuel to use for sorting"
 msgstr "Combustible a usar para ordenar"
 
-#: gas/forms.py:45 gas/forms.py:122
+#: gas/forms.py:34 gas/forms.py:102
 msgid "Date"
 msgstr "Fecha"
 
-#: gas/forms.py:46 gas/forms.py:123
+#: gas/forms.py:35 gas/forms.py:103
 msgid "Prices date"
 msgstr "Fecha de los precios"
 
-#: gas/forms.py:80
+#: gas/forms.py:60
 msgid "Search"
 msgstr "Buscar"
 
-#: gas/forms.py:92 gas/forms.py:94 gas/models.py:16
+#: gas/forms.py:72 gas/forms.py:74 gas/models.py:16
 msgid "Locality ID"
 msgstr "ID de la localidad"
 
-#: gas/forms.py:98 gas/forms.py:100 gas/models.py:43
+#: gas/forms.py:78 gas/forms.py:80 gas/models.py:43
 msgid "Province ID"
 msgstr "ID de provincia"
 
@@ -263,7 +254,7 @@ msgstr "ID de provincia"
 msgid "ID of the locality"
 msgstr "ID de la localidad"
 
-#: gas/models.py:29 gas/views.py:135 templates/gas/search.html:22
+#: gas/models.py:29 gas/views.py:145 templates/gas/search.html:22
 msgid "Localities"
 msgstr "Localidades"
 
@@ -271,7 +262,7 @@ msgstr "Localidades"
 msgid "ID of the province"
 msgstr "ID de la provincia"
 
-#: gas/models.py:56 gas/views.py:124 templates/gas/search.html:23
+#: gas/models.py:56 gas/views.py:134 templates/gas/search.html:24
 msgid "Provinces"
 msgstr "Provincias"
 
@@ -315,17 +306,17 @@ msgstr "Precios"
 msgid "Invalid form. Please try again"
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
-#: gas/views.py:50
+#: gas/views.py:59
 msgid "The location you're looking for could not be found"
 msgstr "No se pudo encontrar la ubicación que estás buscando"
 
-#: gas/views.py:62
+#: gas/views.py:72
 msgid "There were no prices in the database for that location and date"
 msgstr "No hay precios en la base de datos para esa ubicación y fecha"
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
 #: templates/accounts/register.html:5 templates/accounts/why.html:5
-#: templates/base.html:87 templates/base.html:88
+#: templates/base.html:84 templates/base.html:85
 msgid "Account"
 msgstr "Cuenta"
 
@@ -338,13 +329,13 @@ msgstr "Cuenta AWT"
 msgid "You're logged in as"
 msgstr "Estás conectado como"
 
-#: templates/accounts/account.html:12 templates/gas/results.html:106
+#: templates/accounts/account.html:12 templates/gas/results.html:109
 #: templates/legal.html:11 templates/legal.html:58
 msgid "Hosting is not free"
 msgstr "La web no es gratis"
 
-#: templates/accounts/account.html:12 templates/base.html:116
-#: templates/gas/results.html:106 templates/legal.html:11
+#: templates/accounts/account.html:12 templates/base.html:113
+#: templates/gas/results.html:109 templates/legal.html:11
 #: templates/legal.html:58
 msgid "Support me"
 msgstr "Apóyame"
@@ -363,7 +354,7 @@ msgstr "No has iniciado sesión"
 
 #. Translators: Button to go to last page visited
 #: templates/accounts/chpwd.html:17 templates/accounts/respwd.html:17
-#: templates/build.html:14 templates/gas/results.html:112
+#: templates/build.html:14 templates/gas/results.html:115
 msgid "Go back"
 msgstr "Volver atrás"
 
@@ -433,7 +424,7 @@ msgstr "Por qué no deberías crear una cuenta"
 
 #: templates/accounts/why.html:18
 msgid ""
-"By creating an account, you are giving me (Appu) come details about you. "
+"By creating an account, you are giving me (Appu) some details about you. "
 "Please don't create an account if you're uncomfortable with providing those "
 "details"
 msgstr ""
@@ -450,15 +441,15 @@ msgstr ""
 "crear tu cuenta de nuevo. Intentaré evitarlo, pero no puedo prometer que no "
 "vaya a suceder"
 
-#: templates/base.html:90 templates/base.html:91
+#: templates/base.html:87 templates/base.html:88
 msgid "Prices"
 msgstr "Precios"
 
-#: templates/base.html:97
+#: templates/base.html:94
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:119
+#: templates/base.html:116
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -537,27 +528,27 @@ msgstr ""
 msgid "In order: Yesterday, last week, last month"
 msgstr "En orden: Ayer, la semana pasada, el mes pasado"
 
-#: templates/gas/results.html:67
+#: templates/gas/results.html:68
 msgid "Open location in map"
 msgstr "Abrir ubicación en mapa"
 
-#: templates/gas/results.html:70
+#: templates/gas/results.html:72
 msgid "Open GMaps route"
 msgstr "Abrir ruta en GMaps"
 
-#: templates/gas/results.html:77
+#: templates/gas/results.html:80
 msgid "Yesterday"
 msgstr "Ayer"
 
-#: templates/gas/results.html:84
+#: templates/gas/results.html:87
 msgid "Last week"
 msgstr "Semana pasada"
 
-#: templates/gas/results.html:91
+#: templates/gas/results.html:94
 msgid "Last month"
 msgstr "Mes pasado"
 
-#: templates/gas/results.html:111
+#: templates/gas/results.html:114
 msgid "No station prices were found"
 msgstr "No se encontraron precios para las gasolineras"
 
@@ -712,6 +703,12 @@ msgstr ""
 #: templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
+
+#~ msgid "Search by"
+#~ msgstr "Buscar por"
+
+#~ msgid "Type of query"
+#~ msgstr "Tipo de petición"
 
 #~ msgid "No results"
 #~ msgstr "Sin resultados"
