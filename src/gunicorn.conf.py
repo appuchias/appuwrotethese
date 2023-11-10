@@ -7,7 +7,7 @@ from appuwrotethese.settings import DEBUG
 wsgi_app = "appuwrotethese.wsgi:application"
 
 # Production settings
-workers = 2
+# workers = 2
 bind = "0.0.0.0:8443"
 
 # SSL
