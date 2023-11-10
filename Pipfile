@@ -13,7 +13,6 @@ pytz = "*"
 whitenoise = "*"
 tzdata = "*"
 requests = "*"
-pre-commit = "*"
 
 [dev-packages]
 black = "*"
