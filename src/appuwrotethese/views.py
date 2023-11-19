@@ -14,18 +14,19 @@ def home(request: HttpRequest):
 
 
 def projects(request: HttpRequest):
-    return redirect("/gas/")
-
     project_id = request.GET.get("id", "")
     projects = [
         {
             "project_id": 1,
             "name": _("Fuel prices"),
-            "description": _(
-                "A project where you can check the different prices of all gas stations in Spain to sort them from lowest to highest"
-            )
-            + ".",
+            "description": _("Where you can find the cheapest gas prices") + ".",
             "url": "gas/",
+        },
+        {
+            "project_id": 2,
+            "name": _("Mastermind"),
+            "description": _("Where you can play the Mastermind game") + ".",
+            "url": "mastermind/",
         },
         {
             "project_id": 1,
