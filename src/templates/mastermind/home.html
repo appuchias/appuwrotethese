@@ -1,8 +1,20 @@
 {% extends "base.html" %}
 
+{% load user_agents %}
+
 {% block head %}Mastermind homepage{% endblock head %}
 
 {% block content %}
-    <h1>Home</h1>
-    <p> Welcome to the home page!</p>
+<div id="mastermind" class="container">
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">Mastermind</div>
+    <div class="crwrapper">
+        <center>
+            <p>Mastermind is a code-breaking game. One player (the machine in this case) creates a code and the other tries to break the code.</p>
+            <p>The code is a sequence of 4 digits. Each digit can be any number from 0 to 9 and can't be repeated. <br> After each guess, the machine gives feedback to the player. The feedback consists of two numbers:</p>
+            <p>- Number of digits that are in the correct position <br> - Number of digits that are in the code but not in the correct position</p>
+            <p>For example, if the code is 1234 and the guess is 1356, the feedback is 1-1. The digit 1 is in the correct position and the digit 3 is in the code but not in the correct position.</p>
+            <p>The player has 10 attempts to break the code. If the player can't break the code in 10 attempts, the machine wins.</p>
+        </center>
+    </div>
+</div>
 {% endblock content %}
