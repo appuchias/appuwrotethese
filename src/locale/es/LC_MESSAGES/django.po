@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-27 13:07+0200\n"
+"POT-Creation-Date: 2023-11-20 00:01+0100\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -178,39 +178,43 @@ msgstr "Debes proporcionar una localidad, provincia o código postal válido."
 msgid "Welcome to the API!"
 msgstr "Bienvenido a la API!"
 
-#: appuwrotethese/settings.py:204
+#: appuwrotethese/settings.py:205
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:205
+#: appuwrotethese/settings.py:206
 msgid "English"
 msgstr "Inglés"
 
-#: appuwrotethese/views.py:23
+#: appuwrotethese/views.py:21
 msgid "Fuel prices"
 msgstr "Gasolineras"
 
-#: appuwrotethese/views.py:25
-msgid ""
-"A project where you can check the different prices of all gas stations in "
-"Spain to sort them from lowest to highest"
-msgstr ""
-"Un proyecto en el que puedes ver los distintos precios de las gasolineras de "
-"España y ordenarlos de menor a mayor"
+#: appuwrotethese/views.py:22
+msgid "Where you can find the cheapest gas prices"
+msgstr "Donde puedes encontrar el combustible más barato"
 
-#: appuwrotethese/views.py:32
+#: appuwrotethese/views.py:27
+msgid "Mastermind"
+msgstr "Mastermind"
+
+#: appuwrotethese/views.py:28
+msgid "Where you can play the Mastermind game"
+msgstr "Donde puedes jugar al juego Mastermind"
+
+#: appuwrotethese/views.py:33
 msgid "Future"
 msgstr "Futuro"
 
-#: appuwrotethese/views.py:33
+#: appuwrotethese/views.py:34
 msgid "Future projects"
 msgstr "Futuros proyectos"
 
-#: appuwrotethese/views.py:55
+#: appuwrotethese/views.py:56
 msgid "Project placeholder #"
 msgstr "Proyecto de ejemplo #"
 
-#: appuwrotethese/views.py:58
+#: appuwrotethese/views.py:59
 msgid "Placeholder project description"
 msgstr "Descripción del proyecto de ejemplo"
 
@@ -698,11 +702,89 @@ msgid ""
 msgstr ""
 "por su apoyo mientras construía la web y depuraba (especialmente depurándola)"
 
+#: templates/mastermind/home.html:12
+msgid "Mastermind is a code-breaking game"
+msgstr "Mastermind es un juego de descifrar códigos"
+
+#: templates/mastermind/home.html:12
+msgid "One player"
+msgstr "Un jugador"
+
+#: templates/mastermind/home.html:12
+msgid "the machine in this case"
+msgstr "la máquina en este caso"
+
+#: templates/mastermind/home.html:12
+msgid "creates a code and the other tries to break the code"
+msgstr "crea un código y el otro intenta descifrarlo"
+
+#: templates/mastermind/home.html:13
+msgid "The code is a sequence of 4 digits"
+msgstr "El código es una secuencia de 4 dígitos"
+
+#: templates/mastermind/home.html:13
+msgid "Each digit is a number from 0 to 9 and can't appear more than once"
+msgstr "Cada dígito es un número del 0 al 9 y no aparece más de una vez"
+
+#: templates/mastermind/home.html:13
+msgid ""
+"After each guess, the machine gives feedback to the player, consisting of "
+"two numbers"
+msgstr ""
+"Después de cada intento, la máquina da una respuesta al jugador, que "
+"consiste en dos números"
+
+#: templates/mastermind/home.html:14
+msgid "Number of digits that are in the correct position"
+msgstr "Número de dígitos que están en la posición correcta"
+
+#: templates/mastermind/home.html:14
+msgid "Number of digits that are in the code but not in the correct position"
+msgstr ""
+"Número de dígitos que están en el código pero no en la posición correcta"
+
+#: templates/mastermind/home.html:15
+msgid ""
+"For example, if the code is 1234 and the guess is 1356, the feedback is 1-1"
+msgstr ""
+"Por ejemplo, si el código es 1234 y el intento es 1356, la respuesta es 1-1"
+
+#: templates/mastermind/home.html:15
+msgid ""
+"The digit 1 is in the correct position and the digit 3 is in the code but "
+"not in the correct position"
+msgstr ""
+"El dígito 1 está en la posición correcta y el dígito 3 está en el código "
+
+#: templates/mastermind/home.html:16
+msgid "The player has 10 attempts to break the code"
+msgstr "El jugador tiene 10 intentos para descifrar el código"
+
+#: templates/mastermind/home.html:16
+msgid "If the player can't break the code in 10 attempts, the machine wins"
+msgstr ""
+"Si el jugador no puede descifrar el código en 10 intentos, la máquina gana"
+
+#: templates/mastermind/home.html:19
+msgid "Play"
+msgstr "Jugar"
+
+#: templates/mastermind/play.html:9
+msgid "Game"
+msgstr "Partida"
+
 #. Translators: Projects page tab title
 #. Translators: Projects page title
 #: templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
+
+#~ msgid ""
+#~ "A project where you can check the different prices of all gas stations in "
+#~ "Spain to sort them from lowest to highest"
+#~ msgstr ""
+#~ "Un proyecto en el que puedes ver los distintos precios de las gasolineras "
+#~ "de España y ordenarlos de menor a mayor"
 
 #~ msgid "Search by"
 #~ msgstr "Buscar por"

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load user_agents i18n %}
+
+{% block head %}Mastermind{% endblock head %}
+
+{% block content %}
+<div id="mastermind" class="container">
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Game" %}</div>
+</div>
+{% endblock content %}

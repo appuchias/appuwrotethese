@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 
-{% load user_agents %}
+{% load user_agents i18n %}
 
-{% block head %}Mastermind homepage{% endblock head %}
+{% block head %}Mastermind{% endblock head %}
 
 {% block content %}
 <div id="mastermind" class="container">
     <div class="title{% if request|is_mobile %} mobile{% endif %}">Mastermind</div>
     <div class="crwrapper">
         <center>
-            <p>Mastermind is a code-breaking game. One player (the machine in this case) creates a code and the other tries to break the code.</p>
-            <p>The code is a sequence of 4 digits. Each digit can be any number from 0 to 9 and can't be repeated. <br> After each guess, the machine gives feedback to the player. The feedback consists of two numbers:</p>
-            <p>- Number of digits that are in the correct position <br> - Number of digits that are in the code but not in the correct position</p>
-            <p>For example, if the code is 1234 and the guess is 1356, the feedback is 1-1. The digit 1 is in the correct position and the digit 3 is in the code but not in the correct position.</p>
-            <p>The player has 10 attempts to break the code. If the player can't break the code in 10 attempts, the machine wins.</p>
+            <p>{% trans "Mastermind is a code-breaking game" %}. {% trans "One player" %} ({% trans "the machine in this case" %}) {% trans "creates a code and the other tries to break the code" %}.</p>
+            <p>{% trans "The code is a sequence of 4 digits" %}. {% trans "Each digit is a number from 0 to 9 and can't appear more than once" %}. <br> {% trans "After each guess, the machine gives feedback to the player, consisting of two numbers" %}:</p>
+            <p>- {% trans "Number of digits that are in the correct position" %} <br> - {% trans "Number of digits that are in the code but not in the correct position" %}</p>
+            <p>{% trans "For example, if the code is 1234 and the guess is 1356, the feedback is 1-1" %}. {% trans "The digit 1 is in the correct position and the digit 3 is in the code but not in the correct position" %}.</p>
+            <p>{% trans "The player has 10 attempts to break the code" %}. {% trans "If the player can't break the code in 10 attempts, the machine wins" %}.</p>
         </center>
     </div>
+    <center><a href="/mastermind/play" class="text-themed dark">{% trans "Play" %}!</a></center>
 </div>
 {% endblock content %}
