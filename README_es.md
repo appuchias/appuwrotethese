@@ -29,6 +29,6 @@ Este proyecto está licenciado bajo la [Licencia AGPL 3.0+](https://github.com/a
 
 Los iconos de Lucide están licenciados bajo la [Licencia ISC](https://github.com/lucide-icons/lucide/blob/main/LICENSE).
 
-Todas las demás licencias utilizadas se pueden encontrar [aquí](https://app.fossa.com/attribution/a2b2b9c2-e587-42d8-a9ad-121fc1033b43)
+Todas las demás licencias utilizadas se pueden encontrar [aquí](https://app.fossa.com/attribution/c83e0483-56e3-4236-91c7-45aaf481987b)
 
 Hecho con 🖤 por Appu

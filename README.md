@@ -30,6 +30,6 @@ This project is licensed under the [AGPL 3.0+ License](https://github.com/appuch
 
 Lucide icons are licensed under the [ISC License](https://github.com/lucide-icons/lucide/blob/main/LICENSE).
 
-All other used licenses can be found [here](https://app.fossa.com/attribution/a2b2b9c2-e587-42d8-a9ad-121fc1033b43)
+All other used licenses can be found [here](https://app.fossa.com/attribution/c83e0483-56e3-4236-91c7-45aaf481987b)
 
 Built with 🖤 by Appu
