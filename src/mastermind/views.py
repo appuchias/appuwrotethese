@@ -24,7 +24,7 @@ def home(request: HttpRequest):
 def play(request: HttpRequest, game_id: uuid.UUID | None = None):
     if not request.user.is_authenticated:
         messages.error(request, _("You must be logged in to play") + ".")
-        return redirect("mastermind-home")
+        return redirect("login")
 
     if not game_id:
         game_obj = Game(user=request.user)
@@ -108,6 +108,9 @@ def game(request: HttpRequest, game_id: int):
         return redirect("mastermind-home")
 
     if not game_obj.is_finished():
+        if game_obj.user == request.user:
+            return redirect("play", game_id=game_id)
+
         messages.error(request, _("Game is not finished") + ".")
         return redirect("mastermind-home")
 

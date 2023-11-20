@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-20 14:13+0100\n"
+"POT-Creation-Date: 2023-11-20 14:40+0100\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -33,7 +33,7 @@ msgstr "Registrarse"
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: accounts/forms.py:118 templates/accounts/account.html:16
+#: accounts/forms.py:118 templates/accounts/account.html:26
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
@@ -93,7 +93,7 @@ msgstr "Consulta guardada"
 msgid "Saved Queries"
 msgstr "Consultas guardadas"
 
-#: accounts/views.py:19
+#: accounts/views.py:22
 msgid ""
 "Hello, {}\n"
 "\n"
@@ -126,35 +126,35 @@ msgstr ""
 "Un saludo,\n"
 "- Appu\n"
 
-#: accounts/views.py:67
+#: accounts/views.py:81
 msgid "You are now logged in"
 msgstr "Has iniciado sesión"
 
-#: accounts/views.py:69
+#: accounts/views.py:83
 msgid "Wrong username or password"
 msgstr "Nombre de usuario o contraseña incorrectos"
 
-#: accounts/views.py:106
+#: accounts/views.py:120
 msgid "You are now registered"
 msgstr "Te has registrado"
 
-#: accounts/views.py:139
+#: accounts/views.py:153
 msgid "Your password was successfully updated!"
 msgstr "Tu contraseña se actualizó correctamente."
 
-#: accounts/views.py:141
+#: accounts/views.py:155
 msgid "Old password is not correct"
 msgstr "La contraseña anterior no es correcta"
 
-#: accounts/views.py:170
+#: accounts/views.py:184
 msgid "Email is not registered"
 msgstr "El correo electrónico no está registrado"
 
-#: accounts/views.py:179
+#: accounts/views.py:193
 msgid "[appu.ltd] Password reset email"
 msgstr "[appu.ltd] Restablecer contraseña"
 
-#: accounts/views.py:187
+#: accounts/views.py:201
 msgid ""
 "Your password was successfully reset. Please check your email with your new "
 "temporary password."
@@ -354,7 +354,7 @@ msgstr "Has ganado"
 msgid "You lost"
 msgstr "Has perdido"
 
-#: mastermind/views.py:111
+#: mastermind/views.py:114
 msgid "Game is not finished"
 msgstr "La partida no ha terminado"
 
@@ -384,7 +384,31 @@ msgstr "La web no es gratis"
 msgid "Support me"
 msgstr "Apóyame"
 
+#: templates/accounts/account.html:15
+msgid "Saved gas stations"
+msgstr "Gasolineras guardadas"
+
+#: templates/accounts/account.html:15
+msgid "Coming soon"
+msgstr "Próximamente"
+
 #: templates/accounts/account.html:17
+msgid "Mastermind games"
+msgstr "Partidas de Mastermind"
+
+#: templates/accounts/account.html:20
+msgid "guesses"
+msgstr "intentos"
+
+#: templates/accounts/account.html:20
+msgid "not"
+msgstr "no"
+
+#: templates/accounts/account.html:20
+msgid "finished"
+msgstr "terminada"
+
+#: templates/accounts/account.html:27
 msgid "Logout"
 msgstr "Cerrar sesión"
 
@@ -451,10 +475,18 @@ msgstr ""
 "todas las estaciones en tus búsquedas"
 
 #: templates/accounts/why.html:14
+msgid ""
+"Play Mastermind. You will be able to see your game history and continue "
+"saved games"
+msgstr ""
+"Jugar a Mastermind. Podrás ver tu historial de partidas y continuar las "
+"partidas guardadas"
+
+#: templates/accounts/why.html:15
 msgid "Pending"
 msgstr "Pendiente"
 
-#: templates/accounts/why.html:15
+#: templates/accounts/why.html:16
 msgid ""
 "Viewing a personal dashboard with your favourite station and your saved "
 "query to find your usual prices faster"
@@ -462,11 +494,11 @@ msgstr ""
 "Ver un panel personal con tu estación favorita y tu búsqueda guardada para "
 "encontrar tus precios habituales más rápido"
 
-#: templates/accounts/why.html:17
+#: templates/accounts/why.html:18
 msgid "Why you shouldn't create an account"
 msgstr "Por qué no deberías crear una cuenta"
 
-#: templates/accounts/why.html:18
+#: templates/accounts/why.html:19
 msgid ""
 "By creating an account, you are giving me (Appu) some details about you. "
 "Please don't create an account if you're uncomfortable with providing those "
@@ -476,7 +508,7 @@ msgstr ""
 "favor, no crees una cuenta si no te sientes cómodo proporcionando esos "
 "detalles"
 
-#: templates/accounts/why.html:19
+#: templates/accounts/why.html:20
 msgid ""
 "I'm still learning, so I may lose your data and you may need to create your "
 "account again. I will try to avoid it, but I can't promise it won't happen"
@@ -967,9 +999,6 @@ msgstr "Proyectos"
 
 #~ msgid "Your account status is"
 #~ msgstr "El estado de tu cuenta es"
-
-#~ msgid "not "
-#~ msgstr "no "
 
 #~ msgid "upgraded"
 #~ msgstr "mejorada"

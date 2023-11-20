@@ -11,6 +11,9 @@ from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
 
+# Get django installed apps
+from django.conf import settings
+
 from accounts import forms
 
 PASSWORD_CHARS = string.ascii_letters + string.digits + string.punctuation
@@ -35,6 +38,17 @@ Best regards,
 @login_required
 def account(request: HttpRequest):
     """Show account page"""
+
+    if "mastermind" in settings.INSTALLED_APPS:
+        from mastermind.models import Game, Guess
+
+        games = list(Game.objects.filter(user=request.user).order_by("created"))
+
+        return render(
+            request,
+            "accounts/account.html",
+            {"user": request.user, "games": games},
+        )
 
     return render(request, "accounts/account.html", {"user": request.user})
 
