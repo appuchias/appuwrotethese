@@ -6,9 +6,9 @@ from django.urls import path
 from mastermind import views
 
 urlpatterns = [
-    path("", views.home, name="home"),
+    path("", views.home, name="mastermind-home"),
     path("play/", views.play, name="play"),
-    path("play/<int:game_id>/", views.play, name="play"),
-    path("guess/", views.guess, name="guess"),
-    path("game/<int:game_id>/", views.game, name="game"),
+    path("play/<str:game_id>/", views.play, name="play"),
+    path("guess/<str:game_id>/", views.guess, name="guess"),
+    path("game/<str:game_id>/", views.game, name="game"),
 ]
