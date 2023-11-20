@@ -13,6 +13,11 @@ class Command(BaseCommand):
         # Remove all games without guesses
         games = models.Game.objects.all()
 
+        deleted = 0
+
         for game in games:
             if game.guesses.count() == 0:  # type: ignore
                 game.delete()
+                deleted += 1
+
+        self.stdout.write(self.style.SUCCESS(f"Successfully deleted {deleted} games."))
