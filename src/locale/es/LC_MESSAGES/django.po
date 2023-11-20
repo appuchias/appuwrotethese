@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-20 00:01+0100\n"
+"POT-Creation-Date: 2023-11-20 13:49+0100\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -178,11 +178,11 @@ msgstr "Debes proporcionar una localidad, provincia o código postal válido."
 msgid "Welcome to the API!"
 msgstr "Bienvenido a la API!"
 
-#: appuwrotethese/settings.py:205
+#: appuwrotethese/settings.py:207
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:206
+#: appuwrotethese/settings.py:208
 msgid "English"
 msgstr "Inglés"
 
@@ -317,6 +317,22 @@ msgstr "No se pudo encontrar la ubicación que estás buscando"
 #: gas/views.py:72
 msgid "There were no prices in the database for that location and date"
 msgstr "No hay precios en la base de datos para esa ubicación y fecha"
+
+#: mastermind/forms.py:13 mastermind/forms.py:26
+msgid "Guess"
+msgstr "Intento"
+
+#: mastermind/forms.py:16
+msgid "A 4-digit number"
+msgstr "Un número de 4 dígitos"
+
+#: mastermind/views.py:66
+msgid "You have already made 10 guesses"
+msgstr "Ya has hecho 10 intentos"
+
+#: mastermind/views.py:70
+msgid "Invalid guess"
+msgstr "Intento inválido"
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
 #: templates/accounts/register.html:5 templates/accounts/why.html:5
@@ -702,6 +718,22 @@ msgid ""
 msgstr ""
 "por su apoyo mientras construía la web y depuraba (especialmente depurándola)"
 
+#: templates/mastermind/game.html:5
+msgid "Game result"
+msgstr "Resultado de la partida"
+
+#: templates/mastermind/game.html:10
+msgid "Game"
+msgstr "Partida"
+
+#: templates/mastermind/game.html:10
+msgid "Correct code"
+msgstr "Código correcto"
+
+#: templates/mastermind/game.html:16
+msgid "Start another game"
+msgstr "Empezar otra partida"
+
 #: templates/mastermind/home.html:12
 msgid "Mastermind is a code-breaking game"
 msgstr "Mastermind es un juego de descifrar códigos"
@@ -769,9 +801,13 @@ msgstr ""
 msgid "Play"
 msgstr "Jugar"
 
+#: templates/mastermind/play.html:5
+msgid "Playing game"
+msgstr "Partida en curso"
+
 #: templates/mastermind/play.html:9
-msgid "Game"
-msgstr "Partida"
+msgid "Mastermind game"
+msgstr "Partida de Mastermind"
 
 #. Translators: Projects page tab title
 #. Translators: Projects page title
@@ -791,9 +827,6 @@ msgstr "Proyectos"
 
 #~ msgid "Type of query"
 #~ msgstr "Tipo de petición"
-
-#~ msgid "No results"
-#~ msgstr "Sin resultados"
 
 #~ msgid "Results were not found"
 #~ msgstr "No se encontraron resultados"
