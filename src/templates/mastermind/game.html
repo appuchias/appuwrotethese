@@ -13,7 +13,9 @@
             <li>{{ guess }} ({{ guess.correct }}-{{ guess.misplaced }})</li>
             {% endfor %}
         </ol>
-        <a href="/mastermind/play">{% trans "Start another game" %}!</a>
+        <div class="row">
+            <a href="/mastermind/play" class="text-themed darker">{% trans "Start another game" %}!</a>
+        </div>
     </div>
 </div>
 {% endblock content %}
