@@ -2,10 +2,23 @@
 
 {% load user_agents i18n %}
 
-{% block head %}Mastermind{% endblock head %}
+{% block head %}{% trans "Playing game" %} #{{ game.game_id }}{% endblock head %}
 
 {% block content %}
-<div id="mastermind" class="container">
-    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Game" %}</div>
+<div id="play" class="container">
+    <div class="crwrapper">
+        <p>{% trans "Game" %} #{{ game }}</p>
+        <ol>
+            {% for guess in guesses %}
+            <li>{{ guess }} ({{ guess.correct }}-{{ guess.misplaced }})</li>
+            {% endfor %}
+        </ol>
+        {% trans "Game" %}:
+        <form action="/mastermind/guess/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="game_id" value="{{ game.game_id }}">
+            <input type="number" name="guess" min="0" max="9999">
+        </form>
+    </div>
 </div>
 {% endblock content %}

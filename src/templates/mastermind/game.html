@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load user_agents i18n %}
+
+{% block head %}{% trans "Game result" %} #{{ game.game_id }}{% endblock head %}
+
+{% block content %}
+<div id="game" class="container">
+    <div class="crwrapper">
+        <p>{% trans "Game" %} #{{ game }} ({% trans "Correct code" %}: {{ game.code }})</p>
+        <ol>
+            {% for guess in guesses %}
+            <li>{{ guess }} ({{ guess.correct }}-{{ guess.misplaced }})</li>
+            {% endfor %}
+        </ol>
+        <a href="/mastermind/play">{% trans "Start another game" %}!</a>
+    </div>
+</div>
+{% endblock content %}
