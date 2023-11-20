@@ -1,6 +1,7 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
+from django import forms
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import render, redirect
@@ -36,11 +37,14 @@ def play(request: HttpRequest, game_id: int | None = None):
         messages.error(request, "Game is finished.")
         return redirect("game", game_id=game_id)
 
+    form = MastermindGuess()
+    form.fields["game_id"].initial = game_id
+
     guesses = list(Guess.objects.filter(game=game_obj).order_by("created"))
     return render(
         request,
         "mastermind/play.html",
-        {"game": game_obj, "guesses": guesses, "form": MastermindGuess()},
+        {"game": game_obj, "guesses": guesses, "form": form},
     )
 
 
@@ -51,6 +55,7 @@ def guess(request: HttpRequest):
 
     form = MastermindGuess(request.POST)
     if not form.is_valid():
+        messages.error(request, "Invalid form.")
         return redirect("home")
 
     game_id = form.cleaned_data["game_id"]

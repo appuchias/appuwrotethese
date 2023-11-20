@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load user_agents i18n %}
+{% load user_agents i18n crispy_forms_tags %}
 
 {% block head %}{% trans "Playing game" %} #{{ game.game_id }}{% endblock head %}
 
@@ -13,11 +13,9 @@
             <li>{{ guess }} ({{ guess.correct }}-{{ guess.misplaced }})</li>
             {% endfor %}
         </ol>
-        {% trans "Game" %}:
         <form action="/mastermind/guess/" method="post">
             {% csrf_token %}
-            <input type="hidden" name="game_id" value="{{ game.game_id }}">
-            <input type="number" name="guess" min="0" max="9999">
+            {% crispy form %}
         </form>
     </div>
 </div>
