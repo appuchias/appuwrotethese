@@ -30,7 +30,7 @@ def play(request: HttpRequest, game_id: uuid.UUID | None = None):
         game_obj = Game(user=request.user)
         game_obj.save()
 
-        game_id = Game.objects.latest("game_id").game_id
+        game_id = game_obj.game_id
 
         return redirect("play", game_id=game_id)
 
