@@ -7,10 +7,10 @@ from mastermind.models import Game, Guess
 
 
 class GameAdmin(admin.ModelAdmin):
-    list_display = ("game_id", "created", "won", "lost", "created", "updated")
-    list_filter = ("won", "lost")
-    search_fields = ("game_id",)
-    readonly_fields = ("game_id", "code", "won", "lost", "created", "updated")
+    list_display = ("game_id", "created", "user", "won", "lost")
+    list_filter = ("won", "lost", "user")
+    search_fields = ("game_id", "user")
+    readonly_fields = ("game_id", "created", "user", "won", "lost")
 
 
 class GuessAdmin(admin.ModelAdmin):
