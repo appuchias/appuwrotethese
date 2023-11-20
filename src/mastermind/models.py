@@ -3,20 +3,16 @@
 
 from django.db import models
 from django.urls import reverse
+
 from typing import Any
 from random import shuffle
+import uuid
 
 DIGITS = "0123456789"
 
 
 class Game(models.Model):
-    game_id = models.IntegerField(
-        primary_key=True,
-        unique=True,
-        null=False,
-        blank=False,
-        auto_created=True,
-    )
+    game_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     code = models.CharField(max_length=4, null=False, blank=False)
     won = models.BooleanField(default=False)
     lost = models.BooleanField(default=False)
@@ -77,7 +73,6 @@ class Guess(models.Model):
     correct = models.IntegerField(null=False, blank=False)
     misplaced = models.IntegerField(null=False, blank=False)
     created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.guess}"
