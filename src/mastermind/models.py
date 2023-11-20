@@ -2,6 +2,7 @@
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
 from django.db import models
+from django.contrib.auth.models import User
 from django.urls import reverse
 
 from typing import Any
@@ -18,6 +19,7 @@ class Game(models.Model):
     lost = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)

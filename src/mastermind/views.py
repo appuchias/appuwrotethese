@@ -4,6 +4,7 @@
 import uuid
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext_lazy as _
@@ -21,8 +22,12 @@ def home(request: HttpRequest):
 
 
 def play(request: HttpRequest, game_id: uuid.UUID | None = None):
+    if not request.user.is_authenticated:
+        messages.error(request, _("You must be logged in to play") + ".")
+        return redirect("mastermind-home")
+
     if not game_id:
-        game_obj = Game()
+        game_obj = Game(user=request.user)
         game_obj.save()
 
         game_id = Game.objects.latest("game_id").game_id
@@ -32,11 +37,11 @@ def play(request: HttpRequest, game_id: uuid.UUID | None = None):
     try:
         game_obj = Game.objects.get(game_id=str(game_id).zfill(4))
     except Game.DoesNotExist:
-        messages.error(request, "Game does not exist.")
+        messages.error(request, _("Game does not exist") + ".")
         return redirect("mastermind-home")
 
     if game_obj.is_finished():
-        messages.error(request, "Game is finished.")
+        messages.error(request, _("Game is finished") + ".")
         return redirect("game", game_id=game_id)
 
     guesses = list(Guess.objects.filter(game=game_obj).order_by("created"))
@@ -47,6 +52,7 @@ def play(request: HttpRequest, game_id: uuid.UUID | None = None):
     )
 
 
+@login_required()
 def guess(request: HttpRequest, game_id: uuid.UUID):
     allowed_methods = ["POST"]
     if request.method not in allowed_methods:
@@ -61,6 +67,10 @@ def guess(request: HttpRequest, game_id: uuid.UUID):
 
     game_obj = Game.objects.get(game_id=game_id)
     guess_count = game_obj.get_guess_count()
+
+    if not game_obj.user == request.user:
+        messages.error(request, "You are not the owner of this game.")
+        return redirect("mastermind-home")
 
     if guess_count >= 10:
         messages.error(request, _("You have already made 10 guesses") + ".")
@@ -78,13 +88,13 @@ def guess(request: HttpRequest, game_id: uuid.UUID):
     if correct == 4:
         game_obj.won = True
         game_obj.save()
-        messages.success(request, "You won!")
+        messages.success(request, _("You won") + "!")
         return redirect("game", game_id=game_id)
 
     if guess_count == 9:
         game_obj.lost = True
         game_obj.save()
-        messages.error(request, "You lost!")
+        messages.error(request, _("You lost") + ".")
         return redirect("game", game_id=game_id)
 
     return redirect("play", game_id=game_id)
@@ -94,11 +104,11 @@ def game(request: HttpRequest, game_id: int):
     try:
         game_obj = Game.objects.get(game_id=str(game_id).zfill(4))
     except Game.DoesNotExist:
-        messages.error(request, "Game does not exist.")
+        messages.error(request, _("Game does not exist") + ".")
         return redirect("mastermind-home")
 
     if not game_obj.is_finished():
-        messages.error(request, "Game is not finished.")
+        messages.error(request, _("Game is not finished") + ".")
         return redirect("mastermind-home")
 
     guesses = list(Guess.objects.filter(game=game_obj).order_by("created"))

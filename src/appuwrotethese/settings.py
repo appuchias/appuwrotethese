@@ -186,6 +186,8 @@ DATABASES = {
     }
 }
 
+# Authentication
+LOGIN_URL = "/accounts/login/"
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"

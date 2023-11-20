@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-20 13:49+0100\n"
+"POT-Creation-Date: 2023-11-20 14:13+0100\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -178,11 +178,11 @@ msgstr "Debes proporcionar una localidad, provincia o código postal válido."
 msgid "Welcome to the API!"
 msgstr "Bienvenido a la API!"
 
-#: appuwrotethese/settings.py:207
+#: appuwrotethese/settings.py:209
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:208
+#: appuwrotethese/settings.py:210
 msgid "English"
 msgstr "Inglés"
 
@@ -326,13 +326,37 @@ msgstr "Intento"
 msgid "A 4-digit number"
 msgstr "Un número de 4 dígitos"
 
-#: mastermind/views.py:66
+#: mastermind/views.py:26
+msgid "You must be logged in to play"
+msgstr "Es necesario iniciar sesión para jugar"
+
+#: mastermind/views.py:40 mastermind/views.py:107
+msgid "Game does not exist"
+msgstr "La partida no existe"
+
+#: mastermind/views.py:44
+msgid "Game is finished"
+msgstr "La partida ha terminado"
+
+#: mastermind/views.py:76
 msgid "You have already made 10 guesses"
 msgstr "Ya has hecho 10 intentos"
 
-#: mastermind/views.py:70
+#: mastermind/views.py:80
 msgid "Invalid guess"
 msgstr "Intento inválido"
+
+#: mastermind/views.py:91
+msgid "You won"
+msgstr "Has ganado"
+
+#: mastermind/views.py:97
+msgid "You lost"
+msgstr "Has perdido"
+
+#: mastermind/views.py:111
+msgid "Game is not finished"
+msgstr "La partida no ha terminado"
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
 #: templates/accounts/register.html:5 templates/accounts/why.html:5
