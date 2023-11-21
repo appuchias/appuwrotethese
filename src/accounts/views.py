@@ -106,7 +106,7 @@ def acct_register(request: HttpRequest):
     if not form.is_valid():
         for msg in form.error_messages.values():
             messages.error(request, msg)
-        return redirect("/accounts")
+        return redirect("/accounts/register")
 
     data = form.cleaned_data
     user = User.objects.create_user(
