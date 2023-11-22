@@ -16,6 +16,7 @@ class SearchPrices(forms.Form):
         label=_("Search term"),
         required=True,
         help_text=_("Specific term to look for (e.g. Coruña, 15001, etc.)"),
+        widget=forms.TextInput(attrs={"autofocus": True}),
     )
 
     fuel_abbr = forms.ChoiceField(

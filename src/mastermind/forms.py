@@ -14,6 +14,7 @@ class MastermindGuess(forms.Form):
         min_value=0,
         max_value=9999,
         help_text=_("A 4-digit number") + ".",
+        widget=forms.NumberInput(attrs={"autofocus": True}),
     )
 
     def __init__(self, *args, **kwargs):
