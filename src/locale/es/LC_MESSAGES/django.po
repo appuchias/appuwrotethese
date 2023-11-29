@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-29 18:40+0100\n"
+"POT-Creation-Date: 2023-11-29 19:08+0100\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -779,16 +779,20 @@ msgid "Game result"
 msgstr "Resultado de la partida"
 
 #: templates/mastermind/game.html:10
-msgid "Game"
-msgstr "Partida"
+msgid "Game by"
+msgstr "Partida de"
 
 #: templates/mastermind/game.html:10
 msgid "Correct code"
 msgstr "Código correcto"
 
-#: templates/mastermind/game.html:17
+#: templates/mastermind/game.html:18
 msgid "Start another game"
 msgstr "Empezar otra partida"
+
+#: templates/mastermind/game.html:21
+msgid "Share! (copy link)"
+msgstr "Compartir! (copiar enlace)"
 
 #: templates/mastermind/home.html:12
 msgid "Mastermind is a code-breaking game"

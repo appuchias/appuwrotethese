@@ -7,14 +7,19 @@
 {% block content %}
 <div id="game" class="container">
     <div class="crwrapper">
-        <p>{% trans "Game" %} #{{ game }} ({% trans "Correct code" %}: {{ game.code }})</p>
+        <p>{% trans "Game by" %}: {{ user }}. ({% trans "Correct code" %}: {{ game.code }})</p>
         <ol>
             {% for guess in guesses %}
             <li>{{ guess }} ({{ guess.correct }}-{{ guess.misplaced }})</li>
             {% endfor %}
         </ol>
-        <div class="row">
-            <a href="/mastermind/play" class="text-themed darker">{% trans "Start another game" %}!</a>
+        <div>
+            <a href="/mastermind/play" class="btn btn-outline-dark">
+                <i data-lucide="binary"></i> {% trans "Start another game" %}!
+            </a>
+            <a href="#" class="btn btn-outline-dark" onclick="navigator.clipboard.writeText('https://appu.ltd/mastermind/game/{{ game }}');">
+                <i data-lucide="share-2"></i> {% trans "Share! (copy link)" %}
+            </a>
         </div>
     </div>
 </div>
