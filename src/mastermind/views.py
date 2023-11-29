@@ -17,7 +17,7 @@ validate_guess = lambda guess: (
 )
 
 
-def home(request: HttpRequest):
+def mastermind(request: HttpRequest):
     return render(request, "mastermind/home.html")
 
 
@@ -38,7 +38,7 @@ def play(request: HttpRequest, game_id: uuid.UUID | None = None):
         game_obj = Game.objects.get(game_id=str(game_id).zfill(4))
     except Game.DoesNotExist:
         messages.error(request, _("Game does not exist") + ".")
-        return redirect("mastermind-home")
+        return redirect("mastermind")
 
     if game_obj.is_finished():
         messages.error(request, _("Game is finished") + ".")
@@ -61,7 +61,7 @@ def guess(request: HttpRequest, game_id: uuid.UUID):
     form = MastermindGuess(request.POST)
     if not form.is_valid():
         messages.error(request, "Invalid form.")
-        return redirect("mastermind-home")
+        return redirect("mastermind")
 
     guess = str(form.cleaned_data["guess"]).zfill(4)
 
@@ -70,7 +70,7 @@ def guess(request: HttpRequest, game_id: uuid.UUID):
 
     if not game_obj.user == request.user:
         messages.error(request, "You are not the owner of this game.")
-        return redirect("mastermind-home")
+        return redirect("mastermind")
 
     if guess_count >= 10:
         messages.error(request, _("You have already made 10 guesses") + ".")
@@ -105,14 +105,14 @@ def game(request: HttpRequest, game_id: int):
         game_obj = Game.objects.get(game_id=str(game_id).zfill(4))
     except Game.DoesNotExist:
         messages.error(request, _("Game does not exist") + ".")
-        return redirect("mastermind-home")
+        return redirect("mastermind")
 
     if not game_obj.is_finished():
         if game_obj.user == request.user:
             return redirect("play", game_id=game_id)
 
         messages.error(request, _("Game is not finished") + ".")
-        return redirect("mastermind-home")
+        return redirect("mastermind")
 
     guesses = list(Guess.objects.filter(game=game_obj).order_by("created"))
     return render(

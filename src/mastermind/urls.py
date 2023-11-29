@@ -6,7 +6,7 @@ from django.urls import path
 from mastermind import views
 
 urlpatterns = [
-    path("", views.home, name="mastermind-home"),
+    path("", views.mastermind, name="mastermind"),
     path("play/", views.play, name="play"),
     path("play/<str:game_id>/", views.play, name="play"),
     path("guess/<str:game_id>/", views.guess, name="guess"),
