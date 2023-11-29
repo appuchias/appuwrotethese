@@ -19,13 +19,13 @@ def projects(request: HttpRequest):
         {
             "project_id": 1,
             "name": _("Fuel prices"),
-            "description": _("Where you can find the cheapest gas prices") + ".",
+            "description": _("Find the cheapest gas prices") + ".",
             "url": "gas/",
         },
         {
             "project_id": 2,
             "name": _("Mastermind"),
-            "description": _("Where you can play the Mastermind game") + ".",
+            "description": _("Play the Mastermind game") + "!",
             "url": "mastermind/",
         },
         {

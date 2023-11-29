@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-20 14:40+0100\n"
+"POT-Creation-Date: 2023-11-29 18:40+0100\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -81,7 +81,7 @@ msgstr "Localidad"
 msgid "Province"
 msgstr "Provincia"
 
-#: accounts/models.py:57 gas/forms.py:84 gas/forms.py:86 gas/models.py:78
+#: accounts/models.py:57 gas/forms.py:85 gas/forms.py:87 gas/models.py:78
 msgid "Postal code"
 msgstr "Código postal"
 
@@ -178,11 +178,11 @@ msgstr "Debes proporcionar una localidad, provincia o código postal válido."
 msgid "Welcome to the API!"
 msgstr "Bienvenido a la API!"
 
-#: appuwrotethese/settings.py:209
+#: appuwrotethese/settings.py:207
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:210
+#: appuwrotethese/settings.py:208
 msgid "English"
 msgstr "Inglés"
 
@@ -191,16 +191,16 @@ msgid "Fuel prices"
 msgstr "Gasolineras"
 
 #: appuwrotethese/views.py:22
-msgid "Where you can find the cheapest gas prices"
-msgstr "Donde puedes encontrar el combustible más barato"
+msgid "Find the cheapest gas prices"
+msgstr "Encuentra el combustible más barato"
 
 #: appuwrotethese/views.py:27
 msgid "Mastermind"
 msgstr "Mastermind"
 
 #: appuwrotethese/views.py:28
-msgid "Where you can play the Mastermind game"
-msgstr "Donde puedes jugar al juego Mastermind"
+msgid "Play the Mastermind game"
+msgstr "Juega a Mastermind"
 
 #: appuwrotethese/views.py:33
 msgid "Future"
@@ -226,31 +226,31 @@ msgstr "Término de búsqueda"
 msgid "Specific term to look for (e.g. Coruña, 15001, etc.)"
 msgstr "Término concreto a buscar (p.ej. Coruña, 15001, etc.)"
 
-#: gas/forms.py:22 gas/forms.py:90 templates/gas/results.html:41
+#: gas/forms.py:23 gas/forms.py:91 templates/gas/results.html:41
 msgid "Fuel"
 msgstr "Combustible"
 
-#: gas/forms.py:30 gas/forms.py:98
+#: gas/forms.py:31 gas/forms.py:99
 msgid "Fuel to use for sorting"
 msgstr "Combustible a usar para ordenar"
 
-#: gas/forms.py:34 gas/forms.py:102
+#: gas/forms.py:35 gas/forms.py:103
 msgid "Date"
 msgstr "Fecha"
 
-#: gas/forms.py:35 gas/forms.py:103
+#: gas/forms.py:36 gas/forms.py:104
 msgid "Prices date"
 msgstr "Fecha de los precios"
 
-#: gas/forms.py:60
+#: gas/forms.py:61
 msgid "Search"
 msgstr "Buscar"
 
-#: gas/forms.py:72 gas/forms.py:74 gas/models.py:16
+#: gas/forms.py:73 gas/forms.py:75 gas/models.py:16
 msgid "Locality ID"
 msgstr "ID de la localidad"
 
-#: gas/forms.py:78 gas/forms.py:80 gas/models.py:43
+#: gas/forms.py:79 gas/forms.py:81 gas/models.py:43
 msgid "Province ID"
 msgstr "ID de provincia"
 
@@ -318,7 +318,7 @@ msgstr "No se pudo encontrar la ubicación que estás buscando"
 msgid "There were no prices in the database for that location and date"
 msgstr "No hay precios en la base de datos para esa ubicación y fecha"
 
-#: mastermind/forms.py:13 mastermind/forms.py:26
+#: mastermind/forms.py:13 mastermind/forms.py:27
 msgid "Guess"
 msgstr "Intento"
 
@@ -786,7 +786,7 @@ msgstr "Partida"
 msgid "Correct code"
 msgstr "Código correcto"
 
-#: templates/mastermind/game.html:16
+#: templates/mastermind/game.html:17
 msgid "Start another game"
 msgstr "Empezar otra partida"
 
@@ -870,6 +870,9 @@ msgstr "Partida de Mastermind"
 #: templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
+
+#~ msgid "Where you can play the Mastermind game"
+#~ msgstr "Donde puedes jugar al juego Mastermind"
 
 #~ msgid ""
 #~ "A project where you can check the different prices of all gas stations in "
