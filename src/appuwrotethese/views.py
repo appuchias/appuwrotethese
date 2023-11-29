@@ -29,6 +29,12 @@ def projects(request: HttpRequest):
             "url": "mastermind/",
         },
         {
+            "project_id": 3,
+            "name": _("QuickCalc"),
+            "description": _("Train your ability to do mental math quickly") + ".",
+            "url": "quickcalc/",
+        },
+        {
             "project_id": 1,
             "name": _("Future"),
             "description": _("Future projects") + "...",

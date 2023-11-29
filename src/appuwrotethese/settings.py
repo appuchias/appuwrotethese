@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "accounts",
     "api",
     "mastermind",
+    "quickcalc",
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

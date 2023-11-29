@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load user_agents i18n %}
+
+{% block head %}{% trans "Quickcalc" %}{% endblock head %}
+
+{% block content %}
+<div id="quickcalc" class="container">
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Quickcalc" %}</div>
+</div>
+{% endblock content %}
+

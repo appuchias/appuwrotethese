@@ -14,6 +14,7 @@ urlpatterns = [
     path("gas/", include("gas.urls")),
     path("accounts/", include("accounts.urls")),
     path("mastermind/", include("mastermind.urls")),
+    path("quickcalc/", include("quickcalc.urls")),
     path("i18n/", include("django.conf.urls.i18n"), name="i18n"),
     path("robots.txt", views.redirect_static, kwargs={"resource": "robots.txt"}),
     path("favicon.ico", views.redirect_static, kwargs={"resource": "favicon.ico"}),
