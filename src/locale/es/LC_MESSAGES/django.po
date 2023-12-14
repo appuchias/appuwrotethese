@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-29 19:08+0100\n"
+"POT-Creation-Date: 2023-12-14 18:10+0100\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -778,19 +778,27 @@ msgstr ""
 msgid "Game result"
 msgstr "Resultado de la partida"
 
-#: templates/mastermind/game.html:10
+#: templates/mastermind/game.html:9 templates/mastermind/play.html:9
+msgid "Mastermind game"
+msgstr "Partida de Mastermind"
+
+#: templates/mastermind/game.html:11
 msgid "Game by"
 msgstr "Partida de"
 
-#: templates/mastermind/game.html:10
+#: templates/mastermind/game.html:12
 msgid "Correct code"
 msgstr "Código correcto"
 
-#: templates/mastermind/game.html:18
+#: templates/mastermind/game.html:13
+msgid "Guess attempts"
+msgstr "Intentos"
+
+#: templates/mastermind/game.html:21
 msgid "Start another game"
 msgstr "Empezar otra partida"
 
-#: templates/mastermind/game.html:21
+#: templates/mastermind/game.html:24
 msgid "Share! (copy link)"
 msgstr "Compartir! (copiar enlace)"
 
@@ -864,10 +872,6 @@ msgstr "Jugar"
 #: templates/mastermind/play.html:5
 msgid "Playing game"
 msgstr "Partida en curso"
-
-#: templates/mastermind/play.html:9
-msgid "Mastermind game"
-msgstr "Partida de Mastermind"
 
 #. Translators: Projects page tab title
 #. Translators: Projects page title

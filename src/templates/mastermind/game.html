@@ -6,15 +6,18 @@
 
 {% block content %}
 <div id="game" class="container">
+    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Mastermind game" %}</div>
     <div class="crwrapper">
-        <p>{% trans "Game by" %}: {{ user }}. ({% trans "Correct code" %}: {{ game.code }})</p>
+        <div class="title">{% trans "Game by" %} {{ user }}</div>
+        <p class="subtitle">{% trans "Correct code" %}: {{ game.code }}</p>
+        <p>{% trans "Guess attempts" %}:</p>
         <ol>
             {% for guess in guesses %}
             <li>{{ guess }} ({{ guess.correct }}-{{ guess.misplaced }})</li>
             {% endfor %}
         </ol>
-        <div>
-            <a href="/mastermind/play" class="btn btn-outline-dark">
+        <div class="d-flex justify-content-end">
+            <a href="/mastermind/play" class="btn btn-outline-dark mx-2">
                 <i data-lucide="binary"></i> {% trans "Start another game" %}!
             </a>
             <a href="#" class="btn btn-outline-dark" onclick="navigator.clipboard.writeText('https://appu.ltd/mastermind/game/{{ game }}');">
