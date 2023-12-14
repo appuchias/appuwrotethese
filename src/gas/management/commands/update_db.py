@@ -12,3 +12,5 @@ class Command(BaseCommand):
         db_actions.update_station_prices(
             {date.today(): db_actions.get_data()["ListaEESSPrecio"]}
         )
+
+        self.stdout.write(self.style.SUCCESS("Successfully updated the database."))

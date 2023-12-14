@@ -25,3 +25,5 @@ class Command(BaseCommand):
         db_actions.store_historical_prices(
             days=options["days"], local_folder=options["local_folder"]
         )
+
+        self.stdout.write(self.style.SUCCESS("Successfully updated the database."))
