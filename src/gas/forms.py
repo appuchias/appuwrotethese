@@ -6,6 +6,7 @@ from datetime import date
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Layout, Submit
 from django import forms
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 
 
@@ -47,6 +48,13 @@ class SearchPrices(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        # Update q_date widget to set max and value to today
+        self.fields["q_date"].widget.attrs.update(
+            {"max": date.today(), "value": date.today()}
+        )
+
+        # Set crispy form layout
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
@@ -56,11 +64,7 @@ class SearchPrices(forms.Form):
                 css_class="row",
             ),
             Div(
-                Submit(
-                    "submit",
-                    _("Search"),
-                    css_class="btn btn-outline-dark",
-                ),
+                Submit("submit", _("Search"), css_class="btn btn-outline-dark"),
                 css_class="d-flex justify-content-end",
             ),
         )
