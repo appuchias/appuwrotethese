@@ -2,7 +2,7 @@
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
 from django.utils.translation import gettext as _
-from django.http import HttpRequest
+from django.http import HttpRequest, JsonResponse
 from django.shortcuts import render, redirect
 import os
 
@@ -65,6 +65,12 @@ def projects(request: HttpRequest):
         )
     else:
         return no_project(request)
+
+
+def health(request: HttpRequest):
+    """Health check endpoint."""
+
+    return JsonResponse({"status": "OK"})
 
 
 def legal(request: HttpRequest):

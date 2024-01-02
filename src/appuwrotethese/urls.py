@@ -10,7 +10,6 @@ handler500 = "appuwrotethese.views.handler500"
 
 urlpatterns = [
     path("admin/", admin.site.urls, name="admin"),
-    path("api/", include("api.urls")),
     path("gas/", include("gas.urls")),
     path("accounts/", include("accounts.urls")),
     path("mastermind/", include("mastermind.urls")),
@@ -22,6 +21,7 @@ urlpatterns = [
 
 urlpatterns += [
     path("", views.home, name="home"),
+    path("health/", views.health, name="health"),
     path("legal/", views.legal, name="legal"),
     path("text/", views.text, name="text"),
     path("build/", views.build, name="build"),

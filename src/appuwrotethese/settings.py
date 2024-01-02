@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "gas",
     "accounts",
-    "api",
     "mastermind",
 ]
 MIDDLEWARE = [
