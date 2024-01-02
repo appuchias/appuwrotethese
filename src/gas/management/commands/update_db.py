@@ -17,16 +17,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         db_actions.create_localities_provinces()
-        add_upd_counts = db_actions.update_station_prices(
-            {date.today(): db_actions.get_data()["ListaEESSPrecio"]}, options["update"]
+        db_actions.update_day_stations_prices(
+            db_actions.get_data()["ListaEESSPrecio"], date.today(), options["update"]
         )
-        add_stations, add_prices = add_upd_counts[0]
-        upd_stations, upd_prices = add_upd_counts[1]
 
-        self.stdout.write(self.style.SUCCESS("Successfully updated the database.\n"))
-        self.stdout.write(
-            self.style.SUCCESS(f"Add: {add_stations} stations, {add_prices} prices.")
-        )
-        self.stdout.write(
-            self.style.SUCCESS(f"Update: {upd_stations} stations, {upd_prices} prices.")
-        )
+        self.stdout.write(self.style.SUCCESS("Successfully updated the database."))
