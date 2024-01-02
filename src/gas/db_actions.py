@@ -11,7 +11,6 @@ from appuwrotethese.extras import (
     PATH_LOCALITIES,
     PATH_PROVINCES,
     get_json_data,
-    ShellCodes as C,
 )
 from gas.models import Locality, Province, Station, StationPrice
 
@@ -99,28 +98,47 @@ def create_localities_provinces(
             ]
         )
 
-    # print("[✓] Updated complementary tables.")
-    # print("---")
-
 
 ## Update Station and StationPrice tables ##
-def update_station_prices(all_data: dict[date, list]) -> None:
+def update_station_prices(
+    all_data: dict[date, list], update: bool = False
+) -> tuple[tuple[int, int], tuple[int, int]]:
     """Update the database with `prices_date`'s stations and prices
 
+    Args
+    ----
     `all_data` is a dict with the following structure:
     { 1999-12-31: [ { <station fields> }, <more stations> ], <more dates> }
+
+    If `update` is True, it will update existing stations and prices, even if
+    they have the same date.
+
+    Returns
+    -------
+    2 tuples with the number of added stations and prices and the number
+    of updated stations and prices, respectively.
     """
 
-    for prices_date, data in all_data.items():
-        new_prices = list()
-        new_stations = set()
-        id_eess = (int(station["IDEESS"]) for station in data)
+    added_stations_count = 0
+    added_prices_count = 0
 
-        stations = Station.objects.in_bulk(id_eess, field_name="id_eess")
+    updated_stations_count = 0
+    updated_prices_count = 0
+
+    for prices_date, data in all_data.items():
+        ids_eess = (int(station["IDEESS"]) for station in data)
+
+        stations = Station.objects.in_bulk(ids_eess, field_name="id_eess")
         prices = [
             price.station.id_eess
             for price in StationPrice.objects.filter(date=prices_date)
         ]
+
+        new_stations = set()
+        new_prices = list()
+
+        updated_stations = set()
+        updated_prices = list()
 
         for price in data:
             id_eess = int(price["IDEESS"])
@@ -140,6 +158,19 @@ def update_station_prices(all_data: dict[date, list]) -> None:
                 stations[station.id_eess] = station
                 new_stations.add(station)
 
+            elif update:  # Update station info if required
+                station = stations[id_eess]
+                station.company = price["Rótulo"]
+                station.schedule = price["Horario"]
+                station.address = price["Dirección"]
+                station.latitude = price["Latitud"].replace(",", ".")
+                station.longitude = price["Longitud (WGS84)"].replace(",", ".")
+                station.locality = Locality.objects.get(id_mun=price["IDMunicipio"])
+                station.province = Province.objects.get(id_prov=price["IDProvincia"])
+                station.postal_code = int(price["C.P."])
+
+                updated_stations.add(station)
+
             if not id_eess in prices:
                 prices.append(id_eess)
                 new_prices.append(
@@ -153,81 +184,56 @@ def update_station_prices(all_data: dict[date, list]) -> None:
                             for key in DB_FIELD_FUELS
                         },
                     )
+                )
+            elif update:
+                updated_prices.append(
+                    StationPrice.objects.get(
+                        station=stations[id_eess], date=prices_date
+                    )
+                )
+                for key in DB_FIELD_FUELS:
+                    setattr(
+                        updated_prices[-1],
+                        DB_FIELD_FUELS[key],
+                        Decimal(price[key].replace(",", ".")) if price[key] else None,
+                    )
+
+        if update:  # Update required stations and prices
+            if updated_stations:
+                Station.objects.bulk_update(
+                    updated_stations,
+                    fields=[
+                        "company",
+                        "schedule",
+                        "address",
+                        "latitude",
+                        "longitude",
+                        "locality",
+                        "province",
+                        "postal_code",
+                    ],
+                )
+            if updated_prices:
+                StationPrice.objects.bulk_update(
+                    updated_prices, fields=list(DB_FIELD_FUELS.values())
                 )
 
         Station.objects.bulk_create(new_stations)
         StationPrice.objects.bulk_create(new_prices)
+
+        added_stations_count += len(new_stations)
+        added_prices_count += len(new_prices)
+        updated_stations_count += len(updated_stations)
+        updated_prices_count += len(updated_prices)
+
         del new_stations
         del new_prices
 
-    # print("[✓] Updated prices.     ")
-    # print("---")
-
-
-## Same function but optimized for minimal disk access. Not used ##
-def _update_station_prices_mindiskaccess(all_data: dict[date, list]) -> None:
-    """Update the database with `prices_date`'s stations and prices
-
-    This function is much less intensive on disk, requiring only 2 DB writes
-    instead of 1 write for each day added.
-
-    It trades disk accesses with memory usage.
-    On (short) testing it uses ~1GB of RAM per month stored.
-
-    `all_data` is a dict with the following structure:
-    { 1999-12-31: [ { <station fields> }, <more stations> ], <more dates> }
-    """
-
-    new_prices = list()
-    new_stations = set()
-
-    for prices_date, data in all_data.items():
-        id_eess = (int(station["IDEESS"]) for station in data)
-
-        stations = Station.objects.in_bulk(id_eess, field_name="id_eess")
-        prices = [
-            price.station.id_eess
-            for price in StationPrice.objects.filter(date=prices_date)
-        ]
-
-        for price in data:
-            id_eess = int(price["IDEESS"])
-            if not id_eess in stations:
-                station = Station(
-                    id_eess=id_eess,
-                    company=price["Rótulo"],
-                    schedule=price["Horario"],
-                    address=price["Dirección"],
-                    latitude=price["Latitud"].replace(",", "."),
-                    longitude=price["Longitud (WGS84)"].replace(",", "."),
-                    locality=Locality.objects.get(id_mun=price["IDMunicipio"]),
-                    province=Province.objects.get(id_prov=price["IDProvincia"]),
-                    postal_code=int(price["C.P."]),
-                )
-
-                stations[station.id_eess] = station
-                new_stations.add(station)
-
-            if not id_eess in prices:
-                prices.append(id_eess)
-                new_prices.append(
-                    StationPrice(
-                        station=stations.get(id_eess, None),
-                        date=prices_date,
-                        **{
-                            DB_FIELD_FUELS[key]: Decimal(price[key].replace(",", "."))
-                            if price[key]
-                            else None
-                            for key in DB_FIELD_FUELS
-                        },
-                    )
-                )
-
-    Station.objects.bulk_create(new_stations)
-    StationPrice.objects.bulk_create(new_prices)
-
-    print("[✓] Updated prices.     ")
-    print("---")
+    # Return added and updated stations
+    return (
+        (added_stations_count, added_prices_count),
+        (updated_stations_count, updated_prices_count),
+    )
 
 
 ## Store historical prices ##
