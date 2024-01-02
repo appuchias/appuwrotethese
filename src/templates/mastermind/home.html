@@ -6,7 +6,7 @@
 
 {% block content %}
 <div id="mastermind" class="container">
-    <div class="title{% if request|is_mobile %} mobile{% endif %}">Mastermind</div>
+    <h1 class="title{% if request|is_mobile %} mobile{% endif %}">Mastermind</h1>
     <div class="crwrapper">
         <center>
             <p>{% trans "Mastermind is a code-breaking game" %}. {% trans "One player" %} ({% trans "the machine in this case" %}) {% trans "creates a code and the other tries to break the code" %}.</p>

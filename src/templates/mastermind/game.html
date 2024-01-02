@@ -6,7 +6,7 @@
 
 {% block content %}
 <div id="game" class="container">
-    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Mastermind game" %}</div>
+    <h1 class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Mastermind game" %}</h1>
     <div class="crwrapper">
         <div class="title">{% trans "Game by" %} {{ user }}</div>
         <p class="subtitle">{% trans "Correct code" %}: {{ game.code }}</p>

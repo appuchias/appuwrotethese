@@ -5,7 +5,7 @@
 
 {% block content %}
 <div id="db-list" class="container text-themed">
-    <div class="title {% if request|is_mobile %} mobile{% endif %}">{{ q_type }}</div>
+    <h1 class="title {% if request|is_mobile %} mobile{% endif %}">{{ q_type }}</h1>
     <div class="subtitle">
         <p class="text-center">{% trans "These are the names stored in the database. Use them in your searches" %}.</p>
         <p class="text-center">{% trans "Tip: Use CTRL+F or tap 'search in page' in the browser menu" %}.</p>

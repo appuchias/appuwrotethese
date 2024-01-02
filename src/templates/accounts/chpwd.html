@@ -6,7 +6,7 @@
 
 {% block content %}
 <div id="chpwd">
-    <div class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Password change' %}</div>
+    <h1 class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Password change' %}</h1>
     <div class="container crwrapper">
         {% if user.is_authenticated %}
         <form action="/accounts/chpwd/" method="post">
