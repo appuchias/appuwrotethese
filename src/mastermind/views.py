@@ -114,6 +114,11 @@ def game(request: HttpRequest, game_id: int):
         messages.error(request, _("Game is not finished") + ".")
         return redirect("mastermind")
 
+    if game_obj.won:
+        messages.success(request, _("You won") + "!")
+    else:
+        messages.error(request, _("You lost") + ".")
+
     guesses = list(Guess.objects.filter(game=game_obj).order_by("created"))
     return render(
         request,
