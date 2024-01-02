@@ -17,7 +17,10 @@
         <h3><a href="/mastermind" class="text-themed darker">{% trans "Mastermind games" %}</a></h3>
         <ul>
             {% for game in games %}
-            <li><a href="/mastermind/game/{{ game.game_id }}/" class="text-themed darker">{{ game.game_id }} - {{ game.get_guess_count }} {% trans "guesses" %} ({% if not game.won and not game.lost %}{% trans "not" %} {% endif %}{% trans "finished" %})</a></li>
+            <li>
+                <a href="/mastermind/game/{{ game.game_id }}/" class="text-themed darker">{% if game.won %}<i data-lucide="crown"></i>{% elif game.lost %}<i data-lucide="x"></i>{% endif %}{{ game.created|date:"Y/m/d H:i" }} - {{ game.get_guess_count }} {% trans "guesses" %}
+                </a>
+            </li>
             {% endfor %}
         </ul>
         <hr>

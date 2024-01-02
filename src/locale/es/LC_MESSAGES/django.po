@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-14 18:10+0100\n"
+"POT-Creation-Date: 2024-01-03 00:31+0100\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -33,7 +33,7 @@ msgstr "Registrarse"
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: accounts/forms.py:118 templates/accounts/account.html:26
+#: accounts/forms.py:118 templates/accounts/account.html:29
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
@@ -81,7 +81,7 @@ msgstr "Localidad"
 msgid "Province"
 msgstr "Provincia"
 
-#: accounts/models.py:57 gas/forms.py:85 gas/forms.py:87 gas/models.py:78
+#: accounts/models.py:57 gas/forms.py:89 gas/forms.py:91 gas/models.py:78
 msgid "Postal code"
 msgstr "Código postal"
 
@@ -162,27 +162,11 @@ msgstr ""
 "Tu contraseña se restableció correctamente. Por favor, comprueba tu correo "
 "electrónico con tu nueva contraseña temporal."
 
-#: api/gas/views.py:15
-msgid "Welcome to the Gas API!"
-msgstr "Bienvenido a la API de Gas!"
-
-#: api/gas/views.py:24 api/gas/views.py:57
-msgid "Invalid request"
-msgstr "Petición inválida"
-
-#: api/gas/views.py:38 api/gas/views.py:71
-msgid "You must provide a valid locality, province, or postal code."
-msgstr "Debes proporcionar una localidad, provincia o código postal válido."
-
-#: api/views.py:11
-msgid "Welcome to the API!"
-msgstr "Bienvenido a la API!"
-
-#: appuwrotethese/settings.py:207
+#: appuwrotethese/settings.py:206
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:208
+#: appuwrotethese/settings.py:207
 msgid "English"
 msgstr "Inglés"
 
@@ -218,39 +202,39 @@ msgstr "Proyecto de ejemplo #"
 msgid "Placeholder project description"
 msgstr "Descripción del proyecto de ejemplo"
 
-#: gas/forms.py:16
+#: gas/forms.py:17
 msgid "Search term"
 msgstr "Término de búsqueda"
 
-#: gas/forms.py:18
+#: gas/forms.py:19
 msgid "Specific term to look for (e.g. Coruña, 15001, etc.)"
 msgstr "Término concreto a buscar (p.ej. Coruña, 15001, etc.)"
 
-#: gas/forms.py:23 gas/forms.py:91 templates/gas/results.html:41
+#: gas/forms.py:24 gas/forms.py:95 templates/gas/results.html:42
 msgid "Fuel"
 msgstr "Combustible"
 
-#: gas/forms.py:31 gas/forms.py:99
+#: gas/forms.py:32 gas/forms.py:103
 msgid "Fuel to use for sorting"
 msgstr "Combustible a usar para ordenar"
 
-#: gas/forms.py:35 gas/forms.py:103
+#: gas/forms.py:36 gas/forms.py:107
 msgid "Date"
 msgstr "Fecha"
 
-#: gas/forms.py:36 gas/forms.py:104
+#: gas/forms.py:37 gas/forms.py:108
 msgid "Prices date"
 msgstr "Fecha de los precios"
 
-#: gas/forms.py:61
+#: gas/forms.py:67
 msgid "Search"
 msgstr "Buscar"
 
-#: gas/forms.py:73 gas/forms.py:75 gas/models.py:16
+#: gas/forms.py:77 gas/forms.py:79 gas/models.py:16
 msgid "Locality ID"
 msgstr "ID de la localidad"
 
-#: gas/forms.py:79 gas/forms.py:81 gas/models.py:43
+#: gas/forms.py:83 gas/forms.py:85 gas/models.py:43
 msgid "Province ID"
 msgstr "ID de provincia"
 
@@ -373,13 +357,13 @@ msgstr "Cuenta AWT"
 msgid "You're logged in as"
 msgstr "Estás conectado como"
 
-#: templates/accounts/account.html:12 templates/gas/results.html:109
+#: templates/accounts/account.html:12 templates/gas/results.html:110
 #: templates/legal.html:11 templates/legal.html:58
 msgid "Hosting is not free"
 msgstr "La web no es gratis"
 
 #: templates/accounts/account.html:12 templates/base.html:113
-#: templates/gas/results.html:109 templates/legal.html:11
+#: templates/gas/results.html:110 templates/legal.html:11
 #: templates/legal.html:58
 msgid "Support me"
 msgstr "Apóyame"
@@ -396,19 +380,11 @@ msgstr "Próximamente"
 msgid "Mastermind games"
 msgstr "Partidas de Mastermind"
 
-#: templates/accounts/account.html:20
+#: templates/accounts/account.html:21
 msgid "guesses"
 msgstr "intentos"
 
-#: templates/accounts/account.html:20
-msgid "not"
-msgstr "no"
-
-#: templates/accounts/account.html:20
-msgid "finished"
-msgstr "terminada"
-
-#: templates/accounts/account.html:27
+#: templates/accounts/account.html:30
 msgid "Logout"
 msgstr "Cerrar sesión"
 
@@ -422,7 +398,7 @@ msgstr "No has iniciado sesión"
 
 #. Translators: Button to go to last page visited
 #: templates/accounts/chpwd.html:17 templates/accounts/respwd.html:17
-#: templates/build.html:14 templates/gas/results.html:115
+#: templates/build.html:14 templates/gas/results.html:116
 msgid "Go back"
 msgstr "Volver atrás"
 
@@ -592,7 +568,7 @@ msgstr "en"
 msgid "on the"
 msgstr "para el día"
 
-#: templates/gas/results.html:19
+#: templates/gas/results.html:20
 msgid ""
 "The 3 bottom icons show if the price in the past was cheaper (green) or more "
 "expensive (red)"
@@ -600,31 +576,31 @@ msgstr ""
 "Los 3 iconos de abajo muestran si el combustible era más barato (verde) o "
 "más caro (rojo)"
 
-#: templates/gas/results.html:20
+#: templates/gas/results.html:21
 msgid "In order: Yesterday, last week, last month"
 msgstr "En orden: Ayer, la semana pasada, el mes pasado"
 
-#: templates/gas/results.html:68
+#: templates/gas/results.html:69
 msgid "Open location in map"
 msgstr "Abrir ubicación en mapa"
 
-#: templates/gas/results.html:72
+#: templates/gas/results.html:73
 msgid "Open GMaps route"
 msgstr "Abrir ruta en GMaps"
 
-#: templates/gas/results.html:80
+#: templates/gas/results.html:81
 msgid "Yesterday"
 msgstr "Ayer"
 
-#: templates/gas/results.html:87
+#: templates/gas/results.html:88
 msgid "Last week"
 msgstr "Semana pasada"
 
-#: templates/gas/results.html:94
+#: templates/gas/results.html:95
 msgid "Last month"
 msgstr "Mes pasado"
 
-#: templates/gas/results.html:114
+#: templates/gas/results.html:115
 msgid "No station prices were found"
 msgstr "No se encontraron precios para las gasolineras"
 
@@ -786,6 +762,10 @@ msgstr "Partida de Mastermind"
 msgid "Game by"
 msgstr "Partida de"
 
+#: templates/mastermind/game.html:11
+msgid "played on"
+msgstr "jugada el"
+
 #: templates/mastermind/game.html:12
 msgid "Correct code"
 msgstr "Código correcto"
@@ -878,6 +858,30 @@ msgstr "Partida en curso"
 #: templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
+
+#~ msgid "game won"
+#~ msgstr "partida ganada"
+
+#~ msgid "game lost"
+#~ msgstr "partida perdida"
+
+#~ msgid "Welcome to the Gas API!"
+#~ msgstr "Bienvenido a la API de Gas!"
+
+#~ msgid "Invalid request"
+#~ msgstr "Petición inválida"
+
+#~ msgid "You must provide a valid locality, province, or postal code."
+#~ msgstr "Debes proporcionar una localidad, provincia o código postal válido."
+
+#~ msgid "Welcome to the API!"
+#~ msgstr "Bienvenido a la API!"
+
+#~ msgid "not"
+#~ msgstr "no"
+
+#~ msgid "finished"
+#~ msgstr "terminada"
 
 #~ msgid "Where you can play the Mastermind game"
 #~ msgstr "Donde puedes jugar al juego Mastermind"
