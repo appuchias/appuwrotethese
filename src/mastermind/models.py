@@ -16,7 +16,7 @@ class Game(models.Model):
     game_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     code = models.CharField(max_length=4, null=False, blank=False)
     won = models.BooleanField(default=False)
-    lost = models.BooleanField(default=False)
+    finished = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
@@ -34,11 +34,6 @@ class Game(models.Model):
         code = list(DIGITS)
         shuffle(code)
         return "".join(code[:4])
-
-    def is_finished(self) -> bool:
-        """Check if the game is finished."""
-
-        return self.won or self.lost
 
     def check_guess(self, code: str, guess: str) -> tuple[int, int]:
         """Check the guess against the code and return the number of correct and misplaced digits."""
