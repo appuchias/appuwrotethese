@@ -12,7 +12,7 @@ This is my personal website where I will be uploading the projects I think might
 I am learning, so many things shown here will have bugs and there may be something broken.
 In case something happens, you can contact me through any social network found in the web footer.
 
-The official less compiler is used to compile the stylesheets, so you will need to install it in order to compile the stylesheets.
+The official less compiler is used to compile the stylesheets, so you will need to install it in order to join the stylesheets.
 You can find the official documentation [here](http://lesscss.org/usage/#command-line-usage).
 
 This project was previously closed-source, and it was created after 750 commits that are still kept privately but are fundamental to this website.
@@ -22,7 +22,12 @@ This project was previously closed-source, and it was created after 750 commits 
 1. Gas prices
 
     This project allows the users to look up the cheapest gas station in different areas of Spain,
-    either though the name of the locality, the province or its postal/zip code.
+    either through the name of the locality, the province or its postal/zip code.
+
+2. Mastermind
+
+    A logic game.
+    Try to guess a 4-digit code based on the number of correct and misplaced digits of your attempts.
 
 ## License
 

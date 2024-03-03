@@ -5,13 +5,12 @@
 
 ## Qué es esto?
 
-This is my personal website where I will be uploading the projects I think might be useful for some other people and the ones I need to have access to in a convenient way.
 Esta es mi web personal donde subiré los proyectos que creo que pueden ser útiles para otras personas y a los que necesito tener acceso de una manera conveniente.
 
 Estoy aprendiendo, así que muchas cosas que se muestran aquí tendrán errores y puede que algo esté roto.
 En caso de que algo suceda, puedes contactarme a través de cualquier red social de las que se encuentra en el pie de página de la web.
 
-El compilador oficial de less se utiliza para compilar las hojas de estilo, por lo que deberás instalarlo para compilar las hojas de estilo.
+El compilador oficial de less se utiliza para compilar las hojas de estilo, por lo que deberás instalarlo para unir las hojas de estilo.
 Puedes encontrar la documentación oficial [aquí](http://lesscss.org/usage/#command-line-usage).
 
 Este proyecto antes era de código cerrado, y fue creado después de 750 commits que todavía se mantienen en privado pero son fundamentales para esta web.
@@ -22,6 +21,10 @@ Este proyecto antes era de código cerrado, y fue creado después de 750 commits
 
     Este proyecto permite a los usuarios buscar la gasolinera más barata en diferentes áreas de España,
     ya sea a través del nombre de la localidad, la provincia o su código postal.
+
+2. Mastermind
+
+    Un juego de lógica. Intenta adivinar un código de 4 dígitos basado en el número de dígitos correctos y mal colocados de tus intentos.
 
 ## Licencia
 
