@@ -1,9 +1,10 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-import json, lzma, os, requests, time
+import json, lzma, os, requests
 from datetime import date, datetime, timedelta
 from decimal import Decimal
+from concurrent.futures import ThreadPoolExecutor
 
 from appuwrotethese.extras import (
     DATA_OLD_MINUTES,
@@ -200,42 +201,62 @@ def update_day_stations_prices(data: list, day: date, update: bool = False) -> N
     Station.objects.bulk_create(new_stations)
     StationPrice.objects.bulk_create(new_prices)
 
+    print(day, end="\r")
+
+
+def get_data_and_update_day(current_date: date) -> None:
+    """Get the data for `current_date` and update the database.
+
+    If the data is already in the database, it will not be updated.
+    """
+
+    if StationPrice.objects.filter(date=current_date).exists():
+        return
+
+    update_day_stations_prices(
+        requests.get(HIST_URL + current_date.strftime("%d-%m-%Y")).json()[
+            "ListaEESSPrecio"
+        ],
+        current_date,
+    )
+
 
 ## Store historical prices ##
-def store_historical_prices(days: int = 365, local_folder: str = "") -> None:
+def store_historical_prices(
+    days: int = 30, local_folder: str = "", threads: int = 1
+) -> None:
     """Store historical prices in the database.
 
     If `local_folder` is provided, it will use all files in that folder.
     Otherwise, it will store the data from the last year.
     """
 
-    print("[·] Fetching prices")
+    print(f"[·] Fetching prices from the last {days} days ({threads} threads)")
 
     today = date.today()
     current_date = today - timedelta(days=days)
 
-    while current_date <= today:
-        if StationPrice.objects.filter(date=current_date).exists():
-            current_date += timedelta(days=1)
-            continue
-
-        if local_folder:
-            filename = local_folder + current_date.strftime("%Y-%m-%d.json.xz")
-            if not os.path.isfile(filename):
+    with ThreadPoolExecutor(max_workers=threads) as executor:
+        while current_date <= today:
+            if StationPrice.objects.filter(date=current_date).exists():
                 current_date += timedelta(days=1)
                 continue
 
-            with lzma.open(filename) as f:
-                data: list = json.load(f)["ListaEESSPrecio"]
-        else:
-            data: list = requests.get(
-                HIST_URL + current_date.strftime("%d-%m-%Y")
-            ).json()["ListaEESSPrecio"]
+            if local_folder:
+                filename = local_folder + current_date.strftime("%Y-%m-%d.json.xz")
+                if not os.path.isfile(filename):
+                    current_date += timedelta(days=1)
+                    continue
 
-        print(current_date, end="\r")
-        update_day_stations_prices(data, current_date)
-        del data
-        current_date += timedelta(days=1)
+                with lzma.open(filename) as f:
+                    data: list = json.load(f)["ListaEESSPrecio"]
 
-    print("---")
+                executor.submit(update_day_stations_prices, data, current_date)
+            else:
+                executor.submit(get_data_and_update_day, current_date)
+
+            # print(current_date, end="\r")
+            current_date += timedelta(days=1)
+
+    # print("---       ")
     print("[✓] Stored historical prices")

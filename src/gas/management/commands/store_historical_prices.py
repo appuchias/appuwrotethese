@@ -18,12 +18,21 @@ class Command(BaseCommand):
             "--days",
             type=int,
             help="Days to fetch",
-            default=365,
+            default=30,
+        )
+        parser.add_argument(
+            "-t",
+            "--threads",
+            type=int,
+            help="Number of threads to use. Keep low if using SQLite without WAL.",
+            default=1,
         )
 
     def handle(self, *args, **options):
         db_actions.store_historical_prices(
-            days=options["days"], local_folder=options["local_folder"]
+            days=options["days"],
+            local_folder=options["local_folder"],
+            threads=options["threads"],
         )
 
         self.stdout.write(self.style.SUCCESS("Successfully updated the database."))
