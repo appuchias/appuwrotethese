@@ -1,3 +1,0 @@
-[submodule "src/gasdbupdater"]
-	path = src/gasdbupdater
-	url = git@github.com:appuchias/gasdbupdater
