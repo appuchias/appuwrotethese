@@ -40,7 +40,7 @@ def play(request: HttpRequest, game_id: uuid.UUID | None = None):
         messages.error(request, _("Game does not exist") + ".")
         return redirect("mastermind")
 
-    if game_obj.finished:
+    if game_obj.is_finished():
         messages.error(request, _("Game is finished") + ".")
         return redirect("game", game_id=game_id)
 
@@ -72,7 +72,7 @@ def guess(request: HttpRequest, game_id: uuid.UUID):
         messages.error(request, "You are not the owner of this game.")
         return redirect("mastermind")
 
-    if guess_count >= 10:
+    if game_obj.is_finished():  # 10 guesses or more / won
         messages.error(request, _("You have already made 10 guesses") + ".")
         return redirect("game", game_id=game_id)
 
@@ -92,8 +92,6 @@ def guess(request: HttpRequest, game_id: uuid.UUID):
         return redirect("game", game_id=game_id)
 
     if guess_count == 9:
-        game_obj.finished = True
-        game_obj.save()
         messages.error(request, _("You lost") + ".")
         return redirect("game", game_id=game_id)
 
@@ -107,7 +105,7 @@ def game(request: HttpRequest, game_id: int):
         messages.error(request, _("Game does not exist") + ".")
         return redirect("mastermind")
 
-    if not game_obj.finished:
+    if not game_obj.is_finished():
         if game_obj.user == request.user:
             return redirect("play", game_id=game_id)
 

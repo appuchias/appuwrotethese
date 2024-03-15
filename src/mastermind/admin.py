@@ -18,10 +18,10 @@ class GuessInline(admin.TabularInline):
 
 
 class GameAdmin(admin.ModelAdmin):
-    list_display = ("game_id", "created", "user", "won", "finished")
-    list_filter = ("won", "finished", "user")
+    list_display = ("game_id", "created", "user", "won")
+    list_filter = ("won", "user")
     search_fields = ("game_id", "user")
-    readonly_fields = ("game_id", "code", "created", "won", "finished")
+    readonly_fields = ("game_id", "code", "created", "won")
 
     inlines = [GuessInline]
 

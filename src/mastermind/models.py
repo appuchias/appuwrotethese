@@ -16,7 +16,6 @@ class Game(models.Model):
     game_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     code = models.CharField(max_length=4, null=False, blank=False)
     won = models.BooleanField(default=False)
-    finished = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
@@ -47,6 +46,9 @@ class Game(models.Model):
                 else:
                     misplaced += 1
         return correct, misplaced
+
+    def is_finished(self) -> bool:
+        return self.won or self.get_guess_count() >= 10
 
     def get_guess_count(self):
         return Guess.objects.filter(game=self).count()
