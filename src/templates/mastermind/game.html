@@ -26,4 +26,13 @@
         </div>
     </div>
 </div>
+<div style="position:absolute;top:0">
+    <canvas id="confetti"></canvas>
+</div>
 {% endblock content %}
+
+{% block script %}
+{% if game.won %}
+<script src="/s/confetti.js"></script>
+{% endif %}
+{% endblock script %}
