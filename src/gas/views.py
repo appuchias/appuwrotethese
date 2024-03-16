@@ -65,7 +65,7 @@ def result(request: HttpRequest):
                 {"hx": hx, "results": [], "error": error_msg},
             )
 
-    prices = query_handler.db_prices(term_id, id_type, fuel, q_date)
+    prices = query_handler.db_prices(term_id, id_type, fuel, q_date)  # type: ignore
 
     if not prices:
         error_msg = (
@@ -94,14 +94,14 @@ def result(request: HttpRequest):
                 "hx": hx,
                 "results": prices,
                 "term": form_data.get("term"),
-                "fuel": FUEL_NAMES.get(form_data.get("fuel_abbr")),
+                "fuel": FUEL_NAMES.get(form_data.get("fuel_abbr")),  # type: ignore
                 "date": prices_date,
             },
         )
 
-    past_day_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 1)
-    past_week_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 7)
-    past_month_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 30)
+    past_day_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 1)  # type: ignore
+    past_week_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 7)  # type: ignore
+    past_month_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 30)  # type: ignore
 
     return render(
         request,
@@ -110,7 +110,7 @@ def result(request: HttpRequest):
             "hx": hx,
             "results": prices,
             "term": form_data.get("term"),
-            "fuel": FUEL_NAMES.get(form_data.get("fuel_abbr")),
+            "fuel": FUEL_NAMES.get(form_data.get("fuel_abbr")),  # type: ignore
             "date": prices_date,
             "past_day_lower": past_day_lower,
             "past_week_lower": past_week_lower,
