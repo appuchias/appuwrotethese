@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load user_agents i18n %}
+
+{% block content %}
+{% with s=station %}
+<div id="station" class="text-themed">
+    <h1 class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Station" %} #{{ s.id_eess }}</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Información</h2>
+                <table class="table table-dark table-sm table-hover">
+                    <tr>
+                        <td><strong>Nombre:</strong></td>
+                        <td>{{ s.company }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dirección:</strong></td>
+                        <td>{{ s.address }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Localidad:</strong></td>
+                        <td>{{ s.locality }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Provincia:</strong></td>
+                        <td>{{ s.province }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Latitud:</strong></td>
+                        <td>{{ s.latitude }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Longitud:</strong></td>
+                        <td>{{ s.longitude }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Horario:</strong></td>
+                        <td>{{ s.schedule }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h2>Precios actuales</h2>
+                <table class="table table-dark table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <td scope="col">{% trans "Fuel" %}</td>
+                            <td scope="col"><strong>€/L</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">Diésel</td>
+                            <td>{{ p.price_goa|default:"-" }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Gasolina 95</td>
+                            <td>{{ p.price_g95e5|default:"-" }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Gasolina 98</td>
+                            <td>{{ p.price_g98e5|default:"-" }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">GLP</th>
+                            <td>{{ p.price_glp|default:"-" }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Histórico de precios</h2>
+        <table class="table table-dark table-sm table-hover">
+            <thead>
+                <tr>
+                    <td>Fecha</td>
+                    <td>Gasolina 95</td>
+                    <td>Gasolina 98</td>
+                    <td>Diesel A</td>
+                    <td>Diesel B</td>
+                    <td>GLP</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for precio in station.precios %}
+                    <tr>
+                        <td>{{ precio.fecha }}</td>
+                        <td>{{ precio.gasolina_95 }}</td>
+                        <td>{{ precio.gasolina_98 }}</td>
+                        <td>{{ precio.diesel_a }}</td>
+                        <td>{{ precio.diesel_b }}</td>
+                        <td>{{ precio.glp }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endwith %}
+{% endblock %}

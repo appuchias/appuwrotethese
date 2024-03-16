@@ -145,3 +145,13 @@ def names(request: HttpRequest, **kwargs):
             "q_type": _("Localities"),
         },
     )
+
+
+def station(request: HttpRequest, id_eess: int):
+    if request.method != "GET":
+        return HttpResponseNotAllowed(["GET"], "Method not allowed")
+
+    station = models.Station.objects.get(id_eess=id_eess)
+    currentprice = models.StationPrice.objects.filter(station=id_eess).latest("date")
+
+    return render(request, "gas/station.html", {"station": station, "p": currentprice})

@@ -27,7 +27,7 @@
             <div class="card-wrapper col-xl-2 col-md-3 col-sm-4 col-12">
                 <div class="card text-center">
                     <div class="card-header">
-                        <h2 title="{{ s.company|title }}" class="truncate">{{ s.company|title }}</h2>
+                        <a title="{{ s.company|title }}" class="truncate" href="/gas/station/{{ s.id_eess }}">{{ s.company|title }}</a>
                     </div>
                     <div class="card-body">
                         <p class="truncate" title="{{ s.address }}">{{ s.address }}</p>

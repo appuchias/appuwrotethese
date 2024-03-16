@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-03 00:31+0100\n"
+"POT-Creation-Date: 2024-03-16 01:23+0100\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -211,6 +211,7 @@ msgid "Specific term to look for (e.g. Coruña, 15001, etc.)"
 msgstr "Término concreto a buscar (p.ej. Coruña, 15001, etc.)"
 
 #: gas/forms.py:24 gas/forms.py:95 templates/gas/results.html:42
+#: templates/gas/station.html:49
 msgid "Fuel"
 msgstr "Combustible"
 
@@ -314,7 +315,7 @@ msgstr "Un número de 4 dígitos"
 msgid "You must be logged in to play"
 msgstr "Es necesario iniciar sesión para jugar"
 
-#: mastermind/views.py:40 mastermind/views.py:107
+#: mastermind/views.py:40 mastermind/views.py:105
 msgid "Game does not exist"
 msgstr "La partida no existe"
 
@@ -330,17 +331,39 @@ msgstr "Ya has hecho 10 intentos"
 msgid "Invalid guess"
 msgstr "Intento inválido"
 
-#: mastermind/views.py:91
+#: mastermind/views.py:91 mastermind/views.py:116
 msgid "You won"
 msgstr "Has ganado"
 
-#: mastermind/views.py:97
+#: mastermind/views.py:95 mastermind/views.py:118
 msgid "You lost"
 msgstr "Has perdido"
 
-#: mastermind/views.py:114
+#: mastermind/views.py:112
 msgid "Game is not finished"
 msgstr "La partida no ha terminado"
+
+#. Translators: 404 Page title
+#: templates/404.html:5
+msgid "404 Not Found"
+msgstr "404 No encontrado"
+
+#: templates/404.html:12
+msgid "Error 404. Resource not found."
+msgstr "Error 404: Recurso no encontrado."
+
+#. Translators: 500 Page title
+#: templates/500.html:5
+msgid "500: Internal Server Error"
+msgstr "500: Error interno del servidor"
+
+#: templates/500.html:12
+msgid ""
+"There was an internal error while loading the page. Please contact me to be "
+"able to solve it."
+msgstr ""
+"Hubo un error interno al cargar la página. Por favor, contacta conmigo para "
+"que pueda solucionarlo."
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
 #: templates/accounts/register.html:5 templates/accounts/why.html:5
@@ -520,28 +543,6 @@ msgstr "Página en construcción. Vuelve más tarde."
 msgid "Go home"
 msgstr "Volver al inicio"
 
-#. Translators: 404 Page title
-#: templates/e404.html:5
-msgid "404 Not Found"
-msgstr "404 No encontrado"
-
-#: templates/e404.html:12
-msgid "Error 404. Resource not found."
-msgstr "Error 404: Recurso no encontrado."
-
-#. Translators: 500 Page title
-#: templates/e500.html:5
-msgid "500: Internal Server Error"
-msgstr "500: Error interno del servidor"
-
-#: templates/e500.html:12
-msgid ""
-"There was an internal error while loading the page. Please contact me to be "
-"able to solve it."
-msgstr ""
-"Hubo un error interno al cargar la página. Por favor, contacta conmigo para "
-"que pueda solucionarlo."
-
 #: templates/gas/names.html:10
 msgid "These are the names stored in the database. Use them in your searches"
 msgstr ""
@@ -615,6 +616,10 @@ msgstr ""
 #: templates/gas/search.html:12
 msgid "Only works for Spain"
 msgstr "Funciona solo en España"
+
+#: templates/gas/station.html:7
+msgid "Station"
+msgstr "Gasolineras"
 
 #. Translators: Home page title
 #: templates/home.html:5
