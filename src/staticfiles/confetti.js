@@ -9,7 +9,7 @@ cy = ctx.canvas.height / 2;
 let confetti = [];
 const confettiCount = 300;
 const gravity = .5;
-const terminalVelocity = 20;
+const terminalVelocity = 15;
 const drag = 0.075;
 const colors = [
     { front: 'red', back: 'darkred' },
