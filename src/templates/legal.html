@@ -15,13 +15,11 @@
 
         <h2 class="text-themed">{% trans "Privacy" %}</h2>
         <p class="text-themed">
-            {% trans "Some personal information is temporarily stored in logs for attack investigation and mitigation" %}. {% trans "This includes IP addresses and user-agents" %}.
-            <br>
-            {% trans "This information is automatically removed after 3 months using logrotate" %}. {% trans "For any specific information deletion request you can contact me through" %}
-            <a href="mailto:legal@appu.ltd" class="text-themed"> {% trans "my contact email" %}</a>.
+            {% trans "Information stored in logs, such as IP addresses and \"user agents\", is automatically removed after 3 months using logrotate" %}.
+            {% trans "For any information deletion request you can contact me through" %} <a href="mailto:legal@appu.ltd" class="text-themed">{% trans "my contact email" %}</a>.
         </p>
         <p class="text-themed">
-            {% trans "Any information provided in forms or any similar way (usernames, real names, emails and passwords) will be stored in the web's database" %}.
+            {% trans "Any information provided in forms or any equivalent way (usernames, real names, emails and passwords) will be stored in the web's database" %}.
             <br>
             {% trans "You can request its deletion at any time through the same email that is registered in the web" %}. {% trans "All requests will be fulfilled within 30 days from the first notification when possible" %}.
             <br>
@@ -35,6 +33,14 @@
             <br>
             {% trans "None of the information tracked by the analytics script can be used to uniquely identify a specific user" %}.
         </p>
+        <p class="text-themed">
+            {% trans "As they specifically state:" %}
+            <br>
+            >   "Even though the purpose of Plausible Analytics is to track the usage of a website, this can still be done without collecting any personal data or personally identifiable information (PII), without using cookies and while respecting the privacy of the website visitors."
+        </p>
+        <p class="text-themed">
+            {% trans "Their full statement in their data policy can be found" %} <a href="https://plausible.io/data-policy" class="text-themed" rel="noopener noreferrer" target="_blank">{% trans "here" %}</a>.
+        </p>
 
         <h2 class="text-themed">{% trans "External resources" %}</h2>
         <ul>
@@ -43,14 +49,19 @@
             <li class="text-themed"><a class="text-themed" href="https://kazzkiq.github.io/balloon.css/" rel="noopener noreferrer" target="_blank">Balloon CSS</a></li>
             <li class="text-themed"><a class="text-themed" href="https://fonts.google.com/" rel="noopener noreferrer" target="_blank">Google Fonts</a></li>
         </ul>
+        <p class="text-themed">If your name is missing and it should here, contact me at the mail above.</p>
 
         <h2 class="text-themed">{% trans "Thanks" %}</h2>
         <p class="text-themed">{% trans "This website would not be possible without the help of" %}:</p>
         <ul>
             <li class="text-themed">{% trans "My mother" %}, {% trans "specifically for her help with learning CSS and more UI recommendations" %}.</li>
-            <li class="text-themed"><a href="http://instagram.com/paauu_31" class="text-themed" rel="noopener noreferrer" target="_blank"><strong>@paauu_31</strong></a>, {% trans "for her support while building the web and debugging it (specially debugging)" %}.</li>
+            <li class="text-themed"><a href="http://instagram.com/paauu_31" class="text-themed" rel="noopener noreferrer" target="_blank"><strong>@paauu_31</strong></a>, {% trans "for her huge support while building the web and debugging it (specially debugging)" %}.</li>
             {% comment %} <li class="text-themed"></li> {% endcomment %}
         </ul>
+
+        <br>
+
+        <p class="text-themed">Last update: <strong>2024/03/19</strong></p>
 
         <br>
 
