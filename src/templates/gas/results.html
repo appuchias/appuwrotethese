@@ -43,20 +43,44 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th scope="row">Diésel</th>
+                                        <th scope="row">Gasóleo A</th>
                                         <td>{{ i.price_goa|default:"-" }}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Gasolina 95</th>
+                                        <th scope="row">Gasóleo B</th>
+                                        <td>{{ i.price_gob|default:"-" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gasolina 95 E5</th>
                                         <td>{{ i.price_g95e5|default:"-" }}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Gasolina 98</th>
+                                        <th scope="row">Gasolina 95 E5 Premium</th>
+                                        <td>{{ i.price_g95e5_premium|default:"-" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gasolina 95 E10</th>
+                                        <td>{{ i.price_g95e10|default:"-" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gasolina 98 E5</th>
                                         <td>{{ i.price_g98e5|default:"-" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gasolina 98 E10</th>
+                                        <td>{{ i.price_g98e10|default:"-" }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">GLP</th>
                                         <td>{{ i.price_glp|default:"-" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">GNC</th>
+                                        <td>{{ i.price_gnc|default:"-" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Hidrógeno</th>
+                                        <td>{{ i.price_h2|default:"-" }}</td>
                                     </tr>
                                 </tbody>
                             </table>
