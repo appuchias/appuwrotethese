@@ -2,7 +2,7 @@
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
 import json
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponseNotAllowed
@@ -160,4 +160,35 @@ def station(request: HttpRequest, id_eess: int):
     station = models.Station.objects.get(id_eess=id_eess)
     currentprice = models.StationPrice.objects.filter(station=id_eess).latest("date")
 
-    return render(request, "gas/station.html", {"station": station, "p": currentprice})
+    price_history = query_handler.get_station_prices_range(
+        station.id_eess, date.today() - timedelta(days=30), date.today()
+    )
+
+    return render(
+        request,
+        "gas/station.html",
+        {"station": station, "p": currentprice, "price_hist": price_history},
+    )
+
+
+# def staion_pricerange(request: HttpRequest, id_eess: int):
+#     if request.method != "GET":
+#         return HttpResponseNotAllowed(["GET"], "Method not allowed")
+
+#     start_date = request.GET.get("start_date", str(date.today() - timedelta(days=7)))
+#     end_date = request.GET.get("end_date", str(date.today()))
+#     start_date = date.fromisoformat(start_date)
+#     end_date = date.fromisoformat(end_date)
+
+#     station = models.Station.objects.get(id_eess=id_eess)
+#     prices = query_handler.get_station_prices_range(id_eess, start_date, end_date)
+
+#     daterangeform = forms.DateRangeForm(
+#         initial={"start_date": start_date, "end_date": end_date}
+#     )
+
+#     return render(
+#         request,
+#         "gas/station_pricerange.html",
+#         {"station": station, "prices": prices, "daterangeform": daterangeform},
+#     )

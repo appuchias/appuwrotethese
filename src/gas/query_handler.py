@@ -113,6 +113,21 @@ def get_stations_prices(
     return prices
 
 
+def get_station_prices_range(
+    station_id: int, start_date: date, end_date: date
+) -> list[StationPrice]:
+    """Get the prices from the database.
+
+    This function gets the station id, the start date and the end date and returns the list of prices.
+    """
+
+    prices = StationPrice.objects.filter(
+        station_id=station_id, date__range=[start_date, end_date]
+    ).order_by("date")
+
+    return list(prices)
+
+
 def are_past_prices_lower(
     curr_prices, fuel: str, q_date: date, day_diff: int
 ) -> dict[int, str]:

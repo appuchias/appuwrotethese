@@ -73,27 +73,32 @@
         </div>
     </div>
     <div class="container">
-        <h2>Histórico de precios</h2>
-        <table class="table table-dark table-sm table-hover">
+        {% comment %} <div class="row justify-content-between">
+            <h2 class="col">Histórico de precios</h2>
+            <form class="col" hx-get="/gas/station/{{ s.id_eess }}/" hx-trigger="change throttle:500ms, keyup delay:500ms" hx-target="#pricerange" hx-indicator="#indicator" hx-include="#datepicker">
+                <input id="datepicker"></input>
+                <div id="indicator"></div>
+            </form>
+        </div> {% endcomment %}
+        <table id="pricerange" class="table table-dark table-sm table-hover">
             <thead>
                 <tr>
                     <td>Fecha</td>
-                    <td>Gasolina 95</td>
-                    <td>Gasolina 98</td>
                     <td>Diesel A</td>
                     <td>Diesel B</td>
+                    <td>Gasolina 95</td>
+                    <td>Gasolina 98</td>
                     <td>GLP</td>
                 </tr>
             </thead>
             <tbody>
-                {% for precio in station.precios %}
-                    <tr>
-                        <td>{{ precio.fecha }}</td>
-                        <td>{{ precio.gasolina_95 }}</td>
-                        <td>{{ precio.gasolina_98 }}</td>
-                        <td>{{ precio.diesel_a }}</td>
-                        <td>{{ precio.diesel_b }}</td>
-                        <td>{{ precio.glp }}</td>
+                {% for precio in price_hist %}
+                        <td>{{ precio.date|date:"Y-m-d" }}</td>
+                        <td>{{ precio.price_goa|default:"-" }}</td>
+                        <td>{{ precio.price_gob|default:"-" }}</td>
+                        <td>{{ precio.price_g95e5|default:"-" }}</td>
+                        <td>{{ precio.price_g98e5|default:"-" }}</td>
+                        <td>{{ precio.price_glp|default:"-" }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -102,3 +107,32 @@
 </div>
 {% endwith %}
 {% endblock %}
+
+{% block script %}
+{% comment %} <script src="https://cdn.jsdelivr.net/npm/@easepick/datetime@1.2.1/dist/index.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@easepick/core@1.2.1/dist/index.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@easepick/base-plugin@1.2.1/dist/index.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@easepick/range-plugin@1.2.1/dist/index.umd.min.js"></script>
+
+<script>
+
+    const picker = new easepick.create({
+        element: "#datepicker",
+        css: [
+            "https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css"
+        ],
+        zIndex: 10,
+        readonly: false,
+        RangePlugin: {
+            locale: {
+                one: "día",
+                other: "días"
+            }
+        },
+        plugins: [
+            "RangePlugin"
+        ]
+    })
+        
+</script> {% endcomment %}
+{% endblock script %}
