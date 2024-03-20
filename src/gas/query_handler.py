@@ -4,12 +4,10 @@
 from datetime import date, timedelta
 from typing import Iterable
 
-from django.contrib import messages
 from django.db.models import Count
-from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
-from gas import models
+from gas.models import Locality, Province, StationPrice
 
 ## DB name lookup ##
 get_db_product_name = lambda prod_abbr, default="": {
@@ -32,11 +30,11 @@ def get_ids(term: str) -> tuple[int, int]:
 
     if isinstance(term, str):
         # Look it up as a locality
-        locality = models.Locality.objects.filter(name__iexact=term).first()
+        locality = Locality.objects.filter(name__iexact=term).first()
         if locality:
             return locality.id_mun, 0
         else:
-            locality = models.Locality.objects.filter(name__icontains=term)
+            locality = Locality.objects.filter(name__icontains=term)
             if locality.exists():
                 # Select locality with more stations
                 locality = locality.annotate(num_stations=Count("station")).order_by(
@@ -45,10 +43,10 @@ def get_ids(term: str) -> tuple[int, int]:
 
                 return locality.id_mun, 0
 
-        province = models.Province.objects.filter(name__iexact=term.upper()).first()
+        province = Province.objects.filter(name__iexact=term.upper()).first()
         if not province:
             # Provinces are uppercase in the DB
-            province = models.Province.objects.filter(name__icontains=term.upper())
+            province = Province.objects.filter(name__icontains=term.upper())
             if province.exists():
                 # Select province with more stations
                 province = province.annotate(num_stations=Count("station")).order_by(
@@ -68,7 +66,7 @@ def db_prices(
     term_type: str,
     prod_abbr: str,
     q_date: date,
-) -> Iterable[models.StationPrice]:
+) -> Iterable[StationPrice]:
     """Get the prices from the database.
 
     This function gets query data and returns the list of results.
@@ -80,7 +78,7 @@ def db_prices(
 
     prod_name = get_db_product_name(prod_abbr)
     prices = (
-        models.StationPrice.objects.filter(date=q_date, **station_filter)
+        StationPrice.objects.filter(date=q_date, **station_filter)
         .exclude(**{f"{prod_name}": None})
         .order_by(prod_name)
     )
@@ -93,7 +91,7 @@ def db_prices(
 
 def get_stations_prices(
     station_ids: int | Iterable[int], fuel: str, q_date: date
-) -> Iterable[models.StationPrice]:
+) -> Iterable[StationPrice]:
     """Get the prices from the database.
 
     This function gets the station id(s), the fuel used to sort the prices
@@ -104,11 +102,9 @@ def get_stations_prices(
     prod_name = get_db_product_name(fuel)
 
     if isinstance(station_ids, int):
-        raw_prices = models.StationPrice.objects.filter(
-            station_id=station_ids, date=q_date
-        )
+        raw_prices = StationPrice.objects.filter(station_id=station_ids, date=q_date)
     else:
-        raw_prices = models.StationPrice.objects.filter(
+        raw_prices = StationPrice.objects.filter(
             station_id__in=station_ids, date=q_date
         )
 
