@@ -9,40 +9,40 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2>Información</h2>
+                <h2>{% trans "Information" %}</h2>
                 <table class="table table-dark table-sm table-hover">
                     <tr>
-                        <td><strong>Nombre:</strong></td>
+                        <td><strong>{% trans "Name" %}:</strong></td>
                         <td>{{ s.company }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Dirección:</strong></td>
+                        <td><strong>{% trans "Address" %}:</strong></td>
                         <td>{{ s.address }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Localidad:</strong></td>
+                        <td><strong>{% trans "Locality" %}:</strong></td>
                         <td>{{ s.locality }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Provincia:</strong></td>
+                        <td><strong>{% trans "Province" %}:</strong></td>
                         <td>{{ s.province }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Latitud:</strong></td>
+                        <td><strong>{% trans "Latitude" %}:</strong></td>
                         <td>{{ s.latitude }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Longitud:</strong></td>
+                        <td><strong>{% trans "Longitude" %}:</strong></td>
                         <td>{{ s.longitude }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Horario:</strong></td>
+                        <td><strong>{% trans "Schedule" %}:</strong></td>
                         <td>{{ s.schedule }}</td>
                     </tr>
                 </table>
             </div>
             <div class="col-md-6">
-                <h2>Precios actuales</h2>
+                <h2>{% trans "Current prices" %}</h2>
                 <table class="table table-dark table-sm table-hover">
                     <thead>
                         <tr>
@@ -73,7 +73,7 @@
         </div>
     </div>
     <div class="container">
-        <h2 class="mt-2 mb-1">Histórico de precios</h2>
+        <h2 class="mt-2 mb-1">{% trans "Price history" %}</h2>
         <canvas id="price_hist_graph"></canvas>
         {% comment %} <div class="row justify-content-between">
             <form class="col" hx-get="/gas/station/{{ s.id_eess }}/" hx-trigger="change throttle:500ms, keyup delay:500ms" hx-target="#pricerange" hx-indicator="#indicator" hx-include="#datepicker">
@@ -87,7 +87,7 @@
         <table id="pricerange" class="table table-dark table-sm table-hover">
             <thead>
                 <tr>
-                    <td>Fecha</td>
+                    <td>{% trans "Date" %}</td>
                     <td>Diesel A</td>
                     <td>Diesel B</td>
                     <td>Gasolina 95</td>
