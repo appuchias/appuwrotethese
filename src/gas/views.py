@@ -161,17 +161,36 @@ def station(request: HttpRequest, id_eess: int):
     currentprice = models.StationPrice.objects.filter(station=id_eess).latest("date")
 
     price_history = query_handler.get_station_prices_range(
-        station.id_eess, date.today() - timedelta(days=30), date.today()
+        station.id_eess, date.today() - timedelta(days=60), date.today()
     )
+
+    graph_data = [
+        {
+            "date": price.date,
+            "price_goa": price.price_goa,
+            "price_gob": price.price_gob,
+            "price_g95e5": price.price_g95e5,
+            "price_g98e5": price.price_g98e5,
+            "price_glp": price.price_glp,
+            "price_gnc": price.price_gnc,
+            "price_h2": price.price_h2,
+        }
+        for price in price_history
+    ]
 
     return render(
         request,
         "gas/station.html",
-        {"station": station, "p": currentprice, "price_hist": price_history},
+        {
+            "station": station,
+            "p": currentprice,
+            "price_hist": price_history,
+            "graph_data": graph_data,
+        },
     )
 
 
-# def staion_pricerange(request: HttpRequest, id_eess: int):
+# def station_pricerange(request: HttpRequest, id_eess: int):
 #     if request.method != "GET":
 #         return HttpResponseNotAllowed(["GET"], "Method not allowed")
 

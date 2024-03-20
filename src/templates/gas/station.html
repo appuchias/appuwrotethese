@@ -73,13 +73,17 @@
         </div>
     </div>
     <div class="container">
+        <h2 class="mt-2 mb-1">Histórico de precios</h2>
+        <canvas id="price_hist_graph"></canvas>
         {% comment %} <div class="row justify-content-between">
-            <h2 class="col">Histórico de precios</h2>
             <form class="col" hx-get="/gas/station/{{ s.id_eess }}/" hx-trigger="change throttle:500ms, keyup delay:500ms" hx-target="#pricerange" hx-indicator="#indicator" hx-include="#datepicker">
                 <input id="datepicker"></input>
                 <div id="indicator"></div>
             </form>
         </div> {% endcomment %}
+
+        {% if not request|is_mobile %}
+        <br>
         <table id="pricerange" class="table table-dark table-sm table-hover">
             <thead>
                 <tr>
@@ -103,12 +107,62 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% endif %}
     </div>
 </div>
 {% endwith %}
 {% endblock %}
 
 {% block script %}
+<script src="/s/chart.js"></script>
+{{ graph_data|json_script:"price_hist" }}
+<script type="module">
+const precios = JSON.parse(document.getElementById('price_hist').textContent);
+new Chart(
+    document.getElementById('price_hist_graph'),
+    {
+        type: 'line',
+        data: {
+            labels: precios.map(row => row.date),
+            datasets: [
+                {
+                    label: 'Gasóleo A',
+                    data: precios.map(row => row.price_goa),
+                }, {
+                    label: 'Gasóleo B',
+                    data: precios.map(row => row.price_gob),
+                }, {
+                    label: 'Gasolina 95',
+                    data: precios.map(row => row.price_g95e5),
+                }, {
+                    label: 'Gasolina 98',
+                    data: precios.map(row => row.price_g98e5),
+                }, {
+                    label: 'GLP',
+                    data: precios.map(row => row.price_glp),
+                }
+            ]
+        },
+        options: {
+            aspectRatio: {% if request|is_mobile %}1{% else %}2{% endif %},
+            responsive: true,
+            tension: 0.25,
+            scales: {
+                y: {
+                    //beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Precio (€/L)'
+                    },
+                    ticks: {
+                        callback: value => `${Math.round(value * 100) / 100} €/L`
+                    }
+                }
+            }
+        },
+    }
+);
+</script>
 {% comment %} <script src="https://cdn.jsdelivr.net/npm/@easepick/datetime@1.2.1/dist/index.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@easepick/core@1.2.1/dist/index.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@easepick/base-plugin@1.2.1/dist/index.umd.min.js"></script>
