@@ -52,21 +52,45 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td scope="row">Diésel</td>
+                            <td scope="row">Gasóleo A</td>
                             <td>{{ p.price_goa|default:"-" }}</td>
                         </tr>
                         <tr>
-                            <td scope="row">Gasolina 95</td>
+                            <td scope="row">Gasóleo B</td>
+                            <td>{{ p.price_gob|default:"-" }}</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Gasolina 95 E5</td>
                             <td>{{ p.price_g95e5|default:"-" }}</td>
                         </tr>
+                        {% comment %} <tr>
+                            <td scope="row">Gasolina 95 E5 Premium</td>
+                            <td>{{ p.price_g95e5_premium|default:"-" }}</td>
+                        </tr> {% endcomment %}
+                        {% comment %} <tr>
+                            <td scope="row">Gasolina 95 E10</td>
+                            <td>{{ p.price_g95e10|default:"-" }}</td>
+                        </tr> {% endcomment %}
                         <tr>
-                            <td scope="row">Gasolina 98</td>
+                            <td scope="row">Gasolina 98 E5</td>
                             <td>{{ p.price_g98e5|default:"-" }}</td>
                         </tr>
+                        {% comment %} <tr>
+                            <td scope="row">Gasolina 98 E10</td>
+                            <td>{{ p.price_g98e10|default:"-" }}</td>
+                        </tr> {% endcomment %}
                         <tr>
-                            <td scope="row">GLP</th>
+                            <td scope="row">GLP</td>
                             <td>{{ p.price_glp|default:"-" }}</td>
                         </tr>
+                        {% comment %} <tr>
+                            <td scope="row">GNC</td>
+                            <td>{{ p.price_gnc|default:"-" }}</td>
+                        </tr> {% endcomment %}
+                        {% comment %} <tr>
+                            <td scope="row">Hidrógeno</td>
+                            <td>{{ p.price_h2|default:"-" }}</td>
+                        </tr> {% endcomment %}
                     </tbody>
                 </table>
             </div>
