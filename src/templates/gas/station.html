@@ -105,33 +105,6 @@
                 <div id="indicator"></div>
             </form>
         </div> {% endcomment %}
-
-        {% if not request|is_mobile %}
-        <br>
-        <table id="pricerange" class="table table-dark table-sm table-hover">
-            <thead>
-                <tr>
-                    <td>{% trans "Date" %}</td>
-                    <td>Diesel A</td>
-                    <td>Diesel B</td>
-                    <td>Gasolina 95</td>
-                    <td>Gasolina 98</td>
-                    <td>GLP</td>
-                </tr>
-            </thead>
-            <tbody>
-                {% for precio in price_hist %}
-                        <td>{{ precio.date|date:"Y-m-d" }}</td>
-                        <td>{{ precio.price_goa|default:"-" }}</td>
-                        <td>{{ precio.price_gob|default:"-" }}</td>
-                        <td>{{ precio.price_g95e5|default:"-" }}</td>
-                        <td>{{ precio.price_g98e5|default:"-" }}</td>
-                        <td>{{ precio.price_glp|default:"-" }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
     </div>
 </div>
 {% endwith %}
