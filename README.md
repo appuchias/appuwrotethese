@@ -37,4 +37,16 @@ Lucide icons are licensed under the [ISC License](https://github.com/lucide-icon
 
 All other used licenses can be found [here](https://app.fossa.com/attribution/c83e0483-56e3-4236-91c7-45aaf481987b)
 
+
+## Star History
+
+<a href="https://star-history.com/#appuchias/appuwrotethese&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=appuchias/appuwrotethese&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=appuchias/appuwrotethese&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=appuchias/appuwrotethese&type=Date" />
+ </picture>
+</a>
+
+
 Built with 🖤 by Appu
