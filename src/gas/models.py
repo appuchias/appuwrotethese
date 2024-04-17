@@ -72,8 +72,8 @@ class Station(models.Model):
     company = models.CharField(verbose_name=_("Company"), max_length=128, blank=False)
     address = models.CharField(verbose_name=_("Address"), max_length=128, blank=False)
     schedule = models.CharField(verbose_name=_("Schedule"), max_length=64, blank=False)
-    locality = models.ForeignKey(Locality, on_delete=models.CASCADE)
-    province = models.ForeignKey(Province, on_delete=models.CASCADE)
+    locality = models.ForeignKey(Locality, on_delete=models.DO_NOTHING)
+    province = models.ForeignKey(Province, on_delete=models.DO_NOTHING)
     postal_code = models.IntegerField(
         verbose_name=_("Postal code"),
         validators=[MaxValueValidator(99999)],
@@ -98,7 +98,7 @@ class Station(models.Model):
 
 class StationPrice(models.Model):
     date = models.DateField(db_index=True, default=now)
-    station = models.ForeignKey(Station, on_delete=models.CASCADE)
+    station = models.ForeignKey(Station, on_delete=models.DO_NOTHING)
     price_goa = models.DecimalField(
         verbose_name="Gasoleo A",
         max_digits=4,
