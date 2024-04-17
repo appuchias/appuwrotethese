@@ -14,11 +14,11 @@ DEBUG = False
 
 
 with open("settings.conf", "r") as f:
-    config = {k: v.strip() for k, v in [line.split("=") for line in f.readlines()]}
+    config = {k.strip(): v.strip() for k, v in [l.split("=") for l in f.readlines()]}
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config.get("SECRET_KEY")
+SECRET_KEY = config.get("SECRET_KEY", None)
 if SECRET_KEY is None:
     SECRET_KEY = token_urlsafe(64)
     logging.warning(
@@ -36,11 +36,9 @@ CSRF_TRUSTED_ORIGINS = [
 
 ROOT_URLCONF = "appuwrotethese.urls"
 
-ALLOWED_HOSTS = [
-    "appu.ltd",
-    "www.appu.ltd",
-    "*" if DEBUG else None,
-]
+ALLOWED_HOSTS = ["appu.ltd", "www.appu.ltd"]
+if DEBUG:
+    ALLOWED_HOSTS += ["*"]
 
 ADMINS = [("Appu", "appuchia@appu.ltd")]
 
@@ -73,8 +71,6 @@ MIDDLEWARE = [
     "django_user_agents.middleware.UserAgentMiddleware",
     "middleware.persistent_messages_middleware.PersistentMessagesMiddleware",
 ]
-
-COMPRESS_ENABLED = True
 
 
 LOGFILE_NAME = r"log/appuwrotethese"
@@ -209,7 +205,7 @@ LANGUAGES = [
 ]
 LANGUAGE_COOKIE_NAME = "lang"
 LOCALE_PATHS = (BASE_DIR / "locale",)
-FIRST_DAY_OF_WEEK = 1
+FIRST_DAY_OF_WEEK = 1  # Monday
 
 USE_TZ = True
 TIME_ZONE = "Europe/Madrid"
@@ -219,7 +215,7 @@ STATIC_URL = "/s/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STORAGES = {
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"
     },
 }
 MEDIA_URL = "/m/"
