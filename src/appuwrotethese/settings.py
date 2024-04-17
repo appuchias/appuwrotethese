@@ -33,6 +33,9 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "http://localhost",
 ]
+SECURE_HSTS_SECONDS = 604800  # 1 week
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
 
 ROOT_URLCONF = "appuwrotethese.urls"
 
