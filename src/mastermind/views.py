@@ -4,17 +4,33 @@
 import uuid
 
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User, AnonymousUser
 from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext_lazy as _
+from appuwrotethese.settings import config
+
 
 from mastermind.models import Game, Guess
 from mastermind.forms import MastermindGuess
 
-validate_guess = lambda guess: (
-    len(set(guess)) == 4 and all(digit in "0123456789" for digit in guess)
-)
+
+def _validate_guess(guess: str) -> bool:
+    return len(set(guess)) == 4 and all(digit in "0123456789" for digit in guess)
+
+
+def _get_mastermind_user() -> User:
+    if uid := config.get("MASTERMIND_USER_ID", None):
+        if not (user := User.objects.get(id=uid)):
+            raise ValueError("MASTERMIND_USER_ID is invalid.")
+        return user
+
+    if not User.objects.filter(username="mastermind").exists():
+        raise ValueError(
+            "MASTERMIND_USER_ID not set and mastermind user does not exist."
+        )
+
+    return User.objects.get(username="mastermind")
 
 
 def mastermind(request: HttpRequest):
@@ -23,8 +39,7 @@ def mastermind(request: HttpRequest):
 
 def play(request: HttpRequest, game_id: uuid.UUID | None = None):
     if not request.user.is_authenticated:
-        messages.error(request, _("You must be logged in to play") + ".")
-        return redirect("login")
+        request.user = _get_mastermind_user()
 
     if not game_id:
         game_obj = Game(user=request.user)
@@ -52,11 +67,13 @@ def play(request: HttpRequest, game_id: uuid.UUID | None = None):
     )
 
 
-@login_required()
 def guess(request: HttpRequest, game_id: uuid.UUID):
     allowed_methods = ["POST"]
     if request.method not in allowed_methods:
         return HttpResponseNotAllowed(allowed_methods)
+
+    if not request.user.is_authenticated:
+        request.user = _get_mastermind_user()
 
     form = MastermindGuess(request.POST)
     if not form.is_valid():
@@ -76,7 +93,7 @@ def guess(request: HttpRequest, game_id: uuid.UUID):
         messages.error(request, _("You have already made 10 guesses") + ".")
         return redirect("game", game_id=game_id)
 
-    if not validate_guess(guess):
+    if not _validate_guess(guess):
         messages.error(request, _("Invalid guess") + ".")
         return redirect("play", game_id=game_id)
 
