@@ -1,69 +1,87 @@
 {
+    "name": "Appu Wrote These",
+    "short_name": "AWT",
+    "description": "Proyectos de appu.ltd",
+    "start_url": "/gas/",
+    "id": "/",
+    "scope": "/",
+    "display": "standalone",
+    "prefer_related_applications": false,
+    "orientation": "portrait",
+    "lang": "es",
     "background_color": "#141414",
     "theme_color": "#141414",
-    "description": "Proyectos de appu.ltd",
-    "display": "standalone",
-    "icons": [
-        {
-            "src": "/s/icons/square-code.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "/s/icons/square-code-192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "/s/icons/square-code-96.png",
-            "sizes": "96x96",
-            "type": "image/png",
-            "purpose": "any"
-        }
-    ],
-    "name": "Appu Wrote These",
-    "short_name": "appu.ltd",
-    "start_url": "/",
     "shortcuts": [
         {
             "name": "Precios del combustible",
-            "url": "/gas",
+            "url": "/gas/",
             "description": "Buscador de precios de combustible",
             "icons": [
                 {
-                    "src": "/s/icons/fuel.png",
-                    "sizes": "48x48"
+                    "src": "/s/icons/fuel_x96.png",
+                    "sizes": "96x96"
                 }
             ]
         },
         {
             "name": "Mastermind",
-            "url": "/mastermind",
+            "url": "/mastermind/",
             "description": "Juego de lógica",
             "icons": [
                 {
-                    "src": "/s/icons/binary.png",
-                    "sizes": "48x48"
+                    "src": "/s/icons/binary_x96.png",
+                    "sizes": "96x96"
                 }
             ]
         },
         {
             "name": "Cuenta",
-            "url": "/account",
+            "url": "/accounts/",
             "description": "Gestión de la cuenta",
             "icons": [
                 {
-                    "src": "/s/icons/user.png",
-                    "sizes": "48x48"
+                    "src": "/s/icons/user_x96.png",
+                    "sizes": "96x96"
                 }
             ]
         }
     ],
-    "dir": "ltr",
-    "scope": "https://appu.ltd",
-    "lang": "es",
-    "orientation": "portrait",
-    "prefer_related_applications": false
+    "icons": [
+        {
+            "src": "/s/icons/icon_x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/s/icons/icon_x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/s/icons/icon_x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/s/icons/maskable_icon_x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/s/icons/maskable_icon_x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/s/icons/maskable_icon_x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
 }
