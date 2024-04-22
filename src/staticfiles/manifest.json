@@ -1,0 +1,56 @@
+{
+    "background_color": "#7289da",
+    "theme_color": "#7289da",
+    "description": "Proyectos de appu.ltd",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "/s/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "name": "Appu Wrote These",
+    "short_name": "appu.ltd",
+    "start_url": "/",
+    "shortcuts": [
+        {
+            "name": "Precios del combustible",
+            "url": "/gas",
+            "description": "Buscador de precios de combustible",
+            "icons": [
+                {
+                    "src": "/s/icons/fuel.png",
+                    "sizes": "48x48"
+                }
+            ]
+        },
+        {
+            "name": "Mastermind",
+            "url": "/mastermind",
+            "description": "Juego de lógica",
+            "icons": [
+                {
+                    "src": "/s/icons/binary.png",
+                    "sizes": "48x48"
+                }
+            ]
+        },
+        {
+            "name": "Cuenta",
+            "url": "/account",
+            "description": "Gestión de la cuenta",
+            "icons": [
+                {
+                    "src": "/s/icons/user.png",
+                    "sizes": "48x48"
+                }
+            ]
+        }
+    ],
+    "dir": "ltr",
+    "scope": "https://appu.ltd",
+    "lang": "es",
+    "orientation": "portrait"
+}

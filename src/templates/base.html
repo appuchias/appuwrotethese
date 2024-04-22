@@ -38,6 +38,9 @@
         <script defer data-domain="appu.ltd" src="https://plausible.appu.ltd/js/script.outbound-links.js"></script>
         <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
 
+        <!-- PWA -->
+        <link rel="manifest" href="/s/manifest.json">
+
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="76x76" href="/s/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/s/favicon-32x32.png">
@@ -117,6 +120,7 @@
             </div>
         </div>
         <script defer rel="stylesheet" href="/s/bootstrap-5.3.0/bootstrap.min.js"></script>
+        <script>if('serviceWorker' in navigator) {navigator.serviceWorker.register("/s/sw.js")}</script>
         {% block script %}{% endblock script %}
     </body>
     {% endwith %}
