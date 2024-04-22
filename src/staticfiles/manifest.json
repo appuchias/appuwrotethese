@@ -64,5 +64,6 @@
     "dir": "ltr",
     "scope": "https://appu.ltd",
     "lang": "es",
-    "orientation": "portrait"
+    "orientation": "portrait",
+    "prefer_related_applications": false
 }
