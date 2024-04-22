@@ -2,7 +2,7 @@
     "name": "Appu Wrote These",
     "short_name": "AWT",
     "description": "Proyectos de appu.ltd",
-    "start_url": "/gas/",
+    "start_url": "/",
     "id": "/",
     "scope": "/",
     "display": "standalone",
