@@ -26,8 +26,9 @@ FUEL_NAMES = {
 }
 
 
-def search(request: HttpRequest):
-    return render(request, "gas/search.html", {"form": forms.SearchPrices})
+def search(request: HttpRequest, geo: bool = False):
+    form = forms.SearchPricesGeo() if geo else forms.SearchPrices()
+    return render(request, "gas/search.html", {"form": form, "geo": geo})
 
 
 def result(request: HttpRequest):
@@ -173,6 +174,48 @@ def station(request: HttpRequest, id_eess: int):
             "p": currentprice,
             "price_hist": price_history,
             "graph_data": graph_data,
+        },
+    )
+
+
+def result_geo(request: HttpRequest):
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"], "Method not allowed")
+
+    hx = bool(request.headers.get("HX-Request", ""))
+    assert hx, "This view is only for HX-Requests (I think)"
+
+    form = forms.SearchPricesGeo(request.POST)
+    if not form.is_valid():
+        return render(request, "gas/results.html", {"hx": hx, "results": []})
+
+    form_data = form.cleaned_data
+
+    lat = float(form_data.get("latitude", 0.0))
+    lon = float(form_data.get("longitude", 0.0))
+    radius = float(form_data.get("radius", 5.0))
+    fuel = form_data.get("fuel_abbr", "GOA")
+    name = date.today()
+    q_date = form_data.get("q_date", name)
+
+    prices = query_handler.get_by_coords(lat, lon, radius, fuel, date.today())
+
+    past_day_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 1)  # type: ignore
+    past_week_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 7)  # type: ignore
+    past_month_lower = query_handler.are_past_prices_lower(prices, fuel, q_date, 30)  # type: ignore
+
+    return render(
+        request,
+        "gas/results.html",
+        {
+            "hx": hx,
+            "results": prices,
+            "term": f"{lat}, {lon}, {radius} km",
+            "fuel": FUEL_NAMES.get(fuel),
+            "date": q_date,
+            "past_day_lower": past_day_lower,
+            "past_week_lower": past_week_lower,
+            "past_month_lower": past_month_lower,
         },
     )
 

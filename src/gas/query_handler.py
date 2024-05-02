@@ -2,12 +2,13 @@
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
 from datetime import date, timedelta
+from geopy.distance import distance
 from typing import Iterable
 
 from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
-from gas.models import Locality, Province, StationPrice
+from gas.models import Locality, Province, Station, StationPrice
 
 ## DB name lookup ##
 get_db_product_name = lambda prod_abbr, default="": {
@@ -62,10 +63,7 @@ def get_ids(term: str) -> tuple[int, int]:
 
 ## Process the query form ##
 def db_prices(
-    term_id: int,
-    term_type: str,
-    prod_abbr: str,
-    q_date: date,
+    term_id: int, term_type: str, prod_abbr: str, q_date: date
 ) -> Iterable[StationPrice]:
     """Get the prices from the database.
 
@@ -85,6 +83,42 @@ def db_prices(
 
     if not prices.exists():
         return list()
+
+    return prices
+
+
+def get_by_coords(
+    latitude: float, longitude: float, radius: float, fuel: str, q_date: date
+) -> Iterable[StationPrice]:
+    """Get the prices from the database.
+
+    This function gets the coordinates, the radius, the fuel used to sort the prices
+    and the date and returns the list of prices.
+
+    The radius is in km.
+    """
+    # radius = radius / 111.12  # 1 degree is approximately 111.12 km
+
+    # Approximate the bounding box
+    src = (latitude, longitude)
+    d = distance(kilometers=radius)
+    north_lat = d.destination(src, 0).latitude
+    south_lat = d.destination(src, 180).latitude
+    east_lon = d.destination(src, -90).longitude
+    west_lon = d.destination(src, 90).longitude
+
+    prod_name = get_db_product_name(fuel)
+
+    # This will only work in the northern hemisphere (which is the case for Spain)
+    stations = Station.objects.filter(
+        latitude__range=(south_lat, north_lat),
+        longitude__range=(west_lon, east_lon),
+    )
+    prices = (
+        StationPrice.objects.filter(date=q_date, station__in=stations)
+        .exclude(**{f"{prod_name}": None})
+        .order_by(prod_name)
+    )
 
     return prices
 

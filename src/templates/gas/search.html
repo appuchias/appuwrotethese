@@ -11,11 +11,12 @@
             <div class="text-themed dark mb-2">{% trans 'Here you will find the cheapest gas stations for each area sorted by fuel type' %}.</div>
         </center>
     </div>
-    <div class="container crwrapper">
-        <form hx-post="/gas/search/" hx-trigger="load, change throttle:500ms, keyup delay:500ms" hx-target="#search-result" hx-indicator="#indicator" action="/gas/search/" method="POST">
-            {% csrf_token %}
+    <div id="search-box" class="container crwrapper">
+        <form hx-post="/gas/search/{% if geo %}geo/{% endif %}" hx-trigger="load, change throttle:100ms, keyup delay:250ms, coords-set from:body" hx-target="#search-result" hx-indicator="#indicator" action="/gas/search/" method="POST">
+            {% comment %} {% csrf_token %} {% endcomment %}
             {% crispy form %}
         </form>
+        <a href="/gas/{% if not geo %}geo/{% endif %}" class="text-themed darker">{% if not geo %}{% trans "Search by coordinates" %}{% else %}{% trans "Search by area" %}{% endif %}</a>
     </div>
     <div class="row justify-content-between my-3 text-themed">
         <div class="col text-start"><a href="localities/" class="text-themed">{% trans "Localities" %}</a></div>
@@ -27,3 +28,37 @@
     <div id="search-result"></div>
 </div>
 {% endblock %}
+
+{% block script %}
+<!-- Remove the submit button -->
+<script>
+    document.getElementById("submit-id-submit").parentElement.remove();
+</script>
+{% if geo %}<script>
+    // Check if Geolocation is supported
+    if ("geolocation" in navigator) {
+        // Request the user's permission to access their location
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                // If permission is granted, retrieve the user's coordinates
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                lat_elem = document.getElementById("id_latitude").value = latitude;
+                lon_elem = document.getElementById("id_longitude").value = longitude;
+
+                // console.log("(Lat., Lon.): (" + latitude + ", " + longitude + ")");
+
+                document.body.dispatchEvent(new Event("coords-set"));
+            },
+            // function (error) {
+            //     console.error("Error getting location: ", error);
+            // }
+        );
+    } else {
+        // Geolocation is not supported
+        console.log("Geolocation is not supported by this browser.");
+    }
+</script>{% endif %}{% endblock script %}
+
+
