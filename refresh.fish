@@ -4,6 +4,8 @@ if [ "(pwd)" != /home/appu/appuwrotethese/src/ ]
     cd /home/appu/appuwrotethese/src
 end
 
+pipenv install
+
 pipenv run make update
 
 killall gunicorn
