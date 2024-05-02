@@ -22,7 +22,7 @@ SECRET_KEY = config.get("SECRET_KEY", None)
 if SECRET_KEY is None:
     SECRET_KEY = token_urlsafe(64)
     logging.warning(
-        "settings: SECRET_KEY was not set. New one generated for this session. Please set it as an environment variable or in `config.yaml`."
+        "settings: SECRET_KEY was not set. New one generated for this session. Please set it as an environment variable or in `settings.conf`."
     )
 # SECRET_KEY_FALLBACKS = config.get("SECRET_KEY_FALLBACKS", [])
 
