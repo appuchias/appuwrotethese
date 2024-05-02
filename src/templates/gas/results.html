@@ -26,13 +26,16 @@
             {% for i in results %}{% with s=i.station %}
             <div class="card-wrapper col-xl-2 col-md-3 col-sm-4 col-12">
                 <div class="card text-center">
-                    <div class="card-header">
+                    <div class="card-header{% if user.is_authenticated %} d-flex justify-content-between align-items-center{% endif %}">
                         <a title="{{ s.company|title }}" class="truncate" href="/gas/station/{{ s.id_eess }}">{{ s.company|title|truncatechars:18 }}</a>
+                        {% if user.is_authenticated %}<a href="#" hx-get="/health/"><i data-lucide="star"></i></a>{% endif %}
                     </div>
                     <div class="card-body">
-                        <p class="truncate" title="{{ s.address }}">{{ s.address }}</p>
-                        <p>{{ s.locality }}</p>
-                        <p class="horario">{{ s.schedule }}</p>
+                        <div class="details">
+                            <p class="truncate" title="{{ s.address }}">{{ s.address }}</p>
+                            <p class="truncate" title="{{ s.locality }}">{{ s.locality }}</p>
+                            <p class="horario" title="{{ s.schedule }}">{{ s.schedule }}</p>
+                        </div>
                         <div class="price-chart">
                             <table class="table table-sm table-hover">
                                 <thead>
