@@ -72,11 +72,13 @@ def db_prices(
     The term type must be one of (locality_id, province_id, postal_code)
     """
 
-    station_filter = {f"station__{term_type}": term_id}
-
     prod_name = get_db_product_name(prod_abbr)
+
+    station_filter = {f"{term_type}": term_id}
+    stations = Station.objects.filter(**station_filter)
+
     prices = (
-        StationPrice.objects.filter(date=q_date, **station_filter)
+        StationPrice.objects.filter(date=q_date, station__in=stations)
         .exclude(**{f"{prod_name}": None})
         .order_by(prod_name)
     )
