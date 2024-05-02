@@ -14,7 +14,7 @@ DEBUG = False
 
 
 with open("settings.conf", "r") as f:
-    config = {k.strip(): v.strip() for k, v in [l.split("=") for l in f.readlines()]}
+    config = {k.strip(): v.strip() for k, v in [l.split("=", 1) for l in f.readlines()]}
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
