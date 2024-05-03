@@ -1,0 +1,106 @@
+{% load i18n user_agents replace access %}
+<div class="card-wrapper col-xl-2 col-md-3 col-sm-4 col-12">
+    <div class="card text-center">
+        <div class="card-header">
+            <a title="{{ station.company|title }}" class="truncate" href="/gas/station/{{ station.id_eess }}">{{ station.company|title|truncatechars:18 }}</a>
+        </div>
+        <div class="card-body">
+            <div class="details">
+                <p class="truncate" title="{{ station.address }}">{{ station.address }}</p>
+                <p class="truncate" title="{{ station.locality }}">{{ station.locality }}</p>
+                <p class="horario" title="{{ station.schedule }}">{{ station.schedule }}</p>
+            </div>
+            <div class="price-chart">
+                <table class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">{% trans "Fuel" %}</th>
+                            <td scope="col"><strong>€/L</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Gasóleo A</th>
+                            <td>{{ price.price_goa|default:"-" }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Gasóleo B</th>
+                            <td>{{ price.price_gob|default:"-" }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Gasolina 95 E5</th>
+                            <td>{{ price.price_g95e5|default:"-" }}</td>
+                        </tr>
+                        {% comment %} <tr>
+                            <th scope="row">Gasolina 95 E5 Premium</th>
+                            <td>{{ price.price_g95e5_premium|default:"-" }}</td>
+                        </tr> {% endcomment %}
+                        {% comment %} <tr>
+                            <th scope="row">Gasolina 95 E10</th>
+                            <td>{{ price.price_g95e10|default:"-" }}</td>
+                        </tr> {% endcomment %}
+                        <tr>
+                            <th scope="row">Gasolina 98 E5</th>
+                            <td>{{ price.price_g98e5|default:"-" }}</td>
+                        </tr>
+                        {% comment %} <tr>
+                            <th scope="row">Gasolina 98 E10</th>
+                            <td>{{ price.price_g98e10|default:"-" }}</td>
+                        </tr> {% endcomment %}
+                        <tr>
+                            <th scope="row">GLP</th>
+                            <td>{{ price.price_glp|default:"-" }}</td>
+                        </tr>
+                        {% comment %} <tr>
+                            <th scope="row">GNC</th>
+                            <td>{{ price.price_gnc|default:"-" }}</td>
+                        </tr> {% endcomment %}
+                        {% comment %} <tr>
+                            <th scope="row">Hidrógeno</th>
+                            <td>{{ price.price_h2|default:"-" }}</td>
+                        </tr> {% endcomment %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div>
+                    {% if not request|is_pc %}
+                    <a href="geo:{{ station.latitude|replace:',|.' }},{{ station.longitude|replace:',|.' }}?q={{ station.latitude|replace:',|.' }},{{ station.longitude|replace:',|.' }}" class="text-decoration-none" aria-label="{% trans 'Open location in map' %}" data-balloon-pos="up">
+                        <i data-lucide="map-pin"></i>
+                    </a>
+                    {% else %}
+                    <a href="#" class="text-decoration-none" aria-label="{% trans 'Open GMaps route' %}" data-balloon-pos="up"
+                        onclick="window.open('https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll={{ station.latitude|replace:',|.' }},{{ station.longitude|replace:',|.' }}&daddr={{ station.company|lower }} {{ station.locality|lower }} {{ station.postal_code|lower }} {{ station.address|lower }}')">
+                        <i data-lucide="compass"></i>
+                    </a>
+                    {% endif %}
+                </div>
+                {% with ytd=past_day_lower|access:station.id_eess lw=past_week_lower|access:station.id_eess lm=past_month_lower|access:station.id_eess %}
+                <div class="row m-0">
+                    <div class="col px-1" aria-label="{% trans 'Yesterday' %}" data-balloon-pos="up">
+                        {% if ytd == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                        {% elif ytd == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                        {% elif ytd == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                        {% else %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                        {% endif %}
+                    </div>
+                    <div class="col px-1" aria-label="{% trans 'Last week' %}" data-balloon-pos="up">
+                        {% if lw == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                        {% elif lw == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                        {% elif lw == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                        {% else %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                        {% endif %}
+                    </div>
+                    <div class="col px-1" aria-label="{% trans 'Last month' %}" data-balloon-pos="up">
+                        {% if lm == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                        {% elif lm == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                        {% elif lm == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                        {% else %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</div>
