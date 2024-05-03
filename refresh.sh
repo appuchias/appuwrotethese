@@ -11,4 +11,4 @@ pipenv run make collectstatic
 
 killall gunicorn
 sleep 2
-pipenv run gunicorn & disown
+nohup pipenv run gunicorn &
