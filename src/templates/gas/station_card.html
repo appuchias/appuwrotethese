@@ -66,12 +66,12 @@
                 <div>
                     {% if not request|is_pc %}
                     <a href="geo:{{ station.latitude|replace:',|.' }},{{ station.longitude|replace:',|.' }}?q={{ station.latitude|replace:',|.' }},{{ station.longitude|replace:',|.' }}" class="text-decoration-none" aria-label="{% trans 'Open location in map' %}" data-balloon-pos="up">
-                        <i data-lucide="map-pin"></i>
+                        <i data-lucide="map-pinned"></i>
                     </a>
                     {% else %}
                     <a href="#" class="text-decoration-none" aria-label="{% trans 'Open GMaps route' %}" data-balloon-pos="up"
                         onclick="window.open('https://www.google.com/maps?f=d&saddr=My+Location&z=15&ll={{ station.latitude|replace:',|.' }},{{ station.longitude|replace:',|.' }}&daddr={{ station.company|lower }} {{ station.locality|lower }} {{ station.postal_code|lower }} {{ station.address|lower }}')">
-                        <i data-lucide="compass"></i>
+                        <i data-lucide="navigation"></i>
                     </a>
                     {% endif %}
                 </div>
