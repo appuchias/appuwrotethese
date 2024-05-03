@@ -12,8 +12,11 @@
         <p><a href="https://coindrop.to/appuchia" class="btn btn-dark" rel="noopener noreferrer" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="down"><i data-lucide="coins"></i> {% trans "Support me" %}!</a></p>
         <hr>
 
-        <h3><a href="/gas" class="text-themed darker">{% trans "Saved gas stations" %} ({% trans "Coming soon" %}...)</a></h3>
+        {% if gas %}
+        <h3><a href="/gas" class="text-themed darker">{% trans "Saved gas stations" %}</a></h3>
         <hr>
+        {% endif %}
+        {% if mastermind %}
         <h3><a href="/mastermind" class="text-themed darker">{% trans "Mastermind games" %}</a></h3>
         <ul>
             {% for game in games %}
@@ -24,6 +27,7 @@
             {% endfor %}
         </ul>
         <hr>
+        {% endif %}
 
         <div class="row justify-content-end">
             <a href="/accounts/chpwd/" class="col-md-4 btn btn-outline-dark mx-2"><i data-lucide="lock"></i> {% trans "Change password" %}</a>

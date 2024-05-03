@@ -39,18 +39,32 @@ Best regards,
 def account(request: HttpRequest):
     """Show account page"""
 
-    if "mastermind" in settings.INSTALLED_APPS:
-        from mastermind.models import Game, Guess
+    show_gas = "gas" in settings.INSTALLED_APPS and False  # Disabled for now ---
+    show_mastermind = "mastermind" in settings.INSTALLED_APPS
+
+    stations = list()
+    games = list()
+
+    if show_gas:
+        # from gas.models import Station
+        ...
+
+    if show_mastermind:
+        from mastermind.models import Game
 
         games = list(Game.objects.filter(user=request.user).order_by("created"))
 
-        return render(
-            request,
-            "accounts/account.html",
-            {"user": request.user, "games": games},
-        )
-
-    return render(request, "accounts/account.html", {"user": request.user})
+    return render(
+        request,
+        "accounts/account.html",
+        {
+            "user": request.user,
+            "stations": stations,
+            "gas": show_gas,
+            "games": games,
+            "mastermind": show_mastermind,
+        },
+    )
 
 
 def profile(request: HttpRequest):
