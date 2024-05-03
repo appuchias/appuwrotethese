@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-03 14:07+0200\n"
+"POT-Creation-Date: 2024-05-03 14:21+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -186,24 +186,24 @@ msgstr "Término de búsqueda"
 msgid "Specific term to look for (e.g. Coruña, 15001, etc.)"
 msgstr "Término concreto a buscar (p.ej. Coruña, 15001, etc.)"
 
-#: gas/forms.py:38 gas/forms.py:117 gas/forms.py:191
+#: gas/forms.py:38 gas/forms.py:119 gas/forms.py:190
 #: templates/gas/station.html:49 templates/gas/station_card.html:17
 msgid "Fuel"
 msgstr "Combustible"
 
-#: gas/forms.py:41 gas/forms.py:120 gas/forms.py:199
+#: gas/forms.py:41 gas/forms.py:122 gas/forms.py:198
 msgid "Fuel to use for sorting"
 msgstr "Combustible para ordenar"
 
-#: gas/forms.py:45 gas/forms.py:124 gas/forms.py:203
+#: gas/forms.py:45 gas/forms.py:126 gas/forms.py:202
 msgid "Date"
 msgstr "Fecha"
 
-#: gas/forms.py:46 gas/forms.py:125 gas/forms.py:204
+#: gas/forms.py:46 gas/forms.py:127 gas/forms.py:203
 msgid "Prices date"
 msgstr "Fecha de los precios"
 
-#: gas/forms.py:76 gas/forms.py:163
+#: gas/forms.py:76 gas/forms.py:162
 msgid "Search"
 msgstr "Buscar"
 
@@ -227,19 +227,19 @@ msgstr "Valor de longitud"
 msgid "Radius"
 msgstr "Radio"
 
-#: gas/forms.py:113
+#: gas/forms.py:115
 msgid "Max straight line distance"
-msgstr "Distancia máxima en línea recta"
+msgstr "Distancia máxima"
 
-#: gas/forms.py:173 gas/forms.py:175 gas/models.py:16
+#: gas/forms.py:172 gas/forms.py:174 gas/models.py:16
 msgid "Locality ID"
 msgstr "ID de la localidad"
 
-#: gas/forms.py:179 gas/forms.py:181 gas/models.py:43
+#: gas/forms.py:178 gas/forms.py:180 gas/models.py:43
 msgid "Province ID"
 msgstr "ID de provincia"
 
-#: gas/forms.py:185 gas/forms.py:187 gas/models.py:78
+#: gas/forms.py:184 gas/forms.py:186 gas/models.py:78
 msgid "Postal code"
 msgstr "Código postal"
 
@@ -380,13 +380,13 @@ msgstr "Cuenta AWT"
 msgid "You're logged in as"
 msgstr "Estás conectado como"
 
-#: templates/accounts/account.html:12 templates/gas/results.html:31
+#: templates/accounts/account.html:12 templates/gas/results.html:25
 #: templates/legal.html:11 templates/legal.html:69
 msgid "Hosting is not free"
 msgstr "La web no es gratis"
 
 #: templates/accounts/account.html:12 templates/base.html:116
-#: templates/gas/results.html:31 templates/legal.html:11
+#: templates/gas/results.html:25 templates/legal.html:11
 #: templates/legal.html:69
 msgid "Support me"
 msgstr "Apóyame"
@@ -417,7 +417,7 @@ msgstr "No has iniciado sesión"
 
 #. Translators: Button to go to last page visited
 #: templates/accounts/chpwd.html:17 templates/accounts/respwd.html:17
-#: templates/build.html:14 templates/gas/results.html:37
+#: templates/build.html:14 templates/gas/results.html:31
 msgid "Go back"
 msgstr "Volver atrás"
 
@@ -557,19 +557,7 @@ msgstr "en"
 msgid "on the"
 msgstr "para el día"
 
-#: templates/gas/results.html:20
-msgid ""
-"The 3 bottom icons show if the price in the past was cheaper (green) or more "
-"expensive (red)"
-msgstr ""
-"Los 3 iconos de abajo muestran si el combustible era más barato (verde) o "
-"más caro (rojo)"
-
-#: templates/gas/results.html:21
-msgid "In order: Yesterday, last week, last month"
-msgstr "En orden: Ayer, la semana pasada, el mes pasado"
-
-#: templates/gas/results.html:36
+#: templates/gas/results.html:30
 msgid "No station prices were found"
 msgstr "No se encontraron precios para las gasolineras"
 
@@ -877,6 +865,16 @@ msgstr "Partida en curso"
 #: templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
+
+#~ msgid ""
+#~ "The 3 bottom icons show if the price in the past was cheaper (green) or "
+#~ "more expensive (red)"
+#~ msgstr ""
+#~ "Los 3 iconos de abajo muestran si el combustible era más barato (verde) o "
+#~ "más caro (rojo)"
+
+#~ msgid "In order: Yesterday, last week, last month"
+#~ msgstr "En orden: Ayer, la semana pasada, el mes pasado"
 
 #~ msgid "Only alphanumeric characters and underscores are allowed."
 #~ msgstr "Solo se permiten caracteres alfanuméricos y guiones bajos."
