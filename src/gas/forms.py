@@ -149,7 +149,13 @@ class SearchPricesGeo(forms.Form):
         self.helper.layout = Layout(
             Div(
                 HTML(
-                    '<div class="col" style="flex: 0.5"><a class="btn btn-outline-dark" style="margin: 2rem 1rem" href="#" onClick="setCoords();"><i data-lucide="locate-fixed"></i></a></div>'
+                    """
+                    <div class="col" style="flex: 0.5">
+                        <a class="btn btn-outline-dark" style="margin: 2rem 1rem" href="#" onClick="setCoords();">
+                            <i data-lucide="locate-fixed"></i>
+                        </a>
+                    </div>
+                    """
                 ),
                 Div("latitude", css_class="col"),
                 Div("longitude", css_class="col"),
