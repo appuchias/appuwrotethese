@@ -4,7 +4,7 @@
 from datetime import date
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Layout, Submit
+from crispy_forms.layout import Div, Layout, Submit, HTML
 from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
@@ -148,12 +148,15 @@ class SearchPricesGeo(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div(
+                HTML(
+                    '<div class="col" style="flex: 0.5"><a class="btn btn-outline-dark" style="margin: 2rem 1rem" href="#" onClick="setCoords();"><i data-lucide="locate-fixed"></i></a></div>'
+                ),
                 Div("latitude", css_class="col"),
                 Div("longitude", css_class="col"),
                 Div("radius", css_class="col"),
                 Div("fuel_abbr", css_class="col"),
                 Div("q_date", css_class="col"),
-                css_class="row",
+                css_class="container-fluid row",
             ),
             Div(
                 Submit("submit", _("Search"), css_class="btn btn-outline-dark"),
