@@ -62,8 +62,9 @@
                     </tbody>
                 </table>
             </div>
-            <div class="d-flex justify-content-between">
-                <div>
+            <div class="d-flex justify-content-between mt-3">
+                <div class="d-flex flex-column">
+                    <div>{% trans "Go" %}</div>
                     {% if not request|is_pc %}
                     <a href="geo:{{ station.latitude|replace:',|.' }},{{ station.longitude|replace:',|.' }}?q={{ station.latitude|replace:',|.' }},{{ station.longitude|replace:',|.' }}" class="text-decoration-none" aria-label="{% trans 'Open location in map' %}" data-balloon-pos="up">
                         <i data-lucide="map-pinned"></i>
@@ -78,6 +79,7 @@
                 {% with ytd=past_day_lower|access:station.id_eess lw=past_week_lower|access:station.id_eess lm=past_month_lower|access:station.id_eess %}
                 <div class="row m-0">
                     <div class="col px-1" aria-label="{% trans 'Yesterday' %}" data-balloon-pos="up">
+                        <div>1d</div>
                         {% if ytd == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
                         {% elif ytd == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
                         {% elif ytd == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
@@ -85,6 +87,7 @@
                         {% endif %}
                     </div>
                     <div class="col px-1" aria-label="{% trans 'Last week' %}" data-balloon-pos="up">
+                        <div>7d</div>
                         {% if lw == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
                         {% elif lw == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
                         {% elif lw == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
@@ -92,6 +95,7 @@
                         {% endif %}
                     </div>
                     <div class="col px-1" aria-label="{% trans 'Last month' %}" data-balloon-pos="up">
+                        <div>30d</div>
                         {% if lm == 'h' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
                         {% elif lm == 'l' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-square"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
                         {% elif lm == 'e' %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="blue" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-equal"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
