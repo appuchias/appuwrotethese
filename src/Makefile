@@ -23,6 +23,9 @@ compilemsgs:
 lesscompile: # Install AUR: nodejs-less and nodejs-less-plugin-clean-css
 	cat staticfiles/styles/styles.less staticfiles/styles/project_styles.less | lessc - staticfiles/styles/styles.min.css --clean-css
 
+twcss:
+	tailwindcss -i staticfiles/styles/custom.css -o staticfiles/styles/styles.min.css --watch -m
+
 update:
 	git fetch
 	git pull
