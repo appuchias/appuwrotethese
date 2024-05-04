@@ -19,7 +19,7 @@
 -->
 
     <head>
-        <!-- Required meta tags -->
+        <!-- Meta -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="A website where I host the projects I create.">
@@ -27,8 +27,7 @@
         <!-- Libraries -->
         <link href="/s/GFonts-FiraMono400.css" rel="stylesheet">
         <link href="/s/balloon.min.css" rel="stylesheet">
-        <link href="/s/bootstrap-5.3.0/bootstrap.min.css" rel="stylesheet">
-        <script src="/s/htmx-1.9.12.min.js"></script>
+        <script src="/s/htmx-1.9.12.min.js" defer></script> <!-- Deferred to avoid render-blocking -->
 
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="/s/styles/styles.min.css">
@@ -57,7 +56,7 @@
 
     {% with request|is_mobile as phone %}
     <body>
-        <nav id=navbar class="navbar navbar-expand container-fluid">
+        <nav id="navbar" class="flex flex-row flex-wrap fixed t-0 w-full justify-between bg-[#141414] px-2 py-1 items-center z-10">
             <a href="/" id="nav-home-icon">
                 <svg version="1.1" width="32" height="32" viewBox="0 0 1333.3333 1333.3333"
                     xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
@@ -79,47 +78,58 @@
                     </g>
                 </svg>
             </a>
-            <form action="{% url 'set_language' %}" method="post" class="invisible" id="langForm">{% csrf_token %}<input type="text" name="language" value="{% if LANG == 'es' %}en{% else %}es{% endif %}"></form>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                <div class="navbar-nav text-themed">
-                    {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link"><i data-lucide="cog"></i> Admin</a>{% endif %}
-                    <a class="text-reset nav-link" href="/accounts/" {% if phone %}aria-label="{% trans 'Account' %}" data-balloon-pos="down"{% endif %}>
-                        <i data-lucide="user"></i>{% if not phone %} {% trans "Account" %}{% endif %}
-                    </a>
-                    <a class="text-reset nav-link" href="/gas/" {% if phone %}aria-label="{% trans 'Prices' %}" data-balloon-pos="down"{% endif %}>
-                        <i data-lucide="fuel"></i>{% if not phone %} {% trans "Prices" %}{% endif %}
-                    </a>
-                    <a class="text-reset nav-link" href="https://blog.appu.ltd/" rel="noopener" target="_blank" {% if phone %}aria-label="Blog" data-balloon-pos="down"{% endif %}>
-                        <i data-lucide="newspaper"></i>{% if not phone %} Blog{% endif %}
-                    </a>
-                    <div class="vertical-separator"></div>
-                    <a href="javascript:{}" id="langChange" onclick="document.getElementById('langForm').submit();" class="text-reset nav-link">{% trans "Change language" %}</a>
-                </div>
+            <form action="{% url 'set_language' %}" method="post" class="w-0 invisible" id="langForm">{% csrf_token %}<input type="text" name="language" value="{% if LANG == 'es' %}en{% else %}es{% endif %}"></form>
+            <div class="flex flex-row gap-2 items-center text-themed">
+                {% if user.is_staff %}<a href="/admin/" class="text-reset nav-link flex gap-1"><i data-lucide="cog"></i><span class="invisible w-0 sm:visible sm:w-fit">Admin</span></a>{% endif %}
+                <a class="flex gap-1" href="/accounts/" aria-label="{% trans 'Account' %}" data-balloon-pos="down">
+                    <i data-lucide="user"></i> <span class="invisible w-0 sm:visible sm:w-fit">{% trans "Account" %}</span>
+                </a>
+                <a class="flex gap-1" href="/gas/" aria-label="{% trans 'Prices' %}" data-balloon-pos="down">
+                    <i data-lucide="fuel"></i> <span class="invisible w-0 sm:visible sm:w-fit">{% trans "Prices" %}</span>
+                </a>
+                <a class="flex gap-1" href="https://blog.appu.ltd/" target="_blank" aria-label="Blog" data-balloon-pos="down">
+                    <i data-lucide="newspaper"></i> <span class="invisible w-0 sm:visible sm:w-fit">Blog</span>
+                </a>
+                <div class="border-l border-white h-8"></div>
+                <a href="javascript:{}" id="langChange" onclick="document.getElementById('langForm').submit();" class="text-sm text-center">Cambiar <br> idioma</a>
             </div>
         </nav>
         <!-- - -->
-        <div id="content" class="container-fluid">
-            <div class="container-fluid messages">{% if messages %}{% for message in messages %}
+        <div id="content" class="w-full absolute top-12 bg-gradient-to-br from-neutral-800 to-neutral-900 z-0">
+            {% if messages %}<div class="container">
+                {% for message in messages %}
                 <div class="alert alert-{{ message.level_tag }} my-4{% if phone %} mobile{% endif %}" role="alert">
                     {{ message }}
-                </div>{% endfor %}{% endif %}
-            </div>
+                </div>
+                {% endfor %}
+            </div>{% endif %}
             {% block content %}Content{% endblock content %}
         </div>
         <!-- - -->
-        <div id="footer" class="container-fluid">
-            <div class="float-start">
-                <a href="https://links.appu.ltd/" class="text-themed icon" rel="noopener" target="_blank"><i data-lucide="link" class="footer"></i></a>
-                <a href="https://l.appu.ltd/youtube" class="text-themed icon" rel="noopener noreferrer" target="_blank"><i data-lucide="youtube" class="footer"></i></a>
-                <a href="https://l.appu.ltd/awt" class="text-themed icon" rel="noopener" target="_blank"><i data-lucide="github" class="footer"></i></a>
-                <a href="https://coindrop.to/appuchia" class="text-themed icon" rel="noopener noreferrer" target="_blank" aria-label="{% trans "Support me" %}!" data-balloon-pos="up"><i data-lucide="coins" class="footer"></i></a>
+        <div id="footer" class="fixed bottom-0 flex w-full justify-between p-1 items-center transition ease-in-out duration-1000 bg-gradient-to-t from-neutral-950">
+            <div class="flex gap-2">
+                <a href="https://links.appu.ltd/" rel="noopener" target="_blank"><i data-lucide="link" class="footer"></i></a>
+                <a href="https://l.appu.ltd/youtube" rel="noopener noreferrer" target="_blank"><i data-lucide="youtube" class="footer"></i></a>
+                <a href="https://l.appu.ltd/awt" rel="noopener" target="_blank"><i data-lucide="github" class="footer"></i></a>
+                <a href="https://coindrop.to/appuchia" rel="noopener noreferrer" target="_blank" aria-label="{% trans "Support me" %}!" data-balloon-pos="up"><i data-lucide="coins" class="footer"></i></a>
             </div>
-            <div class="float-end">
-                <a href="/legal/" class="text-themed text-decoration-none">{% trans "Coded with 🖤 by Appu" %}</a>
+            <div>
+                <a href="/legal/" class="flex">
+                    {% comment %} {% trans "Coded with 🖤 by Appu" %} {% endcomment %}
+                    {% trans "Coded with" %} &thinsp;
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart" version="1.1" id="heart-code"
+                        xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                        <path d="m 19,14 c 1.49,-1.46 3,-3.21 3,-5.5 A 5.5,5.5 0 0 0 16.5,3 C 14.74,3 13.5,3.5 12,5 10.5,3.5 9.26,3 7.5,3 A 5.5,5.5 0 0 0 2,8.5 c 0,2.3 1.5,4.05 3,5.5 l 7,7 z" id="path1" style="stroke:#ffffff;stroke-opacity:1" />
+                        <g style="fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" id="g1" transform="matrix(0.48216736,0,0,0.48216736,6.2139916,4.5803202)">
+                            <path d="M 8.1594671,7.1993339 4.3189342,12 8.1594671,16.800666" id="path1-3" style="display:inline;stroke-width:3.84053" />
+                            <path d="M 15.840533,7.1993339 19.681066,12 15.840533,16.800666" id="path2" style="display:inline;stroke-width:3.84053" />
+                        </g>
+                    </svg> &thinsp;
+                    {% trans "by Appu" %}
+                </a>
             </div>
         </div>
         <!-- - -->
-        <script defer rel="stylesheet" href="/s/bootstrap-5.3.0/bootstrap.min.js"></script>
         <script>if('serviceWorker' in navigator) {navigator.serviceWorker.register("/s/sw.js")}</script>
         <script src="/s/lucide-0.378.0.min.js" async></script>
         {% block script %}{% endblock script %}

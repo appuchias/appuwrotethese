@@ -5,10 +5,10 @@
 {% block title %}{% trans "Home" %}{% endblock %}
 
 {% block content %}
-<div id="home" class="container-fluid">
-    <h1 class="text-themed title{% if request|is_mobile %} mobile{% endif %}">Appu Wrote These</h1>
-    <div class="projects">
-        <a href="/projects/" class="btn btn-outline-light"><i data-lucide="cpu"></i> {% trans "View projects" %}</a>
+<div id="home" class="w-full bg-[url('/s/background.webp')] bg-top">
+    <h1 id="awt" class="text-7xl sm:text-8xl pt-[25vh] mx-2 text-center">Appu Wrote These</h1>
+    <div id="btn-projects" class="flex pt-20 pb-16 sm:pt-[20vh] justify-center">
+        <a href="/projects/" class="border-white border rounded-lg flex text-xl items-center gap-2 h-min p-3 hover:bg-white hover:text-black transition ease-in-out"><i data-lucide="cpu"></i> {% trans "View projects" %}</a>
     </div>
 </div>
 {% endblock %}
