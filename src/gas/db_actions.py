@@ -131,7 +131,7 @@ def update_day_stations_prices(data: list, day: date, update: bool = False) -> N
 
     for price in data:
         id_eess = int(price["IDEESS"])
-        if not id_eess in stations:
+        if id_eess not in stations:
             station = Station(
                 id_eess=id_eess,
                 company=price["Rótulo"],
@@ -160,7 +160,7 @@ def update_day_stations_prices(data: list, day: date, update: bool = False) -> N
 
             updated_stations.add(station)
 
-        if not id_eess in prices:
+        if id_eess not in prices:
             prices.append(id_eess)
             new_prices.append(
                 StationPrice(
