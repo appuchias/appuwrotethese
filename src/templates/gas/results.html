@@ -23,10 +23,12 @@
         </div>
     </div>
     {% else %}
-    <center>
-        <p class="text-themed">{% trans "No station prices were found" %}: {{ error }}</p>
-        <a class="text-themed dark" href="javascript:history.back()">{% trans 'Go back' %}</a>
-    </center>
+    <div>
+        <p class="text-themed text-center">{% trans "No station prices were found" %}: {{ error }}</p>
+        <p class="text-center">
+            <a class="text-themed dark" href="javascript:history.back()">{% trans 'Go back' %}</a>
+        </p>
+    </div>
     {% endif %}
 </div>
 {% endblock %}
