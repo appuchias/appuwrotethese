@@ -1,7 +1,7 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from django.core.management.base import BaseCommand
 
@@ -18,8 +18,8 @@ class Command(BaseCommand):
         deleted = 0
 
         for game in games:
-            # Prevent deleting games that are less than an hour old
-            if game.created > datetime.now() - timedelta(hours=6):
+            # Prevent deleting games that are less than 4-6 hours old (I don't want to deal with timezones)
+            if game.created > datetime.now(timezone.utc) - timedelta(hours=6):
                 continue
 
             # Delete unfinished games
