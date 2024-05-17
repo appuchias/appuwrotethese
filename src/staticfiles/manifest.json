@@ -18,8 +18,20 @@
             "description": "Buscador de precios de combustible",
             "icons": [
                 {
-                    "src": "/s/icons/fuel_x96.png",
+                    "src": "/s/icons/fuel-64.png",
+                    "sizes": "64x64"
+                },
+                {
+                    "src": "/s/icons/fuel-96.png",
                     "sizes": "96x96"
+                },
+                {
+                    "src": "/s/icons/fuel-192.png",
+                    "sizes": "192x192"
+                },
+                {
+                    "src": "/s/icons/fuel-512.png",
+                    "sizes": "512x512"
                 }
             ]
         },
@@ -29,8 +41,20 @@
             "description": "Juego de lógica",
             "icons": [
                 {
-                    "src": "/s/icons/binary_x96.png",
+                    "src": "/s/icons/binary-64.png",
+                    "sizes": "64x64"
+                },
+                {
+                    "src": "/s/icons/binary-96.png",
                     "sizes": "96x96"
+                },
+                {
+                    "src": "/s/icons/binary-192.png",
+                    "sizes": "192x192"
+                },
+                {
+                    "src": "/s/icons/binary-512.png",
+                    "sizes": "512x512"
                 }
             ]
         },
@@ -40,45 +64,75 @@
             "description": "Gestión de la cuenta",
             "icons": [
                 {
-                    "src": "/s/icons/user_x96.png",
+                    "src": "/s/icons/user-64.png",
+                    "sizes": "64x64"
+                },
+                {
+                    "src": "/s/icons/user-96.png",
                     "sizes": "96x96"
+                },
+                {
+                    "src": "/s/icons/user-192.png",
+                    "sizes": "192x192"
+                },
+                {
+                    "src": "/s/icons/user-512.png",
+                    "sizes": "512x512"
                 }
             ]
         }
     ],
     "icons": [
         {
-            "src": "/s/icons/icon_x512.png",
+            "src": "/s/icons/icon-512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "/s/icons/icon_x192.png",
+            "src": "/s/icons/icon-192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "/s/icons/icon_x96.png",
+            "src": "/s/icons/icon-96.png",
             "sizes": "96x96",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "/s/icons/maskable_icon_x512.png",
+            "src": "/s/icons/icon-64.png",
+            "sizes": "64x64",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/s/icons/icon-32.png",
+            "sizes": "32x32",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/s/icons/icon-16.png",
+            "sizes": "16x16",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/s/icons/maskable-512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "/s/icons/maskable_icon_x192.png",
+            "src": "/s/icons/maskable-192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "/s/icons/maskable_icon_x96.png",
+            "src": "/s/icons/maskable-96.png",
             "sizes": "96x96",
             "type": "image/png",
             "purpose": "maskable"
