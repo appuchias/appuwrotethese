@@ -116,6 +116,14 @@ def get_by_coords(
         latitude__range=(south_lat, north_lat),
         longitude__range=(west_lon, east_lon),
     )
+
+    # Filter by distance
+    stations = filter(
+        lambda s: distance(src, (s.latitude, s.longitude)).kilometers <= radius,
+        stations,
+    )
+
+    # Get the prices
     prices = (
         StationPrice.objects.filter(date=q_date, station__in=stations)
         .exclude(**{f"{prod_name}": None})
