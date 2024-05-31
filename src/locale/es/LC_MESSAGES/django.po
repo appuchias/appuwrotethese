@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-03 14:21+0200\n"
+"POT-Creation-Date: 2024-05-31 19:03+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -61,13 +61,39 @@ msgstr ""
 msgid "Upgrade"
 msgstr "Mejorar"
 
-#: accounts/models.py:27
+#: accounts/models.py:28
 msgid "Saved Station"
 msgstr "Gasolinera guardada"
 
-#: accounts/models.py:28
+#: accounts/models.py:29
 msgid "Saved Stations"
 msgstr "Gasolineras guardadas"
+
+#: accounts/models.py:47
+msgid "Only alphanumeric characters and underscores are allowed."
+msgstr "Solo se permiten caracteres alfanuméricos y guiones bajos."
+
+#: accounts/models.py:55 gas/models.py:23 gas/models.py:28
+#: templates/gas/station.html:28
+msgid "Locality"
+msgstr "Localidad"
+
+#: accounts/models.py:56 gas/models.py:50 gas/models.py:55
+#: templates/gas/station.html:32
+msgid "Province"
+msgstr "Provincia"
+
+#: accounts/models.py:57 gas/forms.py:190 gas/forms.py:192 gas/models.py:78
+msgid "Postal code"
+msgstr "Código postal"
+
+#: accounts/models.py:75
+msgid "Saved Query"
+msgstr "Consulta guardada"
+
+#: accounts/models.py:76
+msgid "Saved Queries"
+msgstr "Consultas guardadas"
 
 #: accounts/views.py:22
 msgid ""
@@ -186,28 +212,28 @@ msgstr "Término de búsqueda"
 msgid "Specific term to look for (e.g. Coruña, 15001, etc.)"
 msgstr "Término concreto a buscar (p.ej. Coruña, 15001, etc.)"
 
-#: gas/forms.py:38 gas/forms.py:119 gas/forms.py:190
-#: templates/gas/station.html:49 templates/gas/station_card.html:17
+#: gas/forms.py:38 gas/forms.py:119 gas/forms.py:196
+#: templates/gas/station.html:54 templates/gas/station_card.html:17
 msgid "Fuel"
 msgstr "Combustible"
 
-#: gas/forms.py:41 gas/forms.py:122 gas/forms.py:198
+#: gas/forms.py:41 gas/forms.py:122 gas/forms.py:204
 msgid "Fuel to use for sorting"
 msgstr "Combustible para ordenar"
 
-#: gas/forms.py:45 gas/forms.py:126 gas/forms.py:202
+#: gas/forms.py:45 gas/forms.py:126 gas/forms.py:208
 msgid "Date"
 msgstr "Fecha"
 
-#: gas/forms.py:46 gas/forms.py:127 gas/forms.py:203
+#: gas/forms.py:46 gas/forms.py:127 gas/forms.py:209
 msgid "Prices date"
 msgstr "Fecha de los precios"
 
-#: gas/forms.py:76 gas/forms.py:162
+#: gas/forms.py:76 gas/forms.py:168
 msgid "Search"
 msgstr "Buscar"
 
-#: gas/forms.py:89 gas/models.py:83 templates/gas/station.html:31
+#: gas/forms.py:89 gas/models.py:83 templates/gas/station.html:36
 msgid "Latitude"
 msgstr "Latitud"
 
@@ -215,7 +241,7 @@ msgstr "Latitud"
 msgid "Latitude value"
 msgstr "Valor de latitud"
 
-#: gas/forms.py:96 gas/models.py:86 templates/gas/station.html:35
+#: gas/forms.py:96 gas/models.py:86 templates/gas/station.html:40
 msgid "Longitude"
 msgstr "Longitud"
 
@@ -231,27 +257,19 @@ msgstr "Radio"
 msgid "Max straight line distance"
 msgstr "Distancia máxima"
 
-#: gas/forms.py:172 gas/forms.py:174 gas/models.py:16
+#: gas/forms.py:178 gas/forms.py:180 gas/models.py:16
 msgid "Locality ID"
 msgstr "ID de la localidad"
 
-#: gas/forms.py:178 gas/forms.py:180 gas/models.py:43
+#: gas/forms.py:184 gas/forms.py:186 gas/models.py:43
 msgid "Province ID"
 msgstr "ID de provincia"
-
-#: gas/forms.py:184 gas/forms.py:186 gas/models.py:78
-msgid "Postal code"
-msgstr "Código postal"
 
 #: gas/models.py:17
 msgid "ID of the locality"
 msgstr "ID de la localidad"
 
-#: gas/models.py:23 gas/models.py:28 templates/gas/station.html:23
-msgid "Locality"
-msgstr "Localidad"
-
-#: gas/models.py:29 gas/views.py:139 templates/gas/search.html:23
+#: gas/models.py:29 gas/views.py:139 templates/gas/search.html:21
 msgid "Localities"
 msgstr "Localidades"
 
@@ -259,11 +277,7 @@ msgstr "Localidades"
 msgid "ID of the province"
 msgstr "ID de la provincia"
 
-#: gas/models.py:50 gas/models.py:55 templates/gas/station.html:27
-msgid "Province"
-msgstr "Provincia"
-
-#: gas/models.py:56 gas/views.py:128 templates/gas/search.html:25
+#: gas/models.py:56 gas/views.py:128 templates/gas/search.html:23
 msgid "Provinces"
 msgstr "Provincias"
 
@@ -271,11 +285,11 @@ msgstr "Provincias"
 msgid "Company"
 msgstr "Compañía"
 
-#: gas/models.py:73 templates/gas/station.html:19
+#: gas/models.py:73 templates/gas/station.html:24
 msgid "Address"
 msgstr "Dirección"
 
-#: gas/models.py:74 templates/gas/station.html:39
+#: gas/models.py:74 templates/gas/station.html:44
 msgid "Schedule"
 msgstr "Horario"
 
@@ -367,7 +381,7 @@ msgstr ""
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
 #: templates/accounts/register.html:5 templates/accounts/why.html:5
-#: templates/base.html:87 templates/base.html:88
+#: templates/base.html:86 templates/base.html:87
 msgid "Account"
 msgstr "Cuenta"
 
@@ -385,7 +399,7 @@ msgstr "Estás conectado como"
 msgid "Hosting is not free"
 msgstr "La web no es gratis"
 
-#: templates/accounts/account.html:12 templates/base.html:116
+#: templates/accounts/account.html:12 templates/base.html:115
 #: templates/gas/results.html:25 templates/legal.html:11
 #: templates/legal.html:69
 msgid "Support me"
@@ -417,7 +431,7 @@ msgstr "No has iniciado sesión"
 
 #. Translators: Button to go to last page visited
 #: templates/accounts/chpwd.html:17 templates/accounts/respwd.html:17
-#: templates/build.html:14 templates/gas/results.html:31
+#: templates/build.html:14 templates/gas/results.html:32
 msgid "Go back"
 msgstr "Volver atrás"
 
@@ -504,15 +518,15 @@ msgstr ""
 "crear tu cuenta de nuevo. Intentaré evitarlo, pero no puedo prometer que no "
 "vaya a suceder"
 
-#: templates/base.html:90 templates/base.html:91
+#: templates/base.html:89 templates/base.html:90
 msgid "Prices"
 msgstr "Precios"
 
-#: templates/base.html:97
+#: templates/base.html:96
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:119
+#: templates/base.html:118
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -561,7 +575,7 @@ msgstr "para el día"
 msgid "No station prices were found"
 msgstr "No se encontraron precios para las gasolineras"
 
-#: templates/gas/search.html:11
+#: templates/gas/search.html:10
 msgid ""
 "Here you will find the cheapest gas stations for each area sorted by fuel "
 "type"
@@ -569,33 +583,37 @@ msgstr ""
 "Aquí podrás encontrar las gasolineras más baratas de cada zona para el tipo "
 "de combustible que utilices"
 
-#: templates/gas/search.html:20
+#: templates/gas/search.html:18
 msgid "Search by coordinates"
 msgstr "Buscar por coordenadas"
 
-#: templates/gas/search.html:20
+#: templates/gas/search.html:18
 msgid "Search by area"
 msgstr "Buscar por área"
 
-#: templates/gas/station.html:7
+#: templates/gas/station.html:12
 msgid "Station"
 msgstr "Gasolinera"
 
-#: templates/gas/station.html:12
+#: templates/gas/station.html:17
 msgid "Information"
 msgstr "Información"
 
-#: templates/gas/station.html:15
+#: templates/gas/station.html:20
 msgid "Name"
 msgstr "Nombre"
 
-#: templates/gas/station.html:45
+#: templates/gas/station.html:50
 msgid "Current prices"
 msgstr "Precios actuales"
 
-#: templates/gas/station.html:105
+#: templates/gas/station.html:111
 msgid "Price history"
 msgstr "Histórico de precios"
+
+#: templates/gas/station.html:175
+msgid "You are here"
+msgstr "Estás aquí"
 
 #: templates/gas/station_card.html:72
 msgid "Go"
@@ -789,31 +807,31 @@ msgstr "Empezar otra partida"
 msgid "Share! (copy link)"
 msgstr "Compartir! (copiar enlace)"
 
-#: templates/mastermind/home.html:12
+#: templates/mastermind/home.html:11
 msgid "Mastermind is a code-breaking game"
 msgstr "Mastermind es un juego de descifrar códigos"
 
-#: templates/mastermind/home.html:12
+#: templates/mastermind/home.html:11
 msgid "One player"
 msgstr "Un jugador"
 
-#: templates/mastermind/home.html:12
+#: templates/mastermind/home.html:11
 msgid "the machine in this case"
 msgstr "la máquina en este caso"
 
-#: templates/mastermind/home.html:12
+#: templates/mastermind/home.html:11
 msgid "creates a code and the other tries to break the code"
 msgstr "crea un código y el otro intenta descifrarlo"
 
-#: templates/mastermind/home.html:13
+#: templates/mastermind/home.html:12
 msgid "The code is a sequence of 4 digits"
 msgstr "El código es una secuencia de 4 dígitos"
 
-#: templates/mastermind/home.html:13
+#: templates/mastermind/home.html:12
 msgid "Each digit is a number from 0 to 9 and can't appear more than once"
 msgstr "Cada dígito es un número del 0 al 9 y no aparece más de una vez"
 
-#: templates/mastermind/home.html:13
+#: templates/mastermind/home.html:12
 msgid ""
 "After each guess, the machine gives feedback to the player, consisting of "
 "two numbers"
@@ -821,38 +839,38 @@ msgstr ""
 "Después de cada intento, la máquina da una respuesta al jugador, que "
 "consiste en dos números"
 
-#: templates/mastermind/home.html:14
+#: templates/mastermind/home.html:13
 msgid "Number of digits that are in the correct position"
 msgstr "Número de dígitos que están en la posición correcta"
 
-#: templates/mastermind/home.html:14
+#: templates/mastermind/home.html:13
 msgid "Number of digits that are in the code but not in the correct position"
 msgstr ""
 "Número de dígitos que están en el código pero no en la posición correcta"
 
-#: templates/mastermind/home.html:15
+#: templates/mastermind/home.html:14
 msgid ""
 "For example, if the code is 1234 and the guess is 1356, the feedback is 1-1"
 msgstr ""
 "Por ejemplo, si el código es 1234 y el intento es 1356, la respuesta es 1-1"
 
-#: templates/mastermind/home.html:15
+#: templates/mastermind/home.html:14
 msgid ""
 "The digit 1 is in the correct position and the digit 3 is in the code but "
 "not in the correct position"
 msgstr ""
 "El dígito 1 está en la posición correcta y el dígito 3 está en el código "
 
-#: templates/mastermind/home.html:16
+#: templates/mastermind/home.html:15
 msgid "The player has 10 attempts to break the code"
 msgstr "El jugador tiene 10 intentos para descifrar el código"
 
-#: templates/mastermind/home.html:16
+#: templates/mastermind/home.html:15
 msgid "If the player can't break the code in 10 attempts, the machine wins"
 msgstr ""
 "Si el jugador no puede descifrar el código en 10 intentos, la máquina gana"
 
-#: templates/mastermind/home.html:19
+#: templates/mastermind/home.html:17
 msgid "Play"
 msgstr "Jugar"
 
@@ -875,15 +893,6 @@ msgstr "Proyectos"
 
 #~ msgid "In order: Yesterday, last week, last month"
 #~ msgstr "En orden: Ayer, la semana pasada, el mes pasado"
-
-#~ msgid "Only alphanumeric characters and underscores are allowed."
-#~ msgstr "Solo se permiten caracteres alfanuméricos y guiones bajos."
-
-#~ msgid "Saved Query"
-#~ msgstr "Consulta guardada"
-
-#~ msgid "Saved Queries"
-#~ msgstr "Consultas guardadas"
 
 #~ msgid "Coming soon"
 #~ msgstr "Próximamente"

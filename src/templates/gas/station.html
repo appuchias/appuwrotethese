@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% load user_agents i18n %}
 
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+{% endblock head %}
+
 {% block content %}
 {% with s=station %}
 <div id="station" class="text-themed">
@@ -97,6 +102,7 @@
         </div>
     </div>
     <div class="container">
+        <div id="map" style="height: 500px; border-radius: 10px"></div>
         <h2 class="mt-2 mb-1">{% trans "Price history" %}</h2>
         <canvas id="price_hist_graph"></canvas>
         {% comment %} <div class="row justify-content-between">
@@ -111,6 +117,63 @@
 {% endblock %}
 
 {% block script %}
+<script>
+    var actual = L.tileLayer('https://tms-pnoa-ma.idee.es/1.0.0/pnoa-ma/{z}/{x}/{-y}.jpeg', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://pnoa.ign.es">PNOA</a>'
+    });
+
+    var provisional = L.tileLayer.wms('https://wms-pnoa.idee.es/pnoa-provisionales?service=WMS&', {
+        layers: 'OrtoimagenExpedita',
+        attribution: '&copy; <a href="https://pnoa.ign.es">PNOA</a>'
+    });
+
+    url = 'https://www.ign.es/wms/pnoa-historico?SERVICE=WMS&';
+
+    // 2017
+    var diecisiete = L.tileLayer.wms(url, {
+        layers: ['PNOA2017'],
+        format: 'image/png',
+        attribution: '&copy; <a href="https://pnoa.ign.es">PNOA</a>'
+    });
+
+    // 2020
+    var veinte = L.tileLayer.wms(url, {
+        layers: ['PNOA2020'],
+        format: 'image/png',
+        attribution: '&copy; <a href="https://pnoa.ign.es">PNOA</a>'
+    });
+
+    var capas = {
+        'PNOA Actual': actual,
+        'PNOA Provisional': provisional,
+        'PNOA 2017': diecisiete,
+        'PNOA 2020': veinte
+    };
+
+    var map = L.map('map', {
+        center: [{{ station.latitude }}, {{ station.longitude }}],
+        zoom: 15,
+        layers: actual
+    });
+    var layerControl = L.control.layers(capas).addTo(map);
+
+    {% comment %} var marker = L.marker([{{ station.latitude }}, {{ station.longitude }}]).addTo(map);
+    marker.bindTooltip("{{ station.company|lower|capfirst }}", {direction:"top", offset: L.point(-16,0), permanent: 1}).openTooltip(); {% endcomment %}
+
+    var tooltip = L.tooltip([{{ station.latitude }}, {{ station.longitude }}], {content: '{{ station.company|lower|capfirst }}', direction: "top", permanent: 1}).addTo(map);
+
+    navigator.geolocation.getCurrentPosition((position) => {
+        var user = L.marker([position.coords.latitude, position.coords.longitude], {icon: L.icon({iconUrl: '/s/icons/car.svg', iconSize: 36, shadowUrl: '/s/icons/car-shadow.svg', shadowSize: 36})}).addTo(map);
+        user.bindTooltip("{% trans 'You are here' %}", {direction:"top", offset: L.point(0,-16)}).openTooltip();
+
+        centerLat = (position.coords.latitude + {{ station.latitude }}) / 2;
+        centerLon = (position.coords.longitude + {{ station.longitude }}) / 2;
+        map.setView([centerLat, centerLon]);
+        map.fitBounds([[position.coords.latitude, position.coords.longitude], [{{ station.latitude }}, {{ station.longitude }}]]);
+    });
+</script>
+
 <script src="/s/chart.js"></script>
 {{ graph_data|json_script:"price_hist" }}
 <script type="module">
@@ -184,6 +247,6 @@ new Chart(
             "RangePlugin"
         ]
     })
-        
+
 </script> {% endcomment %}
 {% endblock script %}
