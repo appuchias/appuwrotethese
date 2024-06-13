@@ -7,10 +7,12 @@
 <div id="search-result">
     {% if not hx %}
     <h1 class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Stations' %}</h1>
-    {% comment %}<p class="text-themed">{% trans "The icon at the bottom of every card opens the route to the station in your maps app" %}.</p>{% endcomment %}
-    {% comment %}{% if user.is_authenticated %}<p class="text-themed">{% trans "The 3 icons on the bootom of cards show the price difference with yesterday, last week and last month, respectively" %}.<br>{% trans "A red icon means the corresponding price was lower, while a green one means now it's cheaper" %}.</p>{% endif %}{% endcomment %}
     <p class="text-themed text-center">{% trans "Price of" %} {{ fuel }} {% trans "in" %} {{ term }} {% trans "on the" %} {{ date }}</p>
     {% endif %}
+
+    <hr>
+
+    <div id="map" style="height: 500px; border-radius: 10px"></div>
 
     <!-- Grid with gas stations -->
     {% if results %}
@@ -31,4 +33,85 @@
     </div>
     {% endif %}
 </div>
+
+<script>
+    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>',
+        minZoom: 12,
+        detectRetina: true
+    });
+    var pnoa = L.tileLayer('https://tms-pnoa-ma.idee.es/1.0.0/pnoa-ma/{z}/{x}/{-y}.jpeg', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://pnoa.ign.es">PNOA</a>, <a href="https://idee.es">IDEE</a>',
+        minZoom: 12,
+        detectRetina: true
+    });
+    var bright = L.tileLayer('https://d.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        minZoom: 12
+    });
+    var dark = L.tileLayer('https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        minZoom: 12,
+    });
+    var capas = {
+        'OpenStreetMap': osm,
+        'PNOA (IGN)': pnoa,
+        '{% trans "Bright" %}': bright,
+        '{% trans "Dark" %}': dark
+    };
+
+
+    var map = L.map('map', {
+        zoom: 15,
+        layers: osm
+    });
+    var layerControl = L.control.layers(capas).addTo(map);
+
+    map.fitBounds([{% for r in results %}[{{ r.station.latitude }}, {{ r.station.longitude }}],{% endfor %}]);
+
+    var markers = L.markerClusterGroup();
+    {% for r in results %}{% with s=r.station %}
+    markers.addLayer(L.marker([{{ s.latitude }}, {{ s.longitude }}], {title: '{{ s.company|lower|capfirst }}', direction: "top", permanent: 1}).bindPopup(`
+        <h6>{{ s.company|lower|capfirst }}</h6>
+        <p>{{ s.address }}. {{ s.postal_code }} {{ s.locality }}, {{ s.province|lower|capfirst }}</p>
+        <p>{% trans "Schedule" %}: {{ s.schedule }}</p>
+        <p><a href="/gas/station/{{ s.id_eess }}/" class="text">Ver detalles</a></p>
+    `));
+    {% endwith %}{% endfor %}
+    map.addLayer(markers);
+
+    if ('{{ term }}'.includes("km")) {
+        parts = '{{ term }}'.split(", ");
+        lat = parseFloat(parts[0]);
+        lon = parseFloat(parts[1]);
+        radius = parseFloat(parts[2].replace(" km", ""));
+
+        console.log("{{ term }}");
+        var circle = L.circle([lat, lon], {
+            color: 'blue',
+            fillColor: '#30f',
+            fillOpacity: 0.05,
+            radius: radius * 1000
+        }).addTo(map);
+
+        map.fitBounds(circle.getBounds());
+    }
+
+    navigator.geolocation.getCurrentPosition((position) => {
+        var user = L.marker([position.coords.latitude, position.coords.longitude], {
+            icon: L.icon({
+                iconUrl: '/s/icons/car.svg',
+                iconSize: 36,
+                shadowUrl: '/s/icons/car-shadow.svg',
+                shadowSize: 36
+            })
+        }).addTo(map);
+        user.bindTooltip("{% trans 'You are here' %}", {direction:"top", offset: L.point(0,-16)}).openTooltip();
+    });
+</script>
+
 {% endblock %}

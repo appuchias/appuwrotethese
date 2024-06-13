@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% load user_agents i18n crispy_forms_tags %}
 
+{% block head %}
+<link rel="stylesheet" href="/s/leaflet/leaflet.css"/>
+<script src="/s/leaflet/leaflet.js"></script>
+
+<link rel="stylesheet" href="/s/leaflet/MarkerCluster.css"/>
+<link rel="stylesheet" href="/s/leaflet/MarkerCluster.Default.css"/>
+<script src="/s/leaflet/leaflet.markercluster.js"></script>
+{% endblock head %}
+
 {% block title %}{% trans 'Gas stations' %}{% endblock %}
 
 {% block content %}
