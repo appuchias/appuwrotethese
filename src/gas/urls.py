@@ -11,6 +11,6 @@ urlpatterns = [
     path("search/geo/", views.result_geo),
     path("localities/", views.names, kwargs={"q_type": "locality"}),
     path("provinces/", views.names, kwargs={"q_type": "province"}),
-    path("station/<int:id_eess>", views.station),
+    path("station/<int:id_eess>/", views.station),
     # path("save/<int:id>", views.save),
 ]
