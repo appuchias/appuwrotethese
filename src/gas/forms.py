@@ -109,7 +109,6 @@ class SearchPricesGeo(forms.Form):
             (5, "5 km"),
             (6, "6 km"),
             (10, "10 km"),
-            (20, "20 km"),
         ],
         required=True,
         help_text=_("Max straight line distance"),
