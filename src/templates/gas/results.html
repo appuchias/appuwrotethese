@@ -3,6 +3,15 @@
 
 {% block title %}Resultados{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="/s/leaflet/leaflet.css"/>
+<script src="/s/leaflet/leaflet.js"></script>
+
+<link rel="stylesheet" href="/s/leaflet/MarkerCluster.css"/>
+<link rel="stylesheet" href="/s/leaflet/MarkerCluster.Default.css"/>
+<script src="/s/leaflet/leaflet.markercluster.js"></script>
+{% endblock head %}
+
 {% block content %}
 <div id="search-result">
     {% if not hx %}
@@ -12,7 +21,9 @@
 
     <hr>
 
+    {% if not hx %}<div class="container">{% endif %}
     <div id="map" style="height: 500px; border-radius: 10px"></div>
+    {% if not hx %}</div>{% endif %}
 
     <!-- Grid with gas stations -->
     {% if results %}
