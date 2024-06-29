@@ -101,70 +101,70 @@ class StationPrice(models.Model):
     station = models.ForeignKey(Station, on_delete=models.DO_NOTHING)
     price_goa = models.DecimalField(
         verbose_name="Gasoleo A",
-        max_digits=4,
+        max_digits=5,
         decimal_places=3,
         null=True,  # This will go wrong at some point
         default=None,
     )
     price_gob = models.DecimalField(
         verbose_name="Gasoleo B",
-        max_digits=4,
+        max_digits=5,
         decimal_places=3,
         null=True,  # This will go wrong at some point
         default=None,
     )
     price_g95e5 = models.DecimalField(
         verbose_name="Gasolina 95 E5",
-        max_digits=4,
+        max_digits=5,
         decimal_places=3,
         null=True,
         default=None,
     )
     price_g95e5_premium = models.DecimalField(
         verbose_name="Gasolina 95 E5 Premium",
-        max_digits=4,
+        max_digits=5,
         decimal_places=3,
         null=True,
         default=None,
     )
     price_g95e10 = models.DecimalField(
         verbose_name="Gasolina 95 E10",
-        max_digits=4,
+        max_digits=5,
         decimal_places=3,
         null=True,
         default=None,
     )
     price_g98e5 = models.DecimalField(
         verbose_name="Gasolina 98 E5",
-        max_digits=4,
+        max_digits=5,
         decimal_places=3,
         null=True,
         default=None,
     )
     price_g98e10 = models.DecimalField(
         verbose_name="Gasolina 98 E10",
-        max_digits=4,
+        max_digits=5,
         decimal_places=3,
         null=True,
         default=None,
     )
     price_glp = models.DecimalField(
         verbose_name="GLP",
-        max_digits=4,
+        max_digits=5,
         decimal_places=3,
         null=True,
         default=None,
     )
     price_gnc = models.DecimalField(
         verbose_name="GNC",
-        max_digits=4,
+        max_digits=5,
         decimal_places=3,
         null=True,
         default=None,
     )
     price_h2 = models.DecimalField(
         verbose_name="H2",
-        max_digits=4,
+        max_digits=5,
         decimal_places=3,
         null=True,
         default=None,
