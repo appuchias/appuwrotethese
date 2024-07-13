@@ -1,10 +1,11 @@
 settings.conf
 db.sqlite3*
 src/ssl/*
+src/log/*.log
+src/log/*.csv
 
 .mypy_cache
 .pytest_cache
 __pycache__
 
-*.log
 src/gas/data/data.json

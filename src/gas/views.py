@@ -51,6 +51,9 @@ def result(request: HttpRequest):
     fuel = form_data.get("fuel_abbr")
     q_date = form_data.get("q_date", date.today())
 
+    # Log anonymized query
+    query_handler.log_query(fuel, q_date)
+
     if term.isdigit() and len(term) == 5:
         term_id = int(term)
         id_type = "postal_code"
@@ -197,6 +200,9 @@ def result_geo(request: HttpRequest):
     fuel = form_data.get("fuel_abbr", "GOA")
     name = date.today()
     q_date = form_data.get("q_date", name)
+
+    # Log anonymized query
+    query_handler.log_query(fuel, q_date)
 
     prices = query_handler.get_by_coords(lat, lon, radius, fuel, date.today())
 

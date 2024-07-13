@@ -1,7 +1,7 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from geopy.distance import distance
 from typing import Iterable
 
@@ -9,6 +9,8 @@ from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
 from gas.models import Locality, Province, Station, StationPrice
+
+QUERY_LOG_FILE = "log/query_log.csv"
 
 ## DB name lookup ##
 get_db_product_name = lambda prod_abbr, default="": {
@@ -23,6 +25,19 @@ get_db_product_name = lambda prod_abbr, default="": {
     "GNC": "price_gnc",
     "H2": "price_h2",
 }.get(prod_abbr, default)
+
+
+## Log queries ##
+def log_query(fuel, q_date):
+    try:
+        with open(QUERY_LOG_FILE, "r") as f:
+            pass
+    except FileNotFoundError:
+        with open(QUERY_LOG_FILE, "w") as f:
+            f.write("datetime;fuel;q_date\n")
+
+    with open(QUERY_LOG_FILE, "a") as f:
+        f.write(f"{datetime.now().isoformat()};{fuel};{q_date}\n")
 
 
 ## Get locality/province id ##
