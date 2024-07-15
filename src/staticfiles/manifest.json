@@ -1,8 +1,8 @@
 {
-    "name": "Appu Wrote These",
-    "short_name": "Appu Wrote These",
+    "name": "Combustible · Appu Wrote These",
+    "short_name": "Combustible · AWT",
     "description": "Proyectos en appu.ltd",
-    "start_url": "/",
+    "start_url": "/gas",
     "id": "/",
     "scope": "/",
     "display": "standalone",
@@ -12,29 +12,29 @@
     "background_color": "#141414",
     "theme_color": "#141414",
     "shortcuts": [
-        {
-            "name": "Precios del combustible",
-            "url": "/gas/",
-            "description": "Buscador de precios de combustible",
-            "icons": [
-                {
-                    "src": "/s/icons/fuel-64.png",
-                    "sizes": "64x64"
-                },
-                {
-                    "src": "/s/icons/fuel-96.png",
-                    "sizes": "96x96"
-                },
-                {
-                    "src": "/s/icons/fuel-192.png",
-                    "sizes": "192x192"
-                },
-                {
-                    "src": "/s/icons/fuel-512.png",
-                    "sizes": "512x512"
-                }
-            ]
-        },
+        // {
+        //     "name": "Precios del combustible",
+        //     "url": "/gas/",
+        //     "description": "Buscador de precios de combustible",
+        //     "icons": [
+        //         {
+        //             "src": "/s/icons/fuel-64.png",
+        //             "sizes": "64x64"
+        //         },
+        //         {
+        //             "src": "/s/icons/fuel-96.png",
+        //             "sizes": "96x96"
+        //         },
+        //         {
+        //             "src": "/s/icons/fuel-192.png",
+        //             "sizes": "192x192"
+        //         },
+        //         {
+        //             "src": "/s/icons/fuel-512.png",
+        //             "sizes": "512x512"
+        //         }
+        //     ]
+        // },
         {
             "name": "Mastermind",
             "url": "/mastermind/",
