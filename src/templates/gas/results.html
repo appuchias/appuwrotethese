@@ -16,14 +16,16 @@
 <div id="search-result">
     {% if not hx %}
     <h1 class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Stations' %}</h1>
-    <p class="text-themed text-center">{% trans "Price of" %} {{ fuel }} {% trans "in" %} {{ term }} {% trans "on the" %} {{ date }}</p>
+    {% if results %}<p class="text-themed text-center">{% trans "Price of" %} {{ fuel }} {% trans "in" %} {{ term }} {% trans "on the" %} {{ date }}</p>{% endif %}
     {% endif %}
 
     <hr>
 
+    {% if results %}
     {% if not hx %}<div class="container">{% endif %}
     <div id="map" style="height: 500px; border-radius: 10px"></div>
     {% if not hx %}</div>{% endif %}
+    {% endif %}
 
     <!-- Grid with gas stations -->
     {% if results %}
@@ -45,7 +47,7 @@
     {% endif %}
 </div>
 
-<script>
+{% if results %}<script>
     var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>',
@@ -119,6 +121,5 @@
         }).addTo(map);
         user.bindTooltip("{% trans 'You are here' %}", {direction:"top", offset: L.point(0,-16)}).openTooltip();
     });
-</script>
-
+</script>{% endif %}
 {% endblock %}
