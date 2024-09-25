@@ -1,21 +1,21 @@
 -i https://pypi.org/simple
 asgiref==3.8.1; python_version >= '3.8'
-certifi==2024.6.2; python_version >= '3.6'
+certifi==2024.8.30; python_version >= '3.6'
 charset-normalizer==3.3.2; python_full_version >= '3.7.0'
 crispy-bootstrap5==2024.2; python_version >= '3.8'
-django==5.0.6; python_version >= '3.10'
-django-crispy-forms==2.2; python_version >= '3.8'
+django==5.1.1; python_version >= '3.10'
+django-crispy-forms==2.3; python_version >= '3.8'
 django-user-agents==0.4.0
 geographiclib==2.0; python_version >= '3.7'
 geopy==2.4.1; python_version >= '3.7'
-gunicorn==22.0.0; python_version >= '3.7'
-idna==3.7; python_version >= '3.5'
+gunicorn==23.0.0; python_version >= '3.7'
+idna==3.10; python_version >= '3.6'
 packaging==24.1; python_version >= '3.8'
-pytz==2024.1
+pytz==2024.2
 requests==2.32.3; python_version >= '3.8'
-sqlparse==0.5.0; python_version >= '3.8'
-tzdata==2024.1; python_version >= '2'
+sqlparse==0.5.1; python_version >= '3.8'
+tzdata==2024.2; python_version >= '2'
 ua-parser==0.18.0
-urllib3==2.2.2; python_version >= '3.8'
+urllib3==2.2.3; python_version >= '3.8'
 user-agents==2.2.0
 whitenoise==6.7.0; python_version >= '3.8'
