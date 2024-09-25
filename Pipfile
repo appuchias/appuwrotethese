@@ -18,3 +18,4 @@ geopy = "*"
 [dev-packages]
 black = "*"
 mypy = "*"
+django-stubs = "*"
