@@ -32,12 +32,12 @@ def search(request: HttpRequest, geo: bool = False):
 
 
 def result(request: HttpRequest):
-    if request.method != "POST":
-        return HttpResponseNotAllowed(["POST"], "Method not allowed")
+    if request.method != "GET":
+        return HttpResponseNotAllowed(["GET"], "Method not allowed")
 
     hx = bool(request.headers.get("HX-Request", ""))
 
-    form = forms.SearchPrices(request.POST)
+    form = forms.SearchPrices(request.GET)
     if not form.is_valid():
         error_msg = _("Invalid form. Please try again") + "."
         if not hx:
@@ -182,13 +182,13 @@ def station(request: HttpRequest, id_eess: int):
 
 
 def result_geo(request: HttpRequest):
-    if request.method != "POST":
-        return HttpResponseNotAllowed(["POST"], "Method not allowed")
+    if request.method != "GET":
+        return HttpResponseNotAllowed(["GET"], "Method not allowed")
 
     hx = bool(request.headers.get("HX-Request", ""))
     assert hx, "This view is only for HX-Requests (I think)"
 
-    form = forms.SearchPricesGeo(request.POST)
+    form = forms.SearchPricesGeo(request.GET)
     if not form.is_valid():
         return render(request, "gas/results.html", {"hx": hx, "results": []})
 
