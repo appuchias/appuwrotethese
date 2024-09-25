@@ -3,12 +3,12 @@
 
 
 import logging
+import os
 from pathlib import Path
 from secrets import token_urlsafe
 
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
-
 
 DEBUG = False
 
@@ -26,7 +26,7 @@ if SECRET_KEY is None:
     )
 # SECRET_KEY_FALLBACKS = config.get("SECRET_KEY_FALLBACKS", [])
 
-SECURE_SSL_REDIRECT = not DEBUG
+SECURE_SSL_REDIRECT = not DEBUG and os.environ.get("HTTPS", "") == "true"
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = [

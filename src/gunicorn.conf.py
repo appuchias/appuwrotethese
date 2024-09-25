@@ -12,7 +12,14 @@ wsgi_app = "appuwrotethese.wsgi:application"
 backlog = 128
 worker_connections = 200
 
-pidfile = "gunicorn.pid"
+# pidfile = "gunicorn.pid"
+
+
+# Logging
+access_log_format = '%(t)s %({cf-connecting-ip}i)s[%({cf-ipcountry}i)s]  "%(f)s" "%(r)s" -> %(s)s %(b)s "%(a)s"'
+accesslog = "./log/access.log"
+errorlog = "./log/gunicorn.log"
+loglevel = "info"
 
 
 # PROD
@@ -25,17 +32,20 @@ if os.getenv("PROD", False) == "true" and not "virtualenvs" in os.getenv("PATH")
         bind = "0.0.0.0:443"
         certfile = "./ssl/cert.pem"
         keyfile = "./ssl/key.pem"
+
+    # HTTP PROD
     else:
         bind = "0.0.0.0:80"
+        accesslog = "-"
+        errorlog = "-"
+
+# DEV
 else:
     bind = "0.0.0.0:8000"
-
-
-# Logging
-access_log_format = '%(t)s %({cf-connecting-ip}i)s[%({cf-ipcountry}i)s]  "%(f)s" "%(r)s" -> %(s)s %(b)s "%(a)s"'
-accesslog = "./log/access.log"
-errorlog = "./log/gunicorn.log"
-loglevel = "info"
+    if DEBUG:
+        loglevel = "debug"
+        accesslog = "-"
+        errorlog = "-"
 
 
 # Startup message
