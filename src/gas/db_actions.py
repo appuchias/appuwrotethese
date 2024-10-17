@@ -5,6 +5,7 @@ import json, lzma, os, requests
 from datetime import date, datetime, timedelta
 from decimal import Decimal
 from concurrent.futures import ThreadPoolExecutor
+from tqdm import tqdm
 
 from appuwrotethese.extras import (
     DATA_OLD_MINUTES,
@@ -15,17 +16,9 @@ from appuwrotethese.extras import (
 )
 from gas.models import Locality, Province, Station, StationPrice
 
+URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/"
 HIST_URL = "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestresHist/"
 HIST_PATH_BASE = "gas/data/hist"
-DB_FIELD_RENAME = {
-    "IDEESS": "id_eess",
-    "Dirección": "address",
-    "Horario": "schedule",
-    "Rótulo": "company",
-    "Latitud": "latitude",
-    "Longitud (WGS84)": "longitude",
-    "C.P.": "postal_code",
-}
 DB_FIELD_FUELS = {
     "Precio Gasoleo A": "price_goa",
     "Precio Gasoleo B": "price_gob",
@@ -42,36 +35,30 @@ DB_FIELD_FUELS = {
 
 ## Data fetching functions ##
 def get_data(path=PATH_DATA, data_old_minutes=DATA_OLD_MINUTES) -> dict:
-    """Get the latest data.
+    """
+    Get the latest data.
 
     If the file is older than `data_old_minutes` minutes, redownload it.
     """
 
-    # Try to use the data in the file
+    # Determine if the data is old
     try:
         with open(path, "r") as r:
             data = json.load(r)
-    except FileNotFoundError:
-        data = {}  # Simulate the data is old
 
-    # Determine if the data is old
-    try:
-        date = data["Fecha"]
+        data_time = datetime.strptime(data["Fecha"], "%d/%m/%Y %H:%M:%S")
+        data_is_old = datetime.now() - data_time > timedelta(minutes=data_old_minutes)
+    except FileNotFoundError:
+        data_is_old = True
     except KeyError:
         data_is_old = True
-    else:
-        data_time = datetime.strptime(date, "%d/%m/%Y %H:%M:%S")
-        # True if data is older than DATA_OLD_MINUTES minutes
-        data_is_old = datetime.now() - data_time > timedelta(minutes=data_old_minutes)
 
     # Refresh the data
     if data_is_old:
-        data = requests.get(
-            "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/"
-        ).json()
+        data = requests.get(URL).json()
 
         with open(path, "w") as f:
-            json.dump(data, f, indent=4)
+            json.dump(data, f)
 
     return data
 
@@ -80,34 +67,50 @@ def get_data(path=PATH_DATA, data_old_minutes=DATA_OLD_MINUTES) -> dict:
 def create_localities_provinces(
     localities_path=PATH_LOCALITIES, provinces_path=PATH_PROVINCES
 ) -> None:
-    """Update the aux tables (gas_locality and gas_province)."""
+    """Update the auxiliary tables `gas_locality` and `gas_province`"""
 
     localities = get_json_data(localities_path)
     provinces = get_json_data(provinces_path)
 
     if Locality.objects.count() != len(localities):
         Locality.objects.bulk_create(
-            [
-                Locality(id_mun=locality["IDMunicipio"], name=locality["Municipio"])
-                for locality in localities
-            ]
+            [Locality(id_mun=l["IDMunicipio"], name=l["Municipio"]) for l in localities]
         )
 
     if Province.objects.count() != len(provinces):
         Province.objects.bulk_create(
-            [  #                              v Typo exists in the API
-                Province(id_prov=province["IDPovincia"], name=province["Provincia"])
-                for province in provinces
-            ]
+            [Province(id_prov=p["IDPovincia"], name=p["Provincia"]) for p in provinces]
         )
 
 
+def create_station(data: dict, station: Station | None = None) -> Station:
+    """Create a station from the data in `data`.
+
+    If `station` is provided, it will update the station with the new data.
+    """
+
+    if not station:
+        station = Station()
+        station.id_eess = int(data["IDEESS"])
+
+    station.company = data["Rótulo"]
+    station.schedule = data["Horario"]
+    station.address = data["Dirección"]
+    station.latitude = data["Latitud"].replace(",", ".")
+    station.longitude = data["Longitud (WGS84)"].replace(",", ".")
+    station.locality = Locality.objects.get(id_mun=data["IDMunicipio"])
+    station.province = Province.objects.get(id_prov=data["IDProvincia"])
+    station.postal_code = int(data["C.P."])
+
+    return station
+
+
 def update_day_stations_prices(data: list, day: date, update: bool = False) -> None:
-    """Update the database with `prices_date`'s stations and prices
+    """Update the database with stations and prices from `data`.
 
     Args
     ----
-    `all_data` is a dict with the following structure:
+    `data` is a dict with the following structure:
     { 1999-12-31: [ { <station fields> }, <more stations> ], <more dates> }
 
     If `update` is True, it will update existing stations and prices, even if
@@ -129,34 +132,17 @@ def update_day_stations_prices(data: list, day: date, update: bool = False) -> N
     updated_stations = set()
     updated_prices = list()
 
-    for price in data:
+    for price in tqdm(data, leave=False):
         id_eess = int(price["IDEESS"])
         if id_eess not in stations:
-            station = Station(
-                id_eess=id_eess,
-                company=price["Rótulo"],
-                schedule=price["Horario"],
-                address=price["Dirección"],
-                latitude=price["Latitud"].replace(",", "."),
-                longitude=price["Longitud (WGS84)"].replace(",", "."),
-                locality=Locality.objects.get(id_mun=price["IDMunicipio"]),
-                province=Province.objects.get(id_prov=price["IDProvincia"]),
-                postal_code=int(price["C.P."]),
-            )
+            station = create_station(price)
 
             stations[station.id_eess] = station
             new_stations.add(station)
 
         elif update:  # Update station info if required
             station = stations[id_eess]
-            station.company = price["Rótulo"]
-            station.schedule = price["Horario"]
-            station.address = price["Dirección"]
-            station.latitude = price["Latitud"].replace(",", ".")
-            station.longitude = price["Longitud (WGS84)"].replace(",", ".")
-            station.locality = Locality.objects.get(id_mun=price["IDMunicipio"])
-            station.province = Province.objects.get(id_prov=price["IDProvincia"])
-            station.postal_code = int(price["C.P."])
+            station = create_station(price, station)
 
             updated_stations.add(station)
 
@@ -164,7 +150,7 @@ def update_day_stations_prices(data: list, day: date, update: bool = False) -> N
             prices.append(id_eess)
             new_prices.append(
                 StationPrice(
-                    station=stations.get(id_eess, None),
+                    station=stations.get(id_eess),
                     date=day,
                     **{
                         DB_FIELD_FUELS[key]: Decimal(price[key].replace(",", "."))
@@ -183,6 +169,8 @@ def update_day_stations_prices(data: list, day: date, update: bool = False) -> N
                     DB_FIELD_FUELS[key],
                     Decimal(price[key].replace(",", ".")) if price[key] else None,
                 )
+
+    print(f"Storing {day}...", end="\r")
 
     if update:  # Update required stations and prices
         if updated_stations:
@@ -206,8 +194,6 @@ def update_day_stations_prices(data: list, day: date, update: bool = False) -> N
 
     Station.objects.bulk_create(new_stations)
     StationPrice.objects.bulk_create(new_prices)
-
-    print(day, end="\r")
 
 
 def get_data_and_update_day(current_date: date) -> None:
