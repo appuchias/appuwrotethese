@@ -12,20 +12,6 @@ from gas.models import Locality, Province, Station, StationPrice
 
 QUERY_LOG_FILE = "log/query_log.csv"
 
-## DB name lookup ##
-get_db_product_name = lambda prod_abbr, default="": {
-    "GOA": "price_goa",
-    "GOB": "price_gob",
-    "G95E5": "price_g95e5",
-    "G95E5+": "price_g95e5_premium",
-    "G95E10": "price_g95e10",
-    "G98E5": "price_g98e5",
-    "G98E10": "price_g98e10",
-    "GLP": "price_glp",
-    "GNC": "price_gnc",
-    "H2": "price_h2",
-}.get(prod_abbr, default)
-
 
 ## Log queries ##
 def log_query(fuel, q_date):
@@ -78,7 +64,7 @@ def get_ids(term: str) -> tuple[int, int]:
 
 ## Process the query form ##
 def db_prices(
-    term_id: int, term_type: str, prod_abbr: str, q_date: date
+    term_id: int, term_type: str, prod_name: str, q_date: date
 ) -> Iterable[StationPrice]:
     """Get the prices from the database.
 
@@ -86,8 +72,6 @@ def db_prices(
 
     The term type must be one of (locality_id, province_id, postal_code)
     """
-
-    prod_name = get_db_product_name(prod_abbr)
 
     station_filter = {f"{term_type}": term_id}
     stations = Station.objects.filter(**station_filter)
@@ -105,7 +89,7 @@ def db_prices(
 
 
 def get_by_coords(
-    latitude: float, longitude: float, radius: float, fuel: str, q_date: date
+    latitude: float, longitude: float, radius: float, prod_name: str, q_date: date
 ) -> Iterable[StationPrice]:
     """Get the prices from the database.
 
@@ -123,8 +107,6 @@ def get_by_coords(
     south_lat = d.destination(src, 180).latitude
     east_lon = d.destination(src, -90).longitude
     west_lon = d.destination(src, 90).longitude
-
-    prod_name = get_db_product_name(fuel)
 
     # This will only work in the northern hemisphere (which is the case for Spain)
     stations = Station.objects.filter(
@@ -149,7 +131,7 @@ def get_by_coords(
 
 
 def get_stations_prices(
-    station_ids: int | Iterable[int], fuel: str, q_date: date
+    station_ids: int | Iterable[int], prod_name: str, q_date: date
 ) -> Iterable[StationPrice]:
     """Get the prices from the database.
 
@@ -157,8 +139,6 @@ def get_stations_prices(
     and the date and returns the list of prices.
     It accepts a single station id or an iterable of station ids.
     """
-
-    prod_name = get_db_product_name(fuel)
 
     if isinstance(station_ids, int):
         raw_prices = StationPrice.objects.filter(station_id=station_ids, date=q_date)
@@ -188,14 +168,13 @@ def get_station_prices_range(
 
 
 def are_past_prices_lower(
-    curr_prices, fuel: str, q_date: date, day_diff: int
+    curr_prices, prod_name: str, q_date: date, day_diff: int
 ) -> dict[int, str]:
     """Get the a past date's prices"""
 
     prev_week = q_date - timedelta(days=day_diff)
-    prod_name = get_db_product_name(fuel)
     past_prices = get_stations_prices(
-        (price.station.id_eess for price in curr_prices), fuel, prev_week
+        (price.station.id_eess for price in curr_prices), prod_name, prev_week
     )
     past_prices = {
         price.station.id_eess: getattr(price, prod_name) for price in past_prices
