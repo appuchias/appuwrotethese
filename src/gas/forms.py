@@ -9,18 +9,17 @@ from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 
-
 FUEL_CHOICES = [
-    ("GOA", "Gasóleo A"),
-    ("GOB", "Gasóleo B"),
-    ("G95E5", "Gasolina 95 E5"),
-    # ("G95E5+", "Gasolina 95 E5 Premium"),
-    # ("G95E10", "Gasolina 95 E10"),
-    ("G98E5", "Gasolina 98 E5"),
-    # ("G98E10", "Gasolina 98 E10"),
-    ("GLP", "GLP"),
-    # ("GNC", "GNC"),
-    # ("H2", "Hidrógeno"),
+    ("price_goa", "Gasóleo A"),
+    ("price_gob", "Gasóleo B"),
+    ("price_g95e5", "Gasolina 95 E5"),
+    # ("price_g95e5_premium", "Gasolina 95 E5 Premium"),
+    # ("price_g95e10", "Gasolina 95 E10"),
+    ("price_g98e5", "Gasolina 98 E5"),
+    # ("price_g98e10", "Gasolina 98 E10"),
+    ("price_glp", "GLP"),
+    # ("price_gnc", "GNC"),
+    # ("price_h2", "Hidrógeno"),
 ]
 
 
