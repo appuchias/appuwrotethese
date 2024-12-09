@@ -41,17 +41,19 @@ def get_data(path=PATH_DATA, data_old_minutes=DATA_OLD_MINUTES) -> dict:
     If the file is older than `data_old_minutes` minutes, redownload it.
     """
 
-    # Determine if the data is old
-    try:
-        with open(path, "r") as r:
-            data = json.load(r)
+    data_is_old = True
 
-        data_time = datetime.strptime(data["Fecha"], "%d/%m/%Y %H:%M:%S")
-        data_is_old = datetime.now() - data_time > timedelta(minutes=data_old_minutes)
-    except FileNotFoundError:
-        data_is_old = True
-    except KeyError:
-        data_is_old = True
+    if os.path.exists(path):
+        try:
+            with open(path, "r") as r:
+                data = json.load(r)
+        except json.JSONDecodeError:
+            data = {}
+
+        data_time = datetime.strptime(
+            data.get("Fecha", "01/01/1970 00:00:00"), "%d/%m/%Y %H:%M:%S"
+        )
+        data_is_old = (datetime.now() - data_time) > timedelta(minutes=data_old_minutes)
 
     # Refresh the data
     if data_is_old:
