@@ -134,7 +134,7 @@ def update_day_stations_prices(data: list, day: date, update: bool = False) -> N
     updated_stations = set()
     updated_prices = list()
 
-    for price in tqdm(data, leave=False, desc=f"Processing {day}"):
+    for price in tqdm(data, desc=f"{day}", leave=False):
         id_eess = int(price["IDEESS"])
         if id_eess not in stations:
             station = create_station(price)
@@ -229,11 +229,7 @@ def store_historical_prices(
     print(f"[·] Fetching {days} days using {workers} workers ({oldest} <-> ytd)")
 
     with Pool(processes=workers) as pool:
-        for current_date in tqdm(
-            (oldest + timedelta(days=i) for i in range(days)),
-            leave=False,
-            disable=(workers > 1),
-        ):
+        for current_date in (oldest + timedelta(days=i) for i in range(days)):
             if StationPrice.objects.filter(date=current_date).exists():
                 continue
 
@@ -250,6 +246,7 @@ def store_historical_prices(
                 pool.apply_async(get_data_and_update_day, (current_date,))
 
         pool.close()
+        print("[·] Tasks submitted. Starting workers...")
         pool.join()
 
     print("---       ")
