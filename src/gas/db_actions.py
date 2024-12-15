@@ -134,7 +134,7 @@ def update_day_stations_prices(data: list, day: date, update: bool = False) -> N
     updated_stations = set()
     updated_prices = list()
 
-    for price in tqdm(data, leave=False):
+    for price in tqdm(data, leave=False, desc=f"Processing {day}"):
         id_eess = int(price["IDEESS"])
         if id_eess not in stations:
             station = create_station(price)
@@ -171,8 +171,6 @@ def update_day_stations_prices(data: list, day: date, update: bool = False) -> N
                     DB_FIELD_FUELS[key],
                     Decimal(price[key].replace(",", ".")) if price[key] else None,
                 )
-
-    print(f"Storing {day}...", end="\r")
 
     if update:  # Update required stations and prices
         if updated_stations:

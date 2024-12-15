@@ -3,7 +3,7 @@ from gas import db_actions
 
 
 class Command(BaseCommand):
-    help = "Add all historical prices to the database."
+    help = "Add historical prices to the database."
 
     def add_arguments(self, parser):
         parser.add_argument(
