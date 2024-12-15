@@ -21,10 +21,10 @@ class Command(BaseCommand):
             default=30,
         )
         parser.add_argument(
-            "-t",
-            "--threads",
+            "-w",
+            "--workers",
             type=int,
-            help="Number of threads to use. Keep low if using SQLite without WAL.",
+            help="Number of workers to use. Keep this value low if you're using SQLite without WAL.",
             default=1,
         )
 
@@ -32,7 +32,7 @@ class Command(BaseCommand):
         db_actions.store_historical_prices(
             days=options["days"],
             local_folder=options["local_folder"],
-            threads=options["threads"],
+            workers=options["workers"],
         )
 
         self.stdout.write(self.style.SUCCESS("Successfully updated the database."))

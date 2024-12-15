@@ -4,7 +4,7 @@
 import json, lzma, os, requests
 from datetime import date, datetime, timedelta
 from decimal import Decimal
-from concurrent.futures import ThreadPoolExecutor
+from multiprocessing import Pool
 from tqdm import tqdm
 
 from appuwrotethese.extras import (
@@ -217,40 +217,42 @@ def get_data_and_update_day(current_date: date) -> None:
 
 ## Store historical prices ##
 def store_historical_prices(
-    days: int = 30, local_folder: str = "", threads: int = 1
+    days: int = 30, local_folder: str = "", workers: int = 1
 ) -> None:
     """Store historical prices in the database.
 
     If `local_folder` is provided, it will use all files in that folder.
-    Otherwise, it will store the data from the last year.
+    Otherwise, it will fetch the data from the API.
     """
 
-    print(f"[·] Fetching prices from the last {days} days ({threads} threads)")
+    # Oldest date to process initially
+    oldest = date.today() - timedelta(days=days)
 
-    today = date.today()
-    current_date = today - timedelta(days=days)
+    print(f"[·] Fetching {days} days using {workers} workers ({oldest} <-> ytd)")
 
-    with ThreadPoolExecutor(max_workers=threads) as executor:
-        while current_date <= today:
+    with Pool(processes=workers) as pool:
+        for current_date in tqdm(
+            (oldest + timedelta(days=i) for i in range(days)),
+            leave=False,
+            disable=(workers > 1),
+        ):
             if StationPrice.objects.filter(date=current_date).exists():
-                current_date += timedelta(days=1)
                 continue
 
             if local_folder:
                 filename = local_folder + current_date.strftime("%Y-%m-%d.json.xz")
                 if not os.path.isfile(filename):
-                    current_date += timedelta(days=1)
                     continue
 
                 with lzma.open(filename) as f:
                     data: list = json.load(f)["ListaEESSPrecio"]
 
-                executor.submit(update_day_stations_prices, data, current_date)
+                pool.apply_async(update_day_stations_prices, (data, current_date))
             else:
-                executor.submit(get_data_and_update_day, current_date)
+                pool.apply_async(get_data_and_update_day, (current_date,))
 
-            # print(current_date, end="\r")
-            current_date += timedelta(days=1)
+        pool.close()
+        pool.join()
 
-    # print("---       ")
+    print("---       ")
     print("[✓] Stored historical prices")
