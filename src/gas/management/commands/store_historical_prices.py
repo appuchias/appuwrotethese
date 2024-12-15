@@ -6,6 +6,7 @@ class Command(BaseCommand):
     help = "Add historical prices to the database."
 
     def add_arguments(self, parser):
+        parser.register("type", "natural", lambda s: max(1, int(s)))
         parser.add_argument(
             "-f",
             "--local-folder",
@@ -16,14 +17,14 @@ class Command(BaseCommand):
         parser.add_argument(
             "-d",
             "--days",
-            type=int,
+            type="natural",
             help="Days to fetch",
             default=30,
         )
         parser.add_argument(
             "-w",
             "--workers",
-            type=int,
+            type="natural",
             help="Number of workers to use. Keep this value low if you're using SQLite without WAL.",
             default=1,
         )
