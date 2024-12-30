@@ -33,10 +33,6 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" type="text/css" href="/s/styles/styles.min.css">
 
-        <!-- Plausible analytics script -->
-        <script defer async data-domain="appu.ltd" src="https://plausible.appu.ltd/js/script.outbound-links.js"></script>
-        <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
-
         <!-- PWA -->
         <link rel="manifest" href="/s/manifest.json">
 
@@ -53,6 +49,9 @@
 
         {% block head %}{% endblock head %}
         <title>Appu · {% block title %}Web{% endblock title %}</title>
+
+        <!-- Metrics -->
+        <script defer src="https://metrics.appu.ltd/script.js" data-website-id="4babf718-91a2-4969-8797-075d36d3857a"></script>
     </head>
 
     {% with request|is_mobile as phone %}
