@@ -23,6 +23,12 @@ compilemsgs:
 lesscompile: # Install AUR: nodejs-less and nodejs-less-plugin-clean-css
 	cat staticfiles/styles/styles.less staticfiles/styles/project_styles.less | lessc - staticfiles/styles/styles.min.css --clean-css
 
+purge_stations:
+	sqlite3 db.sqlite3 "DELETE FROM gas_station;"
+
+purge_prices:
+	sqlite3 db.sqlite3 "DELETE FROM gas_stationprice;"
+
 update:
 	git fetch
 	git pull
