@@ -2,11 +2,14 @@
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
 from datetime import date
+from typing import Any, Mapping
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Layout, Submit, HTML
 from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.forms.renderers import BaseRenderer
+from django.forms.utils import ErrorList
 from django.utils.translation import gettext_lazy as _
 
 FUEL_CHOICES = [
@@ -215,3 +218,49 @@ class GetPrices(forms.Form):
             }
         ),
     )
+
+
+class DateRangeForm(forms.Form):
+    """Form for selecting a date range"""
+
+    start_date = forms.DateField(
+        label=_("Start date"),
+        help_text=_("Start date"),
+        required=True,
+        widget=forms.widgets.DateInput(
+            attrs={
+                "type": "date",
+                "min": date(2007, 1, 1),
+                "max": date.today(),
+                "value": date(2007, 1, 1),
+            }
+        ),
+    )
+
+    end_date = forms.DateField(
+        label=_("End date"),
+        help_text=_("End date"),
+        required=True,
+        widget=forms.widgets.DateInput(
+            attrs={
+                "type": "date",
+                "min": date(2007, 1, 1),
+                "max": date.today(),
+                "value": date.today(),
+            }
+        ),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Set crispy form layout
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                Div("start_date"),
+                HTML("<span>&nbsp;-&nbsp;</span>"),
+                Div("end_date"),
+                css_class="d-flex justify-content-center",
+            ),
+        )

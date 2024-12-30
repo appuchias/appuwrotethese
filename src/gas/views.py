@@ -145,8 +145,43 @@ def names(request: HttpRequest, **kwargs):
 
 
 def station(request: HttpRequest, id_eess: int):
-    if request.method != "GET":
-        return HttpResponseNotAllowed(["GET"], "Method not allowed")
+    if request.method not in ["GET", "POST"]:
+        return HttpResponseNotAllowed(["GET", "POST"], "Method not allowed")
+
+    def build_graph_data(price_history):
+        return [
+            {
+                "date": price.date,
+                "price_goa": price.price_goa,
+                "price_gob": price.price_gob,
+                "price_g95e5": price.price_g95e5,
+                "price_g98e5": price.price_g98e5,
+                "price_glp": price.price_glp,
+                "price_gnc": price.price_gnc,
+                "price_h2": price.price_h2,
+            }
+            for price in price_history
+        ]
+
+    if request.method == "POST":
+        form = forms.DateRangeForm(request.POST)
+        if form.is_valid():
+            start_date = form.cleaned_data.get(
+                "start_date", date.today() - timedelta(days=30)
+            )
+            end_date = form.cleaned_data.get("end_date", date.today())
+
+            return render(
+                request,
+                "gas/station_pricerange.html",
+                {
+                    "graph_data": build_graph_data(
+                        query_handler.get_station_prices_range(
+                            id_eess, start_date, end_date
+                        )
+                    ),
+                },
+            )
 
     station = models.Station.objects.get(id_eess=id_eess)
     currentprice = models.StationPrice.objects.filter(station=id_eess).latest("date")
@@ -155,20 +190,6 @@ def station(request: HttpRequest, id_eess: int):
         station.id_eess, date.today() - timedelta(days=60), date.today()
     )
 
-    graph_data = [
-        {
-            "date": price.date,
-            "price_goa": price.price_goa,
-            "price_gob": price.price_gob,
-            "price_g95e5": price.price_g95e5,
-            "price_g98e5": price.price_g98e5,
-            "price_glp": price.price_glp,
-            "price_gnc": price.price_gnc,
-            "price_h2": price.price_h2,
-        }
-        for price in price_history
-    ]
-
     return render(
         request,
         "gas/station.html",
@@ -176,7 +197,8 @@ def station(request: HttpRequest, id_eess: int):
             "station": station,
             "p": currentprice,
             "price_hist": price_history,
-            "graph_data": graph_data,
+            "daterange_form": forms.DateRangeForm(),
+            "graph_data": build_graph_data(price_history),
         },
     )
 

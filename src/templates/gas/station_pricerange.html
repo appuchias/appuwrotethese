@@ -1,0 +1,36 @@
+{% load user_agents i18n %}
+
+<div id="pricerange">
+    {{ graph_data|json_script:"price_hist" }}
+    <script>
+        chart = Chart.getChart("price_hist_graph");
+        precios = JSON.parse(document.getElementById("price_hist").textContent);
+
+        chart.data.labels = precios.map(row => row.date);
+        chart.data.datasets = [
+            {
+                label: "Gasóleo A",
+                data: precios.map(row => row.price_goa),
+                borderColor: "#36a2eb",
+            }, {
+                label: "Gasóleo B",
+                data: precios.map(row => row.price_gob),
+                borderColor: "#ff6384",
+            }, {
+                label: "Gasolina 95",
+                data: precios.map(row => row.price_g95e5),
+                borderColor: "#4bc0c0",
+            }, {
+                label: "Gasolina 98",
+                data: precios.map(row => row.price_g98e5),
+                borderColor: "#ffcd56",
+            }, {
+                label: "GLP",
+                data: precios.map(row => row.price_glp),
+                borderColor: "#9966ff",
+            }
+        ];
+
+        chart.update();
+    </script>
+</div>
