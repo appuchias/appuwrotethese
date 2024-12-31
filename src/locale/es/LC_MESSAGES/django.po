@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-31 19:03+0200\n"
+"POT-Creation-Date: 2024-12-31 01:10+0100\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -74,16 +74,16 @@ msgid "Only alphanumeric characters and underscores are allowed."
 msgstr "Solo se permiten caracteres alfanuméricos y guiones bajos."
 
 #: accounts/models.py:55 gas/models.py:23 gas/models.py:28
-#: templates/gas/station.html:28
+#: templates/gas/station.html:34
 msgid "Locality"
 msgstr "Localidad"
 
 #: accounts/models.py:56 gas/models.py:50 gas/models.py:55
-#: templates/gas/station.html:32
+#: templates/gas/station.html:38
 msgid "Province"
 msgstr "Provincia"
 
-#: accounts/models.py:57 gas/forms.py:190 gas/forms.py:192 gas/models.py:78
+#: accounts/models.py:57 gas/forms.py:191 gas/forms.py:193 gas/models.py:78
 msgid "Postal code"
 msgstr "Código postal"
 
@@ -204,72 +204,80 @@ msgstr "Proyecto de ejemplo #"
 msgid "Placeholder project description"
 msgstr "Descripción del proyecto de ejemplo"
 
-#: gas/forms.py:31
+#: gas/forms.py:33
 msgid "Search term"
 msgstr "Término de búsqueda"
 
-#: gas/forms.py:33
+#: gas/forms.py:35
 msgid "Specific term to look for (e.g. Coruña, 15001, etc.)"
 msgstr "Término concreto a buscar (p.ej. Coruña, 15001, etc.)"
 
-#: gas/forms.py:38 gas/forms.py:119 gas/forms.py:196
-#: templates/gas/station.html:54 templates/gas/station_card.html:17
+#: gas/forms.py:40 gas/forms.py:120 gas/forms.py:197
+#: templates/gas/station.html:60 templates/gas/station_card.html:17
 msgid "Fuel"
 msgstr "Combustible"
 
-#: gas/forms.py:41 gas/forms.py:122 gas/forms.py:204
+#: gas/forms.py:43 gas/forms.py:123 gas/forms.py:205
 msgid "Fuel to use for sorting"
 msgstr "Combustible para ordenar"
 
-#: gas/forms.py:45 gas/forms.py:126 gas/forms.py:208
+#: gas/forms.py:47 gas/forms.py:127 gas/forms.py:209
 msgid "Date"
 msgstr "Fecha"
 
-#: gas/forms.py:46 gas/forms.py:127 gas/forms.py:209
+#: gas/forms.py:48 gas/forms.py:128 gas/forms.py:210
 msgid "Prices date"
 msgstr "Fecha de los precios"
 
-#: gas/forms.py:76 gas/forms.py:168
+#: gas/forms.py:78 gas/forms.py:169
 msgid "Search"
 msgstr "Buscar"
 
-#: gas/forms.py:89 gas/models.py:83 templates/gas/station.html:36
+#: gas/forms.py:91 gas/models.py:83 templates/gas/station.html:42
 msgid "Latitude"
 msgstr "Latitud"
 
-#: gas/forms.py:91
+#: gas/forms.py:93
 msgid "Latitude value"
 msgstr "Valor de latitud"
 
-#: gas/forms.py:96 gas/models.py:86 templates/gas/station.html:40
+#: gas/forms.py:98 gas/models.py:86 templates/gas/station.html:46
 msgid "Longitude"
 msgstr "Longitud"
 
-#: gas/forms.py:98
+#: gas/forms.py:100
 msgid "Longitude value"
 msgstr "Valor de longitud"
 
-#: gas/forms.py:103
+#: gas/forms.py:105
 msgid "Radius"
 msgstr "Radio"
 
-#: gas/forms.py:115
+#: gas/forms.py:116
 msgid "Max straight line distance"
 msgstr "Distancia máxima"
 
-#: gas/forms.py:178 gas/forms.py:180 gas/models.py:16
+#: gas/forms.py:179 gas/forms.py:181 gas/models.py:16
 msgid "Locality ID"
 msgstr "ID de la localidad"
 
-#: gas/forms.py:184 gas/forms.py:186 gas/models.py:43
+#: gas/forms.py:185 gas/forms.py:187 gas/models.py:43
 msgid "Province ID"
 msgstr "ID de provincia"
+
+#: gas/forms.py:227 gas/forms.py:228
+msgid "Start date"
+msgstr "Fecha de inicio"
+
+#: gas/forms.py:241 gas/forms.py:242
+msgid "End date"
+msgstr "Fecha de fin"
 
 #: gas/models.py:17
 msgid "ID of the locality"
 msgstr "ID de la localidad"
 
-#: gas/models.py:29 gas/views.py:139 templates/gas/search.html:21
+#: gas/models.py:29 gas/views.py:142 templates/gas/search.html:28
 msgid "Localities"
 msgstr "Localidades"
 
@@ -277,7 +285,7 @@ msgstr "Localidades"
 msgid "ID of the province"
 msgstr "ID de la provincia"
 
-#: gas/models.py:56 gas/views.py:128 templates/gas/search.html:23
+#: gas/models.py:56 gas/views.py:131 templates/gas/search.html:30
 msgid "Provinces"
 msgstr "Provincias"
 
@@ -285,11 +293,11 @@ msgstr "Provincias"
 msgid "Company"
 msgstr "Compañía"
 
-#: gas/models.py:73 templates/gas/station.html:24
+#: gas/models.py:73 templates/gas/station.html:30
 msgid "Address"
 msgstr "Dirección"
 
-#: gas/models.py:74 templates/gas/station.html:44
+#: gas/models.py:74 templates/gas/results.html:91 templates/gas/station.html:50
 msgid "Schedule"
 msgstr "Horario"
 
@@ -297,7 +305,7 @@ msgstr "Horario"
 msgid "Gas station"
 msgstr "Gasolinera"
 
-#: gas/models.py:91 templates/gas/search.html:4 templates/gas/search.html:8
+#: gas/models.py:91 templates/gas/search.html:13 templates/gas/search.html:17
 msgid "Gas stations"
 msgstr "Gasolineras"
 
@@ -313,11 +321,11 @@ msgstr "Precios"
 msgid "Invalid form. Please try again"
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
-#: gas/views.py:66
+#: gas/views.py:69
 msgid "The location you're looking for could not be found"
 msgstr "No se pudo encontrar la ubicación que estás buscando"
 
-#: gas/views.py:79
+#: gas/views.py:82
 msgid "There were no prices in the database for that location and date"
 msgstr "No hay precios en la base de datos para esa ubicación y fecha"
 
@@ -381,7 +389,7 @@ msgstr ""
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
 #: templates/accounts/register.html:5 templates/accounts/why.html:5
-#: templates/base.html:86 templates/base.html:87
+#: templates/base.html:85 templates/base.html:86
 msgid "Account"
 msgstr "Cuenta"
 
@@ -394,14 +402,14 @@ msgstr "Cuenta AWT"
 msgid "You're logged in as"
 msgstr "Estás conectado como"
 
-#: templates/accounts/account.html:12 templates/gas/results.html:25
-#: templates/legal.html:11 templates/legal.html:69
+#: templates/accounts/account.html:12 templates/gas/results.html:38
+#: templates/legal.html:11 templates/legal.html:72
 msgid "Hosting is not free"
 msgstr "La web no es gratis"
 
-#: templates/accounts/account.html:12 templates/base.html:115
-#: templates/gas/results.html:25 templates/legal.html:11
-#: templates/legal.html:69
+#: templates/accounts/account.html:12 templates/base.html:114
+#: templates/gas/results.html:38 templates/legal.html:11
+#: templates/legal.html:72
 msgid "Support me"
 msgstr "Apóyame"
 
@@ -431,7 +439,7 @@ msgstr "No has iniciado sesión"
 
 #. Translators: Button to go to last page visited
 #: templates/accounts/chpwd.html:17 templates/accounts/respwd.html:17
-#: templates/build.html:14 templates/gas/results.html:32
+#: templates/build.html:14 templates/gas/results.html:45
 msgid "Go back"
 msgstr "Volver atrás"
 
@@ -518,15 +526,15 @@ msgstr ""
 "crear tu cuenta de nuevo. Intentaré evitarlo, pero no puedo prometer que no "
 "vaya a suceder"
 
-#: templates/base.html:89 templates/base.html:90
+#: templates/base.html:88 templates/base.html:89
 msgid "Prices"
 msgstr "Precios"
 
-#: templates/base.html:96
+#: templates/base.html:95
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:118
+#: templates/base.html:117
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -555,27 +563,39 @@ msgstr ""
 msgid "Tip: Use CTRL+F or tap 'search in page' in the browser menu"
 msgstr "Tip: Usa CTRL+F o pulsa 'buscar en la página' en el menú del navegador"
 
-#: templates/gas/results.html:10
+#: templates/gas/results.html:19
 msgid "Stations"
 msgstr "Gasolineras"
 
-#: templates/gas/results.html:15
+#: templates/gas/results.html:20
 msgid "Price of"
 msgstr "Precio de"
 
-#: templates/gas/results.html:15
+#: templates/gas/results.html:20
 msgid "in"
 msgstr "en"
 
-#: templates/gas/results.html:15
+#: templates/gas/results.html:20
 msgid "on the"
 msgstr "para el día"
 
-#: templates/gas/results.html:30
+#: templates/gas/results.html:43
 msgid "No station prices were found"
 msgstr "No se encontraron precios para las gasolineras"
 
-#: templates/gas/search.html:10
+#: templates/gas/results.html:73 templates/gas/station.html:155
+msgid "Bright"
+msgstr "Claro"
+
+#: templates/gas/results.html:74 templates/gas/station.html:156
+msgid "Dark"
+msgstr "Oscuro"
+
+#: templates/gas/results.html:123 templates/gas/station.html:172
+msgid "You are here"
+msgstr "Estás aquí"
+
+#: templates/gas/search.html:19
 msgid ""
 "Here you will find the cheapest gas stations for each area sorted by fuel "
 "type"
@@ -583,37 +603,33 @@ msgstr ""
 "Aquí podrás encontrar las gasolineras más baratas de cada zona para el tipo "
 "de combustible que utilices"
 
-#: templates/gas/search.html:18
+#: templates/gas/search.html:25
 msgid "Search by coordinates"
 msgstr "Buscar por coordenadas"
 
-#: templates/gas/search.html:18
+#: templates/gas/search.html:25
 msgid "Search by area"
 msgstr "Buscar por área"
 
-#: templates/gas/station.html:12
+#: templates/gas/station.html:9
 msgid "Station"
 msgstr "Gasolinera"
 
-#: templates/gas/station.html:17
+#: templates/gas/station.html:19
 msgid "Information"
 msgstr "Información"
 
-#: templates/gas/station.html:20
+#: templates/gas/station.html:26
 msgid "Name"
 msgstr "Nombre"
 
-#: templates/gas/station.html:50
+#: templates/gas/station.html:56
 msgid "Current prices"
 msgstr "Precios actuales"
 
-#: templates/gas/station.html:111
+#: templates/gas/station.html:116
 msgid "Price history"
 msgstr "Histórico de precios"
-
-#: templates/gas/station.html:175
-msgid "You are here"
-msgstr "Estás aquí"
 
 #: templates/gas/station_card.html:72
 msgid "Go"
@@ -676,6 +692,17 @@ msgstr "mi correo de contacto"
 
 #: templates/legal.html:22
 msgid ""
+"The website stores a log of the Gas queries received (requests to /gas/"
+"search/ and /gas/search/geo/). Only the fuel selected, the time of the query "
+"and the queried date are stores to protect users' privacy."
+msgstr ""
+"La web almacena un registro de las consultas de Gas recibidas (peticiones a "
+"/gas/search/ y /gas/search/geo/). Solo se almacenan el combustible "
+"seleccionado, la hora de la consulta y la fecha consultada para proteger la "
+"privacidad de los usuarios."
+
+#: templates/legal.html:25
+msgid ""
 "Any information provided in forms or any equivalent way (usernames, real "
 "names, emails and passwords) will be stored in the web's database"
 msgstr ""
@@ -683,7 +710,7 @@ msgstr ""
 "formaequivalente (nombres de usuario, nombres reales, correos electrónicos "
 "ycontraseñas) se almacenará en la base de datos de la web"
 
-#: templates/legal.html:24
+#: templates/legal.html:27
 msgid ""
 "You can request its deletion at any time through the same email that is "
 "registered in the web"
@@ -691,7 +718,7 @@ msgstr ""
 "Puedes solicitar su eliminación en cualquier momento a través del mismo "
 "correo electrónico que está registrado en la web"
 
-#: templates/legal.html:24
+#: templates/legal.html:27
 msgid ""
 "All requests will be fulfilled within 30 days from the first notification "
 "when possible"
@@ -699,7 +726,7 @@ msgstr ""
 "Todas las solicitudes se cumplirán en un plazo de 30 días desde la primera "
 "notificación siempre que sea posible"
 
-#: templates/legal.html:26
+#: templates/legal.html:29
 msgid ""
 "None of the information stored by this service is or will be shared with any "
 "third party unless required by law"
@@ -707,7 +734,7 @@ msgstr ""
 "Ninguna información almacenada por este servicio es o será compartida con "
 "terceros a menos que sea requerido por ley"
 
-#: templates/legal.html:28
+#: templates/legal.html:31
 msgid ""
 "Passwords are stored hashed and salted for users' protection in case of a "
 "security breach"
@@ -715,11 +742,11 @@ msgstr ""
 "Las contraseñas se almacenan hasheadas y 'salted' para la protección de los "
 "usuarios en caso de una brecha de seguridad"
 
-#: templates/legal.html:30
+#: templates/legal.html:33
 msgid "Analytics"
 msgstr "Analíticas"
 
-#: templates/legal.html:32
+#: templates/legal.html:35
 msgid ""
 "I use a self-hosted instance of Plausible to store web analytics and be able "
 "to monitor traffic"
@@ -727,7 +754,7 @@ msgstr ""
 "Uso una instancia self-hosted de Plausible para almacenar las analíticas web "
 "y poder monitorizar el tráfico"
 
-#: templates/legal.html:34
+#: templates/legal.html:37
 msgid ""
 "None of the information tracked by the analytics script can be used to "
 "uniquely identify a specific user"
@@ -735,39 +762,39 @@ msgstr ""
 "Ninguna información obtenida por el script de analíticas puede ser usada "
 "para identificar a un usuario específico"
 
-#: templates/legal.html:37
+#: templates/legal.html:40
 msgid "As they specifically state:"
 msgstr "Tal y como ellos mismos afirman:"
 
-#: templates/legal.html:42
+#: templates/legal.html:45
 msgid "Their full statement in their data policy can be found"
 msgstr "Su declaración completa de su política de datos se puede encontrar"
 
-#: templates/legal.html:42
+#: templates/legal.html:45
 msgid "here"
 msgstr "aquí"
 
-#: templates/legal.html:45
+#: templates/legal.html:48
 msgid "External resources"
 msgstr "Recursos externos"
 
-#: templates/legal.html:54
+#: templates/legal.html:57
 msgid "Thanks"
 msgstr "Agradecimientos"
 
-#: templates/legal.html:55
+#: templates/legal.html:58
 msgid "This website would not be possible without the help of"
 msgstr "Esta web no sería posible sin la ayuda de"
 
-#: templates/legal.html:57
+#: templates/legal.html:60
 msgid "My mother"
 msgstr "Mi madre"
 
-#: templates/legal.html:57
+#: templates/legal.html:60
 msgid "specifically for her help with learning CSS and more UI recommendations"
 msgstr "específicamente por su ayuda con CSS y más recomendaciones de UI"
 
-#: templates/legal.html:58
+#: templates/legal.html:61
 msgid ""
 "for her huge support while building the web and debugging it (specially "
 "debugging)"
