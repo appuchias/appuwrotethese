@@ -1,7 +1,7 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-from datetime import date
+from datetime import date, timedelta
 from typing import Any, Mapping
 
 from crispy_forms.helper import FormHelper
@@ -232,7 +232,7 @@ class DateRangeForm(forms.Form):
                 "type": "date",
                 "min": date(2007, 1, 1),
                 "max": date.today(),
-                "value": date(2007, 1, 1),
+                "value": date.today() - timedelta(days=30),
             }
         ),
     )
