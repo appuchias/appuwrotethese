@@ -234,26 +234,3 @@ def result_geo(request: HttpRequest):
             "past_month_lower": past_month_lower,
         },
     )
-
-
-# def station_pricerange(request: HttpRequest, id_eess: int):
-#     if request.method != "GET":
-#         return HttpResponseNotAllowed(["GET"], "Method not allowed")
-
-#     start_date = request.GET.get("start_date", str(date.today() - timedelta(days=7)))
-#     end_date = request.GET.get("end_date", str(date.today()))
-#     start_date = date.fromisoformat(start_date)
-#     end_date = date.fromisoformat(end_date)
-
-#     station = models.Station.objects.get(id_eess=id_eess)
-#     prices = query_handler.get_station_prices_range(id_eess, start_date, end_date)
-
-#     daterangeform = forms.DateRangeForm(
-#         initial={"start_date": start_date, "end_date": end_date}
-#     )
-
-#     return render(
-#         request,
-#         "gas/station_pricerange.html",
-#         {"station": station, "prices": prices, "daterangeform": daterangeform},
-#     )
