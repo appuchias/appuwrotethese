@@ -19,7 +19,7 @@
         <div class="text-themed dark mb-2 text-center">{% trans 'Here you will find the cheapest gas stations for each area sorted by fuel type' %}.</div>
     </div>
     <div id="search-box" class="container crwrapper">
-        <form hx-get="/gas/search/{% if geo %}geo/{% endif %}" hx-trigger="change throttle:500ms queue:none, keyup delay:250ms throttle:750ms queue:none, coords-set from:body" hx-target="#search-result" hx-indicator="#indicator" action="/gas/search/" method="GET">
+        <form hx-get="/gas/search/{% if geo %}geo/{% endif %}" hx-trigger="load, change throttle:100ms, keyup delay:250ms, coords-set from:body" hx-target="#search-result" hx-indicator="#indicator" action="/gas/search/" method="GET">
             {% crispy form %}
         </form>
         <a href="/gas/{% if not geo %}geo/{% endif %}" class="text-themed darker">{% if not geo %}{% trans "Search by coordinates" %}{% else %}{% trans "Search by area" %}{% endif %}</a>
