@@ -209,8 +209,7 @@ def result_geo(request: HttpRequest):
     lon = float(form_data.get("longitude", 0.0))
     radius = float(form_data.get("radius", 5.0))
     fuel = form_data.get("fuel_abbr", "GOA")
-    name = date.today()
-    q_date = form_data.get("q_date", name)
+    q_date = form_data.get("q_date", date.today())
 
     # Log anonymized query
     query_handler.log_query(fuel, q_date)
