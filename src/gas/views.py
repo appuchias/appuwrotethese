@@ -12,18 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from gas import models, forms, query_handler
 from appuwrotethese.extras import PATH_DATA
 
-FUEL_NAMES = {
-    "GOA": "price_goa",
-    "GOB": "price_gob",
-    "G95E5": "price_g95e5",
-    "G95E5+": "price_g95e5_premium",
-    "G95E10": "price_g95e10",
-    "G98E5": "price_g98e5",
-    "G98E10": "price_g98e10",
-    "GLP": "price_glp",
-    "GNC": "price_gnc",
-    "H2": "price_h2",
-}
+FUEL_NAMES = dict(forms.FUEL_CHOICES)
 
 
 def search(request: HttpRequest, geo: bool = False):
@@ -48,7 +37,7 @@ def result(request: HttpRequest):
 
     form_data = form.cleaned_data
     term = str(form_data.get("term"))
-    fuel = form_data.get("fuel_abbr")
+    fuel = form_data.get("fuel_abbr", "GOA")
     q_date = form_data.get("q_date", date.today())
 
     # Log anonymized query
@@ -107,7 +96,7 @@ def result(request: HttpRequest):
             "hx": hx,
             "results": prices,
             "term": form_data.get("term"),
-            "fuel": FUEL_NAMES.get(form_data.get("fuel_abbr")),  # type: ignore
+            "fuel": FUEL_NAMES.get(fuel),
             "date": prices_date,
             "past_day_lower": past_day_lower,
             "past_week_lower": past_week_lower,
