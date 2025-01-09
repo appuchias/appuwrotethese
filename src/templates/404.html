@@ -13,3 +13,7 @@
     </h1>
 </div>
 {% endblock content %}
+
+{% block script %}
+umami.track(props => ({ ...props, error: 404 }));
+{% endblock script %}
