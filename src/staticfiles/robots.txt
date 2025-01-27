@@ -1,3 +1,4 @@
 User-agent: *
 Sitemap: https://appu.ltd/sitemap.xml
 Disallow: /gas/results/
+Disallow: /mastermind/play/
