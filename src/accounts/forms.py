@@ -127,6 +127,7 @@ class AWTPasswordResetForm(forms.Form):
     email = forms.EmailField(
         label=_("Email"),
         max_length=254,
+        required=True,
         help_text=_(
             "Required. You will receive an email with your temporary password."
         ),
