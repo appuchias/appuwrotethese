@@ -1,9 +1,9 @@
 -i https://pypi.org/simple
 asgiref==3.8.1; python_version >= '3.8'
-certifi==2024.12.14; python_version >= '3.6'
-charset-normalizer==3.4.0; python_full_version >= '3.7.0'
+certifi==2025.1.31; python_version >= '3.6'
+charset-normalizer==3.4.1; python_version >= '3.7'
 crispy-bootstrap5==2024.10; python_version >= '3.8'
-django==5.1.4; python_version >= '3.10'
+django==5.1.6; python_version >= '3.10'
 django-crispy-forms==2.3; python_version >= '3.8'
 django-user-agents==0.4.0
 geographiclib==2.0; python_version >= '3.7'
@@ -11,13 +11,13 @@ geopy==2.4.1; python_version >= '3.7'
 gunicorn==23.0.0; python_version >= '3.7'
 idna==3.10; python_version >= '3.6'
 packaging==24.2; python_version >= '3.8'
-pytz==2024.2
+pytz==2025.1
 requests==2.32.3; python_version >= '3.8'
 sqlparse==0.5.3; python_version >= '3.8'
 tqdm==4.67.1; python_version >= '3.7'
-tzdata==2024.2; python_version >= '2'
-ua-parser==1.0.0; python_version >= '3.9'
+tzdata==2025.1; python_version >= '2'
+ua-parser==1.0.1; python_version >= '3.9'
 ua-parser-builtins==0.18.0.post1; python_version >= '3.9'
-urllib3==2.2.3; python_version >= '3.8'
+urllib3==2.3.0; python_version >= '3.9'
 user-agents==2.2.0
-whitenoise==6.8.2; python_version >= '3.9'
+whitenoise==6.9.0; python_version >= '3.9'
