@@ -115,9 +115,9 @@ def guess(request: HttpRequest, game_id: uuid.UUID):
     return redirect("play", game_id=game_id)
 
 
-def game(request: HttpRequest, game_id: int):
+def game(request: HttpRequest, game_id: str):
     try:
-        game_obj = Game.objects.get(game_id=str(game_id).zfill(4))
+        game_obj = Game.objects.get(game_id=game_id)
     except Game.DoesNotExist:
         messages.error(request, _("Game does not exist") + ".")
         return redirect("mastermind")
