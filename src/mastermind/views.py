@@ -5,6 +5,7 @@ import uuid
 
 from django.contrib import messages
 from django.contrib.auth.models import User, AnonymousUser
+from django.core.exceptions import ValidationError
 from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext_lazy as _
@@ -120,6 +121,9 @@ def game(request: HttpRequest, game_id: str):
         game_obj = Game.objects.get(game_id=game_id)
     except Game.DoesNotExist:
         messages.error(request, _("Game does not exist") + ".")
+        return redirect("mastermind")
+    except ValidationError:
+        messages.error(request, _("Invalid game ID") + ".")
         return redirect("mastermind")
 
     if not game_obj.is_finished():
