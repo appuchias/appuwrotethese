@@ -15,8 +15,10 @@
                     {% csrf_token %}
                     {% crispy form %}
                     <div class="links">
-                        <a href="/accounts/register" class="col-md-6">{% trans "Don't have an account" %}? {% trans "Create one here" %}</a>
-                        <a href='/accounts/respwd/'  class="col-md-6"><i data-lucide="key"></i> {% trans "Forgot your password" %}?</a>
+                        <a href="/accounts/register" class="col-md-6">{% trans "Don't have an account" %}?
+                            {% trans "Create one here" %}</a>
+                        <a href='/accounts/respwd/' class="col-md-6"><i data-lucide="key"></i>
+                            {% trans "Forgot your password" %}?</a>
                     </div>
                 </form>
             </div>

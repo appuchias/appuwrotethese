@@ -8,7 +8,8 @@
 <div id="game" class="container">
     <h1 class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Mastermind game" %}</h1>
     <div class="crwrapper">
-        <div class="title">{% trans "Game by" %} {{ game.user }} {% trans "played on" %} {{ game.created|date:"Y/m/d H:i" }}</div>
+        <div class="title">{% trans "Game by" %} {{ game.user }} {% trans "played on" %}
+            {{ game.created|date:"Y/m/d H:i" }}</div>
         <p class="subtitle">{% trans "Correct code" %}: {{ game.code }}</p>
         <p>{% trans "Guess attempts" %}:</p>
         <ol>
@@ -20,7 +21,8 @@
             <a href="/mastermind/play" class="btn btn-outline-dark mx-2">
                 <i data-lucide="binary"></i> {% trans "Start another game" %}!
             </a>
-            <a href="#" class="btn btn-outline-dark" onclick="navigator.clipboard.writeText('https://appu.ltd/mastermind/game/{{ game }}');">
+            <a href="#" class="btn btn-outline-dark"
+                onclick="navigator.clipboard.writeText('https://appu.ltd/mastermind/game/{{ game }}');">
                 <i data-lucide="share-2"></i> {% trans "Share! (copy link)" %}
             </a>
         </div>

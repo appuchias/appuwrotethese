@@ -2,7 +2,7 @@
 {% load user_agents i18n crispy_forms_tags %}
 
 {% block head %}
-<link rel="stylesheet" href="/s/leaflet/leaflet.css"/>
+<link rel="stylesheet" href="/s/leaflet/leaflet.css" />
 <script src="/s/leaflet/leaflet.js"></script>
 {% endblock head %}
 
@@ -111,9 +111,10 @@
         <div id="map" style="height: 500px; border-radius: 10px"></div>
         <hr>
         <h2 class="mt-2 mb-1">{% trans "Price history" %}</h2>
-        <form hx-post="/gas/station/{{ s.id_eess }}/" hx-trigger="change throttle:500ms, keyup delay:500ms" hx-target="#pricerange" hx-indicator="#indicator">
+        <form hx-post="/gas/station/{{ s.id_eess }}/" hx-trigger="change throttle:500ms, keyup delay:500ms"
+            hx-target="#pricerange" hx-indicator="#indicator">
             {% crispy daterange_form %}
-            <img id="indicator" class="col htmx-indicator" src="/s/spinner.svg" height="24"/>
+            <img id="indicator" class="col htmx-indicator" src="/s/spinner.svg" height="24" />
         </form>
         <canvas id="price_hist_graph"></canvas>
         <div id="pricerange">
@@ -155,76 +156,77 @@
 
     var map = L.map('map', {
         center: [{{ station.latitude }}, {{ station.longitude }}],
-        zoom: 15,
+    zoom: 15,
         {% comment %} layers: actual {% endcomment %}
-        layers: osm
+    layers: osm
     });
     var layerControl = L.control.layers(capas).addTo(map);
 
-    var stationMarker = L.marker([{{ station.latitude }}, {{ station.longitude }}], {title: '{{ station.company|lower|capfirst }}', direction: "top", permanent: 1}).addTo(map);
+    var stationMarker = L.marker([{{ station.latitude }}, { { station.longitude } }], { title: '{{ station.company|lower|capfirst }}', direction: "top", permanent: 1 }).addTo(map);
 
     navigator.geolocation.getCurrentPosition((position) => {
-        var user = L.marker([position.coords.latitude, position.coords.longitude], {icon: L.icon({iconUrl: '/s/icons/car.svg', iconSize: 36, shadowUrl: '/s/icons/car-shadow.svg', shadowSize: 36})}).addTo(map);
-        user.bindTooltip("{% trans 'You are here' %}", {direction:"top", offset: L.point(0,-16)}).openTooltip();
+        var user = L.marker([position.coords.latitude, position.coords.longitude], { icon: L.icon({ iconUrl: '/s/icons/car.svg', iconSize: 36, shadowUrl: '/s/icons/car-shadow.svg', shadowSize: 36 }) }).addTo(map);
+        user.bindTooltip("{% trans 'You are here' %}", { direction: "top", offset: L.point(0, -16) }).openTooltip();
 
-        centerLat = (position.coords.latitude + {{ station.latitude }}) / 2;
-        centerLon = (position.coords.longitude + {{ station.longitude }}) / 2;
-        map.setView([centerLat, centerLon]);
-        map.fitBounds([[position.coords.latitude, position.coords.longitude], [{{ station.latitude }}, {{ station.longitude }}]]);
+        centerLat = (position.coords.latitude + {{ station.latitude }
+    }) / 2;
+    centerLon = (position.coords.longitude + {{ station.longitude }}) / 2;
+    map.setView([centerLat, centerLon]);
+    map.fitBounds([[position.coords.latitude, position.coords.longitude], [{{ station.latitude }}, {{ station.longitude }}]]);
     });
 </script>
 
 <script src="/s/chart.js"></script>
 <script type="module">
-const precios = JSON.parse(document.getElementById('price_hist').textContent);
-new Chart(
-    document.getElementById('price_hist_graph'),
-    {
-        type: 'line',
-        data: {
-            labels: precios.map(row => row.date),
-            datasets: [
-                {
-                    label: "Gasóleo A",
-                    data: precios.map(row => row.price_goa),
-                    borderColor: "#36a2eb",
-                }, {
-                    label: "Gasóleo B",
-                    data: precios.map(row => row.price_gob),
-                    borderColor: "#ff6384",
-                }, {
-                    label: "Gasolina 95",
-                    data: precios.map(row => row.price_g95e5),
-                    borderColor: "#4bc0c0",
-                }, {
-                    label: "Gasolina 98",
-                    data: precios.map(row => row.price_g98e5),
-                    borderColor: "#ffcd56",
-                }, {
-                    label: "GLP",
-                    data: precios.map(row => row.price_glp),
-                    borderColor: "#9966ff",
-                }
-            ]
-        },
-        options: {
-            aspectRatio: {% if request|is_mobile %}1{% else %}2{% endif %},
-            responsive: true,
-            tension: 0.25,
-            scales: {
-                y: {
-                    //beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Precio (€/L)'
-                    },
-                    ticks: {
-                        callback: value => `${Math.round(value * 100) / 100} €/L`
+    const precios = JSON.parse(document.getElementById('price_hist').textContent);
+    new Chart(
+        document.getElementById('price_hist_graph'),
+        {
+            type: 'line',
+            data: {
+                labels: precios.map(row => row.date),
+                datasets: [
+                    {
+                        label: "Gasóleo A",
+                        data: precios.map(row => row.price_goa),
+                        borderColor: "#36a2eb",
+                    }, {
+                        label: "Gasóleo B",
+                        data: precios.map(row => row.price_gob),
+                        borderColor: "#ff6384",
+                    }, {
+                        label: "Gasolina 95",
+                        data: precios.map(row => row.price_g95e5),
+                        borderColor: "#4bc0c0",
+                    }, {
+                        label: "Gasolina 98",
+                        data: precios.map(row => row.price_g98e5),
+                        borderColor: "#ffcd56",
+                    }, {
+                        label: "GLP",
+                        data: precios.map(row => row.price_glp),
+                        borderColor: "#9966ff",
                     }
-                }
+                ]
+            },
+            options: {
+                aspectRatio: {% if request | is_mobile %}1{% else %}2{% endif %},
+        responsive: true,
+        tension: 0.25,
+        scales: {
+        y: {
+            //beginAtZero: true,
+            title: {
+                display: true,
+                text: 'Precio (€/L)'
+            },
+            ticks: {
+                callback: value => `${Math.round(value * 100) / 100} €/L`
             }
+        }
+    }
         },
     }
-);
+    );
 </script>
 {% endblock script %}

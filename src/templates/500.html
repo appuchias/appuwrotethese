@@ -4,12 +4,12 @@
 {# Translators: 500 Page title #}
 {% block title %}{% trans "500: Internal Server Error" %}{% endblock title %}
 
-{% block head %}<script>plausible("500",{ props: { path: document.location.pathname } });</script>{% endblock head %}
-
 {% block content %}
 <div id="error500">
     <h1 class="error title">
-        <center>{% trans "There was an internal error while loading the page. Please contact me to be able to solve it." %}</center>
+        <center>
+            {% trans "There was an internal error while loading the page. Please contact me to be able to solve it." %}
+        </center>
     </h1>
 </div>
 {% endblock content %}

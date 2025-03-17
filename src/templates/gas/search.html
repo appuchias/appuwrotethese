@@ -2,11 +2,11 @@
 {% load user_agents i18n crispy_forms_tags %}
 
 {% block head %}
-<link rel="stylesheet" href="/s/leaflet/leaflet.css"/>
+<link rel="stylesheet" href="/s/leaflet/leaflet.css" />
 <script src="/s/leaflet/leaflet.js"></script>
 
-<link rel="stylesheet" href="/s/leaflet/MarkerCluster.css"/>
-<link rel="stylesheet" href="/s/leaflet/MarkerCluster.Default.css"/>
+<link rel="stylesheet" href="/s/leaflet/MarkerCluster.css" />
+<link rel="stylesheet" href="/s/leaflet/MarkerCluster.Default.css" />
 <script src="/s/leaflet/leaflet.markercluster.js"></script>
 {% endblock head %}
 
@@ -16,17 +16,21 @@
 <div id="search" class="container">
     <h1 class="title{% if request|is_mobile %} mobile{% endif %}">{% trans 'Gas stations' %}</h1>
     <div class="subtitle">
-        <div class="text-themed dark mb-2 text-center">{% trans 'Here you will find the cheapest gas stations for each area sorted by fuel type' %}.</div>
+        <div class="text-themed dark mb-2 text-center">
+            {% trans 'Here you will find the cheapest gas stations for each area sorted by fuel type' %}.</div>
     </div>
     <div id="search-box" class="container crwrapper">
-        <form hx-get="/gas/search/{% if geo %}geo/{% endif %}" hx-trigger="load, change throttle:100ms, keyup delay:250ms, coords-set from:body" hx-target="#search-result" hx-indicator="#indicator" action="/gas/search/" method="GET">
+        <form hx-get="/gas/search/{% if geo %}geo/{% endif %}"
+            hx-trigger="load, change throttle:100ms, keyup delay:250ms, coords-set from:body" hx-target="#search-result"
+            hx-indicator="#indicator" action="/gas/search/" method="GET">
             {% crispy form %}
         </form>
-        <a href="/gas/{% if not geo %}geo/{% endif %}" class="text-themed darker">{% if not geo %}{% trans "Search by coordinates" %}{% else %}{% trans "Search by area" %}{% endif %}</a>
+        <a href="/gas/{% if not geo %}geo/{% endif %}"
+            class="text-themed darker">{% if not geo %}{% trans "Search by coordinates" %}{% else %}{% trans "Search by area" %}{% endif %}</a>
     </div>
     <div class="row justify-content-between my-3 text-themed">
         <div class="col text-start"><a href="/gas/localities/" class="text-themed">{% trans "Localities" %}</a></div>
-        <img id="indicator" class="col htmx-indicator" src="/s/spinner.svg" height="24"/>
+        <img id="indicator" class="col htmx-indicator" src="/s/spinner.svg" height="24" />
         <div class="col text-end"><a href="/gas/provinces/" class="text-themed">{% trans "Provinces" %}</a></div>
     </div>
 
@@ -42,33 +46,33 @@
 </script>
 {% if geo %}
 <script>
-function setCoords() {
-    // Check if Geolocation is supported
-    if ("geolocation" in navigator) {
-        // Request the user's permission to access their location
-        navigator.geolocation.getCurrentPosition(
-            function (position) {
-                // If permission is granted, retrieve the user's coordinates
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
+    function setCoords() {
+        // Check if Geolocation is supported
+        if ("geolocation" in navigator) {
+            // Request the user's permission to access their location
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    // If permission is granted, retrieve the user's coordinates
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
 
-                lat_elem = document.getElementById("id_latitude").value = latitude;
-                lon_elem = document.getElementById("id_longitude").value = longitude;
+                    lat_elem = document.getElementById("id_latitude").value = latitude;
+                    lon_elem = document.getElementById("id_longitude").value = longitude;
 
-                // console.log("(Lat., Lon.): (" + latitude + ", " + longitude + ")");
+                    // console.log("(Lat., Lon.): (" + latitude + ", " + longitude + ")");
 
-                document.body.dispatchEvent(new Event("coords-set"));
-            },
-            // function (error) {
-            //     console.error("Error getting location: ", error);
-            // }
-        );
-    } else {
-        // Geolocation is not supported
-        console.log("Geolocation is not supported by this browser.");
+                    document.body.dispatchEvent(new Event("coords-set"));
+                },
+                // function (error) {
+                //     console.error("Error getting location: ", error);
+                // }
+            );
+        } else {
+            // Geolocation is not supported
+            console.log("Geolocation is not supported by this browser.");
+        }
     }
-}
 
-setCoords();
+    setCoords();
 </script>
 {% endif %}{% endblock script %}

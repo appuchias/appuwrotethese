@@ -12,12 +12,14 @@
     </h1>
     <div class="col projects">
         {% for i in project_list %}
-	<a href="/{{ i.url }}" class="text-decoration-none">
+        <a href="/{{ i.url }}" class="text-decoration-none">
             <div class="text-themed row project{% if request|is_mobile %} mobile{% endif %}">
-                <li{% if request|is_mobile %} class="mobile"{% endif %}>
-                    <span title="#{{ i.project_id }}">{% if i.name %}{{ i.name }}{% else %}Placeholder project #{{ i.project_id }}{% endif %}</span>
-                    <div class="description mb-2{% if request|is_mobile %} mobile{% endif %}">{% firstof i.description "A future project will appear here" %}</div>
-                </li>
+                <li{% if request|is_mobile %} class="mobile" {% endif %}>
+                    <span title="#{{ i.project_id }}">{% if i.name %}{{ i.name }}{% else %}Placeholder project
+                        #{{ i.project_id }}{% endif %}</span>
+                    <div class="description mb-2{% if request|is_mobile %} mobile{% endif %}">
+                        {% firstof i.description "A future project will appear here" %}</div>
+                    </li>
             </div>
         </a>
         {% endfor %}

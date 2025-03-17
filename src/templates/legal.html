@@ -8,15 +8,20 @@
     <h1 class="title{% if request|is_mobile %} mobile{% endif %}">{% trans "Legal" %}</h1>
 
     <div class="container">
-        <a href="https://coindrop.to/appuchia" class="text-themed text-decoration-none float-end p-1 border border-light rounded-3" rel="noopener noreferrer" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="up"><i data-lucide="coins"></i> {% trans "Support me" %}!</a>
+        <a href="https://coindrop.to/appuchia"
+            class="text-themed text-decoration-none float-end p-1 border border-light rounded-3"
+            rel="noopener noreferrer" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="up"><i
+                data-lucide="coins"></i> {% trans "Support me" %}!</a>
 
         <br>
         <br>
 
         <h2 class="text-themed">{% trans "Privacy" %}</h2>
         <p class="text-themed">
-            {% trans "Information stored in logs, such as IP addresses and" %} "user agents", {% trans "is automatically removed after 3 months using logrotate" %}.
-            {% trans "For any information deletion request you can contact me through" %} <a href="mailto:legal@appu.ltd" class="text-themed">{% trans "my contact email" %}</a>.
+            {% trans "Information stored in logs, such as IP addresses and" %} "user agents",
+            {% trans "is automatically removed after 3 months using logrotate" %}.
+            {% trans "For any information deletion request you can contact me through" %} <a
+                href="mailto:legal@appu.ltd" class="text-themed">{% trans "my contact email" %}</a>.
         </p>
         <p>
             {% trans "The website stores a log of the Gas queries received (requests to /gas/search/ and /gas/search/geo/). Only the fuel selected, the time of the query and the queried date are stores to protect users' privacy." %}
@@ -24,11 +29,13 @@
         <p class="text-themed">
             {% trans "Any information provided in forms or any equivalent way (usernames, real names, emails and passwords) will be stored in the web's database" %}.
             <br>
-            {% trans "You can request its deletion at any time through the same email that is registered in the web" %}. {% trans "All requests will be fulfilled within 30 days from the first notification when possible" %}.
+            {% trans "You can request its deletion at any time through the same email that is registered in the web" %}.
+            {% trans "All requests will be fulfilled within 30 days from the first notification when possible" %}.
             <br>
             {% trans "None of the information stored by this service is or will be shared with any third party unless required by law" %}.
         </p>
-        <p class="text-themed">{% trans "Passwords are stored hashed and salted for users' protection in case of a security breach" %}.</p>
+        <p class="text-themed">
+            {% trans "Passwords are stored hashed and salted for users' protection in case of a security breach" %}.</p>
 
         <h2 class="text-themed">{% trans "Analytics" %}</h2>
         <p class="text-themed">
@@ -39,26 +46,37 @@
         <p class="text-themed">
             {% trans "As they specifically state on their FAQ:" %}
             <br>
-            <span>"Umami does not collect any personally identifiable information and anonymizes all data collected. Users cannot be identified and are never tracked across websites."</span>
+            <span>"Umami does not collect any personally identifiable information and anonymizes all data collected.
+                Users cannot be identified and are never tracked across websites."</span>
         </p>
         <p class="text-themed">
-            {% trans "More info:" %} <a href="https://umami.is/docs/metric-definitions" class="text-themed" rel="noopener noreferrer" target="_blank">{% trans "Collected metrics" %}</a>. <a href="https://umami.is/privacy" class="text-themed" rel="noopener noreferrer" target="_blank">{% trans "Privacy policy of their service" %}</a>.
+            {% trans "More info:" %} <a href="https://umami.is/docs/metric-definitions" class="text-themed"
+                rel="noopener noreferrer" target="_blank">{% trans "Collected metrics" %}</a>. <a
+                href="https://umami.is/privacy" class="text-themed" rel="noopener noreferrer"
+                target="_blank">{% trans "Privacy policy of their service" %}</a>.
         </p>
 
         <h2 class="text-themed">{% trans "External resources" %}</h2>
         <ul>
-            <li class="text-themed"><a class="text-themed" href="https://getbootstrap.com/" rel="noopener noreferrer" target="_blank">Bootstrap v5.3</a></li>
-            <li class="text-themed"><a class="text-themed" href="https://lucide.dev/" rel="noopener noreferrer" target="_blank">Lucide icons</a></li>
-            <li class="text-themed"><a class="text-themed" href="https://kazzkiq.github.io/balloon.css/" rel="noopener noreferrer" target="_blank">Balloon CSS</a></li>
-            <li class="text-themed"><a class="text-themed" href="https://fonts.google.com/" rel="noopener noreferrer" target="_blank">Google Fonts</a></li>
+            <li class="text-themed"><a class="text-themed" href="https://getbootstrap.com/" rel="noopener noreferrer"
+                    target="_blank">Bootstrap v5.3</a></li>
+            <li class="text-themed"><a class="text-themed" href="https://lucide.dev/" rel="noopener noreferrer"
+                    target="_blank">Lucide icons</a></li>
+            <li class="text-themed"><a class="text-themed" href="https://kazzkiq.github.io/balloon.css/"
+                    rel="noopener noreferrer" target="_blank">Balloon CSS</a></li>
+            <li class="text-themed"><a class="text-themed" href="https://fonts.google.com/" rel="noopener noreferrer"
+                    target="_blank">Google Fonts</a></li>
         </ul>
         <p class="text-themed">If your name is missing and it should here, contact me at the mail above.</p>
 
         <h2 class="text-themed">{% trans "Thanks" %}</h2>
         <p class="text-themed">{% trans "This website would not be possible without the help of" %}:</p>
         <ul>
-            <li class="text-themed">{% trans "My mother" %}, {% trans "specifically for her help with learning CSS and more UI recommendations" %}.</li>
-            <li class="text-themed"><a href="http://instagram.com/paauu_31" class="text-themed" rel="noopener noreferrer" target="_blank"><strong>@paauu_31</strong></a>, {% trans "for her huge support while building the web and debugging it (specially debugging)" %}.</li>
+            <li class="text-themed">{% trans "My mother" %},
+                {% trans "specifically for her help with learning CSS and more UI recommendations" %}.</li>
+            <li class="text-themed"><a href="http://instagram.com/paauu_31" class="text-themed"
+                    rel="noopener noreferrer" target="_blank"><strong>@paauu_31</strong></a>,
+                {% trans "for her huge support while building the web and debugging it (specially debugging)" %}.</li>
             {% comment %} <li class="text-themed"></li> {% endcomment %}
         </ul>
 
@@ -68,7 +86,10 @@
 
         <br>
 
-        <a href="https://coindrop.to/appuchia" class="text-themed text-decoration-none float-end p-1 border border-light rounded-3" rel="noopener noreferrer" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="up"><i data-lucide="coins"></i> {% trans "Support me" %}!</a>
+        <a href="https://coindrop.to/appuchia"
+            class="text-themed text-decoration-none float-end p-1 border border-light rounded-3"
+            rel="noopener noreferrer" aria-label="{% trans 'Hosting is not free' %}!" data-balloon-pos="up"><i
+                data-lucide="coins"></i> {% trans "Support me" %}!</a>
     </div>
 </div>
 {% endblock content %}
