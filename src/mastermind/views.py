@@ -1,7 +1,7 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-import uuid
+import os, uuid
 
 from django.contrib import messages
 from django.contrib.auth.models import User, AnonymousUser
@@ -9,7 +9,6 @@ from django.core.exceptions import ValidationError
 from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext_lazy as _
-from appuwrotethese.settings import config
 
 
 from mastermind.models import Game, Guess
@@ -21,7 +20,7 @@ def _validate_guess(guess: str) -> bool:
 
 
 def _get_mastermind_user() -> User:
-    if uid := config.get("MASTERMIND_USER_ID", None):
+    if uid := os.getenv("MASTERMIND_USER_ID", None):
         if not (user := User.objects.get(id=uid)):
             raise ValueError("MASTERMIND_USER_ID is invalid.")
         return user

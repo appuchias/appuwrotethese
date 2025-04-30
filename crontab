@@ -1,4 +1,0 @@
-PATH=/usr/local/bin:$PATH
-
-5 * * * *	cd /usr/local/awt/src && python3.12 manage.py update_db --update >> /var/log/cron.log 2>&1
-5 0 * * 1	cd /usr/local/awt/src && python3.12 manage.py clean_games >> /var/log/cron.log 2>&1

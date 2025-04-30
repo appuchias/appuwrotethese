@@ -10,15 +10,16 @@ from secrets import token_urlsafe
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 DEBUG = False
 
 
-with open("settings.conf", "r") as f:
-    config = {k.strip(): v.strip() for k, v in [l.split("=", 1) for l in f.readlines()]}
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config.get("SECRET_KEY", None)
+SECRET_KEY = os.getenv("SECRET_KEY", None)
 if SECRET_KEY is None:
     SECRET_KEY = token_urlsafe(64)
     logging.warning(
@@ -233,8 +234,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Email setup
 EMAIL_HOST = "in-v3.mailjet.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = config.get("SMTP_USER", "")
-EMAIL_HOST_PASSWORD = config.get("SMTP_PASS", "")
+EMAIL_HOST_USER = os.getenv("SMTP_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("SMTP_PASS", "")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 SERVER_EMAIL = "noreply@appu.ltd"

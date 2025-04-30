@@ -15,6 +15,7 @@ tzdata = "*"
 requests = "*"
 geopy = "*"
 tqdm = "*"
+python-dotenv = "*"
 
 [dev-packages]
 black = "*"

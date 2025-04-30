@@ -1,4 +1,4 @@
-settings.conf
+.env
 db.sqlite3*
 src/ssl/*
 src/log/*.log

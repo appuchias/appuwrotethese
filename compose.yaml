@@ -25,13 +25,10 @@ services:
     build: .
     environment:
       HTTPS: false
-      PROD: true
-    # deploy:
-    #   mode: replicated
-    #   replicas: 2
+      # PROD: true
     volumes:
-      - weblogs:/usr/local/awt/src/logs
-      - ./src/db.sqlite3:/usr/local/awt/src/db.sqlite3
+      - weblogs:/awt/src/logs
+      - ./src/db.sqlite3:/awt/src/db.sqlite3
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.web.rule=Host(`appu.ltd`)"
