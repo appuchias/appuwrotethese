@@ -12,9 +12,9 @@ User-agent: Amazonbot
 User-agent: anthropic-ai
 User-agent: Applebot
 User-agent: Applebot-Extended
-User-Agent: AwarioBot
-User-Agent: AwarioRssBot
-User-Agent: AwarioSmartBot
+User-agent: AwarioBot
+User-agent: AwarioRssBot
+User-agent: AwarioSmartBot
 User-agent: Brightbot 1.0
 User-agent: Bytespider
 User-agent: CCBot
@@ -25,14 +25,14 @@ User-agent: cohere-ai
 User-agent: cohere-training-data-crawler
 User-agent: Cotoyogi
 User-agent: Crawlspace
-User-Agent: DataForSeoBot
+User-agent: DataForSeoBot
 User-agent: Diffbot
 User-agent: DuckAssistBot
 User-agent: FacebookBot
 User-agent: Factset_spyderbot
 User-agent: FirecrawlAgent
 User-agent: FriendlyCrawler
-User-Agent: Google-CloudVertexBot
+User-agent: Google-CloudVertexBot
 User-agent: Google-Extended
 User-agent: GoogleOther
 User-agent: GoogleOther-Image
@@ -45,7 +45,7 @@ User-agent: img2dataset
 User-agent: imgproxy
 User-agent: ISSCyberRiskCrawler
 User-agent: Kangaroo Bot
-User-Agent: Meltwater
+User-agent: Meltwater
 User-agent: meta-externalagent
 User-agent: Meta-ExternalAgent
 User-agent: meta-externalfetcher
@@ -56,19 +56,24 @@ User-agent: omgili
 User-agent: omgilibot
 User-agent: Operator
 User-agent: PanguBot
-User-Agent: peer39_crawler
+User-agent: peer39_crawler
 User-agent: Perplexity-User
 User-agent: PerplexityBot
 User-agent: PetalBot
 User-agent: Scrapy
-User-Agent: Seekr
+User-agent: Seekr
+User-agent: SiteAuditBot
+User-agent: SemrushBot-BA
+User-agent: SemrushBot-SI
+User-agent: SplitSignalBot
+User-agent: SemrushBot-FT
 User-agent: SemrushBot-OCOB
 User-agent: SemrushBot-SWA
-User-Agent: Sentibot
+User-agent: Sentibot
 User-agent: Sidetrade indexer bot
 User-agent: TikTokSpider
 User-agent: Timpibot
-User-Agent: TurnitinBot
+User-agent: TurnitinBot
 User-agent: VelenPublicWebCrawler
 User-agent: Webzio-Extended
 User-agent: YouBot
