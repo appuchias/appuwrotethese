@@ -2,6 +2,8 @@
 db.sqlite3*
 src/ssl/*
 src/log/*.log
+src/log/*.gz
+src/log/*.zst
 src/log/*.csv
 
 .mypy_cache
