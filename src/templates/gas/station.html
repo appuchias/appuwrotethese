@@ -155,10 +155,7 @@
     };
 
     var map = L.map('map', {
-        center: [{{ station.latitude }}, {{ station.longitude }}],
-    zoom: 15,
-        {% comment %} layers: actual {% endcomment %}
-    layers: osm
+        center: [{{ station.latitude }}, {{ station.longitude }}], zoom: 15, layers: osm
     });
     var layerControl = L.control.layers(capas).addTo(map);
 
@@ -210,7 +207,7 @@
                 ]
             },
             options: {
-                aspectRatio: {% if request | is_mobile %}1{% else %}2{% endif %},
+                aspectRatio: {% if request|is_mobile %}1{% else %}2{% endif %},
         responsive: true,
         tension: 0.25,
         scales: {
