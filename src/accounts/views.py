@@ -193,8 +193,9 @@ def acct_reset_pwd(request: HttpRequest):
 
     data = form.cleaned_data
 
-    user = User.objects.get(email=data.get("email"))
-    if not user:
+    try:
+        user = User.objects.get(email=data.get("email"))
+    except User.DoesNotExist:
         messages.error(request, _("Email is not registered"))
         return redirect("/accounts")
 
