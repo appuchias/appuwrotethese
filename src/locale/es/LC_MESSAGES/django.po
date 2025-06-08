@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-31 01:10+0100\n"
+"POT-Creation-Date: 2025-06-08 12:57+0200\n"
 "PO-Revision-Date: 2021-10-06 21:47-0015\n"
 "Last-Translator: Appuchia <appuchia@appu.ltd>\n"
 "Language-Team: AppuWroteThese-Appuchia <appuchia@appu.ltd>\n"
@@ -33,23 +33,23 @@ msgstr "Registrarse"
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: accounts/forms.py:118 templates/accounts/account.html:33
+#: accounts/forms.py:118 templates/accounts/account.html:39
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: accounts/forms.py:131
+#: accounts/forms.py:132
 msgid "Required. You will receive an email with your temporary password."
 msgstr "Requerido. Recibirás un correo electrónico con su contraseña temporal."
 
-#: accounts/forms.py:147
+#: accounts/forms.py:148
 msgid "Reset password"
 msgstr "Restablecer contraseña"
 
-#: accounts/forms.py:157
+#: accounts/forms.py:158
 msgid "Upgrade UUID"
 msgstr "UUID de mejora"
 
-#: accounts/forms.py:159
+#: accounts/forms.py:160
 msgid ""
 "You will receive an email regarding your purchase from sellix with your "
 "upgrade UUID."
@@ -57,7 +57,7 @@ msgstr ""
 "Recibirás un correo electrónico sobre tu compra de sellix con tu UUID de "
 "mejora."
 
-#: accounts/forms.py:180
+#: accounts/forms.py:181
 msgid "Upgrade"
 msgstr "Mejorar"
 
@@ -136,27 +136,27 @@ msgstr "Has iniciado sesión"
 msgid "Wrong username or password"
 msgstr "Nombre de usuario o contraseña incorrectos"
 
-#: accounts/views.py:134
-msgid "You are now registered"
-msgstr "Te has registrado"
+#: accounts/views.py:136
+msgid "Registrations are currently disabled."
+msgstr "Los registros están desactivados."
 
-#: accounts/views.py:167
+#: accounts/views.py:169
 msgid "Your password was successfully updated!"
 msgstr "Tu contraseña se actualizó correctamente."
 
-#: accounts/views.py:169
+#: accounts/views.py:171
 msgid "Old password is not correct"
 msgstr "La contraseña anterior no es correcta"
 
-#: accounts/views.py:198
+#: accounts/views.py:200
 msgid "Email is not registered"
 msgstr "El correo electrónico no está registrado"
 
-#: accounts/views.py:207
+#: accounts/views.py:209
 msgid "[appu.ltd] Password reset email"
 msgstr "[appu.ltd] Restablecer contraseña"
 
-#: accounts/views.py:215
+#: accounts/views.py:217
 msgid ""
 "Your password was successfully reset. Please check your email with your new "
 "temporary password."
@@ -164,11 +164,11 @@ msgstr ""
 "Tu contraseña se restableció correctamente. Por favor, comprueba tu correo "
 "electrónico con tu nueva contraseña temporal."
 
-#: appuwrotethese/settings.py:206
+#: appuwrotethese/settings.py:211
 msgid "Spanish"
 msgstr "Castellano"
 
-#: appuwrotethese/settings.py:207
+#: appuwrotethese/settings.py:212
 msgid "English"
 msgstr "Inglés"
 
@@ -213,7 +213,7 @@ msgid "Specific term to look for (e.g. Coruña, 15001, etc.)"
 msgstr "Término concreto a buscar (p.ej. Coruña, 15001, etc.)"
 
 #: gas/forms.py:40 gas/forms.py:120 gas/forms.py:197
-#: templates/gas/station.html:60 templates/gas/station_card.html:17
+#: templates/gas/station.html:60 templates/gas/station_card.html:18
 msgid "Fuel"
 msgstr "Combustible"
 
@@ -277,7 +277,7 @@ msgstr "Fecha de fin"
 msgid "ID of the locality"
 msgstr "ID de la localidad"
 
-#: gas/models.py:29 gas/views.py:142 templates/gas/search.html:28
+#: gas/models.py:29 gas/views.py:131 templates/gas/search.html:32
 msgid "Localities"
 msgstr "Localidades"
 
@@ -285,7 +285,7 @@ msgstr "Localidades"
 msgid "ID of the province"
 msgstr "ID de la provincia"
 
-#: gas/models.py:56 gas/views.py:131 templates/gas/search.html:30
+#: gas/models.py:56 gas/views.py:120 templates/gas/search.html:34
 msgid "Provinces"
 msgstr "Provincias"
 
@@ -297,7 +297,7 @@ msgstr "Compañía"
 msgid "Address"
 msgstr "Dirección"
 
-#: gas/models.py:74 templates/gas/results.html:91 templates/gas/station.html:50
+#: gas/models.py:74 templates/gas/results.html:98 templates/gas/station.html:50
 msgid "Schedule"
 msgstr "Horario"
 
@@ -317,15 +317,15 @@ msgstr "Precio"
 msgid "Gas station prices"
 msgstr "Precios"
 
-#: gas/views.py:42
+#: gas/views.py:31
 msgid "Invalid form. Please try again"
 msgstr "Datos del formulario no válidos. Por favor, inténtalo de nuevo."
 
-#: gas/views.py:69
+#: gas/views.py:58
 msgid "The location you're looking for could not be found"
 msgstr "No se pudo encontrar la ubicación que estás buscando"
 
-#: gas/views.py:82
+#: gas/views.py:71
 msgid "There were no prices in the database for that location and date"
 msgstr "No hay precios en la base de datos para esa ubicación y fecha"
 
@@ -353,15 +353,19 @@ msgstr "Ya has hecho 10 intentos"
 msgid "Invalid guess"
 msgstr "Intento inválido"
 
-#: mastermind/views.py:108 mastermind/views.py:133
+#: mastermind/views.py:108 mastermind/views.py:136
 msgid "You won"
 msgstr "Has ganado"
 
-#: mastermind/views.py:112 mastermind/views.py:135
+#: mastermind/views.py:112 mastermind/views.py:138
 msgid "You lost"
 msgstr "Has perdido"
 
-#: mastermind/views.py:129
+#: mastermind/views.py:125
+msgid "Invalid game ID"
+msgstr "ID de partida inválido"
+
+#: mastermind/views.py:132
 msgid "Game is not finished"
 msgstr "La partida no ha terminado"
 
@@ -370,7 +374,7 @@ msgstr "La partida no ha terminado"
 msgid "404 Not Found"
 msgstr "404 No encontrado"
 
-#: templates/404.html:12
+#: templates/404.html:10
 msgid "Error 404. Resource not found."
 msgstr "Error 404: Recurso no encontrado."
 
@@ -379,7 +383,7 @@ msgstr "Error 404: Recurso no encontrado."
 msgid "500: Internal Server Error"
 msgstr "500: Error interno del servidor"
 
-#: templates/500.html:12
+#: templates/500.html:11
 msgid ""
 "There was an internal error while loading the page. Please contact me to be "
 "able to solve it."
@@ -389,7 +393,7 @@ msgstr ""
 
 #: templates/accounts/account.html:5 templates/accounts/login.html:5
 #: templates/accounts/register.html:5 templates/accounts/why.html:5
-#: templates/base.html:85 templates/base.html:86
+#: templates/base.html:101 templates/base.html:103
 msgid "Account"
 msgstr "Cuenta"
 
@@ -402,30 +406,30 @@ msgstr "Cuenta AWT"
 msgid "You're logged in as"
 msgstr "Estás conectado como"
 
-#: templates/accounts/account.html:12 templates/gas/results.html:38
-#: templates/legal.html:11 templates/legal.html:72
+#: templates/accounts/account.html:13 templates/gas/results.html:43
+#: templates/legal.html:13 templates/legal.html:92
 msgid "Hosting is not free"
 msgstr "La web no es gratis"
 
-#: templates/accounts/account.html:12 templates/base.html:114
-#: templates/gas/results.html:38 templates/legal.html:11
-#: templates/legal.html:72
+#: templates/accounts/account.html:14 templates/base.html:138
+#: templates/gas/results.html:44 templates/legal.html:14
+#: templates/legal.html:93
 msgid "Support me"
 msgstr "Apóyame"
 
-#: templates/accounts/account.html:16
+#: templates/accounts/account.html:18
 msgid "Saved gas stations"
 msgstr "Gasolineras guardadas"
 
-#: templates/accounts/account.html:20
+#: templates/accounts/account.html:22
 msgid "Mastermind games"
 msgstr "Partidas de Mastermind"
 
-#: templates/accounts/account.html:24
+#: templates/accounts/account.html:29
 msgid "guesses"
 msgstr "intentos"
 
-#: templates/accounts/account.html:34
+#: templates/accounts/account.html:41
 msgid "Logout"
 msgstr "Cerrar sesión"
 
@@ -438,8 +442,8 @@ msgid "You're not logged in"
 msgstr "No has iniciado sesión"
 
 #. Translators: Button to go to last page visited
-#: templates/accounts/chpwd.html:17 templates/accounts/respwd.html:17
-#: templates/build.html:14 templates/gas/results.html:45
+#: templates/accounts/chpwd.html:17 templates/accounts/respwd.html:18
+#: templates/build.html:14 templates/gas/results.html:51
 msgid "Go back"
 msgstr "Volver atrás"
 
@@ -447,15 +451,15 @@ msgstr "Volver atrás"
 msgid "Don't have an account"
 msgstr "No tienes una cuenta"
 
-#: templates/accounts/login.html:18
+#: templates/accounts/login.html:19
 msgid "Create one here"
 msgstr "Crea una aquí"
 
-#: templates/accounts/login.html:19
+#: templates/accounts/login.html:21
 msgid "Forgot your password"
 msgstr "Olvidaste tu contrsaña"
 
-#: templates/accounts/login.html:25 templates/accounts/register.html:22
+#: templates/accounts/login.html:27 templates/accounts/register.html:22
 msgid "Why should you"
 msgstr "Por qué deberías"
 
@@ -483,7 +487,7 @@ msgstr "Ventajas de una cuenta"
 msgid "Done"
 msgstr "Completado"
 
-#: templates/accounts/why.html:15
+#: templates/accounts/why.html:17
 msgid ""
 "Play Mastermind. You will be able to see your game history and continue "
 "saved games"
@@ -491,11 +495,11 @@ msgstr ""
 "Jugar a Mastermind. Podrás ver tu historial de partidas y continuar las "
 "partidas guardadas"
 
-#: templates/accounts/why.html:16
+#: templates/accounts/why.html:18
 msgid "Pending"
 msgstr "Pendiente"
 
-#: templates/accounts/why.html:17
+#: templates/accounts/why.html:19
 msgid ""
 "Viewing a personal dashboard with your favourite station and your saved "
 "query to find your usual prices faster"
@@ -503,11 +507,11 @@ msgstr ""
 "Ver un panel personal con tu estación favorita y tu búsqueda guardada para "
 "encontrar tus precios habituales más rápido"
 
-#: templates/accounts/why.html:19
+#: templates/accounts/why.html:22
 msgid "Why you shouldn't create an account"
 msgstr "Por qué no deberías crear una cuenta"
 
-#: templates/accounts/why.html:20
+#: templates/accounts/why.html:24
 msgid ""
 "By creating an account, you are giving me (Appu) some details about you. "
 "Please don't create an account if you're uncomfortable with providing those "
@@ -517,7 +521,7 @@ msgstr ""
 "favor, no crees una cuenta si no te sientes cómodo proporcionando esos "
 "detalles"
 
-#: templates/accounts/why.html:21
+#: templates/accounts/why.html:26
 msgid ""
 "I'm still learning, so I may lose your data and you may need to create your "
 "account again. I will try to avoid it, but I can't promise it won't happen"
@@ -526,15 +530,15 @@ msgstr ""
 "crear tu cuenta de nuevo. Intentaré evitarlo, pero no puedo prometer que no "
 "vaya a suceder"
 
-#: templates/base.html:88 templates/base.html:89
+#: templates/base.html:105 templates/base.html:107
 msgid "Prices"
 msgstr "Precios"
 
-#: templates/base.html:95
+#: templates/base.html:115
 msgid "Change language"
 msgstr "Cambiar idioma"
 
-#: templates/base.html:117
+#: templates/base.html:142
 msgid "Coded with 🖤 by Appu"
 msgstr "Hecho con 🖤 por Appu"
 
@@ -563,39 +567,39 @@ msgstr ""
 msgid "Tip: Use CTRL+F or tap 'search in page' in the browser menu"
 msgstr "Tip: Usa CTRL+F o pulsa 'buscar en la página' en el menú del navegador"
 
-#: templates/gas/results.html:19
+#: templates/gas/results.html:20
 msgid "Stations"
 msgstr "Gasolineras"
 
-#: templates/gas/results.html:20
+#: templates/gas/results.html:21
 msgid "Price of"
 msgstr "Precio de"
 
-#: templates/gas/results.html:20
+#: templates/gas/results.html:21
 msgid "in"
 msgstr "en"
 
-#: templates/gas/results.html:20
+#: templates/gas/results.html:22
 msgid "on the"
 msgstr "para el día"
 
-#: templates/gas/results.html:43
+#: templates/gas/results.html:49
 msgid "No station prices were found"
 msgstr "No se encontraron precios para las gasolineras"
 
-#: templates/gas/results.html:73 templates/gas/station.html:155
+#: templates/gas/results.html:80 templates/gas/station.html:156
 msgid "Bright"
 msgstr "Claro"
 
-#: templates/gas/results.html:74 templates/gas/station.html:156
+#: templates/gas/results.html:81 templates/gas/station.html:157
 msgid "Dark"
 msgstr "Oscuro"
 
-#: templates/gas/results.html:123 templates/gas/station.html:172
+#: templates/gas/results.html:130 templates/gas/station.html:169
 msgid "You are here"
 msgstr "Estás aquí"
 
-#: templates/gas/search.html:19
+#: templates/gas/search.html:20
 msgid ""
 "Here you will find the cheapest gas stations for each area sorted by fuel "
 "type"
@@ -603,11 +607,11 @@ msgstr ""
 "Aquí podrás encontrar las gasolineras más baratas de cada zona para el tipo "
 "de combustible que utilices"
 
-#: templates/gas/search.html:25
+#: templates/gas/search.html:29
 msgid "Search by coordinates"
 msgstr "Buscar por coordenadas"
 
-#: templates/gas/search.html:25
+#: templates/gas/search.html:29
 msgid "Search by area"
 msgstr "Buscar por área"
 
@@ -631,27 +635,27 @@ msgstr "Precios actuales"
 msgid "Price history"
 msgstr "Histórico de precios"
 
-#: templates/gas/station_card.html:72
+#: templates/gas/station_card.html:73
 msgid "Go"
 msgstr "Ir"
 
-#: templates/gas/station_card.html:74
+#: templates/gas/station_card.html:76
 msgid "Open location in map"
 msgstr "Abrir ubicación en mapa"
 
-#: templates/gas/station_card.html:78
+#: templates/gas/station_card.html:81
 msgid "Open GMaps route"
 msgstr "Abrir ruta en GMaps"
 
-#: templates/gas/station_card.html:86
+#: templates/gas/station_card.html:90
 msgid "Yesterday"
 msgstr "Ayer"
 
-#: templates/gas/station_card.html:94
+#: templates/gas/station_card.html:121
 msgid "Last week"
 msgstr "Semana pasada"
 
-#: templates/gas/station_card.html:102
+#: templates/gas/station_card.html:152
 msgid "Last month"
 msgstr "Mes pasado"
 
@@ -668,40 +672,40 @@ msgstr "Ver proyectos"
 msgid "Legal"
 msgstr "Legal"
 
-#: templates/legal.html:16
+#: templates/legal.html:19
 msgid "Privacy"
 msgstr "Privacidad"
 
-#: templates/legal.html:18
+#: templates/legal.html:21
 msgid "Information stored in logs, such as IP addresses and"
 msgstr "La información almacenada en los logs, como direcciones IP y"
 
-#: templates/legal.html:18
+#: templates/legal.html:22
 msgid "is automatically removed after 3 months using logrotate"
 msgstr "Es eliminada automáticamente después de 3 meses usando logrotate"
 
-#: templates/legal.html:19
+#: templates/legal.html:23
 msgid "For any information deletion request you can contact me through"
 msgstr ""
 "Para cualquier petición de eliminación de información puedes "
 "contactarconmigo a través de"
 
-#: templates/legal.html:19
+#: templates/legal.html:24
 msgid "my contact email"
 msgstr "mi correo de contacto"
 
-#: templates/legal.html:22
+#: templates/legal.html:27
 msgid ""
 "The website stores a log of the Gas queries received (requests to /gas/"
 "search/ and /gas/search/geo/). Only the fuel selected, the time of the query "
 "and the queried date are stores to protect users' privacy."
 msgstr ""
-"La web almacena un registro de las consultas de Gas recibidas (peticiones a "
-"/gas/search/ y /gas/search/geo/). Solo se almacenan el combustible "
+"La web almacena un registro de las consultas de Gas recibidas (peticiones a /"
+"gas/search/ y /gas/search/geo/). Solo se almacenan el combustible "
 "seleccionado, la hora de la consulta y la fecha consultada para proteger la "
 "privacidad de los usuarios."
 
-#: templates/legal.html:25
+#: templates/legal.html:30
 msgid ""
 "Any information provided in forms or any equivalent way (usernames, real "
 "names, emails and passwords) will be stored in the web's database"
@@ -710,7 +714,7 @@ msgstr ""
 "formaequivalente (nombres de usuario, nombres reales, correos electrónicos "
 "ycontraseñas) se almacenará en la base de datos de la web"
 
-#: templates/legal.html:27
+#: templates/legal.html:32
 msgid ""
 "You can request its deletion at any time through the same email that is "
 "registered in the web"
@@ -718,7 +722,7 @@ msgstr ""
 "Puedes solicitar su eliminación en cualquier momento a través del mismo "
 "correo electrónico que está registrado en la web"
 
-#: templates/legal.html:27
+#: templates/legal.html:33
 msgid ""
 "All requests will be fulfilled within 30 days from the first notification "
 "when possible"
@@ -726,7 +730,7 @@ msgstr ""
 "Todas las solicitudes se cumplirán en un plazo de 30 días desde la primera "
 "notificación siempre que sea posible"
 
-#: templates/legal.html:29
+#: templates/legal.html:35
 msgid ""
 "None of the information stored by this service is or will be shared with any "
 "third party unless required by law"
@@ -734,7 +738,7 @@ msgstr ""
 "Ninguna información almacenada por este servicio es o será compartida con "
 "terceros a menos que sea requerido por ley"
 
-#: templates/legal.html:31
+#: templates/legal.html:38
 msgid ""
 "Passwords are stored hashed and salted for users' protection in case of a "
 "security breach"
@@ -742,19 +746,19 @@ msgstr ""
 "Las contraseñas se almacenan hasheadas y 'salted' para la protección de los "
 "usuarios en caso de una brecha de seguridad"
 
-#: templates/legal.html:33
+#: templates/legal.html:40
 msgid "Analytics"
 msgstr "Analíticas"
 
-#: templates/legal.html:35
+#: templates/legal.html:42
 msgid ""
-"I use a self-hosted instance of Plausible to store web analytics and be able "
-"to monitor traffic"
+"I use a self-hosted instance of Umami to store web analytics and be able to "
+"monitor traffic"
 msgstr ""
-"Uso una instancia self-hosted de Plausible para almacenar las analíticas web "
+"Uso una instancia self-hosted de Umami para almacenar las analíticas web "
 "y poder monitorizar el tráfico"
 
-#: templates/legal.html:37
+#: templates/legal.html:44
 msgid ""
 "None of the information tracked by the analytics script can be used to "
 "uniquely identify a specific user"
@@ -762,39 +766,43 @@ msgstr ""
 "Ninguna información obtenida por el script de analíticas puede ser usada "
 "para identificar a un usuario específico"
 
-#: templates/legal.html:40
-msgid "As they specifically state:"
-msgstr "Tal y como ellos mismos afirman:"
+#: templates/legal.html:47
+msgid "As they specifically state on their FAQ:"
+msgstr "Tal y como ellos mismos afirman en su FAQ:"
 
-#: templates/legal.html:45
-msgid "Their full statement in their data policy can be found"
-msgstr "Su declaración completa de su política de datos se puede encontrar"
+#: templates/legal.html:53
+msgid "More info:"
+msgstr ""
 
-#: templates/legal.html:45
-msgid "here"
-msgstr "aquí"
+#: templates/legal.html:54
+msgid "Collected metrics"
+msgstr ""
 
-#: templates/legal.html:48
+#: templates/legal.html:56
+msgid "Privacy policy of their service"
+msgstr ""
+
+#: templates/legal.html:59
 msgid "External resources"
 msgstr "Recursos externos"
 
-#: templates/legal.html:57
+#: templates/legal.html:72
 msgid "Thanks"
 msgstr "Agradecimientos"
 
-#: templates/legal.html:58
+#: templates/legal.html:73
 msgid "This website would not be possible without the help of"
 msgstr "Esta web no sería posible sin la ayuda de"
 
-#: templates/legal.html:60
+#: templates/legal.html:75
 msgid "My mother"
 msgstr "Mi madre"
 
-#: templates/legal.html:60
+#: templates/legal.html:76
 msgid "specifically for her help with learning CSS and more UI recommendations"
 msgstr "específicamente por su ayuda con CSS y más recomendaciones de UI"
 
-#: templates/legal.html:61
+#: templates/legal.html:79
 msgid ""
 "for her huge support while building the web and debugging it (specially "
 "debugging)"
@@ -818,19 +826,19 @@ msgstr "Partida de"
 msgid "played on"
 msgstr "jugada el"
 
-#: templates/mastermind/game.html:12
+#: templates/mastermind/game.html:13
 msgid "Correct code"
 msgstr "Código correcto"
 
-#: templates/mastermind/game.html:13
+#: templates/mastermind/game.html:14
 msgid "Guess attempts"
 msgstr "Intentos"
 
-#: templates/mastermind/game.html:21
+#: templates/mastermind/game.html:22
 msgid "Start another game"
 msgstr "Empezar otra partida"
 
-#: templates/mastermind/game.html:24
+#: templates/mastermind/game.html:26
 msgid "Share! (copy link)"
 msgstr "Compartir! (copiar enlace)"
 
@@ -842,23 +850,23 @@ msgstr "Mastermind es un juego de descifrar códigos"
 msgid "One player"
 msgstr "Un jugador"
 
-#: templates/mastermind/home.html:11
+#: templates/mastermind/home.html:12
 msgid "the machine in this case"
 msgstr "la máquina en este caso"
 
-#: templates/mastermind/home.html:11
+#: templates/mastermind/home.html:12
 msgid "creates a code and the other tries to break the code"
 msgstr "crea un código y el otro intenta descifrarlo"
 
-#: templates/mastermind/home.html:12
+#: templates/mastermind/home.html:14
 msgid "The code is a sequence of 4 digits"
 msgstr "El código es una secuencia de 4 dígitos"
 
-#: templates/mastermind/home.html:12
+#: templates/mastermind/home.html:15
 msgid "Each digit is a number from 0 to 9 and can't appear more than once"
 msgstr "Cada dígito es un número del 0 al 9 y no aparece más de una vez"
 
-#: templates/mastermind/home.html:12
+#: templates/mastermind/home.html:16
 msgid ""
 "After each guess, the machine gives feedback to the player, consisting of "
 "two numbers"
@@ -866,38 +874,38 @@ msgstr ""
 "Después de cada intento, la máquina da una respuesta al jugador, que "
 "consiste en dos números"
 
-#: templates/mastermind/home.html:13
+#: templates/mastermind/home.html:17
 msgid "Number of digits that are in the correct position"
 msgstr "Número de dígitos que están en la posición correcta"
 
-#: templates/mastermind/home.html:13
+#: templates/mastermind/home.html:18
 msgid "Number of digits that are in the code but not in the correct position"
 msgstr ""
 "Número de dígitos que están en el código pero no en la posición correcta"
 
-#: templates/mastermind/home.html:14
+#: templates/mastermind/home.html:19
 msgid ""
 "For example, if the code is 1234 and the guess is 1356, the feedback is 1-1"
 msgstr ""
 "Por ejemplo, si el código es 1234 y el intento es 1356, la respuesta es 1-1"
 
-#: templates/mastermind/home.html:14
+#: templates/mastermind/home.html:20
 msgid ""
 "The digit 1 is in the correct position and the digit 3 is in the code but "
 "not in the correct position"
 msgstr ""
 "El dígito 1 está en la posición correcta y el dígito 3 está en el código "
 
-#: templates/mastermind/home.html:15
+#: templates/mastermind/home.html:22
 msgid "The player has 10 attempts to break the code"
 msgstr "El jugador tiene 10 intentos para descifrar el código"
 
-#: templates/mastermind/home.html:15
+#: templates/mastermind/home.html:23
 msgid "If the player can't break the code in 10 attempts, the machine wins"
 msgstr ""
 "Si el jugador no puede descifrar el código en 10 intentos, la máquina gana"
 
-#: templates/mastermind/home.html:17
+#: templates/mastermind/home.html:25
 msgid "Play"
 msgstr "Jugar"
 
@@ -910,6 +918,15 @@ msgstr "Partida en curso"
 #: templates/projects.html:5 templates/projects.html:11
 msgid "Projects"
 msgstr "Proyectos"
+
+#~ msgid "You are now registered"
+#~ msgstr "Te has registrado"
+
+#~ msgid "Their full statement in their data policy can be found"
+#~ msgstr "Su declaración completa de su política de datos se puede encontrar"
+
+#~ msgid "here"
+#~ msgstr "aquí"
 
 #~ msgid ""
 #~ "The 3 bottom icons show if the price in the past was cheaper (green) or "

@@ -115,23 +115,25 @@ def acct_register(request: HttpRequest):
             {"form": forms.AWTUserCreationForm},
         )
 
-    # POST
-    form = forms.AWTUserCreationForm(request.POST)
-    if not form.is_valid():
-        for msg in form.error_messages.values():
-            messages.error(request, msg)
-        return redirect("/accounts/register")
+    # # POST
+    # form = forms.AWTUserCreationForm(request.POST)
+    # if not form.is_valid():
+    #     for msg in form.error_messages.values():
+    #         messages.error(request, msg)
+    #     return redirect("/accounts/register")
 
-    data = form.cleaned_data
-    user = User.objects.create_user(
-        username=data.get("username"),
-        email=data.get("email"),
-        first_name=data.get("first_name"),
-        last_name=data.get("last_name"),
-        password=data.get("password1"),
-    )
-    user.save()
-    messages.success(request, _("You are now registered"))
+    # data = form.cleaned_data
+    # user = User.objects.create_user(
+    #     username=data.get("username"),
+    #     email=data.get("email"),
+    #     first_name=data.get("first_name"),
+    #     last_name=data.get("last_name"),
+    #     password=data.get("password1"),
+    # )
+    # user.save()
+    # messages.success(request, _("You are now registered"))
+
+    messages.warning(request, _("Registrations are currently disabled."))
 
     return redirect("/accounts")
 
