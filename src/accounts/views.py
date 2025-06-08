@@ -108,12 +108,12 @@ def acct_register(request: HttpRequest):
     if request.method not in ["GET", "POST"]:
         return HttpResponseNotAllowed(["GET", "POST"], "Method not allowed")
 
-    if request.method == "GET":
-        return render(
-            request,
-            "accounts/register.html",
-            {"form": forms.AWTUserCreationForm},
-        )
+    # if request.method == "GET":
+    #     return render(
+    #         request,
+    #         "accounts/register.html",
+    #         {"form": forms.AWTUserCreationForm},
+    #     )
 
     # # POST
     # form = forms.AWTUserCreationForm(request.POST)
@@ -133,9 +133,10 @@ def acct_register(request: HttpRequest):
     # user.save()
     # messages.success(request, _("You are now registered"))
 
-    messages.warning(request, _("Registrations are currently disabled."))
+    # return redirect("/accounts")
 
-    return redirect("/accounts")
+    messages.warning(request, _("Registrations are currently disabled."))
+    return redirect("/")
 
 
 @login_required
