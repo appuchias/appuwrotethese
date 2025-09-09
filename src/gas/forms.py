@@ -47,14 +47,7 @@ class SearchPrices(forms.Form):
         label=_("Date"),
         help_text=_("Prices date"),
         required=True,
-        widget=forms.widgets.DateInput(
-            attrs={
-                "type": "date",
-                "min": date(2007, 1, 1),
-                "max": date.today(),
-                "value": date.today(),
-            }
-        ),
+        widget=forms.widgets.DateInput(attrs={"type": "date", "min": date(2007, 1, 1)}),
     )
 
     def __init__(self, *args, **kwargs):
@@ -127,14 +120,7 @@ class SearchPricesGeo(forms.Form):
         label=_("Date"),
         help_text=_("Prices date"),
         required=True,
-        widget=forms.widgets.DateInput(
-            attrs={
-                "type": "date",
-                "min": date(2007, 1, 1),
-                "max": date.today(),
-                "value": date.today(),
-            }
-        ),
+        widget=forms.widgets.DateInput(attrs={"type": "date", "min": date(2007, 1, 1)}),
     )
 
     def __init__(self, *args, **kwargs):
@@ -227,28 +213,14 @@ class DateRangeForm(forms.Form):
         label=_("Start date"),
         help_text=_("Start date"),
         required=True,
-        widget=forms.widgets.DateInput(
-            attrs={
-                "type": "date",
-                "min": date(2007, 1, 1),
-                "max": date.today(),
-                "value": date.today() - timedelta(days=30),
-            }
-        ),
+        widget=forms.widgets.DateInput(attrs={"type": "date", "min": date(2007, 1, 1)}),
     )
 
     end_date = forms.DateField(
         label=_("End date"),
         help_text=_("End date"),
         required=True,
-        widget=forms.widgets.DateInput(
-            attrs={
-                "type": "date",
-                "min": date(2007, 1, 1),
-                "max": date.today(),
-                "value": date.today(),
-            }
-        ),
+        widget=forms.widgets.DateInput(attrs={"type": "date", "min": date(2007, 1, 1)}),
     )
 
     def __init__(self, *args, **kwargs):
@@ -263,4 +235,11 @@ class DateRangeForm(forms.Form):
                 Div("end_date"),
                 css_class="d-flex justify-content-center",
             ),
+        )
+
+        self.fields["q_date"].widget.attrs.update(
+            {"max": date.today(), "value": date.today() - timedelta(days=30)}
+        )
+        self.fields["q_date"].widget.attrs.update(
+            {"max": date.today(), "value": date.today()}
         )
