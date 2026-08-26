@@ -91,11 +91,11 @@ base.html is used {% endcomment %}
 
     var markers = L.markerClusterGroup();
     {% for r in results %}
-    markers.addLayer(L.marker([{{ r.station.latitude }}, {{ r.station.longitude }}], { title: '{{ s.company|lower|capfirst }}', direction: "top", permanent: 1 }).bindPopup(`
-        <h6>{{ s.company|lower|capfirst }}</h6>
-        <p>{{ s.address }}. {{ s.postal_code }} {{ s.locality }}, {{ s.province|lower|capfirst }}</p>
-        <p>{% trans "Schedule" %}: {{ s.schedule }}</p>
-        <p><a href="/gas/station/{{ s.id_eess }}/" class="text">Ver detalles</a></p>
+    markers.addLayer(L.marker([{{ r.station.latitude }}, {{ r.station.longitude }}], { title: '{{ r.station.company|lower|capfirst }}', direction: "top", permanent: 1 }).bindPopup(`
+        <h6>{{ r.station.company|lower|capfirst }}</h6>
+        <p>{{ r.station.address }}. {{ r.station.postal_code }} {{ r.station.locality }}, {{ r.station.province|lower|capfirst }}</p>
+        <p>{% trans "Schedule" %}: {{ r.station.schedule }}</p>
+        <p><a href="/gas/station/{{ r.station.id_eess }}/" class="text">Ver detalles</a></p>
     `));
     {% endfor %}
     map.addLayer(markers);
