@@ -254,6 +254,11 @@ class DateRangeForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # Update q_date widget to set max and value to today
+        self.fields["end_date"].widget.attrs.update(
+            {"max": date.today(), "value": date.today()}
+        )
+
         # Set crispy form layout
         self.helper = FormHelper()
         self.helper.layout = Layout(
