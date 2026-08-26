@@ -2,7 +2,8 @@
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
+
 from appuwrotethese import views
 
 handler404 = "appuwrotethese.views.handler404"

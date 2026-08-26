@@ -3,6 +3,8 @@
 
 import secrets, string
 
+# Get django installed apps
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -10,9 +12,6 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
-
-# Get django installed apps
-from django.conf import settings
 
 from accounts import forms
 
@@ -162,7 +161,9 @@ def acct_change_pwd(request: HttpRequest):
 
     data = form.cleaned_data
     user = authenticate(
-        request, username=request.user.username, password=data.get("old_password")  # type: ignore
+        request,
+        username=request.user.username,
+        password=data.get("old_password"),  # type: ignore
     )
     if user is not None:
         user = form.save()

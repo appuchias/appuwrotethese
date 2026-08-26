@@ -4,15 +4,14 @@
 import os, uuid
 
 from django.contrib import messages
-from django.contrib.auth.models import User, AnonymousUser
+from django.contrib.auth.models import AnonymousUser, User
 from django.core.exceptions import ValidationError
 from django.http import HttpRequest, HttpResponseNotAllowed
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
 
-
-from mastermind.models import Game, Guess
 from mastermind.forms import MastermindGuess
+from mastermind.models import Game, Guess
 
 
 def _validate_guess(guess: str) -> bool:

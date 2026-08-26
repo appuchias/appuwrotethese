@@ -2,9 +2,11 @@
 # Copyright (C) 2025  Appuchia <appuchia@appu.ltd>
 
 from datetime import datetime, time, timedelta
+
 from django.contrib.syndication.views import Feed
 from django.urls import reverse
-from gas.models import StationPrice, Station, Locality, Province
+
+from gas.models import Locality, Province, Station, StationPrice
 
 
 class StationFeed(Feed):

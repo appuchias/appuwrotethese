@@ -1,10 +1,11 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
+from django.db import models
 from django.utils.translation import gettext_lazy as _
+
 from gas.models import Station
 
 

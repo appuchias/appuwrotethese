@@ -1,4 +1,5 @@
 from datetime import date
+
 from django.core.management.base import BaseCommand
 
 from gas import db_actions

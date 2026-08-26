@@ -1,10 +1,12 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-import json, lzma, os, requests
+import json, lzma, os
 from datetime import date, datetime, timedelta
 from decimal import Decimal
 from multiprocessing import Pool
+
+import requests
 from tqdm import tqdm
 
 from appuwrotethese.extras import (

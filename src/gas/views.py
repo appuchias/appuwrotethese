@@ -9,8 +9,8 @@ from django.http import HttpRequest, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
-from gas import models, forms, query_handler
 from appuwrotethese.extras import PATH_DATA
+from gas import forms, models, query_handler
 
 FUEL_NAMES = dict(forms.FUEL_CHOICES)
 

@@ -1,10 +1,11 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-from django.utils.translation import gettext as _
-from django.http import HttpRequest, JsonResponse
-from django.shortcuts import render, redirect
 import os
+
+from django.http import HttpRequest, JsonResponse
+from django.shortcuts import redirect, render
+from django.utils.translation import gettext as _
 
 from .settings import STATIC_ROOT
 

@@ -1,16 +1,17 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-from django.apps import AppConfig
-import requests
-
 import threading
+
+import requests
+from django.apps import AppConfig
+
 from appuwrotethese.extras import (
-    store_json_data,
     FILEPATH_ROOT,
-    PATH_PRODUCTS,
     PATH_LOCALITIES,
+    PATH_PRODUCTS,
     PATH_PROVINCES,
+    store_json_data,
 )
 
 

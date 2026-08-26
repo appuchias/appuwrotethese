@@ -1,13 +1,13 @@
 # Appu Wrote These
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
-from django.db import models
-from django.contrib.auth.models import User
-from django.urls import reverse
-
-from typing import Any
-from random import shuffle
 import uuid
+from random import shuffle
+from typing import Any
+
+from django.contrib.auth.models import User
+from django.db import models
+from django.urls import reverse
 
 DIGITS = "0123456789"
 

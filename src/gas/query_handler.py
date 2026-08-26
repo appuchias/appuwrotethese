@@ -2,11 +2,11 @@
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
 from datetime import date, datetime, timedelta
-from geopy.distance import distance
 from typing import Iterable
 
 from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
+from geopy.distance import distance
 
 from gas.models import Locality, Province, Station, StationPrice
 

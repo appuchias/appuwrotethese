@@ -12,7 +12,7 @@ def access(value, arg):
 
     try:
         output = value[arg]
-    except (KeyError, TypeError):
+    except KeyError, TypeError:
         output = getattr(value, arg, None)
 
     return output

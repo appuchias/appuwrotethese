@@ -2,6 +2,7 @@
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
 from datetime import date, datetime, timedelta
+
 from django.test import TestCase
 
 from gas.db_actions import create_localities_provinces, get_data, update_station_prices

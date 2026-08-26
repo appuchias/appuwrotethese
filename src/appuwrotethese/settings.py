@@ -2,14 +2,12 @@
 # Copyright (C) 2023  Appuchia <appuchia@appu.ltd>
 
 
-import logging
-import os
+import logging, os
 from pathlib import Path
 from secrets import token_urlsafe
 
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
-
 from dotenv import load_dotenv
 
 load_dotenv()

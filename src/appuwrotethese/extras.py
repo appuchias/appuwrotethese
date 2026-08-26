@@ -3,8 +3,7 @@
 
 import json
 from pathlib import Path
-from typing import Any, Iterable, Callable
-
+from typing import Any, Callable, Iterable
 
 FILEPATH_ROOT = Path("./gas/")
 PATH_PRODUCTS = FILEPATH_ROOT / "data" / "products.json"
@@ -37,8 +36,8 @@ class ShellCodes:
     INVERTED = "\033[7m"
     HIDDEN = "\033[8m"
 
-    up = lambda n: f"\x1B[{n}A"
-    CLR = "\x1B[0K"
+    up = lambda n: f"\x1b[{n}A"
+    CLR = "\x1b[0K"
 
 
 # First ocurrence that meets requirements
