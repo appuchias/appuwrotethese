@@ -7,8 +7,8 @@ RUN apt update && apt install -y cron
 # Setup the cron job
 RUN echo 'PATH=/usr/local/bin:$PATH' > tmpcron
 RUN echo '' >> tmpcron
-RUN echo '@reboot   	su - awt -c "cd /awt/src && python3.12 manage.py update_db --update >> /var/log/cron.log 2>&1"' >> tmpcron
-RUN echo '5 * * * *	su - awt -c "cd /awt/src && python3.12 manage.py update_db --update >> /var/log/cron.log 2>&1"' >> tmpcron
+RUN echo '@reboot   	su - awt -c "cd /awt/src && python3.12 manage.py update_prices --update >> /var/log/cron.log 2>&1"' >> tmpcron
+RUN echo '5 * * * *	su - awt -c "cd /awt/src && python3.12 manage.py update_prices --update >> /var/log/cron.log 2>&1"' >> tmpcron
 RUN echo '5 0 * * 1	su - awt -c "cd /awt/src && python3.12 manage.py clean_games >> /var/log/cron.log 2>&1"' >> tmpcron
 RUN crontab tmpcron
 RUN rm tmpcron

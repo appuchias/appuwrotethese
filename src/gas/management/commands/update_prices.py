@@ -6,7 +6,7 @@ from gas import db_actions
 
 
 class Command(BaseCommand):
-    help = "Updates the database for the gas app"
+    help = "Updates the prices for the gas app"
 
     def add_arguments(self, parser):
         parser.add_argument(

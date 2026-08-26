@@ -11,8 +11,8 @@ migrate:
 test:
 	python -Wa manage.py test --keepdb
 
-updatedb:
-	./manage.py update_db
+updateprices:
+	./manage.py update_prices
 
 makemsgs:
 	django-admin makemessages -a
